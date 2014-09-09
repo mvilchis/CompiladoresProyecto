@@ -14,8 +14,9 @@ IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
 NUMBER [0-9]
 STRING [a-zA-ZñÑ_ 0-9]*
 NEWLINE [\n]
-INDENT	[\t]; 
-
+INDENT	[\t] 
+     stack<int>pilita;
+     int num_lineas= 0;
 %%
 "\""+{STRING}+"\"" printf("STRING ");
 {NUMBER} printf ("NUMBER ");
@@ -29,7 +30,10 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 }
 
 {INDENT}  printf("INDENT "); 
+        /* pilita.push()*/
 {NEWLINE} printf("NEWLINE\n");
+        /* ++num_lines;*/
+
 {IDENTIFIER} printf("IDENTIFICADOR ");
 "+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" printf("%s", yytext); 
 "'"|"\""|"#"|"\\" printf("%s", yytext);
@@ -48,4 +52,5 @@ int main(int argc, char *argv[])
     else 
         yyin =stdin;
     yylex();
+   // printf("\nNumero de lineas%i\n", num_lines);
 }
