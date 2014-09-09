@@ -16,14 +16,29 @@ STRING [a-zA-ZñÑ_ 0-9]*
 NEWLINE [\n]
 INDENT	[\t] 
      stack<int>pilita;
+     
      int num_lineas= 0;
 %%
 "\""+{STRING}+"\"" printf("STRING ");
+"\""[^\"]"\""
 {NUMBER} printf ("NUMBER ");
 "-"{NUMBER}* printf("NUMBER ");
 {NUMBER}+"."{NUMBER}* printf("NUMBER ");
+.           
 
-print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|nonlocal|while|and|del|global|not|with|as|elif|if|or|yield|assert|else|import|pass|break|except|in|raise {
+return|for|while|if|else{/*Crean bloques*/
+    pilita.push(pilita.top()+1);
+
+string s = yytext; 
+    for(int i=0 ; i<s.length();i++)
+        printf("%c",toupper(s[i]));
+}
+else {/*Deshace bloques*/
+string s = yytext; 
+    for(int i=0 ; i<s.length();i++)
+        printf("%c",toupper(s[i]));
+}
+print|False|class|finally|is|None|continue|lambda|try|True|def|from|nonlocal|and|del|global|not|with|as|elif|or|yield|assert|import|pass|break|except|in|raise {
     string s = yytext; 
     for(int i=0 ; i<s.length();i++)
     	printf("%c",toupper(s[i]));
@@ -31,9 +46,9 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 
 {INDENT}  printf("INDENT "); 
         /* pilita.push()*/
-{NEWLINE} printf("NEWLINE\n");
-        /* ++num_lines;*/
-
+{NEWLINE} {printf("NEWLINE\n");
+         ++num_lineas;
+        }
 {IDENTIFIER} printf("IDENTIFICADOR ");
 "+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" printf("%s", yytext); 
 "'"|"\""|"#"|"\\" printf("%s", yytext);
@@ -47,10 +62,11 @@ int main(int argc, char *argv[])
 {
     /*Definimos la entrada*/
     ++argv, --argc;
+    pilita.push(0);
     if(argc > 0) 
         yyin = fopen(argv[0], "r");
     else 
         yyin =stdin;
     yylex();
-   // printf("\nNumero de lineas%i\n", num_lines);
+   printf("\nNumero de lineas%i\n", pilita.top());
 }
