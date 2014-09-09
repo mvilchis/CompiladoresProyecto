@@ -13,7 +13,7 @@ using namespace std;
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
 NATURAL [1-9][0-9]*
 ENTERO {NATURAL}|["-"][0-9]*
-NUMBER [0]|[0"."]{NATURAL}|[-][0"."]{NATURAL}|{ENTERO}
+NUMBER [0]|[0"."]{NATURAL}|{ENTERO}
 STRING [a-zA-ZñÑ_ 0-9]*
 NEWLINE [\n]
 INDENT	[\t] 
