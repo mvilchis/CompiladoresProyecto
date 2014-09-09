@@ -4,4 +4,4 @@ if 3 > 1:
 		x += 1
 		print x
 else:
-	x = "hola mundo"
+	x = ""hola"

@@ -1,17 +1,20 @@
 %{
 #include <iostream>
 #include <string>
+#include <stack>
 using namespace std;
 %}
 
 %option noyywrap
 %option outfile="pylex.cpp"
 
+
+
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
 NUMBER [0-9]
 STRING [a-zA-ZñÑ_ 0-9]*
 NEWLINE [\n]
-INDENT	[\t]
+INDENT	[\t]; 
 
 %%
 "\""+{STRING}+"\"" printf("STRING ");
@@ -19,8 +22,10 @@ INDENT	[\t]
 "-"{NUMBER}* printf("NUMBER ");
 {NUMBER}+"."{NUMBER}* printf("NUMBER ");
 
-if|while|return  {
-    string s = yytext; for(int i=0 ; i<s.length();i++) printf("%c",toupper(s[i]));
+print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|nonlocal|while|and|del|global|not|with|as|elif|if|or|yield|assert|else|import|pass|break|except|in|raise {
+    string s = yytext; 
+    for(int i=0 ; i<s.length();i++)
+    	printf("%c",toupper(s[i]));
 }
 
 {INDENT}  printf("INDENT "); 
@@ -29,6 +34,9 @@ if|while|return  {
 "+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" printf("%s", yytext); 
 "'"|"\""|"#"|"\\" printf("%s", yytext);
 "("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" printf("%s", yytext); 
+
+"$"|"?"|"`" printf("Error: Caracter inválido");
+
 
 %%
 int main(int argc, char *argv[])
