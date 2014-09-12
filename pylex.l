@@ -12,15 +12,15 @@ using namespace std;
 
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
 NUMBER [0-9]
-STRING [a-zA-ZñÑ_ 0-9]*
+STRING [^\"]*
 NEWLINE [\n]
 INDENT	[\t] 
      stack<int>pilita;
      
      int num_lineas= 0;
 %%
-"\""+{STRING}+"\"" printf("STRING ");
-"\""[^\"]"\""
+"\""{STRING}"\"" printf("STRING ");
+
 {NUMBER} printf ("NUMBER ");
 "-"{NUMBER}* printf("NUMBER ");
 {NUMBER}+"."{NUMBER}* printf("NUMBER ");
