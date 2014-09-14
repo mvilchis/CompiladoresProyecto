@@ -17,9 +17,14 @@ NEWLINE [\n]
 INDENT	[\t] 
      stack<int>pilita;
      int num_lineas= 1;
+     bool primer_texto = false;
      bool revisaIdentacion();
+     bool checa_inicial();
+     bool cad_inicial = false; 
 %%
-"\""+{STRING}+"\"" printf("STRING ");
+
+
+"\""{STRING}"\"" printf("STRING ");
 "\""[^\"]"\"" printf("STRING ");
 {NUMBER} printf ("NUMBER ");
 "-"{NUMBER}* printf("NUMBER ");
@@ -29,26 +34,43 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
     string s = yytext; 
     for(int i=0 ; i<s.length();i++)
     	printf("%c",toupper(s[i]));
+    printf(" ");
 }
-
-{INDENT}  printf("INDENT "); 
+ 
 {NEWLINE}+[\t ]* { 
          ++num_lineas;
+        printf("NEWLINE\n");
         if(revisaIdentacion() == false) {
-            printf("\nError de indentacion en la línea %i\n", num_lineas);
+            printf("\nError de indentacion en la línea %d\n", num_lineas);
             exit(1);
         }
-        printf("NEWLINE\n");
+        
         }
+[\t ]* { if (num_lineas == 1) checa_inicial();
+
+}
+
     
 {IDENTIFIER} printf("IDENTIFICADOR ");
-"+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" printf("%s", yytext); 
+"+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" {printf("%s", yytext); printf(" ");
+} 
 "'"|"\""|"#"|"\\" printf("%s", yytext);
-"("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" printf("%s", yytext); 
+"("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" {printf("%s", yytext);printf(" ");} 
 
-"$"|"?"|"`" printf("Error: Caracter inválido");
+"$"|"?"|"`" printf("Error: Caracter inválido\n");
+. printf("Error: Cadena mal construida\n");
 
 %%
+
+bool checa_inicial(){
+    string cadena = yytext;
+
+    if(cadena.length()>0){
+        //printf("Error: La indentación de la primera línea de código debe ser cero\n");
+        return false;
+    }
+    return true;
+}
 bool revisaIdentacion() {
     int identacion = 0;
     string cadena = yytext;
@@ -62,12 +84,13 @@ bool revisaIdentacion() {
     }
     if(!pilita.empty()&&pilita.top() < identacion) {
         pilita.push(identacion);
+        printf("INDENT ");
         return true;
     }else {
         bool primero = true;
         while(!pilita.empty()) {
             if(!primero) {
-                printf("DEDENT");
+                printf("DEDENT ");
             }
             if(identacion == pilita.top()) return true;
             pilita.pop();
