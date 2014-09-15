@@ -11,8 +11,8 @@ using namespace std;
 
 
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
-NUMBER [0-9]
-STRING [a-zA-ZñÑ_ 0-9]*
+NUMBER [0-9]*
+STRING "\""[^"]*"\""
 NEWLINE [\n]
 INDENT	[\t] 
      stack<int>pilita;
@@ -24,8 +24,8 @@ INDENT	[\t]
 %%
 
 
-"\""{STRING}"\"" printf("STRING ");
-"\""[^\"]"\"" printf("STRING ");
+
+{STRING} printf("STRING ");
 {NUMBER} printf ("NUMBER ");
 "-"{NUMBER}* printf("NUMBER ");
 {NUMBER}+"."{NUMBER}* printf("NUMBER ");
@@ -36,8 +36,14 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
     	printf("%c",toupper(s[i]));
     printf(" ");
 }
- 
-{NEWLINE}+[\t ]* { 
+{NEWLINE}[ \t]*{NEWLINE} {
+    if(num_lineas>1){
+        string s = yytext;
+        yyless(s.length()-1);
+    }
+}
+
+{NEWLINE}[\t ]* { 
          ++num_lineas;
         printf("NEWLINE\n");
         if(revisaIdentacion() == false) {
@@ -46,11 +52,6 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
         }
         
         }
-[\t ]* { if (num_lineas == 1) checa_inicial();
-
-}
-
-    
 {IDENTIFIER} printf("IDENTIFICADOR ");
 "+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" {printf("%s", yytext); printf(" ");
 } 
@@ -58,7 +59,7 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 "("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" {printf("%s", yytext);printf(" ");} 
 
 "$"|"?"|"`" printf("Error: Caracter inválido\n");
-. printf("Error: Cadena mal construida\n");
+
 
 %%
 
@@ -83,6 +84,7 @@ bool revisaIdentacion() {
 
     }
     if(!pilita.empty()&&pilita.top() < identacion) {
+        //printf("Tope: %d identacion %d\n",pilita.top(),identacion);
         pilita.push(identacion);
         printf("INDENT ");
         return true;
