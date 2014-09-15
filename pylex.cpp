@@ -364,8 +364,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 15
-#define YY_END_OF_BUFFER 16
+#define YY_NUM_RULES 16
+#define YY_END_OF_BUFFER 17
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -375,22 +375,22 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[150] =
     {   0,
-        4,    4,   16,   15,   15,    9,   15,   12,   12,   14,
-       11,   11,   12,   13,   11,   11,    5,    6,   11,    4,
-       11,   13,   11,   10,   10,   10,   10,   11,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   11,   11,    0,    0,    9,    8,
-        0,   11,    3,    2,    0,    1,   13,   11,    5,    6,
-       11,    6,    4,   11,   11,   10,   10,   10,   10,   10,
-        7,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,    7,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,    0,    0,   10,   10,   10,   10,   10,
+        4,    4,   17,   16,   10,    9,   16,   13,   13,   15,
+       12,   12,   13,   14,   12,   12,    5,    6,   12,    4,
+       12,   14,   12,   11,   11,   11,   11,   12,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   12,   12,   10,    0,    9,    8,
+        0,   12,    3,    2,    0,    1,   14,   12,    5,    6,
+       12,    6,    4,   12,   12,   11,   11,   11,   11,   11,
+        7,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,    7,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,    0,    0,   11,   11,   11,   11,   11,
 
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,    0
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -576,9 +576,8 @@ stack<int>pilita;
 int num_lineas= 1;
 bool primer_texto = false;
 bool revisaIdentacion();
-bool checa_inicial();
-bool cad_inicial = false; 
-#line 582 "pylex.cpp"
+bool lei = false;
+#line 581 "pylex.cpp"
 
 #define INITIAL 0
 
@@ -760,11 +759,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 24 "pylex.l"
+#line 23 "pylex.l"
 
 
 
-#line 768 "pylex.cpp"
+#line 767 "pylex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -850,47 +849,48 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 27 "pylex.l"
+#line 26 "pylex.l"
 {
-            if(num_lineas>1)yyless(yyleng-1);
+              yyless(yyleng-1);
         
         }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 31 "pylex.l"
-printf("STRING ");
+#line 30 "pylex.l"
+{ printf("STRING "); lei = true;}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 32 "pylex.l"
+#line 31 "pylex.l"
 {printf("\n[Error: cadena mal formada]\n"); yyterminate();}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 33 "pylex.l"
-printf ("NUMBER ");
+#line 32 "pylex.l"
+{printf ("NUMBER "); lei =true;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 34 "pylex.l"
+#line 33 "pylex.l"
 printf("NUMBER ");
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "pylex.l"
+#line 34 "pylex.l"
 printf("NUMBER ");
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 37 "pylex.l"
+#line 36 "pylex.l"
 {
     string s = yytext; 
     for(int i=0 ; i<s.length();i++)
     	printf("%c",toupper(s[i]));
     printf(" ");
+    lei =true;
 }
 	YY_BREAK
 case 8:
@@ -898,20 +898,26 @@ case 8:
 YY_RULE_SETUP
 #line 43 "pylex.l"
 {
-    //printf("%d\n",num_lineas);
-        if(num_lineas>1){
             string s = yytext;
             yyless(s.length()-1);
-        }
 }
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 51 "pylex.l"
+#line 48 "pylex.l"
 { 
-         ++num_lineas;
-        printf("NEWLINE\n");
+        
+        if(num_lineas!=1 || lei){
+            printf("NEWLINE\n");
+        }
+
+        string s = yytext;
+        if (s.compare("\n") && num_lineas == 1 && !lei){
+            printf("\n[Error: La indentación inicial no es cero]\n" );
+            yyterminate();
+        }
+        ++num_lineas;
         if(revisaIdentacion() == false) {
             printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
             yyterminate();
@@ -921,40 +927,52 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 60 "pylex.l"
-printf("IDENTIFICADOR ");
+#line 67 "pylex.l"
+{
+    if(lei){
+        printf("%s",yytext );
+    }else{
+        printf("\n[Error: La indentación inicial no es cero]\n");
+        yyterminate();
+    }
+}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 61 "pylex.l"
-{printf("%s", yytext); printf(" ");
-} 
+#line 75 "pylex.l"
+printf("IDENTIFICADOR ");
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 63 "pylex.l"
-printf("%s", yytext);
+#line 76 "pylex.l"
+{printf("%s", yytext); printf(" ");lei =true;
+} 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 64 "pylex.l"
-{printf("%s", yytext);printf(" ");} 
+#line 78 "pylex.l"
+printf("%s", yytext);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 66 "pylex.l"
-{printf("Error: Caracter inválido\n");yyterminate();}
-	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#line 68 "pylex.l"
-{printf("\n");yyterminate();}
+#line 79 "pylex.l"
+{printf("%s", yytext);printf(" ");lei =true;} 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 70 "pylex.l"
+#line 81 "pylex.l"
+{printf("Error: Caracter inválido\n");yyterminate();}
+	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+#line 83 "pylex.l"
+{printf("\n");yyterminate();}
+	YY_BREAK
+case 16:
+YY_RULE_SETUP
+#line 85 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 958 "pylex.cpp"
+#line 976 "pylex.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1949,19 +1967,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 70 "pylex.l"
+#line 85 "pylex.l"
 
 
 
-bool checa_inicial(){
-    string cadena = yytext;
-
-    if(cadena.length()>0){
-        //printf("Error: La indentación de la primera línea de código debe ser cero\n");
-        return false;
-    }
-    return true;
-}
 bool revisaIdentacion() {
     int identacion = 0;
     string cadena = yytext;

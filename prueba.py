@@ -1,9 +1,17 @@
 
   
 
-  
 
-if 3 > 1:
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+
+
+
+
+
+   if 3 > 1:
 	x = -4
    
     
@@ -27,4 +35,4 @@ if 3 > 1:
 		
 		5 + 10
 else:
-	x = ""hola"
+	x = ""hola""

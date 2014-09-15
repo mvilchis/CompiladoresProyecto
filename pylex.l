@@ -19,17 +19,17 @@ INDENT	[\t]
      int num_lineas= 1;
      bool primer_texto = false;
      bool revisaIdentacion();
-     bool checa_inicial();
+     bool lei = false;
 %%
 
 
 [\t ]*{COMMENT}{NEWLINE}|{NEWLINE}[\t ]*{COMMENT}{NEWLINE} {
-            if(num_lineas>1)yyless(yyleng-1);
+              yyless(yyleng-1);
         
         }
-{STRING} printf("STRING ");
+{STRING} { printf("STRING "); lei = true;}
 "\""[^"] {printf("\n[Error: cadena mal formada]\n"); yyterminate();}
-{NUMBER} printf ("NUMBER ");
+{NUMBER} {printf ("NUMBER "); lei =true;}
 "-"{NUMBER}* printf("NUMBER ");
 {NUMBER}+"."{NUMBER}* printf("NUMBER ");
 
@@ -38,29 +38,45 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
     for(int i=0 ; i<s.length();i++)
     	printf("%c",toupper(s[i]));
     printf(" ");
+    lei =true;
 }
 {NEWLINE}[ \t]*{NEWLINE} {
-    //printf("%d\n",num_lineas);
-        if(num_lineas>1){
             string s = yytext;
             yyless(s.length()-1);
-        }
 }
 
 {NEWLINE}[\t ]* { 
-         ++num_lineas;
-        printf("NEWLINE\n");
+        
+        if(num_lineas!=1 || lei){
+            printf("NEWLINE\n");
+        }
+
+        string s = yytext;
+        if (s.compare("\n") && num_lineas == 1 && !lei){
+            printf("\n[Error: La indentación inicial no es cero]\n" );
+            yyterminate();
+        }
+        ++num_lineas;
         if(revisaIdentacion() == false) {
             printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
             yyterminate();
         }
         
         }
+
+[ \t]+ {
+    if(lei){
+        printf("%s",yytext );
+    }else{
+        printf("\n[Error: La indentación inicial no es cero]\n");
+        yyterminate();
+    }
+}
 {IDENTIFIER} printf("IDENTIFICADOR ");
-"+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" {printf("%s", yytext); printf(" ");
+"+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" {printf("%s", yytext); printf(" ");lei =true;
 } 
 "'"|"\""|"#"|"\\" printf("%s", yytext);
-"("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" {printf("%s", yytext);printf(" ");} 
+"("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" {printf("%s", yytext);printf(" ");lei =true;} 
 
 "$"|"?"|"`" {printf("Error: Caracter inválido\n");yyterminate();}
 
@@ -68,15 +84,6 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 
 %%
 
-bool checa_inicial(){
-    string cadena = yytext;
-
-    if(cadena.length()>0){
-        //printf("Error: La indentación de la primera línea de código debe ser cero\n");
-        return false;
-    }
-    return true;
-}
 bool revisaIdentacion() {
     int identacion = 0;
     string cadena = yytext;
