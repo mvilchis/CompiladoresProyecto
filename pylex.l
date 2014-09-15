@@ -9,7 +9,7 @@ using namespace std;
 %option outfile="pylex.cpp"
 
 
-
+COMMENT "#"[^\n]*
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
 NUMBER [0-9]*
 STRING "\""[^"]*"\""
@@ -20,11 +20,13 @@ INDENT	[\t]
      bool primer_texto = false;
      bool revisaIdentacion();
      bool checa_inicial();
-     bool cad_inicial = false; 
 %%
 
 
-
+[\t ]*{COMMENT}{NEWLINE}|{NEWLINE}[\t ]*{COMMENT}{NEWLINE} {
+            if(num_lineas>1)yyless(yyleng-1);
+        
+        }
 {STRING} printf("STRING ");
 "\""[^"] {printf("\n[Error: cadena mal formada]\n"); yyterminate();}
 {NUMBER} printf ("NUMBER ");
@@ -39,8 +41,10 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 }
 {NEWLINE}[ \t]*{NEWLINE} {
     //printf("%d\n",num_lineas);
-        string s = yytext;
-        yyless(s.length()-1);
+        if(num_lineas>1){
+            string s = yytext;
+            yyless(s.length()-1);
+        }
 }
 
 {NEWLINE}[\t ]* { 
