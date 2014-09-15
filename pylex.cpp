@@ -572,12 +572,11 @@ char *yytext;
 #include <string>
 #include <stack>
 using namespace std;
-stack<int>pilita;
+stack<int>pila;
 int num_lineas= 1;
-bool primer_texto = false;
 bool revisaIdentacion();
 bool lei = false;
-#line 581 "pylex.cpp"
+#line 580 "pylex.cpp"
 
 #define INITIAL 0
 
@@ -759,11 +758,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 23 "pylex.l"
+#line 21 "pylex.l"
 
 
 
-#line 767 "pylex.cpp"
+#line 766 "pylex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -849,42 +848,56 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 26 "pylex.l"
+#line 24 "pylex.l"
 {
               yyless(yyleng-1);
-        
-        }
+}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 30 "pylex.l"
-{ printf("STRING "); lei = true;}
+#line 28 "pylex.l"
+{ 
+    printf("STRING ");
+    lei = true;
+}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 31 "pylex.l"
-{printf("\n[Error: cadena mal formada]\n"); yyterminate();}
+#line 33 "pylex.l"
+{
+    printf("\n[Error: cadena mal formada]\n");
+    yyterminate();
+}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 32 "pylex.l"
-{printf ("NUMBER "); lei =true;}
+#line 38 "pylex.l"
+{
+    printf ("NUMBER ");
+    lei =true;
+}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 33 "pylex.l"
-printf("NUMBER ");
+#line 43 "pylex.l"
+{
+    printf ("NUMBER ");
+    lei =true;
+}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 34 "pylex.l"
-printf("NUMBER ");
+#line 47 "pylex.l"
+{
+    printf ("NUMBER ");
+    lei =true;
+}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 36 "pylex.l"
+#line 52 "pylex.l"
 {
     string s = yytext; 
     for(int i=0 ; i<s.length();i++)
@@ -896,38 +909,38 @@ YY_RULE_SETUP
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 43 "pylex.l"
+#line 60 "pylex.l"
 {
-            string s = yytext;
-            yyless(s.length()-1);
+    string s = yytext;
+    yyless(s.length()-1);
 }
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 48 "pylex.l"
+#line 65 "pylex.l"
 { 
         
-        if(num_lineas!=1 || lei){
+        if(num_lineas!=1 || lei)
             printf("NEWLINE\n");
-        }
 
         string s = yytext;
         if (s.compare("\n") && num_lineas == 1 && !lei){
             printf("\n[Error: La indentación inicial no es cero]\n" );
             yyterminate();
         }
+
         ++num_lineas;
+
         if(revisaIdentacion() == false) {
             printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
             yyterminate();
         }
-        
-        }
+}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 67 "pylex.l"
+#line 84 "pylex.l"
 {
     if(lei){
         printf("%s",yytext );
@@ -939,40 +952,58 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 75 "pylex.l"
-printf("IDENTIFICADOR ");
+#line 93 "pylex.l"
+{
+    printf("IDENTIFICADOR ");
+    lei = true;
+}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 76 "pylex.l"
-{printf("%s", yytext); printf(" ");lei =true;
+#line 98 "pylex.l"
+{
+    printf("%s",yytext);
+    printf(" ");
+    lei =true;
 } 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 78 "pylex.l"
-printf("%s", yytext);
+#line 104 "pylex.l"
+{
+    printf("%s", yytext);
+    lei = true;
+}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 79 "pylex.l"
-{printf("%s", yytext);printf(" ");lei =true;} 
+#line 109 "pylex.l"
+{
+    printf("%s ", yytext);
+    lei =true;
+} 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 81 "pylex.l"
-{printf("Error: Caracter inválido\n");yyterminate();}
+#line 114 "pylex.l"
+{
+    printf("Error: Caracter inválido\n");
+    yyterminate();
+}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 83 "pylex.l"
-{printf("\n");yyterminate();}
+#line 119 "pylex.l"
+{
+    printf("\n");
+    yyterminate();
+}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 85 "pylex.l"
+#line 124 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 976 "pylex.cpp"
+#line 1007 "pylex.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1967,34 +1998,33 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 85 "pylex.l"
+#line 124 "pylex.l"
 
 
 
 bool revisaIdentacion() {
-    int identacion = 0;
+    int indentacion = 0;
     string cadena = yytext;
 
-    for(int i = 0;i < cadena.length()  ; i++) {
+    for(int i = 0;i < cadena.length();i++) {
        if( yytext[i] == '\t')
-           identacion +=8 ;
+           indentacion +=8 ;
            else if (yytext[i]==' ')
-               identacion +=1;
+               indentacion +=1;
 
     }
-    if(!pilita.empty()&&pilita.top() < identacion) {
-        //printf("Tope: %d identacion %d\n",pilita.top(),identacion);
-        pilita.push(identacion);
+    if(!pila.empty() && pila.top() < indentacion) {
+        pila.push(indentacion);
         printf("INDENT ");
         return true;
     }else {
         bool primero = true;
-        while(!pilita.empty()) {
+        while(!pila.empty()) {
             if(!primero) {
                 printf("DEDENT ");
             }
-            if(identacion == pilita.top()) return true;
-            pilita.pop();
+            if(indentacion == pila.top()) return true;
+            pila.pop();
             primero = false;
 
         }
@@ -2012,7 +2042,7 @@ int main(int argc, char *argv[])
         yyin = fopen(argv[0], "r");
     else 
         yyin =stdin;
-        pilita.push(0);
+        pila.push(0);
     yylex();
    // printf("\nNumero de lineas%i\n", num_lines);
 }
