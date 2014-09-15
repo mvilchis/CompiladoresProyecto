@@ -20,8 +20,9 @@ using namespace std;
 COMMENT "#"[^\n]*
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
 NATURAL [1-9][0-9]*
-ENTERO {NATURAL}|["-"][1-9][0-9]*
-NUMBER [0]|[0"."]{NATURAL}|{ENTERO}
+ENTERO [0]|{NATURAL}|[-]{NATURAL}
+FLOTANTE {ENTERO}["."][0-9]*
+NUMBER {FLOTANTE}|{ENTERO}
 STRING "\""[^"]*"\""
 NEWLINE [\n]
      stack<int>pila; /*Pila auxiliar para manejar la indentación*/
@@ -32,32 +33,28 @@ NEWLINE [\n]
 
 
 [\t ]*{COMMENT}{NEWLINE}|{NEWLINE}[\t ]*{COMMENT}{NEWLINE} {
-              yyless(yyleng-1);
+    /*Identifica los comentarios*/ 
+     yyless(yyleng-1);
 }
 
 {STRING} { 
+    /*Identifica cadenas bien formadas*/
     printf("STRING ");
     lei = true;
 }
 
 "\""[^"] {
+    /*Identifica cadenas mal formadas*/
     printf("\n[Error: cadena mal formada]\n");
     yyterminate();
 }
 
 {NUMBER} {
+    /*Identifica números*/
     printf ("NUMBER ");
     lei =true;
 }
 
-"-"{NUMBER}* {
-    printf ("NUMBER ");
-    lei =true;
-}
-{NUMBER}+"."{NUMBER}* {
-    printf ("NUMBER ");
-    lei =true;
-}
 
 print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|nonlocal|while|and|del|global|not|with|as|elif|if|or|yield|assert|else|import|pass|break|except|in|raise {
     string s = yytext; 
@@ -68,12 +65,13 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 }
 
 {NEWLINE}[ \t]*{NEWLINE} {
+    /*Filtra líneas en blanco*/
     string s = yytext;
     yyless(s.length()-1);
 }
 
 {NEWLINE}[\t ]* { 
-        
+        /*indentaciones*/
         if(num_lineas!=1 || lei)
             printf("NEWLINE\n");
 
