@@ -26,6 +26,7 @@ INDENT	[\t]
 
 
 {STRING} printf("STRING ");
+"\""[^"] {printf("\n[Error: cadena mal formada]\n"); yyterminate();}
 {NUMBER} printf ("NUMBER ");
 "-"{NUMBER}* printf("NUMBER ");
 {NUMBER}+"."{NUMBER}* printf("NUMBER ");
@@ -37,18 +38,17 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
     printf(" ");
 }
 {NEWLINE}[ \t]*{NEWLINE} {
-    if(num_lineas>1){
+    //printf("%d\n",num_lineas);
         string s = yytext;
         yyless(s.length()-1);
-    }
 }
 
 {NEWLINE}[\t ]* { 
          ++num_lineas;
         printf("NEWLINE\n");
         if(revisaIdentacion() == false) {
-            printf("\nError de indentacion en la línea %d\n", num_lineas);
-            exit(1);
+            printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
+            yyterminate();
         }
         
         }
@@ -58,8 +58,9 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 "'"|"\""|"#"|"\\" printf("%s", yytext);
 "("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" {printf("%s", yytext);printf(" ");} 
 
-"$"|"?"|"`" printf("Error: Caracter inválido\n");
+"$"|"?"|"`" {printf("Error: Caracter inválido\n");yyterminate();}
 
+<<EOF>> {printf("\n");yyterminate();}
 
 %%
 
