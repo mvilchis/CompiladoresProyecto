@@ -1,5 +1,6 @@
 %{
 #include <iostream>
+#include <stdio.h>
 #include <string>
 #include <stack>
 using namespace std;
@@ -11,7 +12,9 @@ using namespace std;
 
 COMMENT "#"[^\n]*
 IDENTIFIER [a-zA-ZñÑ_][a-zA-ZñÑ_0-9]*
-NUMBER [0-9]*
+NATURAL [1-9][0-9]*
+ENTERO {NATURAL}|["-"][1-9][0-9]*
+NUMBER [0]|[0"."]{NATURAL}|{ENTERO}
 STRING "\""[^"]*"\""
 NEWLINE [\n]
      stack<int>pila;
@@ -165,5 +168,4 @@ int main(int argc, char *argv[])
         yyin =stdin;
         pila.push(0);
     yylex();
-   // printf("\nNumero de lineas%i\n", num_lines);
 }
