@@ -711,17 +711,23 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "pylex.l"
-#line 2 "pylex.l"
+/*  Fernández Martínez José Ismael
+    Trinidad Hernández Norma Verónica
+    Vilchis Domínguez Miguel Alonso
+    Proyecto 01
+    Sept 2014
+*/
+#line 9 "pylex.l"
 #include <iostream>
 #include <stdio.h>
 #include <string>
 #include <stack>
 using namespace std;
-stack<int>pila;
-int num_lineas= 1;
+stack<int>pila; /*Pila auxiliar para manejar la indentación*/
+int num_lineas= 1; /*Guarda el número de líneas de código del programa*/
 bool revisaIdentacion();
-bool lei = false;
-#line 725 "pylex.cpp"
+bool lei = false; /*Variable que nos dice si ya hemos leído alguna línea de código*/
+#line 731 "pylex.cpp"
 
 #define INITIAL 0
 
@@ -903,11 +909,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 24 "pylex.l"
+#line 31 "pylex.l"
 
 
 
-#line 911 "pylex.cpp"
+#line 917 "pylex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -993,7 +999,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 27 "pylex.l"
+#line 34 "pylex.l"
 {
               yyless(yyleng-1);
 }
@@ -1001,7 +1007,7 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 31 "pylex.l"
+#line 38 "pylex.l"
 { 
     printf("STRING ");
     lei = true;
@@ -1010,7 +1016,7 @@ YY_RULE_SETUP
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 36 "pylex.l"
+#line 43 "pylex.l"
 {
     printf("\n[Error: cadena mal formada]\n");
     yyterminate();
@@ -1018,7 +1024,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 41 "pylex.l"
+#line 48 "pylex.l"
 {
     printf ("NUMBER ");
     lei =true;
@@ -1026,7 +1032,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 46 "pylex.l"
+#line 53 "pylex.l"
 {
     printf ("NUMBER ");
     lei =true;
@@ -1034,7 +1040,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 50 "pylex.l"
+#line 57 "pylex.l"
 {
     printf ("NUMBER ");
     lei =true;
@@ -1042,7 +1048,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 55 "pylex.l"
+#line 62 "pylex.l"
 {
     string s = yytext; 
     for(int i=0 ; i<s.length();i++)
@@ -1054,7 +1060,7 @@ YY_RULE_SETUP
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 63 "pylex.l"
+#line 70 "pylex.l"
 {
     string s = yytext;
     yyless(s.length()-1);
@@ -1063,7 +1069,7 @@ YY_RULE_SETUP
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 68 "pylex.l"
+#line 75 "pylex.l"
 { 
         
         if(num_lineas!=1 || lei)
@@ -1085,7 +1091,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 87 "pylex.l"
+#line 94 "pylex.l"
 {
     if(lei){
         printf("%s",yytext );
@@ -1097,7 +1103,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 96 "pylex.l"
+#line 103 "pylex.l"
 {
     printf("IDENTIFICADOR ");
     lei = true;
@@ -1105,7 +1111,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 101 "pylex.l"
+#line 108 "pylex.l"
 {
     printf("%s",yytext);
     printf(" ");
@@ -1114,7 +1120,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 107 "pylex.l"
+#line 114 "pylex.l"
 {
     printf("%s", yytext);
     lei = true;
@@ -1122,7 +1128,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 112 "pylex.l"
+#line 119 "pylex.l"
 {
     printf("%s ", yytext);
     lei =true;
@@ -1130,14 +1136,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 117 "pylex.l"
+#line 124 "pylex.l"
 {
     printf("Error: Caracter inválido\n");
     yyterminate();
 }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 122 "pylex.l"
+#line 129 "pylex.l"
 {
     printf("\n");
     yyterminate();
@@ -1145,10 +1151,10 @@ case YY_STATE_EOF(INITIAL):
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 127 "pylex.l"
+#line 134 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 1152 "pylex.cpp"
+#line 1158 "pylex.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2143,10 +2149,11 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 127 "pylex.l"
+#line 134 "pylex.l"
 
 
 
+/*Función que revisa si la indentación es correcta*/
 bool revisaIdentacion() {
     int indentacion = 0;
     string cadena = yytext;

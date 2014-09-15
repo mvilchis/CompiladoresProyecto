@@ -1,3 +1,10 @@
+/*  Fernández Martínez José Ismael
+    Trinidad Hernández Norma Verónica
+    Vilchis Domínguez Miguel Alonso
+    Proyecto 01
+    Sept 2014
+*/
+
 %{
 #include <iostream>
 #include <stdio.h>
@@ -17,10 +24,10 @@ ENTERO {NATURAL}|["-"][1-9][0-9]*
 NUMBER [0]|[0"."]{NATURAL}|{ENTERO}
 STRING "\""[^"]*"\""
 NEWLINE [\n]
-     stack<int>pila;
-     int num_lineas= 1;
+     stack<int>pila; /*Pila auxiliar para manejar la indentación*/
+     int num_lineas= 1; /*Guarda el número de líneas de código del programa*/
      bool revisaIdentacion();
-     bool lei = false;
+     bool lei = false; /*Variable que nos dice si ya hemos leído alguna línea de código*/
 %%
 
 
@@ -126,6 +133,7 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
 
 %%
 
+/*Función que revisa si la indentación es correcta*/
 bool revisaIdentacion() {
     int indentacion = 0;
     string cadena = yytext;
