@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string>
 #include <stack>
+#include "pypar.hpp"
 using namespace std;
 %}
 
@@ -25,7 +26,9 @@ FLOTANTE {ENTERO}["."][0-9]*
 NUMBER {FLOTANTE}|{ENTERO}
 STRING "\""[^"]*"\""
 NEWLINE [\n]
-     stack<int>pila; /*Pila auxiliar para manejar la indentación*/
+     deque<int> mydeque (0); 
+     stack<int>pila (mydeque); /*Pila auxiliar para manejar la indentación*/
+    
      int num_lineas= 1; /*Guarda el número de líneas de código del programa*/
      void revisaIdentacion();
      bool lei = false; /*Variable que nos dice si ya hemos leído alguna línea de código*/
@@ -61,16 +64,178 @@ NEWLINE [\n]
 }
 
 
-print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|nonlocal|while|and|del|global|not|with|as|elif|if|or|yield|assert|else|import|pass|break|except|in|raise {
-    string s = yytext; 
+print { 
     lei =true;
-    for(int i=0 ; i<s.length();i++)
-    	s[i] = toupper(s[i]);
-    yylval.cad =  s;
-    return RESERVADA;
-    
-}
+    yylval.cad = "PRINT";
+    return PRINT;
+ }
+False { 
+    lei =true;
+    yylval.cad = "FALSE";
+    return FALSE;
 
+ }
+class { 
+    lei =true;
+   yylval.cad = "CLASS";
+    return CLASS;
+ }
+finally { 
+    lei =true;
+    yylval.cad = "FINALLY";
+    return FINALLY;
+}
+is {  
+    lei =true;
+    yylval.cad = "IS";
+    return IS;
+}
+return { 
+    lei =true;
+    yylval.cad = "RETURN";
+    return RETURN;
+}
+None { 
+    lei =true;
+    yylval.cad = "NONE";
+    return NONE;
+}
+continue { 
+    lei =true;
+    yylval.cad = "CONTINUE";
+    return CONTINUE;
+}
+for { 
+    lei =true;
+    yylval.cad = "FOR";
+    return FOR;
+}
+lambda { 
+    lei =true;
+    yylval.cad = "LAMBDA";
+    return LAMBDA;
+}
+try { 
+    lei =true;
+    yylval.cad = "TRY";
+    return TRY;
+}
+True { 
+    lei =true;
+    yylval.cad = "TRUE";
+    return TRUE;
+}
+def { 
+    lei =true;
+    yylval.cad = "DEF";
+    return DEF;
+}
+from { 
+    lei =true;
+    yylval.cad = "FROM";
+    return FROM;
+}
+nonlocal { 
+    lei =true;
+    yylval.cad = "NONLOCAL";
+    return NONLOCAL;
+}
+while { 
+    lei =true;
+    yylval.cad = "WHILE";
+    return WHILE;
+}
+and { 
+    lei =true;
+    yylval.cad = "PRINT";
+    return PRINT;
+}
+del { 
+    lei =true;
+    yylval.cad = "DEL";
+    return DEL;
+}
+global { 
+    lei =true;
+    yylval.cad = "GLOBAL";
+    return GLOBAL;
+}
+not { 
+    lei =true;
+    yylval.cad = "NOT";
+    return NOT;
+}
+with { 
+    lei =true;
+    yylval.cad = "WITH";
+    return WITH;
+}
+as { 
+    lei =true;
+    yylval.cad = "AS";
+    return AS;
+}
+elif { 
+    lei =true;
+    yylval.cad = "ELIF";
+    return ELIF;
+}
+if { 
+    lei =true;
+    yylval.cad = "IF";
+    return IF;
+}
+or { 
+    lei =true;
+    yylval.cad = "OR";
+    return OR;
+}
+yield { 
+    lei =true;
+    yylval.cad = "YIELD";
+    return YIELD;
+}
+assert { 
+    lei =true;
+    yylval.cad = "ASSERT";
+    return ASSERT;
+}
+else { 
+    lei =true;
+    yylval.cad = "ELSE";
+    return ELSE;
+}
+import { 
+    lei =true;
+    yylval.cad = "IMPORT";
+    return IMPORT;
+}
+pass { 
+    lei =true;
+    yylval.cad = "PASS";
+    return PASS;
+}
+break { 
+    lei =true;
+    yylval.cad = "BREAK";
+    return BREAK;
+}
+except { 
+    lei =true;
+    yylval.cad = "EXCEPT";
+    return EXCEPT;
+}
+in { 
+    lei =true;
+    yylval.cad = "IN";
+    return IN;
+}
+raise { 
+    lei =true;
+    yylval.cad = "RAISE";
+    return RAISE;
+}
+    
 {NEWLINE}[ \t]*{NEWLINE} {
     /*Filtra líneas en blanco*/
     string s = yytext;
@@ -121,25 +286,240 @@ print|False|class|finally|is|return|None|continue|for|lambda|try|True|def|from|n
     
 }
 
-"+"|"-"|"*"|"**"|"/"|"//"|"%"|"<<"|">>"|"&"|"|"|"^"|"~"|"<"|">"|"<="|">="|"=="|"!=" {
+"+" {
     lei =true;
     yylval.cad = yytext;
-    return OPERADOR;
-    
-} 
+    return MAS;
 
-"'"|"\""|"#"|"\\" {
-    lei = true;
-    yylval. car = yytext;
-    return ESPECIAL;   
+}
+"-" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MENOS;
+}
+"*" { 
+    lei =true;
+    yylval.cad = yytext;
+    return ASTERISCO;
+}
+"**" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DASTERISCO;
+}
+"/" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DIAG;
+}
+"//" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DDIAG;
+}
+"%" { 
+    lei =true;
+    yylval.cad = yytext;
+    return PORCEN;
+}
+"<<" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DMENOR;
+}
+">>" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DMAYOR;
+}
+"&" { 
+    lei =true;
+    yylval.cad = yytext;
+    return AMPERSON;
+}
+"|" { 
+    lei =true;
+    yylval.cad = yytext;
+    return PIPE;
+}
+"^" { 
+    lei =true;
+    yylval.cad = yytext;
+    return CIRCUNFLEJO;
+}
+"~" { 
+    lei =true;
+    yylval.cad = yytext;
+    return ENETILDE;
+}
+"<" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MENOR;
+}
+">" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MAYOR;
+}
+"<=" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MEIGUAL;
+}
+">=" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MAIGUAL;
+}
+"==" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DIGUAL;
+}
+"!=" {  
+    lei =true;
+    yylval.cad = yytext;
+    return NIGUAL;
 }
 
-"("|")"|"["|"]"|"{"|"}"|","|":"|"."|";"|"@"|"="|"->"|"+="|"-="|"*="|"/="|"//="|"%="|"&="|"|="|"^="|">>="|"<<="|"**=" {
+
+"'" { 
+ lei =true; 
+ yylval.cad=yytext; 
+ return CSIMPLE; 
+ } 
+ "\"" { 
+ lei =true; 
+ yylval.cad=yytext; 
+ return IDIAG; 
+ } 
+ "#" { 
+ lei =true; 
+ yylval.cad=yytext; 
+ return GATO; 
+ } 
+ "\\" {
+    lei = true;
+    yylval.cad = "\\";
+    return DIDIAG;    
+}
+
+"(" { 
     lei =true;
-    yylval.cad ) yytext;
-    return COSA;
-    
-} 
+    yylval.cad = yytext;
+    return APAREN;
+    }
+"[" { 
+ lei =true;
+    yylval.cad = yytext;
+    return ACORCHETE;
+    }
+"]" { 
+ lei =true;
+    yylval.cad = yytext;
+    return CCORCHETE;
+}
+"{" { 
+ lei =true;
+    yylval.cad = yytext;
+    return ALLAVE;
+    }
+"}" { 
+ lei =true;
+    yylval.cad = yytext;
+    return CLLAVE;
+}
+"," { 
+ lei =true;
+    yylval.cad = yytext;
+    return COMA;
+    }
+":" { 
+ lei =true;
+    yylval.cad = yytext;
+    return DPUNTO;
+    }
+"." { 
+ lei =true;
+    yylval.cad = yytext;
+    return PUNTO;
+    }
+";" { 
+ lei =true;
+    yylval.cad = yytext;
+    return PCOMA;
+    }
+"@" { 
+ lei =true;
+    yylval.cad = yytext;
+    return AT;
+    }
+"=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return IGUAL;
+    }
+"->" { 
+ lei =true;
+    yylval.cad = yytext;
+    return MENOSMAYOR;
+    }
+"+=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return MASIGUAL;
+    }
+"-=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return MENOSIGUAL;
+    }
+"*=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return ASTIGUAL;
+    }
+"/=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return DIAIGUAL;
+    }
+"//=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return DDIAIGUAL;
+    }
+"%=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return PORIGUAL;
+    }
+"&=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return AMPIGUAL;
+    }
+"^=" { 
+  lei =true;
+    yylval.cad = yytext;
+    return CIRCIGUAL;
+    }
+">>=" { 
+  lei =true;
+    yylval.cad = yytext;
+    return DMAYORIGUAL;
+    }
+"<<=" { 
+  lei =true;
+    yylval.cad = yytext;
+    return DMENORIGUAL;
+    }
+"**=" {  
+  lei =true;
+    yylval.cad = yytext;
+    return DASTIGUAL;
+    }
 
 "$"|"?"|"`" {
     printf("Error: Caracter inválido\n");
@@ -157,6 +537,7 @@ void revisaIdentacion() {
     int indentacion = 0;
     string cadena = yytext;
     string salida;
+    bool identacion_correcta;
 
     for(int i = 0;i < cadena.length();i++) {
        if( yytext[i] == '\t')
@@ -167,9 +548,9 @@ void revisaIdentacion() {
     }
     if(!pila.empty() && pila.top() < indentacion) {
         pila.push(indentacion);
-        yylval.cad = cadena; 
+        //yylval.cad = cadena; 
         indentacion_correcta = true;
-        return INDENT;
+        /*****REVISAR QUE HAY QUE REGRESAR *****/
     }else {
         bool primero = true;
         while(!pila.empty()) {
@@ -178,7 +559,8 @@ void revisaIdentacion() {
             }
             if(indentacion == pila.top()){ 
                 indentacion_correcta = true;
-                return SALIDA;
+                /**** REVISAR QUE HAY QUE REGRESAR ****/
+                //return SALIDA;
             }
             pila.pop();
             primero = false;
@@ -190,9 +572,8 @@ void revisaIdentacion() {
 
 }
 
-int main(int argc, char *argv[])
+/*int main(int argc, char *argv[])
 {
-    /*Definimos la entrada*/
     ++argv, --argc;
     if(argc > 0) 
         yyin = fopen(argv[0], "r");
@@ -200,4 +581,4 @@ int main(int argc, char *argv[])
         yyin =stdin;
         pila.push(0);
     yylex();
-}
+} */

@@ -1,0 +1,230 @@
+Terminals unused in grammar
+
+   STRING
+   ESPTAB
+   OPERADOR
+   IDENTIFICADOR
+   FALSE
+   CLASS
+   FINALLY
+   IS
+   RETURN
+   NONE
+   CONTINUE
+   FOR
+   LAMBDA
+   TRY
+   TRUE
+   DEF
+   FROM
+   NONLOCAL
+   WHILE
+   AND
+   DEL
+   GLOBAL
+   NOT
+   WITH
+   AS
+   ELIF
+   IF
+   OR
+   YIELD
+   ASSERT
+   ELSE
+   IMPORT
+   PASS
+   BREAK
+   EXCEPT
+   IN
+   RAISE
+   NIGUAL
+   DIGUAL
+   MAIGUAL
+   MEIGUAL
+   MAYOR
+   MENOR
+   ENETILDE
+   CIRCUNFLEJO
+   PIPE
+   AMPERSON
+   DMAYOR
+   DMENOR
+   PORCEN
+   DDIAG
+   DIAG
+   DASTERISCO
+   ASTERISCO
+   MENOS
+   MAS
+   APAREN
+   ACORCHETE
+   CCORCHETE
+   ALLAVE
+   CLLAVE
+   COMA
+   DPUNTO
+   PUNTO
+   PCOMA
+   AT
+   IGUAL
+   MENOSMAYOR
+   MASIGUAL
+   MENOSIGUAL
+   ASTIGUAL
+   DIAIGUAL
+   DDIAIGUAL
+   PORIGUAL
+   AMPIGUAL
+   CIRCIGUAL
+   DMAYORIGUAL
+   DMENORIGUAL
+   DASTIGUAL
+   CSIMPLE
+   IDIAG
+   GATO
+   DIDIAG
+   NEWLINE
+   NUMBER
+   IDENT
+   SALIDA
+   FIN
+
+
+Gramática
+
+    0 $accept: GOAL $end
+
+    1 GOAL: PRINT
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+STRING (258)
+ESPTAB (259)
+OPERADOR (260)
+IDENTIFICADOR (261)
+PRINT (262) 1
+FALSE (263)
+CLASS (264)
+FINALLY (265)
+IS (266)
+RETURN (267)
+NONE (268)
+CONTINUE (269)
+FOR (270)
+LAMBDA (271)
+TRY (272)
+TRUE (273)
+DEF (274)
+FROM (275)
+NONLOCAL (276)
+WHILE (277)
+AND (278)
+DEL (279)
+GLOBAL (280)
+NOT (281)
+WITH (282)
+AS (283)
+ELIF (284)
+IF (285)
+OR (286)
+YIELD (287)
+ASSERT (288)
+ELSE (289)
+IMPORT (290)
+PASS (291)
+BREAK (292)
+EXCEPT (293)
+IN (294)
+RAISE (295)
+NIGUAL (296)
+DIGUAL (297)
+MAIGUAL (298)
+MEIGUAL (299)
+MAYOR (300)
+MENOR (301)
+ENETILDE (302)
+CIRCUNFLEJO (303)
+PIPE (304)
+AMPERSON (305)
+DMAYOR (306)
+DMENOR (307)
+PORCEN (308)
+DDIAG (309)
+DIAG (310)
+DASTERISCO (311)
+ASTERISCO (312)
+MENOS (313)
+MAS (314)
+APAREN (315)
+ACORCHETE (316)
+CCORCHETE (317)
+ALLAVE (318)
+CLLAVE (319)
+COMA (320)
+DPUNTO (321)
+PUNTO (322)
+PCOMA (323)
+AT (324)
+IGUAL (325)
+MENOSMAYOR (326)
+MASIGUAL (327)
+MENOSIGUAL (328)
+ASTIGUAL (329)
+DIAIGUAL (330)
+DDIAIGUAL (331)
+PORIGUAL (332)
+AMPIGUAL (333)
+CIRCIGUAL (334)
+DMAYORIGUAL (335)
+DMENORIGUAL (336)
+DASTIGUAL (337)
+CSIMPLE (338)
+IDIAG (339)
+GATO (340)
+DIDIAG (341)
+NEWLINE (342)
+NUMBER (343)
+IDENT (344)
+SALIDA (345)
+FIN (346)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (92)
+    en la izquierda: 0
+GOAL (93)
+    en la izquierda: 1, en la derecha: 0
+
+
+estado 0
+
+    0 $accept: . GOAL $end
+
+    PRINT  desplazar e ir al estado 1
+
+    GOAL  ir al estado 2
+
+
+estado 1
+
+    1 GOAL: PRINT .
+
+    $default  reduce usando la regla 1 (GOAL)
+
+
+estado 2
+
+    0 $accept: GOAL . $end
+
+    $end  desplazar e ir al estado 3
+
+
+estado 3
+
+    0 $accept: GOAL $end .
+
+    $default  aceptar
