@@ -16,6 +16,8 @@ using namespace std;
 
 %option noyywrap
 %option outfile="pylex.cpp"
+%option stack
+%x edo_poner_dedent
 
 
 COMMENT "#"[^\n]*
@@ -30,10 +32,12 @@ NEWLINE [\n]
      stack<int>pila (mydeque); /*Pila auxiliar para manejar la indentación*/
     
      int num_lineas= 1; /*Guarda el número de líneas de código del programa*/
-     void revisaIdentacion();
+     int revisaIdentacion();
      bool lei = false; /*Variable que nos dice si ya hemos leído alguna línea de código*/
-     bool indentacion_correcta = true;
+     int num_dedent;
 %%
+
+
 
 
 [\t ]*{COMMENT}{NEWLINE}|{NEWLINE}[\t ]*{COMMENT}{NEWLINE} {
@@ -254,20 +258,21 @@ raise {
         }
 
         ++num_lineas;
-        revisaIdentacion();
-        if(!indentacion_correcta) {
+        int n = revisaIdentacion();
+        if(n==0) {
             printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
             yyterminate();
         }
 
+        if(n==1) return INDENT;
+        if(n==2) yy_push_state(edo_poner_dedent);
         if(num_lineas!=1 || lei){
             yylval.car = '\n';
             return NEWLINE;
         }
-            
-
-
 }
+
+
 
 [ \t]+ {
     if(lei){
@@ -530,14 +535,17 @@ raise {
     return FIN;
 }
 
-%%
+<edo_poner_dedent>"$"{
+    num_dedent--;
+    if(!num_dedent) yy_pop_state();
+    return DEDENT
+}
 
+%%
 /*Función que revisa si la indentación es correcta*/
-void revisaIdentacion() {
+int revisaIdentacion() {
     int indentacion = 0;
     string cadena = yytext;
-    string salida;
-    bool identacion_correcta;
 
     for(int i = 0;i < cadena.length();i++) {
        if( yytext[i] == '\t')
@@ -548,29 +556,29 @@ void revisaIdentacion() {
     }
     if(!pila.empty() && pila.top() < indentacion) {
         pila.push(indentacion);
-        //yylval.cad = cadena; 
-        indentacion_correcta = true;
-        /*****REVISAR QUE HAY QUE REGRESAR *****/
+        //printf("INDENT ");
+        return 1;
     }else {
         bool primero = true;
+        num_dedent = 0;
         while(!pila.empty()) {
             if(!primero) {
-                salida+="DEDENT";
+                unput('$')
+                num_dedent++;
+                //printf("DEDENT ");
             }
-            if(indentacion == pila.top()){ 
-                indentacion_correcta = true;
-                /**** REVISAR QUE HAY QUE REGRESAR ****/
-                //return SALIDA;
-            }
+            if(indentacion == pila.top()) return 2;
             pila.pop();
             primero = false;
 
         }
-        indentacion_correcta = false;
+        return 0;
     }
     
 
 }
+
+
 
 /*int main(int argc, char *argv[])
 {
