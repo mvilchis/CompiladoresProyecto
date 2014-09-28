@@ -364,8 +364,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 91
-#define YY_END_OF_BUFFER 92
+#define YY_NUM_RULES 92
+#define YY_END_OF_BUFFER 93
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -375,29 +375,29 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[210] =
     {   0,
-        0,    0,    0,    0,   92,   91,   42,   41,   91,   64,
-       65,   90,   50,   53,   63,   67,   46,   44,   72,   45,
-       74,   48,    5,    5,   73,   75,   57,   77,   58,   76,
-       43,   43,   43,   43,   68,   66,   69,   55,   43,   43,
-       43,   43,   43,   43,   43,   43,   43,   43,   43,   43,
-       43,   43,   43,   43,   70,   54,   71,   56,    1,   42,
-        0,   41,   40,    0,   62,    4,    3,    0,    2,   84,
-       85,   47,   81,   79,    5,   80,   78,   49,   82,    5,
-        5,   51,   59,   61,   60,   52,   43,   43,   43,   43,
-       86,   43,   27,   43,   43,   43,   43,   43,   43,   43,
+        0,    0,    0,    0,   93,   92,   43,   42,   92,   65,
+       66,   91,   51,   54,   64,   68,   47,   45,   73,   46,
+       75,   49,    5,    5,   74,   76,   58,   78,   59,   77,
+       44,   44,   44,   44,   69,   67,   70,   56,   44,   44,
+       44,   44,   44,   44,   44,   44,   44,   44,   44,   44,
+       44,   44,   44,   44,   71,   55,   72,   57,    1,   43,
+        0,   42,   41,    0,   63,    4,    3,    0,    2,   85,
+       86,   48,   82,   80,    5,   81,   79,   50,   83,    6,
+        5,   52,   60,   62,   61,   53,   44,   44,   44,   44,
+       87,   44,   28,   44,   44,   44,   44,   44,   44,   44,
 
-       43,   43,   43,   29,   43,   38,   10,   43,   43,   30,
-       43,   43,   43,   43,   43,   43,   43,   43,    0,    0,
-       89,    5,   83,    5,   88,   87,   43,   43,   43,   22,
-       43,   43,   43,   43,   18,   23,   43,   43,   43,   43,
-       14,   43,   43,   43,   43,   43,   25,   43,   43,   43,
-       43,   16,   43,   43,   43,   43,   12,   17,   43,   43,
-       43,   43,   28,   33,   43,   43,   19,   43,   43,   43,
-       43,   35,   43,   43,   43,   43,   26,   43,    7,   43,
-       36,    8,   43,   43,   43,   43,   43,   43,   43,    6,
-       39,   43,   21,   31,   32,   43,   37,   43,   24,   34,
+       44,   44,   44,   30,   44,   39,   11,   44,   44,   31,
+       44,   44,   44,   44,   44,   44,   44,   44,    0,    0,
+       90,    5,   84,    6,   89,   88,   44,   44,   44,   23,
+       44,   44,   44,   44,   19,   24,   44,   44,   44,   44,
+       15,   44,   44,   44,   44,   44,   26,   44,   44,   44,
+       44,   17,   44,   44,   44,   44,   13,   18,   44,   44,
+       44,   44,   29,   34,   44,   44,   20,   44,   44,   44,
+       44,   36,   44,   44,   44,   44,   27,   44,    8,   44,
+       37,    9,   44,   44,   44,   44,   44,   44,   44,    7,
+       40,   44,   22,   32,   33,   44,   38,   44,   25,   35,
 
-       15,   43,   11,   43,    9,   43,   13,   20,    0
+       16,   44,   12,   44,   10,   44,   14,   21,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -932,27 +932,38 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 66 "pylex.l"
+#line 68 "pylex.l"
 {
     /*Identifica números*/
     lei =true;
-    /*Aqui hay que ver que tipo de numero es para saber q yylval asignamos*/
-    return NUMBER;
+    yylval.numi = yytext;
+    return ENTERO;
     
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 75 "pylex.l"
+#line 76 "pylex.l"
+{
+    /*Identifica números*/
+    lei =true;
+    yylval.numf = yytext;
+    return FLOTANTE;
+    
+}
+	YY_BREAK
+case 7:
+YY_RULE_SETUP
+#line 85 "pylex.l"
 { 
     lei =true;
     yylval.cad = "PRINT";
     return PRINT;
  }
 	YY_BREAK
-case 7:
+case 8:
 YY_RULE_SETUP
-#line 80 "pylex.l"
+#line 90 "pylex.l"
 { 
     lei =true;
     yylval.cad = "FALSE";
@@ -960,308 +971,308 @@ YY_RULE_SETUP
 
  }
 	YY_BREAK
-case 8:
+case 9:
 YY_RULE_SETUP
-#line 86 "pylex.l"
+#line 96 "pylex.l"
 { 
     lei =true;
    yylval.cad = "CLASS";
     return CLASS;
  }
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 91 "pylex.l"
+#line 101 "pylex.l"
 { 
     lei =true;
     yylval.cad = "FINALLY";
     return FINALLY;
 }
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 96 "pylex.l"
+#line 106 "pylex.l"
 {  
     lei =true;
     yylval.cad = "IS";
     return IS;
 }
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 101 "pylex.l"
+#line 111 "pylex.l"
 { 
     lei =true;
     yylval.cad = "RETURN";
     return RETURN;
 }
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
-#line 106 "pylex.l"
+#line 116 "pylex.l"
 { 
     lei =true;
     yylval.cad = "NONE";
     return NONE;
 }
 	YY_BREAK
-case 13:
+case 14:
 YY_RULE_SETUP
-#line 111 "pylex.l"
+#line 121 "pylex.l"
 { 
     lei =true;
     yylval.cad = "CONTINUE";
     return CONTINUE;
 }
 	YY_BREAK
-case 14:
+case 15:
 YY_RULE_SETUP
-#line 116 "pylex.l"
+#line 126 "pylex.l"
 { 
     lei =true;
     yylval.cad = "FOR";
     return FOR;
 }
 	YY_BREAK
-case 15:
+case 16:
 YY_RULE_SETUP
-#line 121 "pylex.l"
+#line 131 "pylex.l"
 { 
     lei =true;
     yylval.cad = "LAMBDA";
     return LAMBDA;
 }
 	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
-#line 126 "pylex.l"
+#line 136 "pylex.l"
 { 
     lei =true;
     yylval.cad = "TRY";
     return TRY;
 }
 	YY_BREAK
-case 17:
+case 18:
 YY_RULE_SETUP
-#line 131 "pylex.l"
+#line 141 "pylex.l"
 { 
     lei =true;
     yylval.cad = "TRUE";
     return TRUE;
 }
 	YY_BREAK
-case 18:
+case 19:
 YY_RULE_SETUP
-#line 136 "pylex.l"
+#line 146 "pylex.l"
 { 
     lei =true;
     yylval.cad = "DEF";
     return DEF;
 }
 	YY_BREAK
-case 19:
+case 20:
 YY_RULE_SETUP
-#line 141 "pylex.l"
+#line 151 "pylex.l"
 { 
     lei =true;
     yylval.cad = "FROM";
     return FROM;
 }
 	YY_BREAK
-case 20:
+case 21:
 YY_RULE_SETUP
-#line 146 "pylex.l"
+#line 156 "pylex.l"
 { 
     lei =true;
     yylval.cad = "NONLOCAL";
     return NONLOCAL;
 }
 	YY_BREAK
-case 21:
+case 22:
 YY_RULE_SETUP
-#line 151 "pylex.l"
+#line 161 "pylex.l"
 { 
     lei =true;
     yylval.cad = "WHILE";
     return WHILE;
 }
 	YY_BREAK
-case 22:
+case 23:
 YY_RULE_SETUP
-#line 156 "pylex.l"
+#line 166 "pylex.l"
 { 
     lei =true;
     yylval.cad = "PRINT";
     return PRINT;
 }
 	YY_BREAK
-case 23:
+case 24:
 YY_RULE_SETUP
-#line 161 "pylex.l"
+#line 171 "pylex.l"
 { 
     lei =true;
     yylval.cad = "DEL";
     return DEL;
 }
 	YY_BREAK
-case 24:
+case 25:
 YY_RULE_SETUP
-#line 166 "pylex.l"
+#line 176 "pylex.l"
 { 
     lei =true;
     yylval.cad = "GLOBAL";
     return GLOBAL;
 }
 	YY_BREAK
-case 25:
+case 26:
 YY_RULE_SETUP
-#line 171 "pylex.l"
+#line 181 "pylex.l"
 { 
     lei =true;
     yylval.cad = "NOT";
     return NOT;
 }
 	YY_BREAK
-case 26:
+case 27:
 YY_RULE_SETUP
-#line 176 "pylex.l"
+#line 186 "pylex.l"
 { 
     lei =true;
     yylval.cad = "WITH";
     return WITH;
 }
 	YY_BREAK
-case 27:
+case 28:
 YY_RULE_SETUP
-#line 181 "pylex.l"
+#line 191 "pylex.l"
 { 
     lei =true;
     yylval.cad = "AS";
     return AS;
 }
 	YY_BREAK
-case 28:
+case 29:
 YY_RULE_SETUP
-#line 186 "pylex.l"
+#line 196 "pylex.l"
 { 
     lei =true;
     yylval.cad = "ELIF";
     return ELIF;
 }
 	YY_BREAK
-case 29:
+case 30:
 YY_RULE_SETUP
-#line 191 "pylex.l"
+#line 201 "pylex.l"
 { 
     lei =true;
     yylval.cad = "IF";
     return IF;
 }
 	YY_BREAK
-case 30:
+case 31:
 YY_RULE_SETUP
-#line 196 "pylex.l"
+#line 206 "pylex.l"
 { 
     lei =true;
     yylval.cad = "OR";
     return OR;
 }
 	YY_BREAK
-case 31:
+case 32:
 YY_RULE_SETUP
-#line 201 "pylex.l"
+#line 211 "pylex.l"
 { 
     lei =true;
     yylval.cad = "YIELD";
     return YIELD;
 }
 	YY_BREAK
-case 32:
+case 33:
 YY_RULE_SETUP
-#line 206 "pylex.l"
+#line 216 "pylex.l"
 { 
     lei =true;
     yylval.cad = "ASSERT";
     return ASSERT;
 }
 	YY_BREAK
-case 33:
+case 34:
 YY_RULE_SETUP
-#line 211 "pylex.l"
+#line 221 "pylex.l"
 { 
     lei =true;
     yylval.cad = "ELSE";
     return ELSE;
 }
 	YY_BREAK
-case 34:
+case 35:
 YY_RULE_SETUP
-#line 216 "pylex.l"
+#line 226 "pylex.l"
 { 
     lei =true;
     yylval.cad = "IMPORT";
     return IMPORT;
 }
 	YY_BREAK
-case 35:
+case 36:
 YY_RULE_SETUP
-#line 221 "pylex.l"
+#line 231 "pylex.l"
 { 
     lei =true;
     yylval.cad = "PASS";
     return PASS;
 }
 	YY_BREAK
-case 36:
+case 37:
 YY_RULE_SETUP
-#line 226 "pylex.l"
+#line 236 "pylex.l"
 { 
     lei =true;
     yylval.cad = "BREAK";
     return BREAK;
 }
 	YY_BREAK
-case 37:
+case 38:
 YY_RULE_SETUP
-#line 231 "pylex.l"
+#line 241 "pylex.l"
 { 
     lei =true;
     yylval.cad = "EXCEPT";
     return EXCEPT;
 }
 	YY_BREAK
-case 38:
+case 39:
 YY_RULE_SETUP
-#line 236 "pylex.l"
+#line 246 "pylex.l"
 { 
     lei =true;
     yylval.cad = "IN";
     return IN;
 }
 	YY_BREAK
-case 39:
+case 40:
 YY_RULE_SETUP
-#line 241 "pylex.l"
+#line 251 "pylex.l"
 { 
     lei =true;
     yylval.cad = "RAISE";
     return RAISE;
 }
 	YY_BREAK
-case 40:
-/* rule 40 can match eol */
+case 41:
+/* rule 41 can match eol */
 YY_RULE_SETUP
-#line 247 "pylex.l"
+#line 257 "pylex.l"
 {
     /*Filtra líneas en blanco*/
     string s = yytext;
     yyless(s.length()-1);
 }
 	YY_BREAK
-case 41:
-/* rule 41 can match eol */
+case 42:
+/* rule 42 can match eol */
 YY_RULE_SETUP
-#line 253 "pylex.l"
+#line 263 "pylex.l"
 { 
         /*indentaciones*/
     
@@ -1288,9 +1299,9 @@ YY_RULE_SETUP
         }
 }
 	YY_BREAK
-case 42:
+case 43:
 YY_RULE_SETUP
-#line 281 "pylex.l"
+#line 291 "pylex.l"
 {
     if(lei){
         yylval.cad = yytext;
@@ -1301,9 +1312,9 @@ YY_RULE_SETUP
     }
 }
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 291 "pylex.l"
+#line 301 "pylex.l"
 {
     lei = true;
     yylval.cad = yytext;
@@ -1311,9 +1322,9 @@ YY_RULE_SETUP
     
 }
 	YY_BREAK
-case 44:
+case 45:
 YY_RULE_SETUP
-#line 298 "pylex.l"
+#line 308 "pylex.l"
 {
     lei =true;
     yylval.cad = yytext;
@@ -1321,414 +1332,414 @@ YY_RULE_SETUP
 
 }
 	YY_BREAK
-case 45:
+case 46:
 YY_RULE_SETUP
-#line 304 "pylex.l"
+#line 314 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return MENOS;
 }
 	YY_BREAK
-case 46:
+case 47:
 YY_RULE_SETUP
-#line 309 "pylex.l"
+#line 319 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return ASTERISCO;
 }
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 314 "pylex.l"
+#line 324 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DASTERISCO;
 }
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 319 "pylex.l"
+#line 329 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DIAG;
 }
 	YY_BREAK
-case 49:
+case 50:
 YY_RULE_SETUP
-#line 324 "pylex.l"
+#line 334 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DDIAG;
 }
 	YY_BREAK
-case 50:
+case 51:
 YY_RULE_SETUP
-#line 329 "pylex.l"
+#line 339 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return PORCEN;
 }
 	YY_BREAK
-case 51:
+case 52:
 YY_RULE_SETUP
-#line 334 "pylex.l"
+#line 344 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DMENOR;
 }
 	YY_BREAK
-case 52:
+case 53:
 YY_RULE_SETUP
-#line 339 "pylex.l"
+#line 349 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DMAYOR;
 }
 	YY_BREAK
-case 53:
+case 54:
 YY_RULE_SETUP
-#line 344 "pylex.l"
+#line 354 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return AMPERSON;
 }
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 349 "pylex.l"
+#line 359 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return PIPE;
 }
 	YY_BREAK
-case 55:
+case 56:
 YY_RULE_SETUP
-#line 354 "pylex.l"
+#line 364 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return CIRCUNFLEJO;
 }
 	YY_BREAK
-case 56:
+case 57:
 YY_RULE_SETUP
-#line 359 "pylex.l"
+#line 369 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return ENETILDE;
 }
 	YY_BREAK
-case 57:
+case 58:
 YY_RULE_SETUP
-#line 364 "pylex.l"
+#line 374 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return MENOR;
 }
 	YY_BREAK
-case 58:
+case 59:
 YY_RULE_SETUP
-#line 369 "pylex.l"
+#line 379 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return MAYOR;
 }
 	YY_BREAK
-case 59:
+case 60:
 YY_RULE_SETUP
-#line 374 "pylex.l"
+#line 384 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return MEIGUAL;
 }
 	YY_BREAK
-case 60:
+case 61:
 YY_RULE_SETUP
-#line 379 "pylex.l"
+#line 389 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return MAIGUAL;
 }
 	YY_BREAK
-case 61:
+case 62:
 YY_RULE_SETUP
-#line 384 "pylex.l"
+#line 394 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DIGUAL;
 }
 	YY_BREAK
-case 62:
+case 63:
 YY_RULE_SETUP
-#line 389 "pylex.l"
+#line 399 "pylex.l"
 {  
     lei =true;
     yylval.cad = yytext;
     return NIGUAL;
 }
 	YY_BREAK
-case 63:
+case 64:
 YY_RULE_SETUP
-#line 396 "pylex.l"
+#line 406 "pylex.l"
 { 
  lei =true; 
  yylval.cad=yytext; 
  return CSIMPLE; 
  } 
 	YY_BREAK
-case 64:
+case 65:
 YY_RULE_SETUP
-#line 401 "pylex.l"
+#line 411 "pylex.l"
 { 
  lei =true; 
  yylval.cad=yytext; 
  return IDIAG; 
  } 
 	YY_BREAK
-case 65:
+case 66:
 YY_RULE_SETUP
-#line 406 "pylex.l"
+#line 416 "pylex.l"
 { 
  lei =true; 
  yylval.cad=yytext; 
  return GATO; 
  } 
 	YY_BREAK
-case 66:
+case 67:
 YY_RULE_SETUP
-#line 411 "pylex.l"
+#line 421 "pylex.l"
 {
     lei = true;
     yylval.cad = "\\";
     return DIDIAG;    
 }
 	YY_BREAK
-case 67:
+case 68:
 YY_RULE_SETUP
-#line 417 "pylex.l"
+#line 427 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return APAREN;
     }
 	YY_BREAK
-case 68:
+case 69:
 YY_RULE_SETUP
-#line 422 "pylex.l"
+#line 432 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return ACORCHETE;
     }
 	YY_BREAK
-case 69:
+case 70:
 YY_RULE_SETUP
-#line 427 "pylex.l"
+#line 437 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return CCORCHETE;
 }
 	YY_BREAK
-case 70:
+case 71:
 YY_RULE_SETUP
-#line 432 "pylex.l"
+#line 442 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return ALLAVE;
     }
 	YY_BREAK
-case 71:
+case 72:
 YY_RULE_SETUP
-#line 437 "pylex.l"
+#line 447 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return CLLAVE;
 }
 	YY_BREAK
-case 72:
+case 73:
 YY_RULE_SETUP
-#line 442 "pylex.l"
+#line 452 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return COMA;
     }
 	YY_BREAK
-case 73:
+case 74:
 YY_RULE_SETUP
-#line 447 "pylex.l"
+#line 457 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return DPUNTO;
     }
 	YY_BREAK
-case 74:
+case 75:
 YY_RULE_SETUP
-#line 452 "pylex.l"
+#line 462 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return PUNTO;
     }
 	YY_BREAK
-case 75:
+case 76:
 YY_RULE_SETUP
-#line 457 "pylex.l"
+#line 467 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return PCOMA;
     }
 	YY_BREAK
-case 76:
+case 77:
 YY_RULE_SETUP
-#line 462 "pylex.l"
+#line 472 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return AT;
     }
 	YY_BREAK
-case 77:
+case 78:
 YY_RULE_SETUP
-#line 467 "pylex.l"
+#line 477 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return IGUAL;
     }
 	YY_BREAK
-case 78:
+case 79:
 YY_RULE_SETUP
-#line 472 "pylex.l"
+#line 482 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return MENOSMAYOR;
     }
 	YY_BREAK
-case 79:
+case 80:
 YY_RULE_SETUP
-#line 477 "pylex.l"
+#line 487 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return MASIGUAL;
     }
 	YY_BREAK
-case 80:
+case 81:
 YY_RULE_SETUP
-#line 482 "pylex.l"
+#line 492 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return MENOSIGUAL;
     }
 	YY_BREAK
-case 81:
+case 82:
 YY_RULE_SETUP
-#line 487 "pylex.l"
+#line 497 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return ASTIGUAL;
     }
 	YY_BREAK
-case 82:
+case 83:
 YY_RULE_SETUP
-#line 492 "pylex.l"
+#line 502 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return DIAIGUAL;
     }
 	YY_BREAK
-case 83:
+case 84:
 YY_RULE_SETUP
-#line 497 "pylex.l"
+#line 507 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return DDIAIGUAL;
     }
 	YY_BREAK
-case 84:
+case 85:
 YY_RULE_SETUP
-#line 502 "pylex.l"
+#line 512 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return PORIGUAL;
     }
 	YY_BREAK
-case 85:
+case 86:
 YY_RULE_SETUP
-#line 507 "pylex.l"
+#line 517 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return AMPIGUAL;
     }
 	YY_BREAK
-case 86:
+case 87:
 YY_RULE_SETUP
-#line 512 "pylex.l"
+#line 522 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
     return CIRCIGUAL;
     }
 	YY_BREAK
-case 87:
+case 88:
 YY_RULE_SETUP
-#line 517 "pylex.l"
+#line 527 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
     return DMAYORIGUAL;
     }
 	YY_BREAK
-case 88:
+case 89:
 YY_RULE_SETUP
-#line 522 "pylex.l"
+#line 532 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
     return DMENORIGUAL;
     }
 	YY_BREAK
-case 89:
+case 90:
 YY_RULE_SETUP
-#line 527 "pylex.l"
+#line 537 "pylex.l"
 {  
   lei =true;
     yylval.cad = yytext;
     return DASTIGUAL;
     }
 	YY_BREAK
-case 90:
+case 91:
 YY_RULE_SETUP
-#line 533 "pylex.l"
+#line 543 "pylex.l"
 {
     printf("Error: Caracter inválido\n");
     yyterminate();
@@ -1736,17 +1747,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(edo_poner_dedent):
-#line 538 "pylex.l"
+#line 548 "pylex.l"
 {
     return FIN;
 }
 	YY_BREAK
-case 91:
+case 92:
 YY_RULE_SETUP
-#line 544 "pylex.l"
+#line 554 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 1750 "pylex.cpp"
+#line 1761 "pylex.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2786,7 +2797,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 544 "pylex.l"
+#line 554 "pylex.l"
 
 
 /*Función que revisa si la indentación es correcta*/

@@ -63,11 +63,21 @@ NEWLINE [\n]
     yyterminate();
 }
 
-{NUMBER} {
+
+
+{ENTERO} {
     /*Identifica números*/
     lei =true;
-    /*Aqui hay que ver que tipo de numero es para saber q yylval asignamos*/
-    return NUMBER;
+    yylval.numi = yytext;
+    return ENTERO;
+    
+}
+
+{FLOTANTE} {
+    /*Identifica números*/
+    lei =true;
+    yylval.numf = yytext;
+    return FLOTANTE;
     
 }
 
