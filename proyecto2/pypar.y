@@ -23,7 +23,7 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 %token <car> NEWLINE
 %token <numi> ENTERO
 %token <numf> FLOTANTE
-%token <cad> IDENT SALIDA
+%token <cad> INDENT SALIDA DEDENT
 %token FIN 
 
 %%

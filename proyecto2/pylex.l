@@ -68,7 +68,7 @@ NEWLINE [\n]
 {ENTERO} {
     /*Identifica números*/
     lei =true;
-    yylval.numi = yytext;
+    yylval.numi = atoi(yytext);
     return ENTERO;
     
 }
@@ -76,7 +76,7 @@ NEWLINE [\n]
 {FLOTANTE} {
     /*Identifica números*/
     lei =true;
-    yylval.numf = yytext;
+    yylval.numf = atof(yytext);
     return FLOTANTE;
     
 }
@@ -573,7 +573,7 @@ int revisaIdentacion() {
         num_dedent = 0;
         while(!pila.empty()) {
             if(!primero) {
-                unput('$')
+                unput('$');
                 num_dedent++;
                 //printf("DEDENT ");
             }
