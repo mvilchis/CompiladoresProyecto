@@ -38,7 +38,11 @@ NEWLINE [\n]
 %%
 
 
-
+<edo_poner_dedent>"$" {
+    num_dedent--;
+    if(!num_dedent) yy_pop_state();
+    return DEDENT;
+}
 
 [\t ]*{COMMENT}{NEWLINE}|{NEWLINE}[\t ]*{COMMENT}{NEWLINE} {
     /*Identifica los comentarios*/ 
@@ -535,11 +539,7 @@ raise {
     return FIN;
 }
 
-<edo_poner_dedent>"$"{
-    num_dedent--;
-    if(!num_dedent) yy_pop_state();
-    return DEDENT
-}
+
 
 %%
 /*Función que revisa si la indentación es correcta*/
