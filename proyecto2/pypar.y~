@@ -207,7 +207,6 @@ continue_stmt: CONTINUE
 return_stmt: RETURN [testlist]
 ;
 yield_stmt: yield_expr
-;
 raise_stmt: RAISE [test [COMA test [COMA test]]]
 import_stmt: import_name | import_from
 import_name: IMPORT dotted_as_names
