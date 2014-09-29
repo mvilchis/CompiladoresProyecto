@@ -97,39 +97,42 @@
      MENOS = 313,
      MAS = 314,
      APAREN = 315,
-     ACORCHETE = 316,
-     CCORCHETE = 317,
-     ALLAVE = 318,
-     CLLAVE = 319,
-     COMA = 320,
-     DPUNTO = 321,
-     PUNTO = 322,
-     PCOMA = 323,
-     AT = 324,
-     IGUAL = 325,
-     MENOSMAYOR = 326,
-     MASIGUAL = 327,
-     MENOSIGUAL = 328,
-     ASTIGUAL = 329,
-     DIAIGUAL = 330,
-     DDIAIGUAL = 331,
-     PORIGUAL = 332,
-     AMPIGUAL = 333,
-     CIRCIGUAL = 334,
-     DMAYORIGUAL = 335,
-     DMENORIGUAL = 336,
-     DASTIGUAL = 337,
-     CSIMPLE = 338,
-     IDIAG = 339,
-     GATO = 340,
-     DIDIAG = 341,
-     NEWLINE = 342,
-     ENTERO = 343,
-     FLOTANTE = 344,
-     INDENT = 345,
-     SALIDA = 346,
-     DEDENT = 347,
-     FIN = 348
+     CPAREN = 316,
+     ACORCHETE = 317,
+     CCORCHETE = 318,
+     ALLAVE = 319,
+     CLLAVE = 320,
+     COMA = 321,
+     DPUNTO = 322,
+     PUNTO = 323,
+     PCOMA = 324,
+     AT = 325,
+     IGUAL = 326,
+     MENOSMAYOR = 327,
+     MASIGUAL = 328,
+     MENOSIGUAL = 329,
+     ASTIGUAL = 330,
+     DIAIGUAL = 331,
+     DDIAIGUAL = 332,
+     PORIGUAL = 333,
+     AMPIGUAL = 334,
+     PIPEIGUAL = 335,
+     CIRCIGUAL = 336,
+     DMAYORIGUAL = 337,
+     DMENORIGUAL = 338,
+     DASTIGUAL = 339,
+     MENORMAYOR = 340,
+     CSIMPLE = 341,
+     IDIAG = 342,
+     GATO = 343,
+     DIDIAG = 344,
+     NEWLINE = 345,
+     ENTERO = 346,
+     FLOTANTE = 347,
+     INDENT = 348,
+     SALIDA = 349,
+     DEDENT = 350,
+     FIN = 351
    };
 #endif
 /* Tokens.  */
@@ -191,39 +194,42 @@
 #define MENOS 313
 #define MAS 314
 #define APAREN 315
-#define ACORCHETE 316
-#define CCORCHETE 317
-#define ALLAVE 318
-#define CLLAVE 319
-#define COMA 320
-#define DPUNTO 321
-#define PUNTO 322
-#define PCOMA 323
-#define AT 324
-#define IGUAL 325
-#define MENOSMAYOR 326
-#define MASIGUAL 327
-#define MENOSIGUAL 328
-#define ASTIGUAL 329
-#define DIAIGUAL 330
-#define DDIAIGUAL 331
-#define PORIGUAL 332
-#define AMPIGUAL 333
-#define CIRCIGUAL 334
-#define DMAYORIGUAL 335
-#define DMENORIGUAL 336
-#define DASTIGUAL 337
-#define CSIMPLE 338
-#define IDIAG 339
-#define GATO 340
-#define DIDIAG 341
-#define NEWLINE 342
-#define ENTERO 343
-#define FLOTANTE 344
-#define INDENT 345
-#define SALIDA 346
-#define DEDENT 347
-#define FIN 348
+#define CPAREN 316
+#define ACORCHETE 317
+#define CCORCHETE 318
+#define ALLAVE 319
+#define CLLAVE 320
+#define COMA 321
+#define DPUNTO 322
+#define PUNTO 323
+#define PCOMA 324
+#define AT 325
+#define IGUAL 326
+#define MENOSMAYOR 327
+#define MASIGUAL 328
+#define MENOSIGUAL 329
+#define ASTIGUAL 330
+#define DIAIGUAL 331
+#define DDIAIGUAL 332
+#define PORIGUAL 333
+#define AMPIGUAL 334
+#define PIPEIGUAL 335
+#define CIRCIGUAL 336
+#define DMAYORIGUAL 337
+#define DMENORIGUAL 338
+#define DASTIGUAL 339
+#define MENORMAYOR 340
+#define CSIMPLE 341
+#define IDIAG 342
+#define GATO 343
+#define DIDIAG 344
+#define NEWLINE 345
+#define ENTERO 346
+#define FLOTANTE 347
+#define INDENT 348
+#define SALIDA 349
+#define DEDENT 350
+#define FIN 351
 
 
 
@@ -238,7 +244,7 @@ typedef union YYSTYPE
   char car;
 }
 /* Line 1529 of yacc.c.  */
-#line 242 "pypar.hpp"
+#line 248 "pypar.hpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

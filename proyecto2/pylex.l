@@ -305,6 +305,123 @@ raise {
     
 }
 
+">>=" { 
+  lei =true;
+    yylval.cad = yytext;
+    return DMAYORIGUAL;
+    }
+"<<=" { 
+  lei =true;
+    yylval.cad = yytext;
+    return DMENORIGUAL;
+    }
+"**=" {  
+  lei =true;
+    yylval.cad = yytext;
+    return DASTIGUAL;
+    }
+"//=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return DDIAIGUAL;
+    }
+
+"**" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DASTERISCO;
+}
+
+"//" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DDIAG;
+}
+
+"<<" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DMENOR;
+}
+">>" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DMAYOR;
+}
+"<=" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MEIGUAL;
+}
+">=" { 
+    lei =true;
+    yylval.cad = yytext;
+    return MAIGUAL;
+}
+"==" { 
+    lei =true;
+    yylval.cad = yytext;
+    return DIGUAL;
+}
+"!=" {  
+    lei =true;
+    yylval.cad = yytext;
+    return NIGUAL;
+}
+"<>" {  
+    lei =true;
+    yylval.cad = yytext;
+    return MENORMAYOR;
+}
+
+
+"->" { 
+ lei =true;
+    yylval.cad = yytext;
+    return MENOSMAYOR;
+    }
+"+=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return MASIGUAL;
+    }
+"-=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return MENOSIGUAL;
+    }
+"*=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return ASTIGUAL;
+    }
+"/=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return DIAIGUAL;
+    }
+
+"%=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return PORIGUAL;
+    }
+"&=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return AMPIGUAL;
+    } 
+"|=" { 
+ lei =true;
+    yylval.cad = yytext;
+    return PIPEIGUAL;
+    }
+"^=" { 
+  lei =true;
+    yylval.cad = yytext;
+    return CIRCIGUAL;
+    }
+
 "+" {
     lei =true;
     yylval.cad = yytext;
@@ -321,36 +438,17 @@ raise {
     yylval.cad = yytext;
     return ASTERISCO;
 }
-"**" { 
+"%" { 
     lei =true;
     yylval.cad = yytext;
-    return DASTERISCO;
+    return PORCEN;
 }
 "/" { 
     lei =true;
     yylval.cad = yytext;
     return DIAG;
 }
-"//" { 
-    lei =true;
-    yylval.cad = yytext;
-    return DDIAG;
-}
-"%" { 
-    lei =true;
-    yylval.cad = yytext;
-    return PORCEN;
-}
-"<<" { 
-    lei =true;
-    yylval.cad = yytext;
-    return DMENOR;
-}
-">>" { 
-    lei =true;
-    yylval.cad = yytext;
-    return DMAYOR;
-}
+
 "&" { 
     lei =true;
     yylval.cad = yytext;
@@ -381,28 +479,6 @@ raise {
     yylval.cad = yytext;
     return MAYOR;
 }
-"<=" { 
-    lei =true;
-    yylval.cad = yytext;
-    return MEIGUAL;
-}
-">=" { 
-    lei =true;
-    yylval.cad = yytext;
-    return MAIGUAL;
-}
-"==" { 
-    lei =true;
-    yylval.cad = yytext;
-    return DIGUAL;
-}
-"!=" {  
-    lei =true;
-    yylval.cad = yytext;
-    return NIGUAL;
-}
-
-
 "'" { 
  lei =true; 
  yylval.cad=yytext; 
@@ -428,6 +504,11 @@ raise {
     lei =true;
     yylval.cad = yytext;
     return APAREN;
+    }
+")" { 
+    lei =true;
+    yylval.cad = yytext;
+    return CPAREN;
     }
 "[" { 
  lei =true;
@@ -479,66 +560,7 @@ raise {
     yylval.cad = yytext;
     return IGUAL;
     }
-"->" { 
- lei =true;
-    yylval.cad = yytext;
-    return MENOSMAYOR;
-    }
-"+=" { 
- lei =true;
-    yylval.cad = yytext;
-    return MASIGUAL;
-    }
-"-=" { 
- lei =true;
-    yylval.cad = yytext;
-    return MENOSIGUAL;
-    }
-"*=" { 
- lei =true;
-    yylval.cad = yytext;
-    return ASTIGUAL;
-    }
-"/=" { 
- lei =true;
-    yylval.cad = yytext;
-    return DIAIGUAL;
-    }
-"//=" { 
- lei =true;
-    yylval.cad = yytext;
-    return DDIAIGUAL;
-    }
-"%=" { 
- lei =true;
-    yylval.cad = yytext;
-    return PORIGUAL;
-    }
-"&=" { 
- lei =true;
-    yylval.cad = yytext;
-    return AMPIGUAL;
-    }
-"^=" { 
-  lei =true;
-    yylval.cad = yytext;
-    return CIRCIGUAL;
-    }
-">>=" { 
-  lei =true;
-    yylval.cad = yytext;
-    return DMAYORIGUAL;
-    }
-"<<=" { 
-  lei =true;
-    yylval.cad = yytext;
-    return DMENORIGUAL;
-    }
-"**=" {  
-  lei =true;
-    yylval.cad = yytext;
-    return DASTIGUAL;
-    }
+
 
 "$"|"?"|"`" {
     printf("Error: Caracter inválido\n");

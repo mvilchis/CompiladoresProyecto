@@ -4,17 +4,20 @@ file_input: (NEWLINE | stmt)* ENDMARKER
 eval_input: testlist NEWLINE* ENDMARKER
 
 
-funcdef: 'def' NAME parameters ':' suite
-parameters: '(' [varargslist] ')'
-varargslist: ((fpdef ['=' test] ',')*
+funcdef: 'def' NAME parameters DPUNTO suite
+parameters: APAREN [varargslist] CPAREN
+varargslist: ((fpdef [IGUAL test] ',')*
               ('*' NAME [',' '**' NAME] | '**' NAME) |
               fpdef ['=' test] (',' fpdef ['=' test])* [','])
-fpdef: NAME | '(' fplist ')'
-fplist: fpdef (',' fpdef)* [',']
-#Hasta aqui ya está
+fpdef: IDENTIFICADOR | APAREN fplist CPAREN
+
+fplist: fpdef fplist_aux [COMA]
+fplist_aux:  fp_aux | %empty
+fp_aux: fp_aux fplist_aux | COMA fpdef
+
 
 stmt: simple_stmt | compound_stmt
-simple_stmt: small_stmt (';' small_stmt)* [';'] NEWLINE
+simple_stmt: small_stmt (';' small_stmt)* [PCOMA] NEWLINE
 small_stmt: (expr_stmt | print_stmt  | del_stmt | pass_stmt | flow_stmt |
             global_stmt | exec_stmt)
 expr_stmt: testlist (augassign (testlist) |
