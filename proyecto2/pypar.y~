@@ -2,10 +2,16 @@
 
 #include <stdio.h>
 #include <string>
+#define YYDEBUG 1
 using namespace std;
 
+extern FILE *yyin;
+extern char *yytext;
+extern void inicializar();
+
 int yylex(); 
-int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
+int yyerror(const char *s) { printf ("Error: %s   *%s*\n", s, yytext); return 1;}
+
 %}
 
 %union {
@@ -28,7 +34,7 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %%
 
-GOAL: file_input
+GOAL: file_input {printf("Exito\n");}
 ;
 
 
@@ -72,7 +78,7 @@ varargslist: varargslist_a
 varargslist_a: varargslist_a_aux_a varargslist_a_aux_b
 ;
 
-varargslist_a_aux_a: varargslist_a_aux_a fpdef val_aux_a COMA 
+varargslist_a_aux_a:  fpdef val_aux_a COMA varargslist_a_aux_a
 |  
 ;
 val_aux_a: IGUAL test
@@ -92,7 +98,7 @@ val_b: COMA
 | 
 ;
 
-varargslist_b_aux: varargslist_b_aux COMA fpdef val_aux_a 
+varargslist_b_aux:  COMA fpdef val_aux_a varargslist_b_aux
 |  
 ;
 
@@ -101,6 +107,7 @@ fpdef: IDENTIFICADOR
 ;
 
 fplist: fpdef fplist_aux fpl_aux
+;
 fpl_aux: COMA
 | 
 ;
@@ -109,7 +116,7 @@ fplist_aux:  fp_aux
 |  
 ;
 
-fp_aux: fp_aux fplist_aux
+fp_aux:  fplist_aux fp_aux
 | COMA fpdef
 ;
 
@@ -122,7 +129,7 @@ simple_stmt: small_stmt simple_stmt_aux ss_aux NEWLINE
 ss_aux: PCOMA
 | 
 ;
-simple_stmt_aux: simple_stmt_aux PCOMA small_stmt 
+simple_stmt_aux: PCOMA small_stmt simple_stmt_aux 
 |  
 ;
 small_stmt: expr_stmt
@@ -133,11 +140,11 @@ small_stmt: expr_stmt
 | global_stmt
 | exec_stmt
 ;
-expr_stmt: testlist augassign testlist
-| expr_stmt_aux_b
+expr_stmt: testlist expr_stmt_aux_b
 ;
-expr_stmt_aux_b:  expr_stmt_aux_b IGUAL testlist
-|  
+
+expr_stmt_aux_b:  augassign testlist
+| IGUAL testlist
 ; 
 
 augassign: MASIGUAL
@@ -153,24 +160,19 @@ augassign: MASIGUAL
 | DASTIGUAL 
 | DDIAIGUAL
 ;
-print_stmt: PRINT  s1 
-| DMAYOR test s2
-;
-print_stmt_aux_a: print_stmt_aux_a COMA test 
-|  
-;
-print_stmt_aux_b: print_stmt_aux_b COMA test 
-| COMA test
-;
 
-s1: test print_stmt_aux_a s2 
-|  
+print_stmt : PRINT norma1;
+norma1 : norma2 | DMAYOR test norma3;
+norma2 : test norma4 norma5  
+|
 ;
-comaS:   
-| COMA
+norma4 : COMA test norma4 | ;
+norma5: COMA |;
+norma3 : COMA test norma4 norma5
+|
 ;
-
-s2: print_stmt_aux_b comaS 
+comaS: COMA
+|
 ;
 
 del_stmt: DEL exprlist
@@ -205,7 +207,7 @@ s5: COMA test
 ;
 global_stmt: GLOBAL IDENTIFICADOR global_stmt_aux
 ;
-global_stmt_aux: global_stmt_aux COMA IDENTIFICADOR |  
+global_stmt_aux:  COMA IDENTIFICADOR global_stmt_aux |  
 ;
 exec_stmt: EXEC expr s7
 ;
@@ -221,7 +223,7 @@ if_stmt
 ;
 if_stmt: IF test DPUNTO suite if_stmt_aux s8
 ;
-if_stmt_aux: if_stmt_aux ELIF test DPUNTO suite |  
+if_stmt_aux:  ELIF test DPUNTO suite if_stmt_aux|  
 ;
 s8: ELSE DPUNTO suite |   
 ;
@@ -231,7 +233,7 @@ for_stmt: FOR exprlist IN testlist DPUNTO suite s8
 ;
 with_stmt: WITH with_item with_stmt_aux  DPUNTO suite
 ;
-with_stmt_aux: with_stmt_aux COMA with_item |  
+with_stmt_aux:  COMA with_item with_stmt_aux |  
 ;
 with_item: test s10
 ;
@@ -243,7 +245,7 @@ suite_aux: suite_aux stmt | stmt
 ;
 testlist_safe: old_test s13
 ;
-testlist_safe_aux: testlist_safe_aux COMA old_test | COMA old_test
+testlist_safe_aux:  COMA old_test testlist_safe_aux | COMA old_test
 ;
 old_test: or_test
 ;
@@ -256,31 +258,31 @@ test: or_test s15
 ;
 or_test: and_test or_test_aux
 ;
-or_test_aux: or_test_aux OR and_test |  
+or_test_aux: OR and_test or_test_aux |  
 ;
 and_test: not_test and_test_aux
 ;
-and_test_aux: and_test_aux AND not_test |  
+and_test_aux:  AND not_test and_test_aux|  
 ;
 not_test: NOT not_test | comparison
 ;
 comparison: expr comparison_aux
 ;
-comparison_aux: comparison_aux comp_op expr |  
+comparison_aux:  comp_op expr comparison_aux|  
 ;
 comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|NOT|NOT IN|IS|IS NOT
 ;
 expr: xor_expr expr_aux
 ;
-expr_aux: expr_aux PIPE xor_expr |  
+expr_aux:  PIPE xor_expr expr_aux |  
 ;
 xor_expr: and_expr xor_expr_aux
 ;
-xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr |  
+xor_expr_aux:  CIRCUNFLEJO and_expr xor_expr_aux|  
 ;
 and_expr: shift_expr shift_expr_aux
 ;
-and_expr_aux: and_expr_aux AMPERSON shift_expr |  
+and_expr_aux:  AMPERSON shift_expr and_expr_aux |  
 ;
 shift_expr: arith_expr shift_expr_aux
 ;
@@ -291,13 +293,13 @@ shift_expr_aux:  DMENOR arith_expr shift_expr_aux
 ;*/
 arith_expr: term arith_expr_aux
 ;
-arith_expr_aux: arith_expr_aux ae_aux term |  
+arith_expr_aux:  ae_aux term arith_expr_aux|  
 ;
 ae_aux: MAS | MENOS
 ;
 term: factor term_aux
 ;
-term_aux:  term_aux t_aux factor |  
+term_aux:   t_aux factor term_aux |  
 ;
 t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
 ;
@@ -321,7 +323,7 @@ s21: test |
 ;
 s22: sliceop |  
 ;
-power_aux: power_aux trailer |  
+power_aux:  trailer power_aux |  
 ;
 atom: APAREN s17 CPAREN
 |ACORCHETE s18 CCORCHETE
@@ -330,14 +332,16 @@ atom: APAREN s17 CPAREN
 | FLOTANTE 
 | ENTERO 
 | string_aux
+|TRUE
+|FALSE
 ;
-string_aux: string_aux STRING | STRING
+string_aux:  STRING string_aux| STRING
 ;
 listmaker: test listmaker_aux
 ;
 listmaker_aux: list_for | lm_aux comaS
 ;
-lm_aux: lm_aux COMA test |  
+lm_aux:  COMA test lm_aux|  
 ;
 testlist_comp: test testlist_comp_aux
 ;
@@ -349,7 +353,7 @@ trailer: APAREN s20 CPAREN | ACORCHETE subscriptlist CCORCHETE | PUNTO IDENTIFIC
 ;
 subscriptlist: subscript subscriptlist_aux COMA
 ;
-subscriptlist_aux: subscriptlist_aux COMA subscript |  
+subscriptlist_aux:  COMA subscript subscriptlist_aux|  
 ;
 subscript: PUNTO PUNTO PUNTO | test | s21 DPUNTO s21 s22
 ;
@@ -357,11 +361,11 @@ sliceop: DPUNTO s21
 ;
 exprlist: expr exprlist_aux comaS
 ;
-exprlist_aux: exprlist_aux COMA expr |  
+exprlist_aux:  COMA expr exprlist_aux|  
 ;
 testlist: test testlist_aux comaS
 ;
-testlist_aux: testlist_aux COMA test |  
+testlist_aux:  testlist_aux COMA test |  
 ;
 dictorsetmaker:  dictorsetmaker_aux_a | dictorsetmaker_aux_b
 ;
@@ -375,15 +379,15 @@ dictorsetmaker_aux_b: test dsm_aux_b
 ;
 dsm_aux_b: comp_for | dsm_aux_b_a comaS
 ;
-dsm_aux_b_a: dsm_aux_b_a COMA test |  
+dsm_aux_b_a:  COMA test dsm_aux_b_a|  
 ;
 arglist: arglist_aux_a arglist_aux_b
 ;
-arglist_aux_a: arglist_aux_a argument COMA |  
+arglist_aux_a:  argument COMA arglist_aux_a|  
 ;
 arglist_aux_b: argument comaS | ASTERISCO test al_aux s25 | DASTERISCO test
 ;       
-al_aux: al_aux COMA argument |  
+al_aux:  COMA argument al_aux|  
 ;
 s25: COMA DASTERISCO test |  
 ;
@@ -410,16 +414,19 @@ s28: comp_iter |
 
 %%
 
-int main(int argc, char *argv[]) {
-    /*++argv, --argc;
-    if(argc > 0) {
-        yyin = fopen(argv[0],"r");
-    }else  {
-    yyin =stdin;
+int main(int argc, char const *argv[]) {
+    ++argv;
+    --argc;
 
-    }*/
-
-	yyparse();
-
-	return 0;
+    if (argc > 0) {
+        yyin = fopen(argv[0], "r");
+    }
+    else
+        yyin = stdin;
+    do {
+        yydebug = 1;
+	inicializar();
+        yyparse();
+    } while (!feof(yyin));
 }
+

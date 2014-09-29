@@ -1,0 +1,9 @@
+if 3 :
+ if True :
+    while (x>2 and x < 5 or y == x):
+        print "Cadena " + "concatenada"
+        quepedo= "tres"
+
+ else  :
+    x=[a,[2,"Hola"]]
+

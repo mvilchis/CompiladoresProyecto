@@ -620,7 +620,8 @@ int revisaIdentacion() {
         }
         return 0;
     }
-return 3;
+    else if (!pila.empty() && pila.top() == 0)
+	return 1;
 
 }
 

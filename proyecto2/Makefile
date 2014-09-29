@@ -9,4 +9,4 @@ clean:
 	rm *tab*
 	rm lex.yy.c
 run: 	
-	./proyecto
+	./proyecto prueba_de_fuego.py

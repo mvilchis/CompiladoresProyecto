@@ -372,8 +372,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 95
-#define YY_END_OF_BUFFER 96
+#define YY_NUM_RULES 96
+#define YY_END_OF_BUFFER 97
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -381,32 +381,32 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[213] =
+static yyconst flex_int16_t yy_accept[216] =
     {   0,
-        0,    0,    0,    0,   96,   95,   43,   42,   95,   79,
-       80,   94,   70,   72,   78,   82,   83,   69,   67,   88,
-       68,   90,   71,    5,    5,   89,   91,   76,   93,   77,
-       92,   44,   44,   44,   44,   84,   81,   85,   74,   44,
-       44,   44,   44,   44,   44,   44,   44,   44,   44,   44,
-       44,   44,   44,   44,   44,   86,   73,   87,   75,    1,
-       43,    0,   42,   41,    0,   56,    4,    3,    0,    2,
-       63,   64,   49,   61,   59,    5,   60,   58,   50,   62,
-        6,    5,   51,   53,   57,   55,   54,   52,   44,   44,
-       44,   44,   66,   44,   28,   44,   44,   44,   44,   44,
+        0,    0,    0,    0,    0,    0,   97,   96,   44,   43,
+       96,   80,   81,   95,   71,   73,   79,   83,   84,   70,
+       68,   89,   69,   91,   72,    6,    6,   90,   92,   77,
+       94,   78,   93,   45,   45,   45,   45,   85,   82,   86,
+       75,   45,   45,   45,   45,   45,   45,   45,   45,   45,
+       45,   45,   45,   45,   45,   45,   45,   87,   74,   88,
+       76,    1,    2,   44,    0,   43,   42,    0,   57,    5,
+        4,    0,    3,   64,   65,   50,   62,   60,    6,   61,
+       59,   51,   63,    7,    6,   52,   54,   58,   56,   55,
+       53,   45,   45,   45,   45,   67,   45,   29,   45,   45,
 
-       44,   44,   44,   44,   44,   30,   44,   39,   11,   44,
-       44,   31,   44,   44,   44,   44,   44,   44,   44,   44,
-       65,    0,    0,   47,    5,   48,    6,   46,   45,   44,
-       44,   44,   23,   44,   44,   44,   44,   19,   24,   44,
-       44,   44,   44,   15,   44,   44,   44,   44,   44,   26,
-       44,   44,   44,   44,   17,   44,   44,   44,   44,   13,
-       18,   44,   44,   44,   44,   29,   34,   44,   44,   20,
-       44,   44,   44,   44,   36,   44,   44,   44,   44,   27,
-       44,    8,   44,   37,    9,   44,   44,   44,   44,   44,
-       44,   44,    7,   40,   44,   22,   32,   33,   44,   38,
+       45,   45,   45,   45,   45,   45,   45,   45,   31,   45,
+       40,   12,   45,   45,   32,   45,   45,   45,   45,   45,
+       45,   45,   45,   66,    0,    0,   48,    6,   49,    7,
+       47,   46,   45,   45,   45,   24,   45,   45,   45,   45,
+       20,   25,   45,   45,   45,   45,   16,   45,   45,   45,
+       45,   45,   27,   45,   45,   45,   45,   18,   45,   45,
+       45,   45,   14,   19,   45,   45,   45,   45,   30,   35,
+       45,   45,   21,   45,   45,   45,   45,   37,   45,   45,
+       45,   45,   28,   45,    9,   45,   38,   10,   45,   45,
+       45,   45,   45,   45,   45,    8,   41,   45,   23,   33,
 
-       44,   25,   35,   16,   44,   12,   44,   10,   44,   14,
-       21,    0
+       34,   45,   39,   45,   26,   36,   17,   45,   13,   45,
+       11,   45,   15,   22,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -452,102 +452,104 @@ static yyconst flex_int32_t yy_meta[63] =
         1,    1
     } ;
 
-static yyconst flex_int16_t yy_base[219] =
+static yyconst flex_int16_t yy_base[222] =
     {   0,
-        0,    0,  244,  243,  249,  252,   61,   62,  224,  242,
-      243,  252,  221,  220,  252,  252,  252,   53,  219,  252,
-       49,  252,   52,   66,   67,  252,  252,   55,  218,   57,
-      252,    0,  204,  190,  187,  252,  252,  252,  214,   36,
-      185,   41,  195,   43,   47,  188,   53,  197,  183,  180,
-       56,   57,  179,   59,  185,  252,  205,  252,  252,  252,
-      103,  225,  108,  252,  224,  252,  221,  252,  222,  252,
-      252,  252,  200,  252,  252,  102,  252,  252,  199,  252,
-       93,  110,  198,  252,  252,  252,  252,  197,    0,  173,
-      170,  163,  252,  177,  163,  174,  177,  164,   76,   71,
+        0,    0,  246,  245,  245,  244,  249,  254,   61,   62,
+      224,  242,  243,  254,  221,  220,  254,  254,  254,   53,
+      219,  254,   49,  254,   52,   66,   67,  254,  254,   55,
+      218,   57,  254,    0,  204,  190,  187,  254,  254,  254,
+      214,   36,  185,   41,  195,   43,   47,  188,   53,  197,
+      183,  180,   56,   57,  179,   59,  185,  254,  205,  254,
+      254,  254,  254,  103,  225,  108,  254,  224,  254,  221,
+      254,  222,  254,  254,  254,  200,  254,  254,  102,  254,
+      254,  199,  254,   93,  110,  198,  254,  254,  254,  254,
+      197,    0,  173,  170,  163,  254,  177,  163,  174,  177,
 
-      173,  162,  158,  159,  158,    0,  156,    0,    0,  158,
-       71,    0,  152,  159,  158,  148,  143,  155,  145,  157,
-      252,  194,  191,  252,  121,  252,  112,  252,  252,  142,
-      153,  152,    0,  151,  154,  137,  135,    0,    0,  146,
-      146,  145,  148,    0,  136,  145,  132,  143,  133,    0,
-      126,  129,  124,  121,    0,  128,  130,  126,  131,    0,
-        0,  119,  124,  116,  123,    0,    0,  116,  119,    0,
-      128,  112,  123,  112,    0,  107,  119,  107,  117,    0,
-      117,    0,  102,    0,    0,  106,  100,  106,  105,   85,
-      100,   97,    0,    0,   86,    0,    0,    0,   79,    0,
+      164,   76,   71,  173,  162,  158,  159,  158,    0,  156,
+        0,    0,  158,   71,    0,  152,  159,  158,  148,  143,
+      155,  145,  157,  254,  194,  191,  254,  121,  254,  112,
+      254,  254,  142,  153,  152,    0,  151,  154,  137,  135,
+        0,    0,  146,  146,  145,  148,    0,  136,  145,  132,
+      143,  133,    0,  126,  129,  124,  121,    0,  128,  130,
+      126,  131,    0,    0,  119,  124,  116,  123,    0,    0,
+      116,  119,    0,  128,  112,  123,  112,    0,  107,  119,
+      107,  117,    0,  117,    0,  102,    0,    0,  106,  100,
+      106,  105,   85,  100,   97,    0,    0,   86,    0,    0,
 
-       75,    0,    0,    0,   91,    0,   76,    0,   49,    0,
-        0,  252,  141,  143,  145,   73,  147,  149
+        0,   79,    0,   75,    0,    0,    0,   91,    0,   76,
+        0,   49,    0,    0,  254,  141,  143,  145,   73,  147,
+      149
     } ;
 
-static yyconst flex_int16_t yy_def[219] =
+static yyconst flex_int16_t yy_def[222] =
     {   0,
-      212,    1,  213,  213,  212,  212,  212,  212,  212,  214,
-      215,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  216,  216,  216,  216,  212,  212,  212,  212,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  212,  212,  212,  212,  212,
-      212,  215,  212,  212,  217,  212,  218,  212,  215,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  216,  216,
-      216,  216,  212,  216,  216,  216,  216,  216,  216,  216,
+      215,    1,  216,  216,  216,  216,  215,  215,  215,  215,
+      215,  217,  218,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  219,  219,  219,  219,  215,  215,  215,
+      215,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  215,  215,  215,
+      215,  215,  215,  215,  218,  215,  215,  220,  215,  221,
+      215,  218,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  219,  219,  219,  219,  215,  219,  219,  219,  219,
 
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      212,  217,  218,  212,  212,  212,  212,  212,  212,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  215,  220,  221,  215,  215,  215,  215,
+      215,  215,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
 
-      216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
-      216,    0,  212,  212,  212,  212,  212,  212
+      219,  219,  219,  219,  219,  219,  219,  219,  219,  219,
+      219,  219,  219,  219,    0,  215,  215,  215,  215,  215,
+      215
     } ;
 
-static yyconst flex_int16_t yy_nxt[315] =
+static yyconst flex_int16_t yy_nxt[317] =
     {   0,
-        6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
-       16,   17,   18,   19,   20,   21,   22,   23,   24,   25,
-       26,   27,   28,   29,   30,   12,   31,   32,   33,   34,
-       35,   36,   37,   38,   39,   12,   40,   41,   42,   43,
-       44,   45,   46,   32,   47,   32,   48,   32,   49,   50,
-       51,   52,   32,   53,   32,   54,   32,   55,   56,   57,
-       58,   59,   61,   63,   64,   73,   62,   65,   76,   79,
-       81,   81,   77,   78,   89,   80,   74,   83,   84,   85,
-       87,   88,   81,   81,   94,   82,   82,   97,   95,  100,
-       98,  102,  113,  115,  106,  211,  103,  116,  104,  101,
+        8,    9,   10,   11,   12,   13,   14,   15,   16,   17,
+       18,   19,   20,   21,   22,   23,   24,   25,   26,   27,
+       28,   29,   30,   31,   32,   14,   33,   34,   35,   36,
+       37,   38,   39,   40,   41,   14,   42,   43,   44,   45,
+       46,   47,   48,   34,   49,   34,   50,   34,   51,   52,
+       53,   54,   34,   55,   34,   56,   34,   57,   58,   59,
+       60,   61,   64,   66,   67,   76,   65,   68,   79,   82,
+       84,   84,   80,   81,   92,   83,   77,   86,   87,   88,
+       90,   91,   84,   84,   97,   85,   85,  100,   98,  103,
+      101,  105,  116,  118,  109,  214,  106,  119,  107,  104,
 
-      107,  108,  118,  119,   61,  109,   81,  114,   62,   63,
-       64,  127,  127,   65,   81,  140,  210,  138,   81,  149,
-      125,  125,  139,  141,  150,   81,   81,  209,   82,   82,
-      127,  127,  208,  207,  206,  205,  204,   81,  203,  125,
-      125,    6,    6,   67,   67,   69,   69,  122,  122,  123,
-      123,  202,  201,  200,  199,  198,  197,  196,  195,  194,
-      193,  192,  191,  190,  189,  188,  187,  186,  185,  184,
-      183,  182,  181,  180,  179,  178,  177,  176,  175,  174,
-      173,  172,  171,  170,  169,  168,  167,  166,  165,  164,
-      163,  162,  161,  160,  159,   68,   70,  158,  157,  156,
+      110,  111,  121,  122,   64,  112,   84,  117,   65,   66,
+       67,  130,  130,   68,   84,  143,  213,  141,   84,  152,
+      128,  128,  142,  144,  153,   84,   84,  212,   85,   85,
+      130,  130,  211,  210,  209,  208,  207,   84,  206,  128,
+      128,    8,    8,   70,   70,   72,   72,  125,  125,  126,
+      126,  205,  204,  203,  202,  201,  200,  199,  198,  197,
+      196,  195,  194,  193,  192,  191,  190,  189,  188,  187,
+      186,  185,  184,  183,  182,  181,  180,  179,  178,  177,
+      176,  175,  174,  173,  172,  171,  170,  169,  168,  167,
+      166,  165,  164,  163,  162,   71,   73,  161,  160,  159,
 
-      155,  154,  153,  152,  151,  148,  147,  146,  145,  144,
-      143,  142,  137,  136,  135,  134,  133,  132,  131,  130,
-      129,  128,  126,  124,   70,   68,   70,   70,  121,  120,
-      117,  112,  111,  110,  105,   99,   96,   93,   92,   91,
-       90,   86,   75,   72,   71,   70,   68,   66,  212,   60,
-       60,    5,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
+      158,  157,  156,  155,  154,  151,  150,  149,  148,  147,
+      146,  145,  140,  139,  138,  137,  136,  135,  134,  133,
+      132,  131,  129,  127,   73,   71,   73,   73,  124,  123,
+      120,  115,  114,  113,  108,  102,   99,   96,   95,   94,
+       93,   89,   78,   75,   74,   73,   71,   69,  215,   63,
+       63,   62,   62,    7,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
 
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215
     } ;
 
-static yyconst flex_int16_t yy_chk[315] =
+static yyconst flex_int16_t yy_chk[317] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -555,35 +557,35 @@ static yyconst flex_int16_t yy_chk[315] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    7,    8,    8,   18,    7,    8,   21,   23,
-       24,   25,   21,   21,  216,   23,   18,   28,   28,   28,
-       30,   30,   24,   25,   40,   25,   25,   42,   40,   44,
-       42,   45,   51,   52,   47,  209,   45,   52,   45,   44,
+        1,    1,    9,   10,   10,   20,    9,   10,   23,   25,
+       26,   27,   23,   23,  219,   25,   20,   30,   30,   30,
+       32,   32,   26,   27,   42,   27,   27,   44,   42,   46,
+       44,   47,   53,   54,   49,  212,   47,   54,   47,   46,
 
-       47,   47,   54,   54,   61,   47,   76,   51,   61,   63,
-       63,   81,   81,   63,   82,  100,  207,   99,   76,  111,
-       76,   76,   99,  100,  111,  125,   82,  205,   82,   82,
-      127,  127,  201,  199,  195,  192,  191,  125,  190,  125,
-      125,  213,  213,  214,  214,  215,  215,  217,  217,  218,
-      218,  189,  188,  187,  186,  183,  181,  179,  178,  177,
-      176,  174,  173,  172,  171,  169,  168,  165,  164,  163,
-      162,  159,  158,  157,  156,  154,  153,  152,  151,  149,
-      148,  147,  146,  145,  143,  142,  141,  140,  137,  136,
-      135,  134,  132,  131,  130,  123,  122,  120,  119,  118,
+       49,   49,   56,   56,   64,   49,   79,   53,   64,   66,
+       66,   84,   84,   66,   85,  103,  210,  102,   79,  114,
+       79,   79,  102,  103,  114,  128,   85,  208,   85,   85,
+      130,  130,  204,  202,  198,  195,  194,  128,  193,  128,
+      128,  216,  216,  217,  217,  218,  218,  220,  220,  221,
+      221,  192,  191,  190,  189,  186,  184,  182,  181,  180,
+      179,  177,  176,  175,  174,  172,  171,  168,  167,  166,
+      165,  162,  161,  160,  159,  157,  156,  155,  154,  152,
+      151,  150,  149,  148,  146,  145,  144,  143,  140,  139,
+      138,  137,  135,  134,  133,  126,  125,  123,  122,  121,
 
-      117,  116,  115,  114,  113,  110,  107,  105,  104,  103,
-      102,  101,   98,   97,   96,   95,   94,   92,   91,   90,
-       88,   83,   79,   73,   69,   67,   65,   62,   57,   55,
-       53,   50,   49,   48,   46,   43,   41,   39,   35,   34,
-       33,   29,   19,   14,   13,   11,   10,    9,    5,    4,
-        3,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
+      120,  119,  118,  117,  116,  113,  110,  108,  107,  106,
+      105,  104,  101,  100,   99,   98,   97,   95,   94,   93,
+       91,   86,   82,   76,   72,   70,   68,   65,   59,   57,
+       55,   52,   51,   50,   48,   45,   43,   41,   37,   36,
+       35,   31,   21,   16,   15,   13,   12,   11,    7,    6,
+        5,    4,    3,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
 
-      212,  212,  212,  212,  212,  212,  212,  212,  212,  212,
-      212,  212,  212,  212
+      215,  215,  215,  215,  215,  215,  215,  215,  215,  215,
+      215,  215,  215,  215,  215,  215
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -615,16 +617,18 @@ char *yytext;
 #include "pypar.hpp"
 using namespace std;
 
-deque<int> mydeque (0); 
-stack<int>pila (mydeque); /*Pila auxiliar para manejar la indentación*/
+
+stack<int>pila; /*Pila auxiliar para manejar la indentación*/
 int num_lineas= 1; /*Guarda el número de líneas de código del programa*/
 int revisaIdentacion();
+void inicializar();
 bool lei = false; /*Variable que nos dice si ya hemos leído alguna línea de código*/
 int num_dedent;
-#line 625 "pylex.cpp"
+#line 628 "pylex.cpp"
 
 #define INITIAL 0
 #define edo_poner_dedent 1
+#define edo_poner_indent 2
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -819,11 +823,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 38 "pylex.l"
+#line 39 "pylex.l"
 
 
 
-#line 827 "pylex.cpp"
+#line 831 "pylex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -876,13 +880,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 213 )
+				if ( yy_current_state >= 216 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 252 );
+		while ( yy_base[yy_current_state] != 254 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -908,7 +912,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 41 "pylex.l"
+#line 42 "pylex.l"
 {
     num_dedent--;
     if(!num_dedent) yy_pop_state();
@@ -916,18 +920,26 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
 #line 47 "pylex.l"
 {
-    /*Identifica los comentarios*/ 
-     yyless(yyleng-1);
+	yy_pop_state();
+	return INDENT;
 }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
 #line 52 "pylex.l"
+{
+    /*Identifica los comentarios*/ 
+     yyless(yyleng-1);
+}
+	YY_BREAK
+case 4:
+/* rule 4 can match eol */
+YY_RULE_SETUP
+#line 57 "pylex.l"
 { 
     /*Identifica cadenas bien formadas*/
     lei = true;
@@ -936,19 +948,19 @@ YY_RULE_SETUP
     
 }
 	YY_BREAK
-case 4:
-/* rule 4 can match eol */
+case 5:
+/* rule 5 can match eol */
 YY_RULE_SETUP
-#line 60 "pylex.l"
+#line 65 "pylex.l"
 {
     /*Identifica cadenas mal formadas*/
     printf("\n[Error: cadena mal formada]\n");
     yyterminate();
 }
 	YY_BREAK
-case 5:
+case 6:
 YY_RULE_SETUP
-#line 68 "pylex.l"
+#line 73 "pylex.l"
 {
     /*Identifica números*/
     lei =true;
@@ -957,9 +969,9 @@ YY_RULE_SETUP
     
 }
 	YY_BREAK
-case 6:
+case 7:
 YY_RULE_SETUP
-#line 76 "pylex.l"
+#line 81 "pylex.l"
 {
     /*Identifica números*/
     lei =true;
@@ -968,18 +980,18 @@ YY_RULE_SETUP
     
 }
 	YY_BREAK
-case 7:
+case 8:
 YY_RULE_SETUP
-#line 85 "pylex.l"
+#line 90 "pylex.l"
 { 
     lei =true;
     yylval.cad = "PRINT";
     return PRINT;
  }
 	YY_BREAK
-case 8:
+case 9:
 YY_RULE_SETUP
-#line 90 "pylex.l"
+#line 95 "pylex.l"
 { 
     lei =true;
     yylval.cad = "FALSE";
@@ -987,40 +999,31 @@ YY_RULE_SETUP
 
  }
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 96 "pylex.l"
+#line 101 "pylex.l"
 { 
     lei =true;
    yylval.cad = "CLASS";
     return CLASS;
  }
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 101 "pylex.l"
+#line 106 "pylex.l"
 { 
     lei =true;
     yylval.cad = "FINALLY";
     return FINALLY;
 }
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 106 "pylex.l"
+#line 111 "pylex.l"
 {  
     lei =true;
     yylval.cad = "IS";
     return IS;
-}
-	YY_BREAK
-case 12:
-YY_RULE_SETUP
-#line 111 "pylex.l"
-{ 
-    lei =true;
-    yylval.cad = "RETURN";
-    return RETURN;
 }
 	YY_BREAK
 case 13:
@@ -1028,8 +1031,8 @@ YY_RULE_SETUP
 #line 116 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "NONE";
-    return NONE;
+    yylval.cad = "RETURN";
+    return RETURN;
 }
 	YY_BREAK
 case 14:
@@ -1037,8 +1040,8 @@ YY_RULE_SETUP
 #line 121 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "CONTINUE";
-    return CONTINUE;
+    yylval.cad = "NONE";
+    return NONE;
 }
 	YY_BREAK
 case 15:
@@ -1046,8 +1049,8 @@ YY_RULE_SETUP
 #line 126 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "FOR";
-    return FOR;
+    yylval.cad = "CONTINUE";
+    return CONTINUE;
 }
 	YY_BREAK
 case 16:
@@ -1055,8 +1058,8 @@ YY_RULE_SETUP
 #line 131 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "LAMBDA";
-    return LAMBDA;
+    yylval.cad = "FOR";
+    return FOR;
 }
 	YY_BREAK
 case 17:
@@ -1064,8 +1067,8 @@ YY_RULE_SETUP
 #line 136 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "TRY";
-    return TRY;
+    yylval.cad = "LAMBDA";
+    return LAMBDA;
 }
 	YY_BREAK
 case 18:
@@ -1073,8 +1076,8 @@ YY_RULE_SETUP
 #line 141 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "TRUE";
-    return TRUE;
+    yylval.cad = "TRY";
+    return TRY;
 }
 	YY_BREAK
 case 19:
@@ -1082,8 +1085,8 @@ YY_RULE_SETUP
 #line 146 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "DEF";
-    return DEF;
+    yylval.cad = "TRUE";
+    return TRUE;
 }
 	YY_BREAK
 case 20:
@@ -1091,8 +1094,8 @@ YY_RULE_SETUP
 #line 151 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "FROM";
-    return FROM;
+    yylval.cad = "DEF";
+    return DEF;
 }
 	YY_BREAK
 case 21:
@@ -1100,8 +1103,8 @@ YY_RULE_SETUP
 #line 156 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "NONLOCAL";
-    return NONLOCAL;
+    yylval.cad = "FROM";
+    return FROM;
 }
 	YY_BREAK
 case 22:
@@ -1109,8 +1112,8 @@ YY_RULE_SETUP
 #line 161 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "WHILE";
-    return WHILE;
+    yylval.cad = "NONLOCAL";
+    return NONLOCAL;
 }
 	YY_BREAK
 case 23:
@@ -1118,8 +1121,8 @@ YY_RULE_SETUP
 #line 166 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "PRINT";
-    return PRINT;
+    yylval.cad = "WHILE";
+    return WHILE;
 }
 	YY_BREAK
 case 24:
@@ -1127,8 +1130,8 @@ YY_RULE_SETUP
 #line 171 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "DEL";
-    return DEL;
+    yylval.cad = "PRINT";
+    return PRINT;
 }
 	YY_BREAK
 case 25:
@@ -1136,8 +1139,8 @@ YY_RULE_SETUP
 #line 176 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "GLOBAL";
-    return GLOBAL;
+    yylval.cad = "DEL";
+    return DEL;
 }
 	YY_BREAK
 case 26:
@@ -1145,8 +1148,8 @@ YY_RULE_SETUP
 #line 181 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "NOT";
-    return NOT;
+    yylval.cad = "GLOBAL";
+    return GLOBAL;
 }
 	YY_BREAK
 case 27:
@@ -1154,8 +1157,8 @@ YY_RULE_SETUP
 #line 186 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "WITH";
-    return WITH;
+    yylval.cad = "NOT";
+    return NOT;
 }
 	YY_BREAK
 case 28:
@@ -1163,8 +1166,8 @@ YY_RULE_SETUP
 #line 191 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "AS";
-    return AS;
+    yylval.cad = "WITH";
+    return WITH;
 }
 	YY_BREAK
 case 29:
@@ -1172,8 +1175,8 @@ YY_RULE_SETUP
 #line 196 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "ELIF";
-    return ELIF;
+    yylval.cad = "AS";
+    return AS;
 }
 	YY_BREAK
 case 30:
@@ -1181,8 +1184,8 @@ YY_RULE_SETUP
 #line 201 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "IF";
-    return IF;
+    yylval.cad = "ELIF";
+    return ELIF;
 }
 	YY_BREAK
 case 31:
@@ -1190,8 +1193,8 @@ YY_RULE_SETUP
 #line 206 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "OR";
-    return OR;
+    yylval.cad = "IF";
+    return IF;
 }
 	YY_BREAK
 case 32:
@@ -1199,8 +1202,8 @@ YY_RULE_SETUP
 #line 211 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "YIELD";
-    return YIELD;
+    yylval.cad = "OR";
+    return OR;
 }
 	YY_BREAK
 case 33:
@@ -1208,8 +1211,8 @@ YY_RULE_SETUP
 #line 216 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "ASSERT";
-    return ASSERT;
+    yylval.cad = "YIELD";
+    return YIELD;
 }
 	YY_BREAK
 case 34:
@@ -1217,8 +1220,8 @@ YY_RULE_SETUP
 #line 221 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "ELSE";
-    return ELSE;
+    yylval.cad = "ASSERT";
+    return ASSERT;
 }
 	YY_BREAK
 case 35:
@@ -1226,8 +1229,8 @@ YY_RULE_SETUP
 #line 226 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "IMPORT";
-    return IMPORT;
+    yylval.cad = "ELSE";
+    return ELSE;
 }
 	YY_BREAK
 case 36:
@@ -1235,8 +1238,8 @@ YY_RULE_SETUP
 #line 231 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "PASS";
-    return PASS;
+    yylval.cad = "IMPORT";
+    return IMPORT;
 }
 	YY_BREAK
 case 37:
@@ -1244,8 +1247,8 @@ YY_RULE_SETUP
 #line 236 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "BREAK";
-    return BREAK;
+    yylval.cad = "PASS";
+    return PASS;
 }
 	YY_BREAK
 case 38:
@@ -1253,8 +1256,8 @@ YY_RULE_SETUP
 #line 241 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "EXCEPT";
-    return EXCEPT;
+    yylval.cad = "BREAK";
+    return BREAK;
 }
 	YY_BREAK
 case 39:
@@ -1262,8 +1265,8 @@ YY_RULE_SETUP
 #line 246 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "IN";
-    return IN;
+    yylval.cad = "EXCEPT";
+    return EXCEPT;
 }
 	YY_BREAK
 case 40:
@@ -1271,28 +1274,38 @@ YY_RULE_SETUP
 #line 251 "pylex.l"
 { 
     lei =true;
+    yylval.cad = "IN";
+    return IN;
+}
+	YY_BREAK
+case 41:
+YY_RULE_SETUP
+#line 256 "pylex.l"
+{ 
+    lei =true;
     yylval.cad = "RAISE";
     return RAISE;
 }
 	YY_BREAK
-case 41:
-/* rule 41 can match eol */
+case 42:
+/* rule 42 can match eol */
 YY_RULE_SETUP
-#line 257 "pylex.l"
+#line 262 "pylex.l"
 {
     /*Filtra líneas en blanco*/
     string s = yytext;
     yyless(s.length()-1);
 }
 	YY_BREAK
-case 42:
-/* rule 42 can match eol */
+case 43:
+/* rule 43 can match eol */
 YY_RULE_SETUP
-#line 263 "pylex.l"
+#line 268 "pylex.l"
 { 
         /*indentaciones*/
-    
-        
+	cout << "AQUI" << endl;
+    	
+		
 
         string s = yytext;
         if (s.compare("\n") && num_lineas == 1 && !lei){
@@ -1306,31 +1319,30 @@ YY_RULE_SETUP
             printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
             yyterminate();
         }
-
-        if(n==1) return INDENT;
-        if(n==2) yy_push_state(edo_poner_dedent);
-        if(num_lineas!=1 || lei){
+		if(num_lineas!=1 || lei){
             yylval.car = '\n';
-            return NEWLINE;
+			return NEWLINE;
         }
+        
+		
 }
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 291 "pylex.l"
+#line 296 "pylex.l"
 {
     if(lei){
         yylval.cad = yytext;
-        return ESPTAB;
+        //return ESPTAB;
     }else{
         printf("\n[Error: La indentación inicial no es cero]\n");
         yyterminate();
     }
 }
 	YY_BREAK
-case 44:
+case 45:
 YY_RULE_SETUP
-#line 301 "pylex.l"
+#line 306 "pylex.l"
 {
     lei = true;
     yylval.cad = yytext;
@@ -1338,67 +1350,58 @@ YY_RULE_SETUP
     
 }
 	YY_BREAK
-case 45:
-YY_RULE_SETUP
-#line 308 "pylex.l"
-{ 
-  lei =true;
-    yylval.cad = yytext;
-    return DMAYORIGUAL;
-    }
-	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 313 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
-    return DMENORIGUAL;
+    return DMAYORIGUAL;
     }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 318 "pylex.l"
+{ 
+  lei =true;
+    yylval.cad = yytext;
+    return DMENORIGUAL;
+    }
+	YY_BREAK
+case 48:
+YY_RULE_SETUP
+#line 323 "pylex.l"
 {  
   lei =true;
     yylval.cad = yytext;
     return DASTIGUAL;
     }
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 323 "pylex.l"
+#line 328 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
     return DDIAIGUAL;
     }
 	YY_BREAK
-case 49:
+case 50:
 YY_RULE_SETUP
-#line 329 "pylex.l"
+#line 334 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DASTERISCO;
 }
 	YY_BREAK
-case 50:
+case 51:
 YY_RULE_SETUP
-#line 335 "pylex.l"
+#line 340 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
     return DDIAG;
-}
-	YY_BREAK
-case 51:
-YY_RULE_SETUP
-#line 341 "pylex.l"
-{ 
-    lei =true;
-    yylval.cad = yytext;
-    return DMENOR;
 }
 	YY_BREAK
 case 52:
@@ -1407,7 +1410,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return DMAYOR;
+    return DMENOR;
 }
 	YY_BREAK
 case 53:
@@ -1416,7 +1419,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return MEIGUAL;
+    return DMAYOR;
 }
 	YY_BREAK
 case 54:
@@ -1425,7 +1428,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return MAIGUAL;
+    return MEIGUAL;
 }
 	YY_BREAK
 case 55:
@@ -1434,16 +1437,16 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return DIGUAL;
+    return MAIGUAL;
 }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 366 "pylex.l"
-{  
+{ 
     lei =true;
     yylval.cad = yytext;
-    return NIGUAL;
+    return DIGUAL;
 }
 	YY_BREAK
 case 57:
@@ -1452,17 +1455,17 @@ YY_RULE_SETUP
 {  
     lei =true;
     yylval.cad = yytext;
-    return MENORMAYOR;
+    return NIGUAL;
 }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 378 "pylex.l"
-{ 
- lei =true;
+#line 376 "pylex.l"
+{  
+    lei =true;
     yylval.cad = yytext;
-    return MENOSMAYOR;
-    }
+    return MENORMAYOR;
+}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
@@ -1470,7 +1473,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return MASIGUAL;
+    return MENOSMAYOR;
     }
 	YY_BREAK
 case 60:
@@ -1479,7 +1482,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return MENOSIGUAL;
+    return MASIGUAL;
     }
 	YY_BREAK
 case 61:
@@ -1488,7 +1491,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return ASTIGUAL;
+    return MENOSIGUAL;
     }
 	YY_BREAK
 case 62:
@@ -1497,16 +1500,16 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return DIAIGUAL;
+    return ASTIGUAL;
     }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 404 "pylex.l"
+#line 403 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
-    return PORIGUAL;
+    return DIAIGUAL;
     }
 	YY_BREAK
 case 64:
@@ -1515,8 +1518,8 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return AMPIGUAL;
-    } 
+    return PORIGUAL;
+    }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
@@ -1524,35 +1527,35 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return PIPEIGUAL;
-    }
+    return AMPIGUAL;
+    } 
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
 #line 419 "pylex.l"
+{ 
+ lei =true;
+    yylval.cad = yytext;
+    return PIPEIGUAL;
+    }
+	YY_BREAK
+case 67:
+YY_RULE_SETUP
+#line 424 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
     return CIRCIGUAL;
     }
 	YY_BREAK
-case 67:
+case 68:
 YY_RULE_SETUP
-#line 425 "pylex.l"
+#line 430 "pylex.l"
 {
     lei =true;
     yylval.cad = yytext;
     return MAS;
 
-}
-	YY_BREAK
-case 68:
-YY_RULE_SETUP
-#line 431 "pylex.l"
-{ 
-    lei =true;
-    yylval.cad = yytext;
-    return MENOS;
 }
 	YY_BREAK
 case 69:
@@ -1561,7 +1564,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return ASTERISCO;
+    return MENOS;
 }
 	YY_BREAK
 case 70:
@@ -1570,7 +1573,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return PORCEN;
+    return ASTERISCO;
 }
 	YY_BREAK
 case 71:
@@ -1579,16 +1582,16 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return DIAG;
+    return PORCEN;
 }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 452 "pylex.l"
+#line 451 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
-    return AMPERSON;
+    return DIAG;
 }
 	YY_BREAK
 case 73:
@@ -1597,7 +1600,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return PIPE;
+    return AMPERSON;
 }
 	YY_BREAK
 case 74:
@@ -1606,7 +1609,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return CIRCUNFLEJO;
+    return PIPE;
 }
 	YY_BREAK
 case 75:
@@ -1615,7 +1618,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return ENETILDE;
+    return CIRCUNFLEJO;
 }
 	YY_BREAK
 case 76:
@@ -1624,7 +1627,7 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return MENOR;
+    return ENETILDE;
 }
 	YY_BREAK
 case 77:
@@ -1633,17 +1636,17 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return MAYOR;
+    return MENOR;
 }
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
 #line 482 "pylex.l"
 { 
- lei =true; 
- yylval.cad=yytext; 
- return CSIMPLE; 
- } 
+    lei =true;
+    yylval.cad = yytext;
+    return MAYOR;
+}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
@@ -1651,7 +1654,7 @@ YY_RULE_SETUP
 { 
  lei =true; 
  yylval.cad=yytext; 
- return IDIAG; 
+ return CSIMPLE; 
  } 
 	YY_BREAK
 case 80:
@@ -1660,26 +1663,26 @@ YY_RULE_SETUP
 { 
  lei =true; 
  yylval.cad=yytext; 
- return GATO; 
+ return IDIAG; 
  } 
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
 #line 497 "pylex.l"
+{ 
+ lei =true; 
+ yylval.cad=yytext; 
+ return GATO; 
+ } 
+	YY_BREAK
+case 82:
+YY_RULE_SETUP
+#line 502 "pylex.l"
 {
     lei = true;
     yylval.cad = "\\";
     return DIDIAG;    
 }
-	YY_BREAK
-case 82:
-YY_RULE_SETUP
-#line 503 "pylex.l"
-{ 
-    lei =true;
-    yylval.cad = yytext;
-    return APAREN;
-    }
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
@@ -1687,16 +1690,16 @@ YY_RULE_SETUP
 { 
     lei =true;
     yylval.cad = yytext;
-    return CPAREN;
+    return APAREN;
     }
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
 #line 513 "pylex.l"
 { 
- lei =true;
+    lei =true;
     yylval.cad = yytext;
-    return ACORCHETE;
+    return CPAREN;
     }
 	YY_BREAK
 case 85:
@@ -1705,8 +1708,8 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return CCORCHETE;
-}
+    return ACORCHETE;
+    }
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
@@ -1714,8 +1717,8 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return ALLAVE;
-    }
+    return CCORCHETE;
+}
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
@@ -1723,8 +1726,8 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return CLLAVE;
-}
+    return ALLAVE;
+    }
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
@@ -1732,8 +1735,8 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return COMA;
-    }
+    return CLLAVE;
+}
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
@@ -1741,7 +1744,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return DPUNTO;
+    return COMA;
     }
 	YY_BREAK
 case 90:
@@ -1750,7 +1753,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return PUNTO;
+    return DPUNTO;
     }
 	YY_BREAK
 case 91:
@@ -1759,7 +1762,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return PCOMA;
+    return PUNTO;
     }
 	YY_BREAK
 case 92:
@@ -1768,7 +1771,7 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return AT;
+    return PCOMA;
     }
 	YY_BREAK
 case 93:
@@ -1777,30 +1780,36 @@ YY_RULE_SETUP
 { 
  lei =true;
     yylval.cad = yytext;
-    return IGUAL;
+    return AT;
     }
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 565 "pylex.l"
+#line 563 "pylex.l"
+{ 
+ lei =true;
+    yylval.cad = yytext;
+    return IGUAL;
+    }
+	YY_BREAK
+case 95:
+YY_RULE_SETUP
+#line 570 "pylex.l"
 {
     printf("Error: Caracter inválido\n");
     yyterminate();
 }
 	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-case YY_STATE_EOF(edo_poner_dedent):
-#line 570 "pylex.l"
-{
-    return FIN;
-}
-	YY_BREAK
-case 95:
+case 96:
 YY_RULE_SETUP
-#line 576 "pylex.l"
+#line 579 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 1804 "pylex.cpp"
+#line 1809 "pylex.cpp"
+case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(edo_poner_dedent):
+case YY_STATE_EOF(edo_poner_indent):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2090,7 +2099,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 213 )
+			if ( yy_current_state >= 216 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -2118,11 +2127,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 213 )
+		if ( yy_current_state >= 216 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 212);
+	yy_is_jam = (yy_current_state == 215);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2841,26 +2850,34 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 576 "pylex.l"
+#line 579 "pylex.l"
 
 
 /*Función que revisa si la indentación es correcta*/
 int revisaIdentacion() {
+	if(!pila.empty())
+		cout << "vacia" << endl;
+    else 	
+		cout << "tope: " << pila.top() << endl; 
     int indentacion = 0;
     string cadena = yytext;
-
+	cout << "yytext: ****" << yytext << "***" << endl;
     for(int i = 0;i < cadena.length();i++) {
-       if( yytext[i] == '\t')
+       if( yytext[i] == '\t'){
            indentacion +=8 ;
-           else if (yytext[i]==' ')
-               indentacion +=1;
+
+      }else if (yytext[i]==' '){
+           indentacion +=1;
+	}
 
     }
     if(!pila.empty() && pila.top() < indentacion) {
         pila.push(indentacion);
         //printf("INDENT ");
+		unput('#');
+		yy_push_state(edo_poner_indent);
         return 1;
-    }else {
+    }else if (!pila.empty() && pila.top() > indentacion){
         bool primero = true;
         num_dedent = 0;
         while(!pila.empty()) {
@@ -2869,15 +2886,22 @@ int revisaIdentacion() {
                 num_dedent++;
                 //printf("DEDENT ");
             }
-            if(indentacion == pila.top()) return 2;
+            if(indentacion == pila.top()){ 
+				yy_push_state(edo_poner_dedent);				
+				return 2;
+			}
             pila.pop();
             primero = false;
 
         }
         return 0;
     }
-    
+return 3;
 
+}
+
+void inicializar(){
+	pila.push(0);
 }
 
 
