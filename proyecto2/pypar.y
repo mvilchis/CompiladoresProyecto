@@ -28,7 +28,8 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %%
 
-
+GOAL: single_input | file_input | eval_input
+;
 
 single_input: NEWLINE 
 | simple_stmt 
@@ -328,110 +329,188 @@ s11: test s12 | %empty
 s12: except_clause_aux test | %empty
 ;
 testlist_safe: old_test s13
-             testlist_safe_aux: testlist_safe_aux COMA old_test | COMA old_test
-             old_test: or_test | old_lambdef
-             old_lambdef: LAMBDA s14  DPUNTO old_test
-
+;
+testlist_safe_aux: testlist_safe_aux COMA old_test | COMA old_test
+;
+old_test: or_test | old_lambdef
+;
+old_lambdef: LAMBDA s14  DPUNTO old_test
+;
 s13: testlist_safe_aux comaS| %empty
+;
 s14: varargslist| %empty
+;
 s15: IF or_test ELSE test |  %empty
+;
 test: or_test s15 | lambdef
-    or_test: and_test or_test_aux
-    or_test_aux: or_test_aux OR and_test | %empty
-    and_test: not_test and_test_aux
-    and_test_aux: and_test_aux AND not_test | %empty
-    not_test: NOT not_test | comparison
-    comparison: expr comparison_aux
-    comparison_aux: comparison_aux comp_op expr | %empty
-    comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|NOT|NOT IN|IS|IS NOT
-    expr: xor_expr expr_aux
-    expr_aux: expr_aux PIPE xor_expr | %empty
-    xor_expr: and_expr xor_expr_aux
-    xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr | %empty
-    and_expr: shift_expr shift_expr_aux
-    and_expr_aux: and_expr_aux AMPERSON shift_expr | %empty
-    shift_expr: arith_expr shift_expr_aux
-    shift_expr_aux: shift_expr shift_sim arith_expr | %empty
-    shift_sim: DMENOR | DMAYOR
-    arith_expr: term arith_expr_aux
-    arith_expr_aux: arith_expr_aux ae_aux term | %empty
-    ae_aux: MAS | MENOS
-    term: factor term_aux
-    term_aux:  term_aux t_aux factor | %empty
-    t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
-    factor: factor_aux factor | power
-    factor_aux: MAS | MENOS | ENETILDE
-    power: atom power_aux s16
-
+;
+or_test: and_test or_test_aux
+;
+or_test_aux: or_test_aux OR and_test | %empty
+;
+and_test: not_test and_test_aux
+;
+and_test_aux: and_test_aux AND not_test | %empty
+;
+not_test: NOT not_test | comparison
+;
+comparison: expr comparison_aux
+;
+comparison_aux: comparison_aux comp_op expr | %empty
+;
+comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|NOT|NOT IN|IS|IS NOT
+;
+expr: xor_expr expr_aux
+;
+expr_aux: expr_aux PIPE xor_expr | %empty
+;
+xor_expr: and_expr xor_expr_aux
+;
+xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr | %empty
+;
+and_expr: shift_expr shift_expr_aux
+;
+and_expr_aux: and_expr_aux AMPERSON shift_expr | %empty
+;
+shift_expr: arith_expr shift_expr_aux
+;
+shift_expr_aux: shift_expr shift_sim arith_expr | %empty
+;
+shift_sim: DMENOR | DMAYOR
+;
+arith_expr: term arith_expr_aux
+;
+arith_expr_aux: arith_expr_aux ae_aux term | %empty
+;
+ae_aux: MAS | MENOS
+;
+term: factor term_aux
+;
+term_aux:  term_aux t_aux factor | %empty
+;
+t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
+;
+factor: factor_aux factor | power
+;
+factor_aux: MAS | MENOS | ENETILDE
+;
+power: atom power_aux s16
+;
 s16: DASTERISCO factor | %empty
+;
 s17: yield_expr|testlist_comp | %empty
+;
 s18: listmaker | %empty
+;
 s19: dictorsetmaker | %empty
+;
 s20: arglist | %empty
+;
 s21: test | %empty
+;
 s22: sliceop | %empty
-    power_aux: power_aux trailer | %empty
-    atom: APAREN s17 CPAREN |
-           ACORCHETE s18 CCORCHETE |
-                  ALLAVE s19 CLLAVE |
-                         '`' testlist1 '`' |
-                                IDENTIFICADOR | FLOTANTE | ENTERO | string_aux
-                                string_aux: string_aux STRING | STRING
-                                listmaker: test listmaker_aux
-                                listmaker_aux: list_for | lm_aux comaS
-                                lm_aux: lm_aux COMA test | %empty
-                                testlist_comp: test testlist_comp_aux
-                                testlist_comp_aux: comp_for | tc_aux comaS
-                                tc_aux: tc_aux COMA test | %empty
-                                lambdef: LAMBDA s14  DPUNTO test
-                                trailer: APAREN s20 CPAREN | ACORCHETE subscriptlist CCORCHETE | PUNTO IDENTIFICADOR
-                                subscriptlist: subscript subscriptlist_aux COMA
-                                subscriptlist_aux: subscriptlist_aux COMA subscript | %empty
-                                subscript: PUNTO PUNTO PUNTO | test | s21 DPUNTO s21 s22
-                                sliceop: DPUNTO s21
-                                exprlist: expr exprlist_aux comaS
-                                exprlist_aux: exprlist_aux COMA expr | %empty
-                                testlist: test testlist_aux comaS
-                                testlist_aux: testlist_aux COMA test | %empty
-                                dictorsetmaker:  dictorsetmaker_aux_a | dictorsetmaker_aux_b
-
+;
+power_aux: power_aux trailer | %empty
+;
+atom: APAREN s17 CPAREN
+|ACORCHETE s18 CCORCHETE
+|ALLAVE s19 CLLAVE
+|'`' testlist1 '`'
+|IDENTIFICADOR 
+| FLOTANTE 
+| ENTERO 
+| string_aux
+;
+string_aux: string_aux STRING | STRING
+;
+listmaker: test listmaker_aux
+;
+listmaker_aux: list_for | lm_aux comaS
+;
+lm_aux: lm_aux COMA test | %empty
+;
+testlist_comp: test testlist_comp_aux
+;
+testlist_comp_aux: comp_for | tc_aux comaS
+;
+tc_aux: tc_aux COMA test | %empty
+;
+lambdef: LAMBDA s14  DPUNTO test
+;
+trailer: APAREN s20 CPAREN | ACORCHETE subscriptlist CCORCHETE | PUNTO IDENTIFICADOR
+;
+subscriptlist: subscript subscriptlist_aux COMA
+;
+subscriptlist_aux: subscriptlist_aux COMA subscript | %empty
+;
+subscript: PUNTO PUNTO PUNTO | test | s21 DPUNTO s21 s22
+;
+sliceop: DPUNTO s21
+;
+exprlist: expr exprlist_aux comaS
+;
+exprlist_aux: exprlist_aux COMA expr | %empty
+;
+testlist: test testlist_aux comaS
+;
+testlist_aux: testlist_aux COMA test | %empty
+;
+dictorsetmaker:  dictorsetmaker_aux_a | dictorsetmaker_aux_b
+;
 dictorsetmaker_aux_a: test DPUNTO test dsm_aux_a
-                    dsm_aux_a: comp_for | dsm_aux_a_a comaS
-                                                dsm_aux_a_a: dsm_aux_a_a COMA test DPUNTO test | %empty
-                                                dictorsetmaker_aux_b: test dsm_aux_b
-                                                dsm_aux_b: comp_for | dsm_aux_b_a comaS
-                                                dsm_aux_b_a: dsm_aux_b_a COMA test | %empty
-
-
-
+;
+dsm_aux_a: comp_for | dsm_aux_a_a comaS
+;
+dsm_aux_a_a: dsm_aux_a_a COMA test DPUNTO test | %empty
+;
+dictorsetmaker_aux_b: test dsm_aux_b
+;
+dsm_aux_b: comp_for | dsm_aux_b_a comaS
+;
+dsm_aux_b_a: dsm_aux_b_a COMA test | %empty
+;
 s23: APAREN s24 CPAREN |%empty 
+;
 s24: testlist | %empty
+;
 classdef: CLASS IDENTIFICADOR s23 DPUNTO suite
-
+;
 arglist: arglist_aux_a arglist_aux_b
-       arglist_aux_a: arglist_aux_a argument COMA | %empty
-       arglist_aux_b: argument comaS | ASTERISCO test al_aux s25 | DASTERISCO test
-       al_aux: al_aux COMA argument | %empty
-
+;
+arglist_aux_a: arglist_aux_a argument COMA | %empty
+;
+arglist_aux_b: argument comaS | ASTERISCO test al_aux s25 | DASTERISCO test
+;       
+al_aux: al_aux COMA argument | %empty
+;
 s25: COMA DASTERISCO test | %empty
-
+;
 argument: test s26 | test IGUAL test
+;
 s26: comp_for | %empty
-
+;
 list_iter: list_for | list_if
-         list_for: FOR exprlist IN testlist_safe s27
-         list_if: IF old_test s27
+;
+list_for: FOR exprlist IN testlist_safe s27
+;
+list_if: IF old_test s27
+;
 s27: list_iter | %empty 
+;
 comp_iter: comp_for | comp_if
-         comp_for: FOR exprlist IN or_test s28
-         comp_if: IF old_test s28
+;
+comp_for: FOR exprlist IN or_test s28
+;
+comp_if: IF old_test s28
+;
 s28: comp_iter | %empty 
-
+;
 testlist1: test testlist1_aux
-         testlist1_aux: testlist1_aux COMA test | %empty
-
+;
+testlist1_aux: testlist1_aux COMA test | %empty
+;
 yield_expr: YIELD s24
-
+;
 %%
 
 int main(int argc, char *argv[]) {
