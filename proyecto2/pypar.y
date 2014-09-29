@@ -28,27 +28,23 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %%
 
-GOAL: single_input | file_input | eval_input
+GOAL: file_input
 ;
 
-single_input: NEWLINE 
-| simple_stmt 
-| compound_stmt NEWLINE
+
+
+file_input: NEWLINE file_input | stmt file_input|
 ;
 
-file_input: file_input_aux FIN
-;
-
-file_input_aux: fi_aux 
+/*file_input_aux: fi_aux 
 |  
 ;
 
-fi_aux: fi_aux file_input_aux 
-| NEWLINE 
+fi_aux: fi_aux file_input_aux  
 | stmt
-;
+;*/
 
-eval_input: testlist eval_input_aux FIN
+/*eval_input: testlist eval_input_aux FIN
 ;
 
 eval_input_aux: ei_aux 
@@ -57,7 +53,7 @@ eval_input_aux: ei_aux
 
 ei_aux: ei_aux eval_input_aux 
 | NEWLINE 
-;
+;*/
 
 
 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
@@ -105,6 +101,7 @@ fpdef: IDENTIFICADOR
 ;
 
 fplist: fpdef fplist_aux fpl_aux
+;
 fpl_aux: COMA
 | 
 ;
@@ -288,10 +285,11 @@ and_expr_aux: and_expr_aux AMPERSON shift_expr |
 ;
 shift_expr: arith_expr shift_expr_aux
 ;
-shift_expr_aux: shift_expr shift_sim arith_expr |  
+shift_expr_aux:  DMENOR arith_expr shift_expr_aux
+|  DMAYOR arith_expr shift_expr_aux |
 ;
-shift_sim: DMENOR | DMAYOR
-;
+/*shift_sim: DMENOR | DMAYOR
+;*/
 arith_expr: term arith_expr_aux
 ;
 arith_expr_aux: arith_expr_aux ae_aux term |  
@@ -329,7 +327,6 @@ power_aux: power_aux trailer |
 atom: APAREN s17 CPAREN
 |ACORCHETE s18 CCORCHETE
 |ALLAVE s19 CLLAVE
-|'`' testlist1 '`'
 |IDENTIFICADOR 
 | FLOTANTE 
 | ENTERO 
@@ -410,10 +407,6 @@ comp_for: FOR exprlist IN or_test s28
 comp_if: IF old_test s28
 ;
 s28: comp_iter |   
-;
-testlist1: test testlist1_aux
-;
-testlist1_aux: testlist1_aux COMA test |  
 ;
 
 %%
