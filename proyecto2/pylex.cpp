@@ -1130,8 +1130,8 @@ YY_RULE_SETUP
 #line 171 "pylex.l"
 { 
     lei =true;
-    yylval.cad = "PRINT";
-    return PRINT;
+    yylval.cad = "AND";
+    return AND;
 }
 	YY_BREAK
 case 25:

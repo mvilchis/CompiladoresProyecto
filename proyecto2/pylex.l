@@ -170,8 +170,8 @@ while {
 }
 and { 
     lei =true;
-    yylval.cad = "PRINT";
-    return PRINT;
+    yylval.cad = "AND";
+    return AND;
 }
 del { 
     lei =true;

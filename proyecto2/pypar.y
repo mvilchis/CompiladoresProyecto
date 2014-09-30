@@ -429,7 +429,7 @@ int main(int argc, char const *argv[]) {
     else
         yyin = stdin;
     do {
-        yydebug = 0;
+        yydebug = 1;
 	inicializar();
         yyparse();
     } while (!feof(yyin));
