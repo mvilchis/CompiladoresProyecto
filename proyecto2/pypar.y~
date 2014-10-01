@@ -1,3 +1,10 @@
+/*  Fernández Martínez José Ismael
+    Trinidad Hernández Norma Verónica
+    Vilchis Domínguez Miguel Alonso
+    Proyecto 01
+    Sept 2014
+*/
+
 %{
 
 #include <stdio.h>
@@ -10,7 +17,7 @@ extern char *yytext;
 extern void inicializar();
 
 int yylex(); 
-int yyerror(const char *s) { printf ("Error: %s   *%s*\n", s, yytext); return 1;}
+int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %}
 
@@ -33,7 +40,7 @@ int yyerror(const char *s) { printf ("Error: %s   *%s*\n", s, yytext); return 1;
 %token FIN 
 
 %%
-
+/*Símbolo inicial*/
 GOAL: file_input {printf("Éxito\n");}
 ;
 
@@ -43,10 +50,15 @@ file_input: file_input NEWLINE | stmt file_input|
 ;
 
 
-
+/*definición de funciones*/
 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
 ;
-
+funccall : IDENTIFICADOR APAREN n20 CPAREN
+;
+n20 : testlist 
+|
+;
+/*definicion de parámetros*/
 parameters: APAREN parameters_aux CPAREN
 ;
 parameters_aux: varargslist
@@ -91,7 +103,7 @@ fpl_aux: COMA
 fplist_aux: fplist_aux COMA fpdef 
 |  
 ;
-
+/*definición statments*/
 stmt: simple_stmt 
 | compound_stmt
 ;
@@ -112,6 +124,7 @@ expr_stmt
 | flow_stmt
 | global_stmt
 | exec_stmt
+|funccall
 ;
 expr_stmt: testlist expr_stmt_aux_b
 ;
@@ -137,7 +150,7 @@ augassign: MASIGUAL
 | DASTIGUAL 
 | DDIAIGUAL
 ;
-
+/*PRINT*/
 print_stmt : PRINT s29;
 s29 : s30 | DMAYOR test s31;
 s30 : test s32 comaS 
@@ -151,26 +164,32 @@ s32 :  s32 COMA test| ;
 comaS: COMA
 |
 ;
-
+/*DEL*/
 del_stmt: DEL exprlist
 ;
+/*PASS*/
 pass_stmt: PASS
 ;
+/*Statments de flujo*/
 flow_stmt:
 break_stmt 
 | continue_stmt 
 | return_stmt 
 | raise_stmt 
 ;
+/*BREAK*/
 break_stmt: BREAK
 ;
+/*CONTINUE*/
 continue_stmt: CONTINUE
 ;
+/*RETURN*/
 return_stmt: RETURN return_stmt_aux
 ;
 return_stmt_aux: testlist
 | 
 ;
+/*RAISE*/
 raise_stmt: RAISE s3
 ;
 
@@ -183,10 +202,12 @@ s4: COMA test s5
 s5: COMA test 
 |   
 ;
+/*GLOBAL*/
 global_stmt: GLOBAL IDENTIFICADOR global_stmt_aux
 ;
 global_stmt_aux:  global_stmt_aux COMA IDENTIFICADOR |  
 ;
+/*EXEC*/
 exec_stmt: EXEC expr s7
 ;
 s7: IN test s5 |   
@@ -199,14 +220,17 @@ if_stmt
 | with_stmt 
 | funcdef 
 ;
+/*IF*/
 if_stmt: IF test DPUNTO suite if_stmt_aux s8
 ;
 if_stmt_aux:  if_stmt_aux ELIF test DPUNTO suite |  
 ;
 s8: ELSE DPUNTO suite |   
 ;
+/*WHILE*/
 while_stmt: WHILE test DPUNTO suite s8
 ;
+/*FOR*/
 for_stmt: FOR exprlist IN testlist DPUNTO suite s8
 ;
 with_stmt: WITH with_item with_stmt_aux  DPUNTO suite
@@ -221,19 +245,19 @@ suite: simple_stmt | NEWLINE INDENT suite_aux DEDENT
 ;
 suite_aux: suite_aux stmt | stmt
 ;
-testlist_safe: old_test s13 comaS
-;
-testlist_safe_aux:  COMA old_test testlist_safe_aux | COMA old_test
+testlist_safe: old_test n10
 ;
 old_test: or_test
 ;
-
+n10: s13 comaS
+;
 s13: s13 COMA old_test | COMA old_test
 ;
 s15: IF or_test ELSE test |   
 ;
 test: or_test s15
 ;
+/*COMPARADORES*/
 or_test: and_test or_test_aux
 ;
 or_test_aux:or_test_aux  OR and_test |  
@@ -267,8 +291,6 @@ shift_expr: arith_expr shift_expr_aux
 shift_expr_aux: shift_expr_aux DMENOR arith_expr 
 | shift_expr_aux  DMAYOR arith_expr |
 ;
-/*shift_sim: DMENOR | DMAYOR
-;*/
 arith_expr: term arith_expr_aux
 ;
 arith_expr_aux: arith_expr_aux ae_aux term |  
@@ -313,6 +335,7 @@ atom: APAREN s17 CPAREN
 |TRUE
 |FALSE
 ;
+/*CADENAS*/
 string_aux: string_aux STRING | STRING
 ;
 listmaker: test listmaker_aux
@@ -369,6 +392,7 @@ al_aux:al_aux  COMA argument |
 ;
 s25: COMA DASTERISCO test |  
 ;
+/*ARGUMENTOS*/
 argument: test s26 | test IGUAL test
 ;
 s26: comp_for |  

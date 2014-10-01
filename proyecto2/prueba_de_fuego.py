@@ -42,6 +42,7 @@ while avanza: #comentario a media linea
         #comentario nueva linea
         print "Y es 8"
         avanza = False
+	r();
     else:
 #Comentario mal identado    
         print " esta es una cadenaa"
