@@ -53,11 +53,7 @@ file_input: file_input NEWLINE | stmt file_input|
 /*definición de funciones*/
 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
 ;
-funccall : IDENTIFICADOR APAREN n20 CPAREN
-;
-n20 : testlist 
-|
-;
+
 /*definicion de parámetros*/
 parameters: APAREN parameters_aux CPAREN
 ;
@@ -124,7 +120,6 @@ expr_stmt
 | flow_stmt
 | global_stmt
 | exec_stmt
-|funccall
 ;
 expr_stmt: testlist expr_stmt_aux_b
 ;
