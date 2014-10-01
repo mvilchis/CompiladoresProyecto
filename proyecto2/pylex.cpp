@@ -1303,9 +1303,7 @@ YY_RULE_SETUP
 #line 268 "pylex.l"
 { 
         /*indentaciones*/
-	cout << "AQUI" << endl;
     	
-		
 
         string s = yytext;
         if (s.compare("\n") && num_lineas == 1 && !lei){
@@ -1329,7 +1327,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 296 "pylex.l"
+#line 294 "pylex.l"
 {
     if(lei){
         yylval.cad = yytext;
@@ -1342,7 +1340,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 306 "pylex.l"
+#line 304 "pylex.l"
 {
     lei = true;
     yylval.cad = yytext;
@@ -1352,7 +1350,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 313 "pylex.l"
+#line 311 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
@@ -1361,7 +1359,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 318 "pylex.l"
+#line 316 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
@@ -1370,7 +1368,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 323 "pylex.l"
+#line 321 "pylex.l"
 {  
   lei =true;
     yylval.cad = yytext;
@@ -1379,7 +1377,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 328 "pylex.l"
+#line 326 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1388,7 +1386,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 334 "pylex.l"
+#line 332 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1397,7 +1395,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 340 "pylex.l"
+#line 338 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1406,7 +1404,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 346 "pylex.l"
+#line 344 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1415,7 +1413,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 351 "pylex.l"
+#line 349 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1424,7 +1422,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 356 "pylex.l"
+#line 354 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1433,7 +1431,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 361 "pylex.l"
+#line 359 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1442,7 +1440,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 366 "pylex.l"
+#line 364 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1451,7 +1449,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 371 "pylex.l"
+#line 369 "pylex.l"
 {  
     lei =true;
     yylval.cad = yytext;
@@ -1460,7 +1458,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 376 "pylex.l"
+#line 374 "pylex.l"
 {  
     lei =true;
     yylval.cad = yytext;
@@ -1469,7 +1467,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 383 "pylex.l"
+#line 381 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1478,7 +1476,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 388 "pylex.l"
+#line 386 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1487,7 +1485,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 393 "pylex.l"
+#line 391 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1496,7 +1494,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 398 "pylex.l"
+#line 396 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1505,7 +1503,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 403 "pylex.l"
+#line 401 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1514,7 +1512,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 409 "pylex.l"
+#line 407 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1523,7 +1521,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 414 "pylex.l"
+#line 412 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1532,7 +1530,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 419 "pylex.l"
+#line 417 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1541,7 +1539,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 424 "pylex.l"
+#line 422 "pylex.l"
 { 
   lei =true;
     yylval.cad = yytext;
@@ -1550,7 +1548,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 430 "pylex.l"
+#line 428 "pylex.l"
 {
     lei =true;
     yylval.cad = yytext;
@@ -1560,7 +1558,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 436 "pylex.l"
+#line 434 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1569,7 +1567,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 441 "pylex.l"
+#line 439 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1578,7 +1576,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 446 "pylex.l"
+#line 444 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1587,7 +1585,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 451 "pylex.l"
+#line 449 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1596,7 +1594,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 457 "pylex.l"
+#line 455 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1605,7 +1603,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 462 "pylex.l"
+#line 460 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1614,7 +1612,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 467 "pylex.l"
+#line 465 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1623,7 +1621,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 472 "pylex.l"
+#line 470 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1632,7 +1630,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 477 "pylex.l"
+#line 475 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1641,7 +1639,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 482 "pylex.l"
+#line 480 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1650,7 +1648,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 487 "pylex.l"
+#line 485 "pylex.l"
 { 
  lei =true; 
  yylval.cad=yytext; 
@@ -1659,7 +1657,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 492 "pylex.l"
+#line 490 "pylex.l"
 { 
  lei =true; 
  yylval.cad=yytext; 
@@ -1668,7 +1666,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 497 "pylex.l"
+#line 495 "pylex.l"
 { 
  lei =true; 
  yylval.cad=yytext; 
@@ -1677,7 +1675,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 502 "pylex.l"
+#line 500 "pylex.l"
 {
     lei = true;
     yylval.cad = "\\";
@@ -1686,7 +1684,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 508 "pylex.l"
+#line 506 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1695,7 +1693,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 513 "pylex.l"
+#line 511 "pylex.l"
 { 
     lei =true;
     yylval.cad = yytext;
@@ -1704,7 +1702,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 518 "pylex.l"
+#line 516 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1713,7 +1711,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 523 "pylex.l"
+#line 521 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1722,7 +1720,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 528 "pylex.l"
+#line 526 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1731,7 +1729,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 533 "pylex.l"
+#line 531 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1740,7 +1738,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 538 "pylex.l"
+#line 536 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1749,7 +1747,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 543 "pylex.l"
+#line 541 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1758,7 +1756,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 548 "pylex.l"
+#line 546 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1767,7 +1765,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 553 "pylex.l"
+#line 551 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1776,7 +1774,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 558 "pylex.l"
+#line 556 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1785,7 +1783,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 563 "pylex.l"
+#line 561 "pylex.l"
 { 
  lei =true;
     yylval.cad = yytext;
@@ -1794,7 +1792,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 570 "pylex.l"
+#line 568 "pylex.l"
 {
     printf("Error: Caracter inválido\n");
     yyterminate();
@@ -1802,10 +1800,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 579 "pylex.l"
+#line 577 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 1809 "pylex.cpp"
+#line 1807 "pylex.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(edo_poner_dedent):
 case YY_STATE_EOF(edo_poner_indent):
@@ -2850,18 +2848,15 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 579 "pylex.l"
+#line 577 "pylex.l"
 
 
 /*Función que revisa si la indentación es correcta*/
 int revisaIdentacion() {
-	if(!pila.empty())
-		cout << "vacia" << endl;
-    else 	
-		cout << "tope: " << pila.top() << endl; 
+	 
     int indentacion = 0;
     string cadena = yytext;
-	cout << "yytext: ****" << yytext << "***" << endl;
+
     for(int i = 0;i < cadena.length();i++) {
        if( yytext[i] == '\t'){
            indentacion +=8 ;

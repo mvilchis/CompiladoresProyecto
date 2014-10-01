@@ -1,3 +1,17 @@
+def imprime(a, b = 3, c, args, dictionary):
+    if a < c:
+        print "Menor"
+    elif a == c :
+        print "Igual"
+        function()
+        for x in args :
+            print x
+    elif 5:
+        x = 2
+    else:
+        c = a + b
+    return a, a and b,a >= b, [a, b, c]
+
 if 3 :
  if True :
     while (x>2 and x < 5 or y == x):
@@ -15,20 +29,6 @@ def function():
 
 for x in range(0, 3):
     print "We're on time %d" 
-
-def imprime(a, b = 3, c, *args, **dictionary):
-    if a < c:
-        print "Menor"
-    elif a == c :
-        print "Igual"
-        function()
-        for x in args :
-            print x
-    elif 5:
-        x = 2
-    else:
-        c = a + b
-    return a, a and b,a >= b, [a, b, c]
 
 #!/usr/bin/env python
    # -*- coding: utf-8 -*-

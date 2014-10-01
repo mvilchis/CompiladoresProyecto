@@ -267,9 +267,7 @@ raise {
 
 {NEWLINE}[\t ]* { 
         /*indentaciones*/
-	cout << "AQUI" << endl;
     	
-		
 
         string s = yytext;
         if (s.compare("\n") && num_lineas == 1 && !lei){
@@ -579,13 +577,10 @@ raise {
 %%
 /*Función que revisa si la indentación es correcta*/
 int revisaIdentacion() {
-	if(!pila.empty())
-		cout << "vacia" << endl;
-    else 	
-		cout << "tope: " << pila.top() << endl; 
+	 
     int indentacion = 0;
     string cadena = yytext;
-	cout << "yytext: ****" << yytext << "***" << endl;
+
     for(int i = 0;i < cadena.length();i++) {
        if( yytext[i] == '\t'){
            indentacion +=8 ;

@@ -1,3 +1,10 @@
+/*  Fernández Martínez José Ismael
+    Trinidad Hernández Norma Verónica
+    Vilchis Domínguez Miguel Alonso
+    Proyecto 01
+    Sept 2014
+*/
+
 %{
 
 #include <stdio.h>
@@ -34,7 +41,7 @@ int yyerror(const char *s) { printf ("Error: %s   *%s*\n", s, yytext); return 1;
 
 %%
 
-GOAL: file_input {printf("Exito\n");}
+GOAL: file_input {printf("Éxito\n");}
 ;
 
 
@@ -42,67 +49,40 @@ GOAL: file_input {printf("Exito\n");}
 file_input: file_input NEWLINE | stmt file_input|
 ;
 
-/* file_input_aux: fi_aux 
-|  
+
+
+funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
 ;
 
-fi_aux: fi_aux file_input_aux  
-| stmt
-;*/
-
-/*eval_input: testlist eval_input_aux FIN
+parameters: APAREN parameters_aux CPAREN
 ;
-
-eval_input_aux: ei_aux 
-|  
-;
-
-ei_aux: ei_aux eval_input_aux 
-| NEWLINE 
-;*/
-
-
-funcdef: 
-DEF IDENTIFICADOR parameters DPUNTO suite
-;
-
-parameters:
-APAREN parameters_aux CPAREN
-;
-parameters_aux: 
-varargslist
+parameters_aux: varargslist
 |
 ;
 
-varargslist: varargslist_a
-| varargslist_b
+varargslist: varargslist_aux_a varargslist_aux_b
+|fpdef val_aux varargslist_aux_c
+;
+varargslist_aux_a: varargslist_aux_a fpdef val_aux COMA
+|
+;
+val_aux: IGUAL test
+|
 ;
 
-varargslist_a: varargslist_a_aux_a varargslist_a_aux_b
+varargslist_aux_b:  ASTERISCO IDENTIFICADOR n1 
+| DASTERISCO IDENTIFICADOR 
 ;
-
-varargslist_a_aux_a: varargslist_a_aux_a fpdef val_aux_a COMA 
-|  
+n1: COMA DASTERISCO IDENTIFICADOR
+|
 ;
-val_aux_a: IGUAL test
-| 
+varargslist_aux_c: n2 n3
 ;
-
-varargslist_a_aux_b: ASTERISCO IDENTIFICADOR val_aux_b 
-| DASTERISCO IDENTIFICADOR
+n2: n2 COMA fpdef val_aux
+|
 ;
-val_aux_b: COMA DASTERISCO IDENTIFICADOR
-| 
-;
-
-varargslist_b: fpdef val_aux_a varargslist_b_aux val_b
-;
-val_b: COMA
-| 
-;
-
-varargslist_b_aux: varargslist_b_aux COMA fpdef val_aux_a 
-|  
+n3: COMA
+|
 ;
 
 fpdef: IDENTIFICADOR
@@ -429,7 +409,7 @@ int main(int argc, char const *argv[]) {
     else
         yyin = stdin;
     do {
-        yydebug = 1;
+        yydebug = 0;
 	inicializar();
         yyparse();
     } while (!feof(yyin));

@@ -170,8 +170,8 @@ while {
 }
 and { 
     lei =true;
-    yylval.cad = "PRINT";
-    return PRINT;
+    yylval.cad = "AND";
+    return AND;
 }
 del { 
     lei =true;
@@ -579,13 +579,10 @@ raise {
 %%
 /*Función que revisa si la indentación es correcta*/
 int revisaIdentacion() {
-	if(!pila.empty())
-		cout << "vacia" << endl;
-    else 	
-		cout << "tope: " << pila.top() << endl; 
+	 
     int indentacion = 0;
     string cadena = yytext;
-	cout << "yytext: ****" << yytext << "***" << endl;
+
     for(int i = 0;i < cadena.length();i++) {
        if( yytext[i] == '\t'){
            indentacion +=8 ;

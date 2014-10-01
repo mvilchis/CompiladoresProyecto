@@ -148,7 +148,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 17 "pypar.y" /* yacc.c:1909  */
+#line 24 "pypar.y" /* yacc.c:1909  */
 
   int numi;
   float numf;
