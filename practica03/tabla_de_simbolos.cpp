@@ -5,10 +5,10 @@
 using namespace std;
 
 union t{
-	int i;
-	double d;
-	char *s;
-	char c;
+		int i;
+		double d;
+		char c;
+		char *s;
 };
 
 class Simbolo{
@@ -17,12 +17,13 @@ private:
 	string tipo;
 	union t valor;
 public:
+	Simbolo(){}
+
 	Simbolo(string identificador, string tipo, union t valor){
 		this->identificador = identificador;
 		this->tipo = tipo;
 		this->valor = valor;
 	}
-	Simbolo();
 
 	string getIdentificador(){
 		return identificador;
@@ -38,10 +39,43 @@ public:
 };
 
 class TablaDeSimbolos{
-	list< map<int,Simbolo> > tablas;
+private:
+	list< map<string,Simbolo> > tablas;
+public:
+	TablaDeSimbolos(){
+		map<string,Simbolo> t;
+		tablas.push_front(t);
+	}
 
-	union t lookUp(union t nombre){
-		return nombre;
+	Simbolo* lookUp(string nombre){
+		for(list<map<string,Simbolo> >::iterator it=tablas.begin();it!=tablas.end();it++)			
+			if((*it).find(nombre)!=(*it).end())
+				return &((*((*it).find(nombre))).second);
+		return NULL;
+	}
+
+	void insert(string nombre, Simbolo record){
+		if(tablas.empty()){
+			map<string,Simbolo> t;
+			tablas.push_front(t);
+		}
+		(*(tablas.begin())).insert(pair<string,Simbolo>(nombre,record));
+	}
+
+	void openScope(){
+		map<string,Simbolo> m;
+		tablas.push_front(m);
+	}
+
+	void closeScope(){
+		if(!tablas.empty())
+			tablas.pop_front();
+	}
+
+	bool declaredLocally(string nombre){
+		if(!tablas.empty())
+			return (*(tablas.begin())).count(nombre);
+		return false;
 	}
 
 };
@@ -49,6 +83,27 @@ class TablaDeSimbolos{
 
 int main(){
 	
+	TablaDeSimbolos t;
+	Simbolo s;
+
+	t.insert("hola",s);
+	if(t.lookUp("hola")!=NULL) cout << "hay algo" << endl; else cout << "Es nulo" << endl;
+	cout << t.declaredLocally("hola") << endl;
+
+	t.openScope();
+	if(t.lookUp("hola")!=NULL) cout << "hay algo" << endl; else cout << "Es nulo" << endl;
+	cout << t.declaredLocally("hola") << endl;
+
+	t.closeScope();
+	t.closeScope();
+
+	if(t.lookUp("hola")!=NULL) cout << "hay algo" << endl; else cout << "Es nulo" << endl;
+	cout << t.declaredLocally("hola") << endl;
+
+	t.insert("cosa",s);
+
+
+
 
 	return 0;
 }
