@@ -12,7 +12,7 @@ class LeafNode: public Node{
 };
 
 class NodeList{
-	virtual bool empty()=0;
+    //virtual bool empty()=0;
 };
 
 class LNodeList: public NodeList{
@@ -29,7 +29,7 @@ private:
 	NodeList* chen;
 public:
 	INode(int nls):Node(){chen = new VNodeList(nls);}
-	//INode():Node(),chen(new LNodeList())
+	INode():Node(){chen=new LNodeList();}
 	void AddFChild(Node n){
 
 	}
@@ -46,10 +46,61 @@ public:
 	
 };
 
+class BlockNode: public INode {
+    public:
+        BlockNode():INode() {}
+        //Implementar agregar hijos
+        
+};
+class BinNode: public INode {
+    public:
+        BinNode():INode(2) {}
+        //Implementar set hijos
+};
+class intNode : public LeafNode {
+    public:
+        int valor;
+        intNode(int valor):LeafNode(){this->valor=valor;}
+        //virtual void accept(NodeVisitor *nv) {
+        //nv.visit(this);
+};
+/*********************************
+ *
+ *      Seccion de terminales
+ *
+ *********************************/
+String
+Identificador
+False
+Continue
+True
 
+/**********************************
+ *
+ *      Seccion de no terminales 
+ *
+ *********************************/
+class ifNode: public BlockNode {
+    public:
+        ifNode():BlockNode() {}
+       
+};
+class forNode: public BlockNode {
+    public:
+        forNode():BlockNode() {}
+       
+};
+Return
+class WhileNode: public BinNode {
+    public: 
 
-
-
+}
+/*********************************
+ *
+ * Seccion de unarios
+ *
+ *********************************/
+Print
 
 int main(){
 	return 0;
