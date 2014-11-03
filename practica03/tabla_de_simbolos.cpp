@@ -4,6 +4,13 @@
 #include <string>
 using namespace std;
 
+/*  Fernández Martínez José Ismael
+    Trinidad Hernández Norma Verónica
+    Vilchis Domínguez Miguel Alonso
+    Práctica 03
+    Oct 2014
+*/
+
 union t{
 		int i;
 		double d;
