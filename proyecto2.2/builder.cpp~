@@ -15,11 +15,11 @@ public:
 		return new StringNode(v);
 	}
 // IDENTIFICADOR 
-	Node* bIDENTIFICADORNode(string v){
+Node* bIDENTIFICADORNode(string v){
 		return new IdentificadorNode(v);
 	}
 //PRINT 
-	Node* bPRINTNode(NodeList* l){
+Node* bPRINTNode(NodeList* l){
 		INode* n = new PrintNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
@@ -27,18 +27,18 @@ public:
 		return n;
 	}
 //FALSE 
-	Node* bFALSENode(){
+Node* bFALSENode(){
 		return new FalseNode;
 	}
 //IS 
-	Node* bISNode(Node* n1, Node* n2){
+Node* bISNode(Node* n1, Node* n2){
 		INode* n = new IsNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //RETURN
-	Node* bRETURNNode(NodeList* l){
+Node* bRETURNNode(NodeList* l){
 		INode* n = new ReturnNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
@@ -47,11 +47,11 @@ public:
 	}
  
 //CONTINUE 
-	Node* bCONTINUENode(){
+Node* bCONTINUENode(){
 		return new ContinueNode;
 	}
 //FOR 
-	Node* bFORNode(NodeList* l){
+Node* bFORNode(NodeList* l){
 		INode* n = new ForNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
@@ -59,26 +59,26 @@ public:
 		return n;
 	}
 //TRUE
-	Node* bTRUENode(){
+Node* bTRUENode(){
 		return new TrueNode;
 	}
 
 //WHILE
-	Node* bWHILENode(Node* n1, Node* n2){
+Node* bWHILENode(Node* n1, Node* n2){
 		INode* n = new WhileNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //AND 
-	Node* bANDNode(Node* n1, Node* n2){
+Node* bANDNode(Node* n1, Node* n2){
 		INode* n = new AndNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DEL
-	Node* bDELNode(Node* c){
+Node* bDELNode(Node* c){
 		INode* n = new DelNode;
 		n->setFChild(c);
 		return n;
@@ -86,25 +86,25 @@ public:
 //GLOBAL
 
 //NOT
-	Node* bNOTNode(Node* c){
+Node* bNOTNode(Node* c){
 		INode* n = new NotNode;
 		n->setFChild(c);
 		return n;
 	}
 //WITH
-	Node* bWITHNode(Node* c){
+Node* bWITHNode(Node* c){
 		INode* n = new WithNode;
 		n->setFChild(c);
 		return n;
 	}
 //AS
-	Node* bASNode(Node* c){
+Node* bASNode(Node* c){
 		INode* n = new AsNode;
 		n->setFChild(c);
 		return n;
 	}
 //ELIF 
-	Node* bELIFNode(NodeList* l){
+Node* bELIFNode(NodeList* l){
 		INode* n = new ElifNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
@@ -112,7 +112,7 @@ public:
 		return n;
 	}
 //IF 
-	Node* bIFNode(NodeList* l){
+Node* bIFNode(NodeList* l){
 		INode* n = new IfNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
@@ -120,7 +120,7 @@ public:
 		return n;
 	}
 //OR 
-	Node* bORNode(Node* n1, Node* n2){
+Node* bORNode(Node* n1, Node* n2){
 		INode* n = new OrNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
@@ -128,16 +128,16 @@ public:
 	}
 //ELSE 
 //PASS
-	Node* bPASSNode(){
+Node* bPASSNode(){
 		return new PassNode;
 	}
 //BREAK
-	Node* bBREAKNode(){
+Node* bBREAKNode(){
 		return new BreakNode;
 	}
 //IN 
 //EXEC
-	Node* bEXECNode(NodeList* l){
+Node* bEXECNode(NodeList* l){
 		INode* n = new FuncionNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
@@ -145,113 +145,113 @@ public:
 		return n;
 	}
 //NIGUAL
-	Node* bNIGNode(Node* n1, Node* n2){
+Node* bNIGNode(Node* n1, Node* n2){
 		INode* n = new NIgNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DIGUAL
-	Node* bDIGNode(Node* n1, Node* n2){
+Node* bDIGNode(Node* n1, Node* n2){
 		INode* n = new DIgNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //MAIGUAL
-	Node* bMAYIGNode(Node* n1, Node* n2){
+Node* bMAYIGNode(Node* n1, Node* n2){
 		INode* n = new MayIgNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //MEIGUAL
-	Node* bMENIGNode(Node* n1, Node* n2){
+Node* bMENIGNode(Node* n1, Node* n2){
 		INode* n = new MenIgNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //MAYOR
-	Node* bMAYORNode(Node* n1, Node* n2){
+Node* bMAYORNode(Node* n1, Node* n2){
 		INode* n = new MayorNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //MENOR
-	Node* bMENORNode(Node* n1, Node* n2){
+Node* bMENORNode(Node* n1, Node* n2){
 		INode* n = new MenorNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //ENETILDE
-	Node* bENETILDENode(Node *n){
+Node* bENETILDENode(Node *n){
 		return new EnetildeNode(n);
 	}
 //CIRCUNFLEJO
-	Node* bCIRCUNFLEJONode(Node *n){
+Node* bCIRCUNFLEJONode(Node *n){
 		return new CircunflejoNode(n);
 	}
 //PIPE
-	Node* bPIPENode(Node* n1, Node* n2){
+Node* bPIPENode(Node* n1, Node* n2){
 		INode* n= new PipeNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //AMPERSON
-	Node* bAMPERSONNode(Node* n1, Node* n2){
+Node* bAMPERSONNode(Node* n1, Node* n2){
 		INode* n= new AmpersonNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DMAYOR
-	Node* bDMAYORNode(Node* n1, Node* n2){
+Node* bDMAYORNode(Node* n1, Node* n2){
 		INode* n= new DMayorNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DMENOR
-	Node* bDMENORNode(Node* n1, Node* n2){
+Node* bDMENORNode(Node* n1, Node* n2){
 		INode* n= new DMenorNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //PORCEN
-	Node* bMODNode(Node* n1, Node* n2){
+Node* bMODNode(Node* n1, Node* n2){
 		INode* n= new ModNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DDIAG
-	Node* bDDIAGNode(Node* n1, Node* n2){
+Node* bDDIAGNode(Node* n1, Node* n2){
 		INode* n= new DDiagNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DIAG
-	Node* bDIVNode(Node* n1, Node* n2){
+Node* bDIVNode(Node* n1, Node* n2){
 		INode* n = new DivNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //DASTERISCO
-	Node* bDASTERISTICOSNode(Node* n1, Node* n2){
+Node* bDASTERISTICOSNode(Node* n1, Node* n2){
 		INode* n = new DAsteriscosNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
 	}
 //ASTERISCO
-	Node* bPORNode(Node* n1, Node* n2){
+Node* bPORNode(Node* n1, Node* n2){
 		INode* n = new PorNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
