@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "composite.cpp"
 #include "builder.cpp"
 #include "tabla_de_simbolos.cpp"
 #define YYDEBUG 1
@@ -23,13 +24,19 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %}
 
-%union {
-  int numi;
-  float numf;
-  const char* cad;
-  char car;
-  Node *nodeT;
-} ;
+%code requires{
+  #define YYSTYPE struct envolv
+  struct envolv{
+    enum {INTEGERT, FLOATT, STRTNODET} kind;
+    union{
+      int integert;
+      float floatt;
+      std::string *strt;
+      Node *nodet;
+    } miUnion;
+  };
+}
+
 
 %token <cad> STRING ESPTAB OPERADOR IDENTIFICADOR
 %token <cad> PRINT FALSE CLASS FINALLY IS RETURN NONE CONTINUE FOR LAMBDA TRY TRUE DEF FROM NONLOCAL WHILE AND DEL GLOBAL NOT WITH AS ELIF IF OR YIELD ASSERT ELSE IMPORT PASS BREAK EXCEPT IN RAISE EXEC
@@ -55,8 +62,8 @@ file_input: file_input NEWLINE | stmt file_input|
 
 /*definición de funciones*/
 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite {
-//	Node *identificadorN = (ast->bIDENTIFICADORNode($2.miUnion.cad));
-//	$$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3.miUnion.nodeT, $5.miUnion.nodeT));
+	Node *identificadorN = (ast->bIDENTIFICADORNode($2.miUnion.cad));
+	$$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3.miUnion.nodeT, $5.miUnion.nodeT));
 	
 }
 ;

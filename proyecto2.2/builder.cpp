@@ -402,13 +402,6 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
-//MENORMAYOR
-	Node* bAMPIGUALNode(Node* n1, Node* n2){
-		INode* n = new AmpIgualNode;
-		n->setFChild(n1);
-		n->setSChild(n2);
-		return n;
-	}
 //NEWLINE
 	Node* bNEWLINENode(){
 		return new NewLineNode;

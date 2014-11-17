@@ -142,7 +142,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 26 "pypar.y"
+#line 28 "pypar.y"
 
   int numi;
   float numf;
