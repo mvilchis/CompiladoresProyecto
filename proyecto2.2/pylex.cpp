@@ -603,13 +603,13 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "pylex.l"
-/*  Fernández Martínez José Ismael
-    Trinidad Hernández Norma Verónica
-    Vilchis Domínguez Miguel Alonso
-    Proyecto 01
-    Sept 2014
+/* Fernández Martínez José Ismael
+Trinidad Hernández Norma Verónica
+Vilchis Domínguez Miguel Alonso
+Proyecto 01
+Sept 2014
 */
-#line 9 "pylex.l"
+#line 8 "pylex.l"
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -620,12 +620,11 @@ using namespace std;
 
 
 stack<int>pila; /*Pila auxiliar para manejar la indentación*/
-int num_lineas= 1; /*Guarda el número de líneas de código del programa*/
-int revisaIdentacion();
+int num_lineas= 1; /*Guarda el número de líneas de código del programa*/	int revisaIdentacion();
 void inicializar();
 bool lei = false; /*Variable que nos dice si ya hemos leído alguna línea de código*/
 int num_dedent;
-#line 629 "pylex.cpp"
+#line 628 "pylex.cpp"
 
 #define INITIAL 0
 #define edo_poner_dedent 1
@@ -824,11 +823,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 40 "pylex.l"
+#line 36 "pylex.l"
 
-
-
-#line 832 "pylex.cpp"
+#line 829 "pylex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -913,898 +910,887 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 43 "pylex.l"
+#line 37 "pylex.l"
 {
-    num_dedent--;
-    if(!num_dedent) yy_pop_state();
-    return DEDENT;
+num_dedent--;
+if(!num_dedent) yy_pop_state();
+return DEDENT;
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 48 "pylex.l"
+#line 42 "pylex.l"
 {
-	yy_pop_state();
-	return INDENT;
+yy_pop_state();
+return INDENT;
 }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 53 "pylex.l"
+#line 46 "pylex.l"
 {
-    /*Identifica los comentarios*/ 
-     yyless(yyleng-1);
+/*Identifica los comentarios*/
+yyless(yyleng-1);
 }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 58 "pylex.l"
-{ 
-    /*Identifica cadenas bien formadas*/
-    lei = true;
-    yylval.miUnion.cad = yytext;
-    return STRING;
-    
+#line 50 "pylex.l"
+{
+/*Identifica cadenas bien formadas*/
+lei = true;
+yylval.miUnion.cad = yytext;
+return STRING;
 }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 66 "pylex.l"
+#line 56 "pylex.l"
 {
-    /*Identifica cadenas mal formadas*/
-    printf("\n[Error: cadena mal formada]\n");
-    yyterminate();
+/*Identifica cadenas mal formadas*/
+printf("\n[Error: cadena mal formada]\n");
+yyterminate();
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 74 "pylex.l"
+#line 61 "pylex.l"
 {
-    /*Identifica números*/
-    lei =true;
-    yylval.miUnion.numi = atoi(yytext);
-    return ENTERO;
-    
+/*Identifica números*/
+lei =true;
+yylval.miUnion.numi = atoi(yytext);
+return ENTERO;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 82 "pylex.l"
+#line 67 "pylex.l"
 {
-    /*Identifica números*/
-    lei =true;
-    yylval.miUnion.numf = atof(yytext);
-    return FLOTANTE;
-    
+/*Identifica números*/
+lei =true;
+yylval.miUnion.numf = atof(yytext);
+return FLOTANTE;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 91 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "PRINT";
-    return PRINT;
- }
+#line 73 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "PRINT";
+return PRINT;
+}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 96 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "FALSE";
-    return FALSE;
-
- }
+#line 78 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "FALSE";
+return FALSE;
+}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 102 "pylex.l"
-{ 
-    lei =true;
-   yylval.miUnion.cad = "CLASS";
-    return CLASS;
- }
+#line 83 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "CLASS";
+return CLASS;
+}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 107 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "FINALLY";
-    return FINALLY;
+#line 88 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "FINALLY";
+return FINALLY;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 112 "pylex.l"
-{  
-    lei =true;
-    yylval.miUnion.cad = "IS";
-    return IS;
+#line 93 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "IS";
+return IS;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 117 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "RETURN";
-    return RETURN;
+#line 98 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "RETURN";
+return RETURN;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 122 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "NONE";
-    return NONE;
+#line 103 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "NONE";
+return NONE;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 127 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "CONTINUE";
-    return CONTINUE;
+#line 108 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "CONTINUE";
+return CONTINUE;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 132 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "FOR";
-    return FOR;
+#line 113 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "FOR";
+return FOR;
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 137 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "LAMBDA";
-    return LAMBDA;
+#line 118 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "LAMBDA";
+return LAMBDA;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 142 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "TRY";
-    return TRY;
+#line 123 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "TRY";
+return TRY;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 147 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "TRUE";
-    return TRUE;
+#line 128 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "TRUE";
+return TRUE;
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 152 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "DEF";
-    return DEF;
+#line 133 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "DEF";
+return DEF;
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 157 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "FROM";
-    return FROM;
+#line 138 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "FROM";
+return FROM;
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 162 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "NONLOCAL";
-    return NONLOCAL;
+#line 143 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "NONLOCAL";
+return NONLOCAL;
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 167 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "WHILE";
-    return WHILE;
+#line 148 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "WHILE";
+return WHILE;
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 172 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "AND";
-    return AND;
+#line 153 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "AND";
+return AND;
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 177 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "DEL";
-    return DEL;
+#line 158 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "DEL";
+return DEL;
 }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 182 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "GLOBAL";
-    return GLOBAL;
+#line 163 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "GLOBAL";
+return GLOBAL;
 }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 187 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "NOT";
-    return NOT;
+#line 168 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "NOT";
+return NOT;
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 192 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "WITH";
-    return WITH;
+#line 173 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "WITH";
+return WITH;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 197 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "AS";
-    return AS;
+#line 178 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "AS";
+return AS;
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 202 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "ELIF";
-    return ELIF;
+#line 183 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "ELIF";
+return ELIF;
 }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 207 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "IF";
-    return IF;
+#line 188 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "IF";
+return IF;
 }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 212 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "OR";
-    return OR;
+#line 193 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "OR";
+return OR;
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 217 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "YIELD";
-    return YIELD;
+#line 198 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "YIELD";
+return YIELD;
 }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 222 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "ASSERT";
-    return ASSERT;
+#line 203 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "ASSERT";
+return ASSERT;
 }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 227 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "ELSE";
-    return ELSE;
+#line 208 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "ELSE";
+return ELSE;
 }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 232 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "IMPORT";
-    return IMPORT;
+#line 213 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "IMPORT";
+return IMPORT;
 }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 237 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "PASS";
-    return PASS;
+#line 218 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "PASS";
+return PASS;
 }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 242 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "BREAK";
-    return BREAK;
+#line 223 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "BREAK";
+return BREAK;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 247 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "EXCEPT";
-    return EXCEPT;
+#line 228 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "EXCEPT";
+return EXCEPT;
 }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 252 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "IN";
-    return IN;
+#line 233 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "IN";
+return IN;
 }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 257 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = "RAISE";
-    return RAISE;
+#line 238 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = "RAISE";
+return RAISE;
 }
 	YY_BREAK
 case 42:
 /* rule 42 can match eol */
 YY_RULE_SETUP
-#line 263 "pylex.l"
+#line 243 "pylex.l"
 {
-    /*Filtra líneas en blanco*/
-    string s = yytext;
-    yyless(s.length()-1);
+/*Filtra líneas en blanco*/
+string s = yytext;
+yyless(s.length()-1);
 }
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 269 "pylex.l"
-{ 
-        /*indentaciones*/
-    	
-
-        string s = yytext;
-        if (s.compare("\n") && num_lineas == 1 && !lei){
-            printf("\n[Error: La indentación inicial no es cero]\n" );
-            yyterminate();
-        }
-
-        ++num_lineas;
-        int n = revisaIdentacion();
-        if(n==0) {
-            printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
-            yyterminate();
-        }
-		if(num_lineas!=1 || lei){
-            yylval.miUnion.car = '\n';
-			return NEWLINE;
-        }
-        
-		
+#line 248 "pylex.l"
+{
+/*indentaciones*/
+string s = yytext;
+if (s.compare("\n") && num_lineas == 1 && !lei){
+printf("\n[Error: La indentación inicial no es cero]\n" );
+yyterminate();
+}
+++num_lineas;
+int n = revisaIdentacion();
+if(n==0) {
+printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
+yyterminate();
+}
+if(num_lineas!=1 || lei){
+yylval.miUnion.car = '\n';
+return NEWLINE;
+}
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 295 "pylex.l"
+#line 266 "pylex.l"
 {
-    if(lei){
-        yylval.miUnion.cad = yytext;
-        //return ESPTAB;
-    }else{
-        printf("\n[Error: La indentación inicial no es cero]\n");
-        yyterminate();
-    }
+if(lei){
+yylval.miUnion.cad = yytext;
+//return ESPTAB;
+}else{
+printf("\n[Error: La indentación inicial no es cero]\n");
+yyterminate();
+}
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 305 "pylex.l"
+#line 275 "pylex.l"
 {
-    lei = true;
-    yylval.miUnion.cad = yytext;
-    return IDENTIFICADOR;
-    
+lei = true;
+yylval.miUnion.cad = yytext;
+return IDENTIFICADOR;
 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 312 "pylex.l"
-{ 
-  lei =true;
-    yylval.miUnion.cad = yytext;
-    return DMAYORIGUAL;
-    }
+#line 280 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DMAYORIGUAL;
+}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 317 "pylex.l"
-{ 
-  lei =true;
-    yylval.miUnion.cad = yytext;
-    return DMENORIGUAL;
-    }
+#line 285 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DMENORIGUAL;
+}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 322 "pylex.l"
-{  
-  lei =true;
-    yylval.miUnion.cad = yytext;
-    return DASTIGUAL;
-    }
+#line 290 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DASTIGUAL;
+}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 327 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return DDIAIGUAL;
-    }
+#line 295 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DDIAIGUAL;
+}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 333 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return DASTERISCO;
+#line 300 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DASTERISCO;
 }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 339 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return DDIAG;
+#line 305 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DDIAG;
 }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 345 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return DMENOR;
+#line 310 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DMENOR;
 }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 350 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return DMAYOR;
+#line 315 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DMAYOR;
 }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 355 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MEIGUAL;
+#line 320 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MEIGUAL;
 }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 360 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MAIGUAL;
+#line 325 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MAIGUAL;
 }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 365 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return DIGUAL;
+#line 330 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DIGUAL;
 }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 370 "pylex.l"
-{  
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return NIGUAL;
+#line 335 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return NIGUAL;
 }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 375 "pylex.l"
-{  
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MENORMAYOR;
+#line 340 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MENORMAYOR;
 }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 382 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return MENOSMAYOR;
-    }
+#line 345 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MENOSMAYOR;
+}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 387 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return MASIGUAL;
-    }
+#line 350 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MASIGUAL;
+}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 392 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return MENOSIGUAL;
-    }
+#line 355 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MENOSIGUAL;
+}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 397 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return ASTIGUAL;
-    }
+#line 360 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return ASTIGUAL;
+}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 402 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return DIAIGUAL;
-    }
+#line 365 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DIAIGUAL;
+}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 408 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return PORIGUAL;
-    }
+#line 370 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return PORIGUAL;
+}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 413 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return AMPIGUAL;
-    } 
+#line 375 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return AMPIGUAL;
+}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 418 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return PIPEIGUAL;
-    }
+#line 380 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return PIPEIGUAL;
+}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 423 "pylex.l"
-{ 
-  lei =true;
-    yylval.miUnion.cad = yytext;
-    return CIRCIGUAL;
-    }
+#line 385 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return CIRCIGUAL;
+}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 429 "pylex.l"
+#line 390 "pylex.l"
 {
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MAS;
-
+lei =true;
+yylval.miUnion.cad = yytext;
+return MAS;
 }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 435 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MENOS;
+#line 395 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MENOS;
 }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 440 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return ASTERISCO;
+#line 400 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return ASTERISCO;
 }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 445 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return PORCEN;
+#line 405 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return PORCEN;
 }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 450 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return DIAG;
+#line 410 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DIAG;
 }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 456 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return AMPERSON;
+#line 415 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return AMPERSON;
 }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 461 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return PIPE;
+#line 420 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return PIPE;
 }
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 466 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return CIRCUNFLEJO;
+#line 425 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return CIRCUNFLEJO;
 }
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 471 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return ENETILDE;
+#line 430 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return ENETILDE;
 }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 476 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MENOR;
+#line 435 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MENOR;
 }
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 481 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return MAYOR;
+#line 440 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return MAYOR;
 }
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 486 "pylex.l"
-{ 
- lei =true; 
- yylval.miUnion.cad=yytext; 
- return CSIMPLE; 
- } 
+#line 445 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad=yytext;
+return CSIMPLE;
+}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 491 "pylex.l"
-{ 
- lei =true; 
- yylval.miUnion.cad=yytext; 
- return IDIAG; 
- } 
+#line 450 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad=yytext;
+return IDIAG;
+}
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 496 "pylex.l"
-{ 
- lei =true; 
- yylval.miUnion.cad=yytext; 
- return GATO; 
- } 
+#line 455 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad=yytext;
+return GATO;
+}
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 501 "pylex.l"
+#line 460 "pylex.l"
 {
-    lei = true;
-    yylval.miUnion.cad = "\\";
-    return DIDIAG;    
+lei = true;
+yylval.miUnion.cad = "\\";
+return DIDIAG;
 }
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 507 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return APAREN;
-    }
+#line 465 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return APAREN;
+}
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 512 "pylex.l"
-{ 
-    lei =true;
-    yylval.miUnion.cad = yytext;
-    return CPAREN;
-    }
+#line 470 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return CPAREN;
+}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 517 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return ACORCHETE;
-    }
+#line 475 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return ACORCHETE;
+}
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 522 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return CCORCHETE;
+#line 480 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return CCORCHETE;
 }
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 527 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return ALLAVE;
-    }
+#line 485 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return ALLAVE;
+}
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 532 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return CLLAVE;
+#line 490 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return CLLAVE;
 }
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 537 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return COMA;
-    }
+#line 495 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return COMA;
+}
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 542 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return DPUNTO;
-    }
+#line 500 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return DPUNTO;
+}
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 547 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return PUNTO;
-    }
+#line 505 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return PUNTO;
+}
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 552 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return PCOMA;
-    }
+#line 510 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return PCOMA;
+}
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 557 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return AT;
-    }
+#line 515 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return AT;
+}
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 562 "pylex.l"
-{ 
- lei =true;
-    yylval.miUnion.cad = yytext;
-    return IGUAL;
-    }
+#line 520 "pylex.l"
+{
+lei =true;
+yylval.miUnion.cad = yytext;
+return IGUAL;
+}
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 569 "pylex.l"
+#line 525 "pylex.l"
 {
-    printf("Error: Caracter inválido\n");
-    yyterminate();
+printf("Error: Caracter inválido\n");
+yyterminate();
 }
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 578 "pylex.l"
+#line 529 "pylex.l"
 ECHO;
 	YY_BREAK
-#line 1808 "pylex.cpp"
+#line 1794 "pylex.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(edo_poner_dedent):
 case YY_STATE_EOF(edo_poner_indent):
@@ -2849,67 +2835,58 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 578 "pylex.l"
+#line 529 "pylex.l"
 
 
 /*Función que revisa si la indentación es correcta*/
 int revisaIdentacion() {
-	 
-    int indentacion = 0;
-    string cadena = yytext;
-
-    for(int i = 0;i < cadena.length();i++) {
-       if( yytext[i] == '\t'){
-           indentacion +=8 ;
-
-      }else if (yytext[i]==' '){
-           indentacion +=1;
-	}
-
-    }
-    if(!pila.empty() && pila.top() < indentacion) {
-        pila.push(indentacion);
-        //printf("INDENT ");
-		unput('#');
-		yy_push_state(edo_poner_indent);
-        return 1;
-    }else if (!pila.empty() && pila.top() > indentacion){
-        bool primero = true;
-        num_dedent = 0;
-        while(!pila.empty()) {
-            if(!primero) {
-                unput('$');
-                num_dedent++;
-                //printf("DEDENT ");
-            }
-            if(indentacion == pila.top()){ 
-				yy_push_state(edo_poner_dedent);				
-				return 2;
-			}
-            pila.pop();
-            primero = false;
-
-        }
-        return 0;
-    }
+int indentacion = 0;
+string cadena = yytext;
+for(int i = 0;i < cadena.length();i++) {
+if( yytext[i] == '\t'){
+indentacion +=8 ;
+}else if (yytext[i]==' '){
+indentacion +=1;
+}
+}
+if(!pila.empty() && pila.top() < indentacion) {
+pila.push(indentacion);
+//printf("INDENT ");
+unput('#');
+yy_push_state(edo_poner_indent);
+return 1;
+}else if (!pila.empty() && pila.top() > indentacion){
+bool primero = true;
+num_dedent = 0;
+while(!pila.empty()) {
+if(!primero) {
+unput('$');
+num_dedent++;
+//printf("DEDENT ");
+}
+if(indentacion == pila.top()){
+yy_push_state(edo_poner_dedent);
+return 2;
+}
+pila.pop();
+primero = false;
+}
+return 0;
+}
 return 3;
-
 }
-
 void inicializar(){
-	pila.push(0);
+pila.push(0);
 }
-
-
-
 /*int main(int argc, char *argv[])
 {
-    ++argv, --argc;
-    if(argc > 0) 
-        yyin = fopen(argv[0], "r");
-    else 
-        yyin =stdin;
-        pila.push(0);
-    yylex();
+++argv, --argc;
+if(argc > 0)
+yyin = fopen(argv[0], "r");
+else
+yyin =stdin;
+pila.push(0);
+yylex();
 } */
+
 

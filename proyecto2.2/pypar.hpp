@@ -33,17 +33,17 @@
 /* "%code requires" blocks.  */
 
 /* Line 2068 of yacc.c  */
-#line 22 "pypar.y"
+#line 20 "pypar.y"
 
-  #define YYSTYPE struct envolv
-  struct envolv{
-    enum {INTEGERT, FLOATT, STRTNODET} kind;
-	union{
-      int numi;
-     float numf;
-     const char* cad;
-     char car;
-     Node* nodeT;
+#define YYSTYPE struct envolv
+struct envolv{
+enum {INTEGERT, FLOATT, STRTNODET} kind;
+union{
+int numi;
+float numf;
+const char* cad;
+char car;
+Node* nodeT;
 } miUnion;
 };
 

@@ -73,18 +73,16 @@
 #include <iostream>
 #include "builder.cpp"
 #define YYDEBUG 1
-extern MASTBuilder *ast; 
+extern MASTBuilder *ast;
 extern FILE *yyin;
 extern char *yytext;
 extern void inicializar();
-
-int yylex(); 
+int yylex();
 int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 
-
 /* Line 268 of yacc.c  */
-#line 88 "pypar.cpp"
+#line 86 "pypar.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -107,24 +105,24 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 /* "%code requires" blocks.  */
 
 /* Line 288 of yacc.c  */
-#line 22 "pypar.y"
+#line 20 "pypar.y"
 
-  #define YYSTYPE struct envolv
-  struct envolv{
-    enum {INTEGERT, FLOATT, STRTNODET} kind;
-	union{
-      int numi;
-     float numf;
-     const char* cad;
-     char car;
-     Node* nodeT;
+#define YYSTYPE struct envolv
+struct envolv{
+enum {INTEGERT, FLOATT, STRTNODET} kind;
+union{
+int numi;
+float numf;
+const char* cad;
+char car;
+Node* nodeT;
 } miUnion;
 };
 
 
 
 /* Line 288 of yacc.c  */
-#line 128 "pypar.cpp"
+#line 126 "pypar.cpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -243,7 +241,7 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 
 /* Line 343 of yacc.c  */
-#line 247 "pypar.cpp"
+#line 245 "pypar.cpp"
 
 #ifdef short
 # undef short
@@ -635,34 +633,34 @@ static const yytype_int16 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    49,    49,    54,    54,    54,    59,    67,    69,    70,
-      73,    74,    76,    77,    79,    80,    83,    84,    86,    87,
-      89,    91,    92,    94,    95,    98,    99,   102,   104,   105,
-     108,   109,   112,   113,   116,   118,   119,   121,   122,   125,
-     126,   127,   128,   129,   130,   131,   133,   136,   137,   140,
-     141,   144,   145,   146,   147,   148,   149,   150,   151,   152,
-     153,   154,   155,   158,   159,   159,   160,   161,   163,   164,
-     167,   167,   168,   169,   172,   175,   179,   180,   181,   182,
-     185,   188,   191,   193,   194,   197,   200,   201,   203,   204,
-     206,   207,   210,   212,   212,   215,   217,   217,   221,   222,
-     223,   224,   225,   228,   230,   230,   232,   232,   235,   238,
-     240,   242,   242,   244,   246,   246,   248,   248,   250,   250,
-     252,   254,   256,   258,   258,   260,   260,   262,   265,   267,
-     267,   269,   271,   271,   273,   273,   275,   277,   277,   279,
-     279,   279,   279,   279,   279,   279,   279,   279,   279,   279,
-     281,   283,   283,   285,   287,   287,   289,   291,   291,   293,
-     295,   296,   296,   298,   300,   300,   302,   302,   304,   306,
-     306,   308,   308,   308,   308,   310,   310,   312,   312,   312,
-     314,   316,   316,   318,   318,   320,   320,   322,   322,   324,
-     324,   326,   326,   328,   328,   330,   330,   332,   333,   334,
-     335,   336,   337,   338,   339,   340,   343,   343,   345,   347,
-     347,   349,   349,   351,   353,   353,   355,   355,   357,   357,
-     357,   359,   361,   361,   363,   363,   363,   365,   367,   369,
-     369,   371,   373,   373,   375,   375,   377,   379,   379,   381,
-     381,   383,   385,   385,   387,   387,   389,   391,   391,   393,
-     393,   393,   395,   395,   397,   397,   400,   400,   402,   402,
-     404,   404,   406,   408,   410,   410,   412,   412,   414,   416,
-     418,   418
+       0,    45,    45,    47,    47,    47,    50,    56,    58,    59,
+      61,    62,    64,    65,    67,    68,    70,    71,    73,    74,
+      76,    78,    79,    81,    82,    84,    85,    87,    89,    90,
+      92,    93,    96,    97,    99,   101,   102,   104,   105,   108,
+     109,   110,   111,   112,   113,   114,   116,   118,   119,   122,
+     123,   125,   126,   127,   128,   129,   130,   131,   132,   133,
+     134,   135,   136,   139,   140,   140,   141,   142,   144,   145,
+     147,   147,   148,   149,   152,   155,   159,   160,   161,   162,
+     165,   168,   171,   173,   174,   177,   179,   180,   182,   183,
+     185,   186,   189,   191,   191,   194,   196,   196,   199,   200,
+     201,   202,   203,   206,   208,   208,   210,   210,   213,   216,
+     218,   220,   220,   222,   224,   224,   226,   226,   228,   228,
+     230,   232,   234,   236,   236,   238,   238,   240,   243,   245,
+     245,   247,   249,   249,   251,   251,   253,   255,   255,   257,
+     257,   257,   257,   257,   257,   257,   257,   257,   257,   257,
+     259,   261,   261,   263,   265,   265,   267,   269,   269,   271,
+     273,   274,   274,   276,   278,   278,   280,   280,   282,   284,
+     284,   286,   286,   286,   286,   288,   288,   290,   290,   290,
+     292,   294,   294,   296,   296,   298,   298,   300,   300,   302,
+     302,   304,   304,   306,   306,   308,   308,   310,   311,   312,
+     313,   314,   315,   316,   317,   318,   321,   321,   323,   325,
+     325,   327,   327,   329,   331,   331,   333,   333,   335,   335,
+     335,   337,   339,   339,   341,   341,   341,   343,   345,   347,
+     347,   349,   351,   351,   353,   353,   355,   357,   357,   359,
+     359,   361,   363,   363,   365,   365,   367,   369,   369,   371,
+     371,   371,   373,   373,   375,   375,   378,   378,   380,   380,
+     382,   382,   384,   386,   388,   388,   390,   390,   392,   394,
+     396,   396
 };
 #endif
 
@@ -1961,25 +1959,24 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 49 "pypar.y"
+#line 45 "pypar.y"
     {printf("Éxito\n");}
     break;
 
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 59 "pypar.y"
+#line 50 "pypar.y"
     {
-//	Node *identificadorN = (ast->bIDENTIFICADORNode("a"));
-//	$$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3, $5));
-	
+// Node *identificadorN = (ast->bIDENTIFICADORNode("a"));
+// $$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3, $5));
 }
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1983 "pypar.cpp"
+#line 1980 "pypar.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2210,23 +2207,21 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 421 "pypar.y"
-
+#line 398 "pypar.y"
 
 int main(int argc, char const *argv[]) {
-    ++argv;
-    --argc;
-
-    if (argc > 0) {
-        yyin = fopen(argv[0], "r");
-    }
-    else
-        yyin = stdin;
-    do {
-        yydebug = 0;
-	inicializar();
-        yyparse();
-    } while (!feof(yyin));
+++argv;
+--argc;
+if (argc > 0) {
+yyin = fopen(argv[0], "r");
+}
+else
+yyin = stdin;
+do {
+yydebug = 0;
+inicializar();
+yyparse();
+} while (!feof(yyin));
 }
 
 
