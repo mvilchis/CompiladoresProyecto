@@ -4,13 +4,14 @@
     Proyecto 02
     Sept 2014
 */
+
 %{
+
 #include <stdio.h>
 #include <string>
-#include <iostream>
-#include "builder.cpp"
 #define YYDEBUG 1
-extern MASTBuilder *ast; 
+using namespace std;
+
 extern FILE *yyin;
 extern char *yytext;
 extern void inicializar();
@@ -19,19 +20,13 @@ int yylex();
 int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %}
-%code requires{
-  #define YYSTYPE struct envolv
-  struct envolv{
-    enum {INTEGERT, FLOATT, STRTNODET} kind;
-	union{
-      int numi;
-     float numf;
-     const char* cad;
-     char car;
-     Node* nodeT;
-} miUnion;
+
+%union {
+  int numi;
+  float numf;
+  const char* cad;
+  char car;
 };
-}
 
 %token <cad> STRING ESPTAB OPERADOR IDENTIFICADOR
 %token <cad> PRINT FALSE CLASS FINALLY IS RETURN NONE CONTINUE FOR LAMBDA TRY TRUE DEF FROM NONLOCAL WHILE AND DEL GLOBAL NOT WITH AS ELIF IF OR YIELD ASSERT ELSE IMPORT PASS BREAK EXCEPT IN RAISE EXEC
@@ -56,11 +51,7 @@ file_input: file_input NEWLINE | stmt file_input|
 
 
 /*definición de funciones*/
-funcdef: DEF IDENTIFICADOR parameters DPUNTO suite {
-//	Node *identificadorN = (ast->bIDENTIFICADORNode("a"));
-//	$$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3, $5));
-	
-}
+funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
 ;
 
 /*definicion de parámetros*/

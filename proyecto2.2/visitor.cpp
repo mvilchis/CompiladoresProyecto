@@ -42,8 +42,14 @@ public:
 	void visit(StringNode* n){
 		cout << n->valor;
 	}
-	void visit(BoolNode* n){
-		if(n->valor) cout << "TRUE"; else cout << "FALSE";
+	void visit(IdentificadorNode* n){
+		cout << n->nombre;
+	}
+	void visit(TrueNode* n){
+		cout << "TRUE";
+	}
+	void visit(FalseNode* n){
+		cout << "FALSE";
 	}
 	void visit(ContinueNode* n){
 		cout << "CONTINUE ";
@@ -62,6 +68,9 @@ public:
 	}
 	void visit(IfNode* n){
 		printBloque("IF",n);
+	}
+	void visit(ElIfNode* n){
+		printBloque("ELIF",n);
 	}
 	void visit(ForNode* n){
 		printBloque("FOR",n);
@@ -120,9 +129,6 @@ public:
 	void visit(MayIgNode* n){
 		printBinario("MAYORIGUAL",n);
 	}
-	void visit(ModNode* n){
-		printBinario("MODULO",n);
-	}
 	void visit(DelNode* n){
 		printUnario("DEL",n);
 	}
@@ -135,9 +141,118 @@ public:
 	void visit(AsNode* n){
 		printUnario("AS",n);
 	}
+	void visit(NIgNode* n){
+		printBinario("NIGUAL",n);
+	}
+	void visit(DIgNode* n){
+		printBinario("DIGUAL",n);
+	}
+	void visit(EnetildeNode* n){
+		printUnario("ENETILDE",n);
+	}
+	void visit(CircunflejoNode* n){
+		printUnario("CIRCUNFLEJO",n);
+	}
+	void visit(PipeNode* n){
+		printBinario("PIPE",n);
+	}
+	void visit(AmpersonNode* n){
+		printBinario("AMPERSON",n);
+	}
+	void visit(DMayorNode* n){
+		printBinario("DMAYOR",n);
+	}
+	void visit(DMenorNode* n){
+		printBinario("DMENOR",n);
+	}
+	void visit(ModNode* n){
+		printBinario("PORCEN",n);
+	}
+	void visit(DDiagNode* n){
+		printBinario("DDIAG",n);
+	}
+	void visit(DAsteriscosNode* n){
+		printBinario("DASTERISCO",n);
+	}
+	void visit(AParenNode* n){
+		cout << "APAREN";
+	}
+	void visit(CParenNode* n){
+		cout << "CPAREN";
+	}
+	void visit(ACorcheteNode* n){
+		cout << "ACORCHETE";
+	}
+	void visit(CCorcheteNode* n){
+		cout << "ACORCHETE";
+	}
+	void visit(ALlaveNode* n){
+		cout << "ALLAVE";
+	}
+	void visit(CLlaveNode* n){
+		cout << "ALLAVE";
+	}
+	void visit(ComaNode* n){
+		cout << "COMA";
+	}
+	void visit(DPuntoNode* n){
+		cout << "DPUNTO";
+	}
+	void visit(PuntoNode* n){
+		cout << "PUNTO";
+	}
+	void visit(PComaNode* n){
+		cout << "PCOMA";
+	}
+	void visit(MasIgualNode* n){
+		printBinario("MASIGUAL",n);
+	}
+	void visit(MenosIgualNode* n){
+		printBinario("MENOSIGUAL",n);
+	}
+	void visit(AsIgualNode* n){
+		printBinario("ASIGUAL",n);
+	}
+	void visit(DiaIgualNode* n){
+		printBinario("DIAIGUAL",n);
+	}
+	void visit(DDiaIgualNode* n){
+		printBinario("DDIAIGUAL",n);
+	}
+	void visit(PorIgualNode* n){
+		printBinario("PORIGUAL",n);
+	}
+	void visit(AmpIgualNode* n){
+		printBinario("AMPIGUAL",n);
+	}
+	void visit(PipeIgualNode* n){
+		printBinario("PIPEIGUAL",n);
+	}
+	void visit(CircIgualNode* n){
+		printBinario("CIRCIGUAL",n);
+	}
+	void visit(DMayorIgualNode* n){
+		printBinario("DMAYORIGUAL",n);
+	}
+	void visit(DMenorIgualNode* n){
+		printBinario("DMENORIGUAL",n);
+	}
+	void visit(DAstIgualNode* n){
+		printBinario("DASTIGUAL",n);
+	}
+	void visit(MenorMayorNode* n){
+		printBinario("MENORMAYOR",n);
+	}
+	void visit(NewLineNode* n){
+		cout << "NEWLINE";
+	}
+	void visit(DentacionNode* n){
+		cout << "DEDENT ";
+	}
 };
 
 
 int main() {
 	return 0;
 }
+

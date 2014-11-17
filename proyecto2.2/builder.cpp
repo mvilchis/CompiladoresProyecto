@@ -10,11 +10,11 @@ class MASTBuilder:public ASTBuilder{
 public:
 
 
-//STRING 
+//*STRING 
 	Node* bSTRINGNode(string v){
 		return new StringNode(v);
 	}
-// IDENTIFICADOR 
+//IDENTIFICADOR 
 	Node* bIDENTIFICADORNode(string v){
 		return new IdentificadorNode(v);
 	}
@@ -84,7 +84,13 @@ public:
 		return n;
 	}
 //GLOBAL
-
+	Node* bGLOBALNode(NodeList* l){
+		INode* n = new GlobalNode;
+		Niterador *it = l->getIterador();
+		while(it->hasNext())
+			n->addSChild(it->next());
+		return n;
+	}
 //NOT
 	Node* bNOTNode(Node* c){
 		INode* n = new NotNode;
@@ -105,7 +111,7 @@ public:
 	}
 //ELIF 
 	Node* bELIFNode(NodeList* l){
-		INode* n = new ElifNode;
+		INode* n = new ElIfNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
 			n->addSChild(it->next());
@@ -187,12 +193,16 @@ public:
 		return n;
 	}
 //ENETILDE
-	Node* bENETILDENode(Node *n){
-		return new EnetildeNode(n);
+	Node* bENETILDENode(Node* c){
+		INode* n = new EnetildeNode;
+		n->setFChild(c);
+		return n;
 	}
 //CIRCUNFLEJO
-	Node* bCIRCUNFLEJONode(Node *n){
-		return new CircunflejoNode(n);
+	Node* bCIRCUNFLEJONode(Node* c){
+		INode* n = new CircunflejoNode;
+		n->setFChild(c);
+		return n;
 	}
 //PIPE
 	Node* bPIPENode(Node* n1, Node* n2){
@@ -289,11 +299,11 @@ public:
 	}
 //ALLAVE
 	Node* bALLAVENode(){
-		return new AllaveNode;
+		return new ALlaveNode;
 	}
 //CLLAVE
 	Node* bCLLAVENode(){
-		return new CllaveNode;
+		return new CLlaveNode;
 	}
 //COMA
 	Node* bCOMANode(){
@@ -402,11 +412,18 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+//MENORMAYOR
+	Node* bMENORMAYORNode(Node* n1, Node* n2){
+		INode* n = new MenorMayorNode;
+		n->setFChild(n1);
+		n->setSChild(n2);
+		return n;
+	}
 //NEWLINE
 	Node* bNEWLINENode(){
 		return new NewLineNode;
 	}
-//ENTERO 
+//*ENTERO 
 	Node* bINTNode(int v){
 		return new IntNode(v);
 	}
@@ -425,16 +442,44 @@ public:
 
 	
 	
-	Node* bBOOLNode(bool v){
-		return new BoolNode(v);
-	}
+	//Node* bBOOLNode(bool v){
+	//	return new BoolNode(v);
+	//}
 	
-//Funcion	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	Node* bFUNCIONNode(NodeList* l){
 		INode* n = new FuncionNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
 			n->addSChild(it->next());
 		return n;
-	} 
+	}
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 };
