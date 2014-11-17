@@ -142,14 +142,14 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 28 "pypar.y"
+#line 27 "pypar.y"
 
-  int numi;
-  float numf;
-  const char* cad;
-  char car;
-  Node *nodeT;
-
+      int numi;
+     float numf;
+     const char* cad;
+     char car;
+      Node *nodet;
+    
 
 
 /* Line 2068 of yacc.c  */
