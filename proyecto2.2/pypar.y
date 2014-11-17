@@ -29,9 +29,10 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
   struct envolv{
     enum {INTEGERT, FLOATT, STRTNODET} kind;
     union{
-      int integert;
-      float floatt;
-      std::string *strt;
+      int numi;
+     float numf;
+     const char* cad;
+     char car;
       Node *nodet;
     } miUnion;
   };
