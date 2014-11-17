@@ -87,7 +87,7 @@ public:
 
 };
 
-
+/*
 int main(){
 	
 	TablaDeSimbolos t;
@@ -113,4 +113,4 @@ int main(){
 
 
 	return 0;
-}
+} */

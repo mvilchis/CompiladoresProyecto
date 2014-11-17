@@ -4,16 +4,12 @@
     Proyecto 02
     Sept 2014
 */
-
 %{
-
 #include <stdio.h>
 #include <string>
-#include "composite.cpp"
+#include <iostream>
 #include "builder.cpp"
-#include "tabla_de_simbolos.cpp"
 #define YYDEBUG 1
-using namespace std;
 extern MASTBuilder *ast; 
 extern FILE *yyin;
 extern char *yytext;
@@ -23,16 +19,20 @@ int yylex();
 int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
 
 %}
-
-%union{
+%code requires{
+  #define YYSTYPE struct envolv
+  struct envolv{
+    enum {INTEGERT, FLOATT, STRTNODET} kind;
+	union{
       int numi;
      float numf;
      const char* cad;
      char car;
-      Node *nodet;
-    } ;
+     Node* nodeT;
+} miUnion;
+};
+}
 
-%type<Node*> GOAL file_input funcdef parameters parameters_aux varargslist varargslist_aux_a val_aux varargslist_aux_b n1 varargslist_aux_c n2 n3 fpdef fplist fpl_aux fplist_aux stmt simple_stmt ss_aux simple_stmt_aux small_stmt expr_stmt expr_stmt_aux_b expr_stmt_aux_b_a augassign print_stmt  s29  s30  s31  s32  comaS del_stmt pass_stmt flow_stmt break_stmt continue_stmt return_stmt return_stmt_aux raise_stmt s3 s4 s5 global_stmt global_stmt_aux exec_stmt s7 compound_stmt if_stmt if_stmt_aux s8 while_stmt for_stmt with_stmt with_stmt_aux with_item s10 suite suite_aux testlist_safe old_test n10 s13 s15 test or_test or_test_aux and_test and_test_aux not_test comparison comparison_aux comp_op expr expr_aux xor_expr xor_expr_aux and_expr and_expr_aux shift_expr shift_expr_aux arith_expr arith_expr_aux ae_aux term term_aux t_aux factor factor_aux power s16 s17 s18 s19 s20 s21 s22 power_aux atom string_aux listmaker listmaker_aux lm_aux testlist_comp testlist_comp_aux tc_aux trailer subscriptlist subscriptlist_aux subscript sliceop exprlist exprlist_aux testlist testlist_aux dictorsetmaker dictorsetmaker_aux_a dsm_aux_a dsm_aux_a_a dictorsetmaker_aux_b dsm_aux_b dsm_aux_b_a arglist arglist_aux_a arglist_aux_b al_aux s25 argument s26 list_iter list_for list_if s27 comp_iter comp_for comp_if s28
 %token <cad> STRING ESPTAB OPERADOR IDENTIFICADOR
 %token <cad> PRINT FALSE CLASS FINALLY IS RETURN NONE CONTINUE FOR LAMBDA TRY TRUE DEF FROM NONLOCAL WHILE AND DEL GLOBAL NOT WITH AS ELIF IF OR YIELD ASSERT ELSE IMPORT PASS BREAK EXCEPT IN RAISE EXEC
 %token <cad> NIGUAL DIGUAL MAIGUAL MEIGUAL MAYOR MENOR ENETILDE CIRCUNFLEJO PIPE AMPERSON DMAYOR DMENOR PORCEN DDIAG DIAG DASTERISCO ASTERISCO MENOS MAS
@@ -57,8 +57,8 @@ file_input: file_input NEWLINE | stmt file_input|
 
 /*definición de funciones*/
 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite {
-//	Node *identificadorN = (ast->bIDENTIFICADORNode($2.miUnion.cad));
-//	$$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3.miUnion.nodeT, $5.miUnion.nodeT));
+//	Node *identificadorN = (ast->bIDENTIFICADORNode("a"));
+//	$$.miUnion.nodeT = (ast->bFUNCIONNode(identificadorN, $3, $5));
 	
 }
 ;

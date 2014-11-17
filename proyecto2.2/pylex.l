@@ -11,6 +11,7 @@
 #include <string>
 #include <stack>
 #include "pypar.hpp"
+#include "builder.cpp"
 using namespace std;
 %}
 
@@ -57,7 +58,7 @@ NEWLINE [\n]
 {STRING} { 
     /*Identifica cadenas bien formadas*/
     lei = true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return STRING;
     
 }
@@ -73,7 +74,7 @@ NEWLINE [\n]
 {ENTERO} {
     /*Identifica números*/
     lei =true;
-    yylval.numi = atoi(yytext);
+    yylval.miUnion.numi = atoi(yytext);
     return ENTERO;
     
 }
@@ -81,7 +82,7 @@ NEWLINE [\n]
 {FLOTANTE} {
     /*Identifica números*/
     lei =true;
-    yylval.numf = atof(yytext);
+    yylval.miUnion.numf = atof(yytext);
     return FLOTANTE;
     
 }
@@ -89,173 +90,173 @@ NEWLINE [\n]
 
 print { 
     lei =true;
-    yylval.cad = "PRINT";
+    yylval.miUnion.cad = "PRINT";
     return PRINT;
  }
 False { 
     lei =true;
-    yylval.cad = "FALSE";
+    yylval.miUnion.cad = "FALSE";
     return FALSE;
 
  }
 class { 
     lei =true;
-   yylval.cad = "CLASS";
+   yylval.miUnion.cad = "CLASS";
     return CLASS;
  }
 finally { 
     lei =true;
-    yylval.cad = "FINALLY";
+    yylval.miUnion.cad = "FINALLY";
     return FINALLY;
 }
 is {  
     lei =true;
-    yylval.cad = "IS";
+    yylval.miUnion.cad = "IS";
     return IS;
 }
 return { 
     lei =true;
-    yylval.cad = "RETURN";
+    yylval.miUnion.cad = "RETURN";
     return RETURN;
 }
 None { 
     lei =true;
-    yylval.cad = "NONE";
+    yylval.miUnion.cad = "NONE";
     return NONE;
 }
 continue { 
     lei =true;
-    yylval.cad = "CONTINUE";
+    yylval.miUnion.cad = "CONTINUE";
     return CONTINUE;
 }
 for { 
     lei =true;
-    yylval.cad = "FOR";
+    yylval.miUnion.cad = "FOR";
     return FOR;
 }
 lambda { 
     lei =true;
-    yylval.cad = "LAMBDA";
+    yylval.miUnion.cad = "LAMBDA";
     return LAMBDA;
 }
 try { 
     lei =true;
-    yylval.cad = "TRY";
+    yylval.miUnion.cad = "TRY";
     return TRY;
 }
 True { 
     lei =true;
-    yylval.cad = "TRUE";
+    yylval.miUnion.cad = "TRUE";
     return TRUE;
 }
 def { 
     lei =true;
-    yylval.cad = "DEF";
+    yylval.miUnion.cad = "DEF";
     return DEF;
 }
 from { 
     lei =true;
-    yylval.cad = "FROM";
+    yylval.miUnion.cad = "FROM";
     return FROM;
 }
 nonlocal { 
     lei =true;
-    yylval.cad = "NONLOCAL";
+    yylval.miUnion.cad = "NONLOCAL";
     return NONLOCAL;
 }
 while { 
     lei =true;
-    yylval.cad = "WHILE";
+    yylval.miUnion.cad = "WHILE";
     return WHILE;
 }
 and { 
     lei =true;
-    yylval.cad = "AND";
+    yylval.miUnion.cad = "AND";
     return AND;
 }
 del { 
     lei =true;
-    yylval.cad = "DEL";
+    yylval.miUnion.cad = "DEL";
     return DEL;
 }
 global { 
     lei =true;
-    yylval.cad = "GLOBAL";
+    yylval.miUnion.cad = "GLOBAL";
     return GLOBAL;
 }
 not { 
     lei =true;
-    yylval.cad = "NOT";
+    yylval.miUnion.cad = "NOT";
     return NOT;
 }
 with { 
     lei =true;
-    yylval.cad = "WITH";
+    yylval.miUnion.cad = "WITH";
     return WITH;
 }
 as { 
     lei =true;
-    yylval.cad = "AS";
+    yylval.miUnion.cad = "AS";
     return AS;
 }
 elif { 
     lei =true;
-    yylval.cad = "ELIF";
+    yylval.miUnion.cad = "ELIF";
     return ELIF;
 }
 if { 
     lei =true;
-    yylval.cad = "IF";
+    yylval.miUnion.cad = "IF";
     return IF;
 }
 or { 
     lei =true;
-    yylval.cad = "OR";
+    yylval.miUnion.cad = "OR";
     return OR;
 }
 yield { 
     lei =true;
-    yylval.cad = "YIELD";
+    yylval.miUnion.cad = "YIELD";
     return YIELD;
 }
 assert { 
     lei =true;
-    yylval.cad = "ASSERT";
+    yylval.miUnion.cad = "ASSERT";
     return ASSERT;
 }
 else { 
     lei =true;
-    yylval.cad = "ELSE";
+    yylval.miUnion.cad = "ELSE";
     return ELSE;
 }
 import { 
     lei =true;
-    yylval.cad = "IMPORT";
+    yylval.miUnion.cad = "IMPORT";
     return IMPORT;
 }
 pass { 
     lei =true;
-    yylval.cad = "PASS";
+    yylval.miUnion.cad = "PASS";
     return PASS;
 }
 break { 
     lei =true;
-    yylval.cad = "BREAK";
+    yylval.miUnion.cad = "BREAK";
     return BREAK;
 }
 except { 
     lei =true;
-    yylval.cad = "EXCEPT";
+    yylval.miUnion.cad = "EXCEPT";
     return EXCEPT;
 }
 in { 
     lei =true;
-    yylval.cad = "IN";
+    yylval.miUnion.cad = "IN";
     return IN;
 }
 raise { 
     lei =true;
-    yylval.cad = "RAISE";
+    yylval.miUnion.cad = "RAISE";
     return RAISE;
 }
     
@@ -282,7 +283,7 @@ raise {
             yyterminate();
         }
 		if(num_lineas!=1 || lei){
-            yylval.car = '\n';
+            yylval.miUnion.car = '\n';
 			return NEWLINE;
         }
         
@@ -293,7 +294,7 @@ raise {
 
 [ \t]+ {
     if(lei){
-        yylval.cad = yytext;
+        yylval.miUnion.cad = yytext;
         //return ESPTAB;
     }else{
         printf("\n[Error: La indentación inicial no es cero]\n");
@@ -303,264 +304,264 @@ raise {
 
 {IDENTIFIER} {
     lei = true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return IDENTIFICADOR;
     
 }
 
 ">>=" { 
   lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DMAYORIGUAL;
     }
 "<<=" { 
   lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DMENORIGUAL;
     }
 "**=" {  
   lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DASTIGUAL;
     }
 "//=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DDIAIGUAL;
     }
 
 "**" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DASTERISCO;
 }
 
 "//" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DDIAG;
 }
 
 "<<" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DMENOR;
 }
 ">>" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DMAYOR;
 }
 "<=" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MEIGUAL;
 }
 ">=" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MAIGUAL;
 }
 "==" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DIGUAL;
 }
 "!=" {  
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return NIGUAL;
 }
 "<>" {  
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MENORMAYOR;
 }
 
 
 "->" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MENOSMAYOR;
     }
 "+=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MASIGUAL;
     }
 "-=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MENOSIGUAL;
     }
 "*=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return ASTIGUAL;
     }
 "/=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DIAIGUAL;
     }
 
 "%=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return PORIGUAL;
     }
 "&=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return AMPIGUAL;
     } 
 "|=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return PIPEIGUAL;
     }
 "^=" { 
   lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return CIRCIGUAL;
     }
 
 "+" {
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MAS;
 
 }
 "-" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MENOS;
 }
 "*" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return ASTERISCO;
 }
 "%" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return PORCEN;
 }
 "/" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DIAG;
 }
 
 "&" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return AMPERSON;
 }
 "|" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return PIPE;
 }
 "^" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return CIRCUNFLEJO;
 }
 "~" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return ENETILDE;
 }
 "<" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MENOR;
 }
 ">" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return MAYOR;
 }
 "'" { 
  lei =true; 
- yylval.cad=yytext; 
+ yylval.miUnion.cad=yytext; 
  return CSIMPLE; 
  } 
  "\"" { 
  lei =true; 
- yylval.cad=yytext; 
+ yylval.miUnion.cad=yytext; 
  return IDIAG; 
  } 
  "#" { 
  lei =true; 
- yylval.cad=yytext; 
+ yylval.miUnion.cad=yytext; 
  return GATO; 
  } 
  "\\" {
     lei = true;
-    yylval.cad = "\\";
+    yylval.miUnion.cad = "\\";
     return DIDIAG;    
 }
 
 "(" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return APAREN;
     }
 ")" { 
     lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return CPAREN;
     }
 "[" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return ACORCHETE;
     }
 "]" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return CCORCHETE;
 }
 "{" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return ALLAVE;
     }
 "}" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return CLLAVE;
 }
 "," { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return COMA;
     }
 ":" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return DPUNTO;
     }
 "." { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return PUNTO;
     }
 ";" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return PCOMA;
     }
 "@" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return AT;
     }
 "=" { 
  lei =true;
-    yylval.cad = yytext;
+    yylval.miUnion.cad = yytext;
     return IGUAL;
     }
 

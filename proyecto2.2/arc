@@ -1,10 +1,8 @@
 flex pylex.l
 bison --report=state -dv pypar.y -o pypar.cpp
 pypar.y: conflicts: 3 shift/reduce
-g++ -std=c++11 pylex.cpp pypar.cpp composite.cpp builder.cpp  tabla_de_simbolos.cpp  -o proyecto
-In file included from pylex.l:13:0:
-pypar.y:32:7: error: ‘Node’ does not name a type
-In file included from pypar.y:13:0:
+g++ pypar.cpp pylex.cpp builder.cpp composite.cpp  tabla_de_simbolos.cpp  -o proyecto
+In file included from pypar.y:11:0:
 builder.cpp: In member function ‘Node* MASTBuilder::bIDENTIFICADORNode(std::string)’:
 builder.cpp:19:14: error: expected type-specifier before ‘IdentificadorNode’
 builder.cpp:19:14: error: cannot convert ‘int*’ to ‘Node*’ in return
@@ -174,10 +172,178 @@ builder.cpp:423:14: error: expected type-specifier before ‘DentacionNode’
 builder.cpp:423:14: error: cannot convert ‘int*’ to ‘Node*’ in return
 builder.cpp:423:14: error: expected ‘;’ before ‘DentacionNode’
 builder.cpp:423:14: error: ‘DentacionNode’ was not declared in this scope
-pypar.y: In function ‘int main(int, const char**)’:
-pypar.y:422:38: error: declaration of C function ‘int main(int, const char**)’ conflicts with
-In file included from pypar.y:14:0:
-tabla_de_simbolos.cpp:91:5: error: previous declaration ‘int main()’ here
+In file included from pylex.l:13:0:
+pypar.y:31:6: error: ‘Node’ does not name a type
+In file included from pylex.l:14:0:
+builder.cpp: In member function ‘Node* MASTBuilder::bIDENTIFICADORNode(std::string)’:
+builder.cpp:19:14: error: expected type-specifier before ‘IdentificadorNode’
+builder.cpp:19:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:19:14: error: expected ‘;’ before ‘IdentificadorNode’
+builder.cpp:19:33: error: ‘IdentificadorNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bFALSENode()’:
+builder.cpp:31:14: error: expected type-specifier before ‘FalseNode’
+builder.cpp:31:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:31:14: error: expected ‘;’ before ‘FalseNode’
+builder.cpp:31:14: error: ‘FalseNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bTRUENode()’:
+builder.cpp:63:14: error: expected type-specifier before ‘TrueNode’
+builder.cpp:63:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:63:14: error: expected ‘;’ before ‘TrueNode’
+builder.cpp:63:14: error: ‘TrueNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bELIFNode(NodeList*)’:
+builder.cpp:108:18: error: expected type-specifier before ‘ElifNode’
+builder.cpp:108:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:108:18: error: expected ‘,’ or ‘;’ before ‘ElifNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bNIGNode(Node*, Node*)’:
+builder.cpp:149:18: error: expected type-specifier before ‘NIgNode’
+builder.cpp:149:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:149:18: error: expected ‘,’ or ‘;’ before ‘NIgNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDIGNode(Node*, Node*)’:
+builder.cpp:156:18: error: expected type-specifier before ‘DIgNode’
+builder.cpp:156:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:156:18: error: expected ‘,’ or ‘;’ before ‘DIgNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bENETILDENode(Node*)’:
+builder.cpp:191:14: error: expected type-specifier before ‘EnetildeNode’
+builder.cpp:191:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:191:14: error: expected ‘;’ before ‘EnetildeNode’
+builder.cpp:191:28: error: ‘EnetildeNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bCIRCUNFLEJONode(Node*)’:
+builder.cpp:195:14: error: expected type-specifier before ‘CircunflejoNode’
+builder.cpp:195:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:195:14: error: expected ‘;’ before ‘CircunflejoNode’
+builder.cpp:195:31: error: ‘CircunflejoNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bPIPENode(Node*, Node*)’:
+builder.cpp:199:17: error: expected type-specifier before ‘PipeNode’
+builder.cpp:199:17: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:199:17: error: expected ‘,’ or ‘;’ before ‘PipeNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bAMPERSONNode(Node*, Node*)’:
+builder.cpp:206:17: error: expected type-specifier before ‘AmpersonNode’
+builder.cpp:206:17: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:206:17: error: expected ‘,’ or ‘;’ before ‘AmpersonNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDMAYORNode(Node*, Node*)’:
+builder.cpp:213:17: error: expected type-specifier before ‘DMayorNode’
+builder.cpp:213:17: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:213:17: error: expected ‘,’ or ‘;’ before ‘DMayorNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDMENORNode(Node*, Node*)’:
+builder.cpp:220:17: error: expected type-specifier before ‘DMenorNode’
+builder.cpp:220:17: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:220:17: error: expected ‘,’ or ‘;’ before ‘DMenorNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDDIAGNode(Node*, Node*)’:
+builder.cpp:234:17: error: expected type-specifier before ‘DDiagNode’
+builder.cpp:234:17: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:234:17: error: expected ‘,’ or ‘;’ before ‘DDiagNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDASTERISTICOSNode(Node*, Node*)’:
+builder.cpp:248:18: error: expected type-specifier before ‘DAsteriscosNode’
+builder.cpp:248:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:248:18: error: expected ‘,’ or ‘;’ before ‘DAsteriscosNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bAPARENNode()’:
+builder.cpp:276:14: error: expected type-specifier before ‘AParenNode’
+builder.cpp:276:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:276:14: error: expected ‘;’ before ‘AParenNode’
+builder.cpp:276:14: error: ‘AParenNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bCPARENNode()’:
+builder.cpp:280:14: error: expected type-specifier before ‘CParenNode’
+builder.cpp:280:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:280:14: error: expected ‘;’ before ‘CParenNode’
+builder.cpp:280:14: error: ‘CParenNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bACORCHETENode()’:
+builder.cpp:284:14: error: expected type-specifier before ‘ACorcheteNode’
+builder.cpp:284:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:284:14: error: expected ‘;’ before ‘ACorcheteNode’
+builder.cpp:284:14: error: ‘ACorcheteNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bCCORCHETENode()’:
+builder.cpp:288:14: error: expected type-specifier before ‘CCorcheteNode’
+builder.cpp:288:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:288:14: error: expected ‘;’ before ‘CCorcheteNode’
+builder.cpp:288:14: error: ‘CCorcheteNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bALLAVENode()’:
+builder.cpp:292:14: error: expected type-specifier before ‘AllaveNode’
+builder.cpp:292:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:292:14: error: expected ‘;’ before ‘AllaveNode’
+builder.cpp:292:14: error: ‘AllaveNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bCLLAVENode()’:
+builder.cpp:296:14: error: expected type-specifier before ‘CllaveNode’
+builder.cpp:296:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:296:14: error: expected ‘;’ before ‘CllaveNode’
+builder.cpp:296:14: error: ‘CllaveNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bCOMANode()’:
+builder.cpp:300:14: error: expected type-specifier before ‘ComaNode’
+builder.cpp:300:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:300:14: error: expected ‘;’ before ‘ComaNode’
+builder.cpp:300:14: error: ‘ComaNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bDPUNTONode()’:
+builder.cpp:304:14: error: expected type-specifier before ‘DPuntoNode’
+builder.cpp:304:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:304:14: error: expected ‘;’ before ‘DPuntoNode’
+builder.cpp:304:14: error: ‘DPuntoNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bPUNTONode()’:
+builder.cpp:308:14: error: expected type-specifier before ‘PuntoNode’
+builder.cpp:308:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:308:14: error: expected ‘;’ before ‘PuntoNode’
+builder.cpp:308:14: error: ‘PuntoNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bPCOMANode()’:
+builder.cpp:312:14: error: expected type-specifier before ‘PComaNode’
+builder.cpp:312:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:312:14: error: expected ‘;’ before ‘PComaNode’
+builder.cpp:312:14: error: ‘PComaNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bMASIGUALNode(Node*, Node*)’:
+builder.cpp:323:18: error: expected type-specifier before ‘MasIgualNode’
+builder.cpp:323:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:323:18: error: expected ‘,’ or ‘;’ before ‘MasIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bMENOSIGUALNode(Node*, Node*)’:
+builder.cpp:330:18: error: expected type-specifier before ‘MenosIgualNode’
+builder.cpp:330:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:330:18: error: expected ‘,’ or ‘;’ before ‘MenosIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bASIGUALNode(Node*, Node*)’:
+builder.cpp:337:18: error: expected type-specifier before ‘AsIgualNode’
+builder.cpp:337:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:337:18: error: expected ‘,’ or ‘;’ before ‘AsIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDIAIGUALNode(Node*, Node*)’:
+builder.cpp:344:18: error: expected type-specifier before ‘DiaIgualNode’
+builder.cpp:344:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:344:18: error: expected ‘,’ or ‘;’ before ‘DiaIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDDIAIGUALNode(Node*, Node*)’:
+builder.cpp:351:18: error: expected type-specifier before ‘DDiaIgualNode’
+builder.cpp:351:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:351:18: error: expected ‘,’ or ‘;’ before ‘DDiaIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bPORIGUALNode(Node*, Node*)’:
+builder.cpp:358:18: error: expected type-specifier before ‘PorIgualNode’
+builder.cpp:358:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:358:18: error: expected ‘,’ or ‘;’ before ‘PorIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bAMPIGUALNode(Node*, Node*)’:
+builder.cpp:365:18: error: expected type-specifier before ‘AmpIgualNode’
+builder.cpp:365:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:365:18: error: expected ‘,’ or ‘;’ before ‘AmpIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bPIPEIGUALNode(Node*, Node*)’:
+builder.cpp:372:18: error: expected type-specifier before ‘PipeIgualNode’
+builder.cpp:372:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:372:18: error: expected ‘,’ or ‘;’ before ‘PipeIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bCIRCIGUALNode(Node*, Node*)’:
+builder.cpp:379:18: error: expected type-specifier before ‘CircIgualNode’
+builder.cpp:379:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:379:18: error: expected ‘,’ or ‘;’ before ‘CircIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDMAYORIGUALNode(Node*, Node*)’:
+builder.cpp:386:18: error: expected type-specifier before ‘DMayorIgualNode’
+builder.cpp:386:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:386:18: error: expected ‘,’ or ‘;’ before ‘DMayorIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDMENORIGUALNode(Node*, Node*)’:
+builder.cpp:393:18: error: expected type-specifier before ‘DMenorIgualNode’
+builder.cpp:393:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:393:18: error: expected ‘,’ or ‘;’ before ‘DMenorIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bDASTIGUALNode(Node*, Node*)’:
+builder.cpp:400:18: error: expected type-specifier before ‘DAstIgualNode’
+builder.cpp:400:18: error: cannot convert ‘int*’ to ‘INode*’ in initialization
+builder.cpp:400:18: error: expected ‘,’ or ‘;’ before ‘DAstIgualNode’
+builder.cpp: In member function ‘Node* MASTBuilder::bNEWLINENode()’:
+builder.cpp:407:14: error: expected type-specifier before ‘NewLineNode’
+builder.cpp:407:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:407:14: error: expected ‘;’ before ‘NewLineNode’
+builder.cpp:407:14: error: ‘NewLineNode’ was not declared in this scope
+builder.cpp: In member function ‘Node* MASTBuilder::bDENTACIONNode()’:
+builder.cpp:423:14: error: expected type-specifier before ‘DentacionNode’
+builder.cpp:423:14: error: cannot convert ‘int*’ to ‘Node*’ in return
+builder.cpp:423:14: error: expected ‘;’ before ‘DentacionNode’
+builder.cpp:423:14: error: ‘DentacionNode’ was not declared in this scope
 builder.cpp: In member function ‘Node* MASTBuilder::bIDENTIFICADORNode(std::string)’:
 builder.cpp:19:14: error: expected type-specifier before ‘IdentificadorNode’
 builder.cpp:19:14: error: cannot convert ‘int*’ to ‘Node*’ in return

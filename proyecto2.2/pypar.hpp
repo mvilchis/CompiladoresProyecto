@@ -30,6 +30,27 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* "%code requires" blocks.  */
+
+/* Line 2068 of yacc.c  */
+#line 22 "pypar.y"
+
+  #define YYSTYPE struct envolv
+  struct envolv{
+    enum {INTEGERT, FLOATT, STRTNODET} kind;
+	union{
+      int numi;
+     float numf;
+     const char* cad;
+     char car;
+     Node* nodeT;
+} miUnion;
+};
+
+
+
+/* Line 2068 of yacc.c  */
+#line 54 "pypar.hpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -138,24 +159,7 @@
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-{
 
-/* Line 2068 of yacc.c  */
-#line 27 "pypar.y"
-
-      int numi;
-     float numf;
-     const char* cad;
-     char car;
-      Node *nodet;
-    
-
-
-/* Line 2068 of yacc.c  */
-#line 157 "pypar.hpp"
-} YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
