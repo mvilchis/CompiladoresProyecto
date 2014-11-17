@@ -436,40 +436,12 @@ public:
 		return new BoolNode(v);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+//Funcion	
 	Node* bFUNCIONNode(NodeList* l){
 		INode* n = new FuncionNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
 			n->addSChild(it->next());
 		return n;
-	}
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	} 
 };

@@ -1,13 +1,12 @@
-all: compila run
 
-compila:
-	g++ composite.cpp  -o composite -c
-	g++ builder.cpp  -o builder -c
-	g++ visitor.cpp -o visitor
-run: 	
-	./visitor
+all: interprete run
+
+interprete:
+	flex pylex.l
+	bison --report=state -dv pypar.y -o pypar.cpp
+	g++ pylex.cpp pypar.cpp -o proyecto
 clean:
-	rm builder
-	rm visitor
-	rm composite
-	
+	rm *tab*
+	rm lex.yy.c
+run: 	
+	./proyecto prueba_de_fuego.py
