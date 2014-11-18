@@ -5,19 +5,21 @@ Proyecto 02
 Sept 2014
 */
 %{
-#include <stdio.h>
-#include <string>
 #include <iostream>
+#include "stdio.h"
 #include "builder.cpp"
+#include "visitor.h"
 #define YYDEBUG 1
 extern MASTBuilder *ast;
+
 extern FILE *yyin;
 extern char *yytext;
 extern void inicializar();
 int yylex();
-int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
+int yyerror(const char *s) { printf("Error: %s\n", s); return 1;}
 %}
 %code requires{
+#include "visitor.h"
 #define YYSTYPE struct envolv
 struct envolv{
 enum {INTEGERT, FLOATT, STRTNODET} kind;
@@ -26,7 +28,7 @@ int numi;
 float numf;
 const char* cad;
 char car;
-Node* nodeT;
+// Node* nodeT;
 } miUnion;
 };
 }
@@ -42,7 +44,7 @@ Node* nodeT;
 %token FIN
 %%
 /*Símbolo inicial*/
-GOAL: file_input {printf("Éxito\n");}
+GOAL: file_input {printf("Exito\n");}
 ;
 file_input: file_input NEWLINE | stmt file_input|
 ;

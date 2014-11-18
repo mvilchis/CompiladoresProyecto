@@ -33,8 +33,9 @@
 /* "%code requires" blocks.  */
 
 /* Line 2068 of yacc.c  */
-#line 20 "pypar.y"
+#line 21 "pypar.y"
 
+#include "visitor.h"
 #define YYSTYPE struct envolv
 struct envolv{
 enum {INTEGERT, FLOATT, STRTNODET} kind;
@@ -43,14 +44,14 @@ int numi;
 float numf;
 const char* cad;
 char car;
-Node* nodeT;
+// Node* nodeT;
 } miUnion;
 };
 
 
 
 /* Line 2068 of yacc.c  */
-#line 54 "pypar.hpp"
+#line 55 "pypar.hpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE

@@ -89,7 +89,6 @@ class MenorMayorNode;
 class NewLineNode;
 class DentacionNode;
 class PrintVisitor;
-class MASTBuilder;
 class NodeVisitor{
 protected:
 	NodeVisitor(){}
@@ -241,4 +240,4 @@ public:
 	virtual Node * bNEWLINENode () = 0;
 	virtual Node * bDENTACIONNode () = 0;
 };
-
+class MASTBuilder;
