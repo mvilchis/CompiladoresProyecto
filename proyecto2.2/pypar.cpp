@@ -655,20 +655,20 @@ static const yytype_uint16 yyrline[] =
      354,   357,   359,   361,   364,   366,   368,   370,   373,   375,
      378,   381,   384,   387,   389,   392,   394,   396,   400,   403,
      405,   407,   410,   412,   414,   416,   419,   422,   424,   426,
-     428,   430,   432,   434,   436,   438,   440,   442,   444,   446,
-     449,   452,   454,   456,   459,   461,   463,   466,   468,   470,
-     473,   476,   478,   480,   483,   485,   487,   489,   492,   495,
-     497,   499,   501,   503,   505,   508,   510,   513,   515,   517,
-     520,   523,   525,   527,   529,   531,   533,   535,   537,   539,
-     541,   543,   545,   547,   549,   551,   553,   555,   558,   561,
-     564,   567,   570,   573,   576,   579,   583,   585,   588,   591,
-     593,   596,   598,   600,   603,   605,   608,   610,   612,   614,
-     616,   619,   622,   624,   626,   628,   630,   633,   636,   639,
-     641,   643,   646,   648,   650,   652,   655,   658,   660,   663,
-     665,   667,   670,   672,   675,   677,   679,   682,   684,   686,
-     688,   690,   693,   695,   697,   699,   702,   704,   707,   709,
-     711,   714,   717,   720,   723,   726,   728,   731,   734,   737,
-     740,   743
+     427,   428,   429,   430,   431,   432,   433,   434,   435,   436,
+     438,   441,   443,   445,   448,   450,   452,   455,   457,   459,
+     462,   465,   467,   469,   472,   474,   476,   478,   481,   484,
+     486,   488,   490,   492,   494,   497,   499,   502,   504,   506,
+     509,   512,   514,   516,   518,   520,   522,   524,   526,   528,
+     530,   532,   534,   536,   538,   540,   542,   544,   547,   550,
+     553,   556,   559,   562,   565,   568,   572,   574,   577,   580,
+     582,   585,   587,   589,   592,   594,   597,   599,   601,   603,
+     605,   608,   611,   613,   615,   617,   619,   622,   625,   628,
+     630,   632,   635,   637,   639,   641,   644,   647,   649,   652,
+     654,   656,   659,   661,   664,   666,   668,   671,   673,   675,
+     677,   679,   682,   684,   686,   688,   691,   693,   696,   698,
+     700,   703,   706,   709,   712,   715,   717,   720,   723,   726,
+     729,   732
 };
 #endif
 
@@ -2477,7 +2477,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 246 "pypar.y"
-    {(yyval.nodeT)=ast->bDELNode((yyvsp[(1) - (2)].cad));}
+    {}
     break;
 
   case 75:
@@ -2938,924 +2938,924 @@ yyreduce:
   case 140:
 
 /* Line 1806 of yacc.c  */
-#line 428 "pypar.y"
+#line 427 "pypar.y"
     {}
     break;
 
   case 141:
 
 /* Line 1806 of yacc.c  */
-#line 430 "pypar.y"
+#line 428 "pypar.y"
     {}
     break;
 
   case 142:
 
 /* Line 1806 of yacc.c  */
-#line 432 "pypar.y"
+#line 429 "pypar.y"
     {}
     break;
 
   case 143:
 
 /* Line 1806 of yacc.c  */
-#line 434 "pypar.y"
+#line 430 "pypar.y"
     {}
     break;
 
   case 144:
 
 /* Line 1806 of yacc.c  */
-#line 436 "pypar.y"
+#line 431 "pypar.y"
     {}
     break;
 
   case 145:
 
 /* Line 1806 of yacc.c  */
-#line 438 "pypar.y"
+#line 432 "pypar.y"
     {}
     break;
 
   case 146:
 
 /* Line 1806 of yacc.c  */
-#line 440 "pypar.y"
+#line 433 "pypar.y"
     {}
     break;
 
   case 147:
 
 /* Line 1806 of yacc.c  */
-#line 442 "pypar.y"
+#line 434 "pypar.y"
     {}
     break;
 
   case 148:
 
 /* Line 1806 of yacc.c  */
-#line 444 "pypar.y"
+#line 435 "pypar.y"
     {}
     break;
 
   case 149:
 
 /* Line 1806 of yacc.c  */
-#line 446 "pypar.y"
+#line 436 "pypar.y"
     {}
     break;
 
   case 150:
 
 /* Line 1806 of yacc.c  */
-#line 449 "pypar.y"
+#line 438 "pypar.y"
     {}
     break;
 
   case 151:
 
 /* Line 1806 of yacc.c  */
-#line 452 "pypar.y"
+#line 441 "pypar.y"
     {}
     break;
 
   case 152:
 
 /* Line 1806 of yacc.c  */
-#line 454 "pypar.y"
+#line 443 "pypar.y"
     {}
     break;
 
   case 153:
 
 /* Line 1806 of yacc.c  */
-#line 456 "pypar.y"
+#line 445 "pypar.y"
     {}
     break;
 
   case 154:
 
 /* Line 1806 of yacc.c  */
-#line 459 "pypar.y"
+#line 448 "pypar.y"
     {}
     break;
 
   case 155:
 
 /* Line 1806 of yacc.c  */
-#line 461 "pypar.y"
+#line 450 "pypar.y"
     {}
     break;
 
   case 156:
 
 /* Line 1806 of yacc.c  */
-#line 463 "pypar.y"
+#line 452 "pypar.y"
     {}
     break;
 
   case 157:
 
 /* Line 1806 of yacc.c  */
-#line 466 "pypar.y"
+#line 455 "pypar.y"
     {}
     break;
 
   case 158:
 
 /* Line 1806 of yacc.c  */
-#line 468 "pypar.y"
+#line 457 "pypar.y"
     {}
     break;
 
   case 159:
 
 /* Line 1806 of yacc.c  */
-#line 470 "pypar.y"
+#line 459 "pypar.y"
     {}
     break;
 
   case 160:
 
 /* Line 1806 of yacc.c  */
-#line 473 "pypar.y"
+#line 462 "pypar.y"
     {}
     break;
 
   case 161:
 
 /* Line 1806 of yacc.c  */
-#line 476 "pypar.y"
+#line 465 "pypar.y"
     {}
     break;
 
   case 162:
 
 /* Line 1806 of yacc.c  */
-#line 478 "pypar.y"
+#line 467 "pypar.y"
     {}
     break;
 
   case 163:
 
 /* Line 1806 of yacc.c  */
-#line 480 "pypar.y"
+#line 469 "pypar.y"
     {}
     break;
 
   case 164:
 
 /* Line 1806 of yacc.c  */
-#line 483 "pypar.y"
+#line 472 "pypar.y"
     {}
     break;
 
   case 165:
 
 /* Line 1806 of yacc.c  */
-#line 485 "pypar.y"
+#line 474 "pypar.y"
     {}
     break;
 
   case 166:
 
 /* Line 1806 of yacc.c  */
-#line 487 "pypar.y"
+#line 476 "pypar.y"
     {}
     break;
 
   case 167:
 
 /* Line 1806 of yacc.c  */
-#line 489 "pypar.y"
+#line 478 "pypar.y"
     {}
     break;
 
   case 168:
 
 /* Line 1806 of yacc.c  */
-#line 492 "pypar.y"
+#line 481 "pypar.y"
     {}
     break;
 
   case 169:
 
 /* Line 1806 of yacc.c  */
-#line 495 "pypar.y"
+#line 484 "pypar.y"
     {}
     break;
 
   case 170:
 
 /* Line 1806 of yacc.c  */
-#line 497 "pypar.y"
+#line 486 "pypar.y"
     {}
     break;
 
   case 171:
 
 /* Line 1806 of yacc.c  */
-#line 499 "pypar.y"
+#line 488 "pypar.y"
     {}
     break;
 
   case 172:
 
 /* Line 1806 of yacc.c  */
-#line 501 "pypar.y"
+#line 490 "pypar.y"
     {}
     break;
 
   case 173:
 
 /* Line 1806 of yacc.c  */
-#line 503 "pypar.y"
+#line 492 "pypar.y"
     {}
     break;
 
   case 174:
 
 /* Line 1806 of yacc.c  */
-#line 505 "pypar.y"
+#line 494 "pypar.y"
     {}
     break;
 
   case 175:
 
 /* Line 1806 of yacc.c  */
-#line 508 "pypar.y"
+#line 497 "pypar.y"
     {}
     break;
 
   case 176:
 
 /* Line 1806 of yacc.c  */
-#line 510 "pypar.y"
+#line 499 "pypar.y"
     {}
     break;
 
   case 177:
 
 /* Line 1806 of yacc.c  */
-#line 513 "pypar.y"
+#line 502 "pypar.y"
     {}
     break;
 
   case 178:
 
 /* Line 1806 of yacc.c  */
-#line 515 "pypar.y"
+#line 504 "pypar.y"
     {}
     break;
 
   case 179:
 
 /* Line 1806 of yacc.c  */
-#line 517 "pypar.y"
+#line 506 "pypar.y"
     {}
     break;
 
   case 180:
 
 /* Line 1806 of yacc.c  */
-#line 520 "pypar.y"
+#line 509 "pypar.y"
     {}
     break;
 
   case 181:
 
 /* Line 1806 of yacc.c  */
-#line 523 "pypar.y"
+#line 512 "pypar.y"
     {}
     break;
 
   case 182:
 
 /* Line 1806 of yacc.c  */
-#line 525 "pypar.y"
+#line 514 "pypar.y"
     {}
     break;
 
   case 183:
 
 /* Line 1806 of yacc.c  */
-#line 527 "pypar.y"
+#line 516 "pypar.y"
     {}
     break;
 
   case 184:
 
 /* Line 1806 of yacc.c  */
-#line 529 "pypar.y"
+#line 518 "pypar.y"
     {}
     break;
 
   case 185:
 
 /* Line 1806 of yacc.c  */
-#line 531 "pypar.y"
+#line 520 "pypar.y"
     {}
     break;
 
   case 186:
 
 /* Line 1806 of yacc.c  */
-#line 533 "pypar.y"
+#line 522 "pypar.y"
     {}
     break;
 
   case 187:
 
 /* Line 1806 of yacc.c  */
-#line 535 "pypar.y"
+#line 524 "pypar.y"
     {}
     break;
 
   case 188:
 
 /* Line 1806 of yacc.c  */
-#line 537 "pypar.y"
+#line 526 "pypar.y"
     {}
     break;
 
   case 189:
 
 /* Line 1806 of yacc.c  */
-#line 539 "pypar.y"
+#line 528 "pypar.y"
     {}
     break;
 
   case 190:
 
 /* Line 1806 of yacc.c  */
-#line 541 "pypar.y"
+#line 530 "pypar.y"
     {}
     break;
 
   case 191:
 
 /* Line 1806 of yacc.c  */
-#line 543 "pypar.y"
+#line 532 "pypar.y"
     {}
     break;
 
   case 192:
 
 /* Line 1806 of yacc.c  */
-#line 545 "pypar.y"
+#line 534 "pypar.y"
     {}
     break;
 
   case 193:
 
 /* Line 1806 of yacc.c  */
-#line 547 "pypar.y"
+#line 536 "pypar.y"
     {}
     break;
 
   case 194:
 
 /* Line 1806 of yacc.c  */
-#line 549 "pypar.y"
+#line 538 "pypar.y"
     {}
     break;
 
   case 195:
 
 /* Line 1806 of yacc.c  */
-#line 551 "pypar.y"
+#line 540 "pypar.y"
     {}
     break;
 
   case 196:
 
 /* Line 1806 of yacc.c  */
-#line 553 "pypar.y"
+#line 542 "pypar.y"
     {}
     break;
 
   case 197:
 
 /* Line 1806 of yacc.c  */
-#line 555 "pypar.y"
+#line 544 "pypar.y"
     {}
     break;
 
   case 198:
 
 /* Line 1806 of yacc.c  */
-#line 558 "pypar.y"
+#line 547 "pypar.y"
     {}
     break;
 
   case 199:
 
 /* Line 1806 of yacc.c  */
-#line 561 "pypar.y"
+#line 550 "pypar.y"
     {}
     break;
 
   case 200:
 
 /* Line 1806 of yacc.c  */
-#line 564 "pypar.y"
+#line 553 "pypar.y"
     {}
     break;
 
   case 201:
 
 /* Line 1806 of yacc.c  */
-#line 567 "pypar.y"
+#line 556 "pypar.y"
     {}
     break;
 
   case 202:
 
 /* Line 1806 of yacc.c  */
-#line 570 "pypar.y"
+#line 559 "pypar.y"
     {}
     break;
 
   case 203:
 
 /* Line 1806 of yacc.c  */
-#line 573 "pypar.y"
+#line 562 "pypar.y"
     {}
     break;
 
   case 204:
 
 /* Line 1806 of yacc.c  */
-#line 576 "pypar.y"
+#line 565 "pypar.y"
     {}
     break;
 
   case 205:
 
 /* Line 1806 of yacc.c  */
-#line 579 "pypar.y"
+#line 568 "pypar.y"
     {}
     break;
 
   case 206:
 
 /* Line 1806 of yacc.c  */
-#line 583 "pypar.y"
+#line 572 "pypar.y"
     {}
     break;
 
   case 207:
 
 /* Line 1806 of yacc.c  */
-#line 585 "pypar.y"
+#line 574 "pypar.y"
     {}
     break;
 
   case 208:
 
 /* Line 1806 of yacc.c  */
-#line 588 "pypar.y"
+#line 577 "pypar.y"
     {}
     break;
 
   case 209:
 
 /* Line 1806 of yacc.c  */
-#line 591 "pypar.y"
+#line 580 "pypar.y"
     {}
     break;
 
   case 210:
 
 /* Line 1806 of yacc.c  */
-#line 593 "pypar.y"
+#line 582 "pypar.y"
     {}
     break;
 
   case 211:
 
 /* Line 1806 of yacc.c  */
-#line 596 "pypar.y"
+#line 585 "pypar.y"
     {}
     break;
 
   case 212:
 
 /* Line 1806 of yacc.c  */
-#line 598 "pypar.y"
+#line 587 "pypar.y"
     {}
     break;
 
   case 213:
 
 /* Line 1806 of yacc.c  */
-#line 600 "pypar.y"
+#line 589 "pypar.y"
     {}
     break;
 
   case 214:
 
 /* Line 1806 of yacc.c  */
-#line 603 "pypar.y"
+#line 592 "pypar.y"
     {}
     break;
 
   case 215:
 
 /* Line 1806 of yacc.c  */
-#line 605 "pypar.y"
+#line 594 "pypar.y"
     {}
     break;
 
   case 216:
 
 /* Line 1806 of yacc.c  */
-#line 608 "pypar.y"
+#line 597 "pypar.y"
     {}
     break;
 
   case 217:
 
 /* Line 1806 of yacc.c  */
-#line 610 "pypar.y"
+#line 599 "pypar.y"
     {}
     break;
 
   case 218:
 
 /* Line 1806 of yacc.c  */
-#line 612 "pypar.y"
+#line 601 "pypar.y"
     {}
     break;
 
   case 219:
 
 /* Line 1806 of yacc.c  */
-#line 614 "pypar.y"
+#line 603 "pypar.y"
     {}
     break;
 
   case 220:
 
 /* Line 1806 of yacc.c  */
-#line 616 "pypar.y"
+#line 605 "pypar.y"
     {}
     break;
 
   case 221:
 
 /* Line 1806 of yacc.c  */
-#line 619 "pypar.y"
+#line 608 "pypar.y"
     {}
     break;
 
   case 222:
 
 /* Line 1806 of yacc.c  */
-#line 622 "pypar.y"
+#line 611 "pypar.y"
     {}
     break;
 
   case 223:
 
 /* Line 1806 of yacc.c  */
-#line 624 "pypar.y"
+#line 613 "pypar.y"
     {}
     break;
 
   case 224:
 
 /* Line 1806 of yacc.c  */
-#line 626 "pypar.y"
+#line 615 "pypar.y"
     {}
     break;
 
   case 225:
 
 /* Line 1806 of yacc.c  */
-#line 628 "pypar.y"
+#line 617 "pypar.y"
     {}
     break;
 
   case 226:
 
 /* Line 1806 of yacc.c  */
-#line 630 "pypar.y"
+#line 619 "pypar.y"
     {}
     break;
 
   case 227:
 
 /* Line 1806 of yacc.c  */
-#line 633 "pypar.y"
+#line 622 "pypar.y"
     {}
     break;
 
   case 228:
 
 /* Line 1806 of yacc.c  */
-#line 636 "pypar.y"
+#line 625 "pypar.y"
     {}
     break;
 
   case 229:
 
 /* Line 1806 of yacc.c  */
-#line 639 "pypar.y"
+#line 628 "pypar.y"
     {}
     break;
 
   case 230:
 
 /* Line 1806 of yacc.c  */
-#line 641 "pypar.y"
+#line 630 "pypar.y"
     {}
     break;
 
   case 231:
 
 /* Line 1806 of yacc.c  */
-#line 643 "pypar.y"
+#line 632 "pypar.y"
     {}
     break;
 
   case 232:
 
 /* Line 1806 of yacc.c  */
-#line 646 "pypar.y"
+#line 635 "pypar.y"
     {}
     break;
 
   case 233:
 
 /* Line 1806 of yacc.c  */
-#line 648 "pypar.y"
+#line 637 "pypar.y"
     {}
     break;
 
   case 234:
 
 /* Line 1806 of yacc.c  */
-#line 650 "pypar.y"
+#line 639 "pypar.y"
     {}
     break;
 
   case 235:
 
 /* Line 1806 of yacc.c  */
-#line 652 "pypar.y"
+#line 641 "pypar.y"
     {}
     break;
 
   case 236:
 
 /* Line 1806 of yacc.c  */
-#line 655 "pypar.y"
+#line 644 "pypar.y"
     {}
     break;
 
   case 237:
 
 /* Line 1806 of yacc.c  */
-#line 658 "pypar.y"
+#line 647 "pypar.y"
     {}
     break;
 
   case 238:
 
 /* Line 1806 of yacc.c  */
-#line 660 "pypar.y"
+#line 649 "pypar.y"
     {}
     break;
 
   case 239:
 
 /* Line 1806 of yacc.c  */
-#line 663 "pypar.y"
+#line 652 "pypar.y"
     {}
     break;
 
   case 240:
 
 /* Line 1806 of yacc.c  */
-#line 665 "pypar.y"
+#line 654 "pypar.y"
     {}
     break;
 
   case 241:
 
 /* Line 1806 of yacc.c  */
-#line 667 "pypar.y"
+#line 656 "pypar.y"
     {}
     break;
 
   case 242:
 
 /* Line 1806 of yacc.c  */
-#line 670 "pypar.y"
+#line 659 "pypar.y"
     {}
     break;
 
   case 243:
 
 /* Line 1806 of yacc.c  */
-#line 672 "pypar.y"
+#line 661 "pypar.y"
     {}
     break;
 
   case 244:
 
 /* Line 1806 of yacc.c  */
-#line 675 "pypar.y"
+#line 664 "pypar.y"
     {}
     break;
 
   case 245:
 
 /* Line 1806 of yacc.c  */
-#line 677 "pypar.y"
+#line 666 "pypar.y"
     {}
     break;
 
   case 246:
 
 /* Line 1806 of yacc.c  */
-#line 679 "pypar.y"
+#line 668 "pypar.y"
     {}
     break;
 
   case 247:
 
 /* Line 1806 of yacc.c  */
-#line 682 "pypar.y"
+#line 671 "pypar.y"
     {}
     break;
 
   case 248:
 
 /* Line 1806 of yacc.c  */
-#line 684 "pypar.y"
+#line 673 "pypar.y"
     {}
     break;
 
   case 249:
 
 /* Line 1806 of yacc.c  */
-#line 686 "pypar.y"
+#line 675 "pypar.y"
     {}
     break;
 
   case 250:
 
 /* Line 1806 of yacc.c  */
-#line 688 "pypar.y"
+#line 677 "pypar.y"
     {}
     break;
 
   case 251:
 
 /* Line 1806 of yacc.c  */
-#line 690 "pypar.y"
+#line 679 "pypar.y"
     {}
     break;
 
   case 252:
 
 /* Line 1806 of yacc.c  */
-#line 693 "pypar.y"
+#line 682 "pypar.y"
     {}
     break;
 
   case 253:
 
 /* Line 1806 of yacc.c  */
-#line 695 "pypar.y"
+#line 684 "pypar.y"
     {}
     break;
 
   case 254:
 
 /* Line 1806 of yacc.c  */
-#line 697 "pypar.y"
+#line 686 "pypar.y"
     {}
     break;
 
   case 255:
 
 /* Line 1806 of yacc.c  */
-#line 699 "pypar.y"
+#line 688 "pypar.y"
     {}
     break;
 
   case 256:
 
 /* Line 1806 of yacc.c  */
-#line 702 "pypar.y"
+#line 691 "pypar.y"
     {}
     break;
 
   case 257:
 
 /* Line 1806 of yacc.c  */
-#line 704 "pypar.y"
+#line 693 "pypar.y"
     {}
     break;
 
   case 258:
 
 /* Line 1806 of yacc.c  */
-#line 707 "pypar.y"
+#line 696 "pypar.y"
     {}
     break;
 
   case 259:
 
 /* Line 1806 of yacc.c  */
-#line 709 "pypar.y"
+#line 698 "pypar.y"
     {}
     break;
 
   case 260:
 
 /* Line 1806 of yacc.c  */
-#line 711 "pypar.y"
+#line 700 "pypar.y"
     {}
     break;
 
   case 261:
 
 /* Line 1806 of yacc.c  */
-#line 714 "pypar.y"
+#line 703 "pypar.y"
     {}
     break;
 
   case 262:
 
 /* Line 1806 of yacc.c  */
-#line 717 "pypar.y"
+#line 706 "pypar.y"
     {}
     break;
 
   case 263:
 
 /* Line 1806 of yacc.c  */
-#line 720 "pypar.y"
+#line 709 "pypar.y"
     {}
     break;
 
   case 264:
 
 /* Line 1806 of yacc.c  */
-#line 723 "pypar.y"
+#line 712 "pypar.y"
     {}
     break;
 
   case 265:
 
 /* Line 1806 of yacc.c  */
-#line 726 "pypar.y"
+#line 715 "pypar.y"
     {}
     break;
 
   case 266:
 
 /* Line 1806 of yacc.c  */
-#line 728 "pypar.y"
+#line 717 "pypar.y"
     {}
     break;
 
   case 267:
 
 /* Line 1806 of yacc.c  */
-#line 731 "pypar.y"
+#line 720 "pypar.y"
     {}
     break;
 
   case 268:
 
 /* Line 1806 of yacc.c  */
-#line 734 "pypar.y"
+#line 723 "pypar.y"
     {}
     break;
 
   case 269:
 
 /* Line 1806 of yacc.c  */
-#line 737 "pypar.y"
+#line 726 "pypar.y"
     {}
     break;
 
   case 270:
 
 /* Line 1806 of yacc.c  */
-#line 740 "pypar.y"
+#line 729 "pypar.y"
     {}
     break;
 
   case 271:
 
 /* Line 1806 of yacc.c  */
-#line 743 "pypar.y"
+#line 732 "pypar.y"
     {}
     break;
 
@@ -4093,7 +4093,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 745 "pypar.y"
+#line 734 "pypar.y"
 
 int main(int argc, char const *argv[]) {
 ++argv;

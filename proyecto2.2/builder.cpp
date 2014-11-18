@@ -19,16 +19,11 @@ public:
 		return new IdentificadorNode(v);
 	}
 //PRINT 
-	Node* bPRINTNode(NodeLit* l){
+	Node* bPRINTNode(NodeList* l){
 		INode* n = new PrintNode;
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
 			n->addSChild(it->next());
-		return n;
-	}
-	Node *bPRINTNode(Node *c) {
-		Node *n= new PrintNode;
-		n->setFChild(c);
 		return n;
 	}
 //FALSE 
@@ -49,11 +44,6 @@ public:
 		while(it->hasNext())
 			n->addSChild(it->next());
 		return n;
-	}
-	Node* bRETURNNode (Node *c) {
-		Node *tmp = new ReturnNode;
-		tmp->setFChild(c);
-		return tmp;
 	}
  
 //CONTINUE 
@@ -293,10 +283,6 @@ public:
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
-	}
-	Node* bMASNode(){
-		Node *tmp=new bMASNode;
-		return tmp;
 	}
 //APAREN
 	Node* bAPARENNode(){
