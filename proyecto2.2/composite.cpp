@@ -735,13 +735,13 @@ class NotInNode: public UnaNode{
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
 };
 //is
-class InNode: public UnaNode{
+class IsNode: public UnaNode{
     public: 
         IsNode():UnaNode(){}
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
 };
 //isnot
-class NotInNode: public UnaNode{
+class IsNotNode: public UnaNode{
     public: 
         IsNotNode():UnaNode(){}
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
