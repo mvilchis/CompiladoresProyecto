@@ -519,6 +519,9 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bMENORMAYORNode(){
+		return new MenorMayorNode;
+	}
 //NEWLINE
 	Node* bNEWLINENode(){
 		return new NewLineNode;
@@ -566,5 +569,13 @@ public:
 		while(it->hasNext())
 			n->addSChild(it->next());
 		return n;
-	} 
+	}
+
+	Node* bFUNCIONNode(Node* a, Node* b, Node* c){
+		INode* n = new FuncionNode;
+		n->addSChild(a);
+		n->addSChild(b);
+		n->addSChild(c);
+		return n;
+	}
 };
