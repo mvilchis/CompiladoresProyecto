@@ -249,9 +249,6 @@ public:
 	void visit(DentacionNode* n){
 		cout << "DEDENT ";
 	}
-	void visit(IsNode* n){
-		cout << "IS ";
-	}
 	void visit(IsNotNode* n){
 		cout << "ISNOT ";
 	}

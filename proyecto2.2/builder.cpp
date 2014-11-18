@@ -31,7 +31,7 @@ public:
 		return new FalseNode;
 	}
 //IS 
-	Node* bISNode(Node* n1, Node* n2){
+	/*Node* bISNode(Node* n1, Node* n2){
 		INode* n = new IsNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
@@ -39,7 +39,7 @@ public:
 	}
 	Node* bISNode(){
 		return new IsNode;
-	}
+	}*/
 //RETURN
 	Node* bRETURNNode(NodeList* l){
 		INode* n = new ReturnNode;

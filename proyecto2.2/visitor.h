@@ -170,7 +170,6 @@ public:
 	virtual void visit(MenorMayorNode*) = 0;
 	virtual void visit(NewLineNode*) = 0;
 	virtual void visit(DentacionNode*) = 0;
-	virtual void visit(IsNode* n) = 0;
 	virtual void visit(IsNotNode*) = 0;
 	virtual void visit(InNode*) = 0;
 	virtual void visit(NotInNode*) = 0;
@@ -247,7 +246,6 @@ public:
 	virtual Node * bMENORMAYORIgual () = 0;
 	virtual Node * bNEWLINENode () = 0;
 	virtual Node * bDENTACIONNode () = 0;
-	virtual Node * bISNode () = 0;
 	virtual Node * bISNOTNode () = 0;
 	virtual Node * bINNode () = 0;
 	virtual Node * bNOTINNode () = 0;

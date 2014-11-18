@@ -466,11 +466,11 @@ class WhileNode: public BinNode{
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
 };
  //is
-class IsNode: public BinNode{
+/*class IsNode: public BinNode{
     public: 
         IsNode():BinNode(){}
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
-};
+};*/
 //and
 class AndNode: public BinNode{
     public: 
