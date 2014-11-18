@@ -35,23 +35,12 @@
 /* Line 2068 of yacc.c  */
 #line 21 "pypar.y"
 
-#include "visitor.h"
-#define YYSTYPE struct envolv
-struct envolv{
-enum {INTEGERT, FLOATT, STRTNODET} kind;
-union{
-int numi;
-float numf;
-const char* cad;
-char car;
-// Node* nodeT;
-} miUnion;
-};
+#include "composite.cpp"
 
 
 
 /* Line 2068 of yacc.c  */
-#line 55 "pypar.hpp"
+#line 44 "pypar.hpp"
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -160,7 +149,24 @@ char car;
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef union YYSTYPE
+{
 
+/* Line 2068 of yacc.c  */
+#line 24 "pypar.y"
+
+int numi;
+float numf;
+const char* cad;
+char car;
+ Node* nodeT;
+
+
+
+/* Line 2068 of yacc.c  */
+#line 168 "pypar.hpp"
+} YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif

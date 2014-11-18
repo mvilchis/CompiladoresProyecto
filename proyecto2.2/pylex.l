@@ -50,7 +50,7 @@ yyless(yyleng-1);
 {STRING} {
 /*Identifica cadenas bien formadas*/
 lei = true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return STRING;
 }
 "\""[^"] {
@@ -61,183 +61,183 @@ yyterminate();
 {ENTERO} {
 /*Identifica números*/
 lei =true;
-yylval.miUnion.numi = atoi(yytext);
+yylval.numi = atoi(yytext);
 return ENTERO;
 }
 {FLOTANTE} {
 /*Identifica números*/
 lei =true;
-yylval.miUnion.numf = atof(yytext);
+yylval.numf = atof(yytext);
 return FLOTANTE;
 }
 print {
 lei =true;
-yylval.miUnion.cad = "PRINT";
+yylval.cad = "PRINT";
 return PRINT;
 }
 False {
 lei =true;
-yylval.miUnion.cad = "FALSE";
+yylval.cad = "FALSE";
 return FALSE;
 }
 class {
 lei =true;
-yylval.miUnion.cad = "CLASS";
+yylval.cad = "CLASS";
 return CLASS;
 }
 finally {
 lei =true;
-yylval.miUnion.cad = "FINALLY";
+yylval.cad = "FINALLY";
 return FINALLY;
 }
 is {
 lei =true;
-yylval.miUnion.cad = "IS";
+yylval.cad = "IS";
 return IS;
 }
 return {
 lei =true;
-yylval.miUnion.cad = "RETURN";
+yylval.cad = "RETURN";
 return RETURN;
 }
 None {
 lei =true;
-yylval.miUnion.cad = "NONE";
+yylval.cad = "NONE";
 return NONE;
 }
 continue {
 lei =true;
-yylval.miUnion.cad = "CONTINUE";
+yylval.cad = "CONTINUE";
 return CONTINUE;
 }
 for {
 lei =true;
-yylval.miUnion.cad = "FOR";
+yylval.cad = "FOR";
 return FOR;
 }
 lambda {
 lei =true;
-yylval.miUnion.cad = "LAMBDA";
+yylval.cad = "LAMBDA";
 return LAMBDA;
 }
 try {
 lei =true;
-yylval.miUnion.cad = "TRY";
+yylval.cad = "TRY";
 return TRY;
 }
 True {
 lei =true;
-yylval.miUnion.cad = "TRUE";
+yylval.cad = "TRUE";
 return TRUE;
 }
 def {
 lei =true;
-yylval.miUnion.cad = "DEF";
+yylval.cad = "DEF";
 return DEF;
 }
 from {
 lei =true;
-yylval.miUnion.cad = "FROM";
+yylval.cad = "FROM";
 return FROM;
 }
 nonlocal {
 lei =true;
-yylval.miUnion.cad = "NONLOCAL";
+yylval.cad = "NONLOCAL";
 return NONLOCAL;
 }
 while {
 lei =true;
-yylval.miUnion.cad = "WHILE";
+yylval.cad = "WHILE";
 return WHILE;
 }
 and {
 lei =true;
-yylval.miUnion.cad = "AND";
+yylval.cad = "AND";
 return AND;
 }
 del {
 lei =true;
-yylval.miUnion.cad = "DEL";
+yylval.cad = "DEL";
 return DEL;
 }
 global {
 lei =true;
-yylval.miUnion.cad = "GLOBAL";
+yylval.cad = "GLOBAL";
 return GLOBAL;
 }
 not {
 lei =true;
-yylval.miUnion.cad = "NOT";
+yylval.cad = "NOT";
 return NOT;
 }
 with {
 lei =true;
-yylval.miUnion.cad = "WITH";
+yylval.cad = "WITH";
 return WITH;
 }
 as {
 lei =true;
-yylval.miUnion.cad = "AS";
+yylval.cad = "AS";
 return AS;
 }
 elif {
 lei =true;
-yylval.miUnion.cad = "ELIF";
+yylval.cad = "ELIF";
 return ELIF;
 }
 if {
 lei =true;
-yylval.miUnion.cad = "IF";
+yylval.cad = "IF";
 return IF;
 }
 or {
 lei =true;
-yylval.miUnion.cad = "OR";
+yylval.cad = "OR";
 return OR;
 }
 yield {
 lei =true;
-yylval.miUnion.cad = "YIELD";
+yylval.cad = "YIELD";
 return YIELD;
 }
 assert {
 lei =true;
-yylval.miUnion.cad = "ASSERT";
+yylval.cad = "ASSERT";
 return ASSERT;
 }
 else {
 lei =true;
-yylval.miUnion.cad = "ELSE";
+yylval.cad = "ELSE";
 return ELSE;
 }
 import {
 lei =true;
-yylval.miUnion.cad = "IMPORT";
+yylval.cad = "IMPORT";
 return IMPORT;
 }
 pass {
 lei =true;
-yylval.miUnion.cad = "PASS";
+yylval.cad = "PASS";
 return PASS;
 }
 break {
 lei =true;
-yylval.miUnion.cad = "BREAK";
+yylval.cad = "BREAK";
 return BREAK;
 }
 except {
 lei =true;
-yylval.miUnion.cad = "EXCEPT";
+yylval.cad = "EXCEPT";
 return EXCEPT;
 }
 in {
 lei =true;
-yylval.miUnion.cad = "IN";
+yylval.cad = "IN";
 return IN;
 }
 raise {
 lei =true;
-yylval.miUnion.cad = "RAISE";
+yylval.cad = "RAISE";
 return RAISE;
 }
 {NEWLINE}[ \t]*{NEWLINE} {
@@ -259,13 +259,13 @@ printf("\n[Error de indentacion en la línea %d]\n", num_lineas);
 yyterminate();
 }
 if(num_lineas!=1 || lei){
-yylval.miUnion.car = '\n';
+yylval.car = '\n';
 return NEWLINE;
 }
 }
 [ \t]+ {
 if(lei){
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 //return ESPTAB;
 }else{
 printf("\n[Error: La indentación inicial no es cero]\n");
@@ -274,252 +274,252 @@ yyterminate();
 }
 {IDENTIFIER} {
 lei = true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return IDENTIFICADOR;
 }
 ">>=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DMAYORIGUAL;
 }
 "<<=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DMENORIGUAL;
 }
 "**=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DASTIGUAL;
 }
 "//=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DDIAIGUAL;
 }
 "**" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DASTERISCO;
 }
 "//" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DDIAG;
 }
 "<<" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DMENOR;
 }
 ">>" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DMAYOR;
 }
 "<=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MEIGUAL;
 }
 ">=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MAIGUAL;
 }
 "==" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DIGUAL;
 }
 "!=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return NIGUAL;
 }
 "<>" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MENORMAYOR;
 }
 "->" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MENOSMAYOR;
 }
 "+=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MASIGUAL;
 }
 "-=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MENOSIGUAL;
 }
 "*=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return ASTIGUAL;
 }
 "/=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DIAIGUAL;
 }
 "%=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return PORIGUAL;
 }
 "&=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return AMPIGUAL;
 }
 "|=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return PIPEIGUAL;
 }
 "^=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return CIRCIGUAL;
 }
 "+" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MAS;
 }
 "-" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MENOS;
 }
 "*" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return ASTERISCO;
 }
 "%" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return PORCEN;
 }
 "/" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DIAG;
 }
 "&" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return AMPERSON;
 }
 "|" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return PIPE;
 }
 "^" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return CIRCUNFLEJO;
 }
 "~" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return ENETILDE;
 }
 "<" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MENOR;
 }
 ">" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return MAYOR;
 }
 "'" {
 lei =true;
-yylval.miUnion.cad=yytext;
+yylval.cad=yytext;
 return CSIMPLE;
 }
 "\"" {
 lei =true;
-yylval.miUnion.cad=yytext;
+yylval.cad=yytext;
 return IDIAG;
 }
 "#" {
 lei =true;
-yylval.miUnion.cad=yytext;
+yylval.cad=yytext;
 return GATO;
 }
 "\\" {
 lei = true;
-yylval.miUnion.cad = "\\";
+yylval.cad = "\\";
 return DIDIAG;
 }
 "(" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return APAREN;
 }
 ")" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return CPAREN;
 }
 "[" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return ACORCHETE;
 }
 "]" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return CCORCHETE;
 }
 "{" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return ALLAVE;
 }
 "}" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return CLLAVE;
 }
 "," {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return COMA;
 }
 ":" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return DPUNTO;
 }
 "." {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return PUNTO;
 }
 ";" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return PCOMA;
 }
 "@" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return AT;
 }
 "=" {
 lei =true;
-yylval.miUnion.cad = yytext;
+yylval.cad = yytext;
 return IGUAL;
 }
 "$"|"?"|"`" {

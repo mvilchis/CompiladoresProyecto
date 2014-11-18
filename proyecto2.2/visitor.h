@@ -240,4 +240,3 @@ public:
 	virtual Node * bNEWLINENode () = 0;
 	virtual Node * bDENTACIONNode () = 0;
 };
-class MASTBuilder;
