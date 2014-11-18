@@ -37,6 +37,9 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bISNode(){
+		return new IsNode;
+	}
 //RETURN
 	Node* bRETURNNode(NodeList* l){
 		INode* n = new ReturnNode;
@@ -44,6 +47,14 @@ public:
 		while(it->hasNext())
 			n->addSChild(it->next());
 		return n;
+	}
+	Node* bRETURNNode(){
+		return new ReturnNode;
+	}
+	Node* bRETURNNode(Node* c){
+		INode* n = new ReturnNode;
+		n->setFChild(c);
+		return n;	
 	}
  
 //CONTINUE 
@@ -157,12 +168,18 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bNIGNode(){
+		return new NIgNode;
+	}
 //DIGUAL
 	Node* bDIGNode(Node* n1, Node* n2){
 		INode* n = new DIgNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+	Node* bDIGNode(){
+		return new DIgNode;
 	}
 //MAIGUAL
 	Node* bMAYIGNode(Node* n1, Node* n2){
@@ -171,6 +188,9 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bMAYIGNode(){
+		return new MayIgNode;
+	}
 //MEIGUAL
 	Node* bMENIGNode(Node* n1, Node* n2){
 		INode* n = new MenIgNode;
@@ -178,12 +198,18 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bMENIGNode(){
+		return new MenIgNode;
+	}
 //MAYOR
 	Node* bMAYORNode(Node* n1, Node* n2){
 		INode* n = new MayorNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+	Node* bMAYORNode(){
+		return new MayorNode;
 	}
 //MENOR
 	Node* bMENORNode(Node* n1, Node* n2){
@@ -193,7 +219,7 @@ public:
 		return n;
 	}
 	Node* bMENORNode() {
-	return new MenosNode;
+	return new MenorNode;
 	}
 //ENETILDE
 	Node* bENETILDENode(Node* c){
@@ -201,7 +227,7 @@ public:
 		n->setFChild(c);
 		return n;
 	}
-//CIRCUNFLEJO
+//CIRCUNFLEjo
 	Node* bCIRCUNFLEJONode(Node* c){
 		INode* n = new CircunflejoNode;
 		n->setFChild(c);
@@ -242,6 +268,9 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bMODNode(){
+		return new ModNode;
+	}
 //DDIAG
 	Node* bDDIAGNode(Node* n1, Node* n2){
 		INode* n= new DDiagNode;
@@ -249,12 +278,18 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bDDIAGNode(){
+		return new DDiagNode;
+	}
 //DIAG
 	Node* bDIVNode(Node* n1, Node* n2){
 		INode* n = new DivNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+	Node* bDIVNode(){
+		return new DivNode;
 	}
 //DASTERISCO
 	Node* bDASTERISTICOSNode(Node* n1, Node* n2){
@@ -270,6 +305,9 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bPORNode(){
+		return new PorNode;
+	}
 //MENOS
 	Node* bMENOSNode(Node* n1, Node* n2){
 		INode* n = new MenosNode;
@@ -277,12 +315,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bMENOSNode(){
+		return new MenosNode;
+	}
 //MAS
 	Node* bMASNode(Node* n1, Node* n2){
 		INode* n = new MasNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bMASNode(){
+		return new MasNode;
 	}
 //APAREN
 	Node* bAPARENNode(){
@@ -331,12 +377,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bIGUALNode(){
+		return new IgualNode;
+	}
 //MASIGUAL
 	Node* bMASIGUALNode(Node* n1, Node* n2){
 		INode* n = new MasIgualNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bMASIGUALNode(){
+		return new MasIgualNode;
 	}
 //MENOSIGUAL
 	Node* bMENOSIGUALNode(Node* n1, Node* n2){
@@ -345,12 +399,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bMENOSIGUALNode(){
+		return new MenosIgualNode;
+	}
 //ASTIGUAL
 	Node* bASIGUALNode(Node* n1, Node* n2){
 		INode* n = new AsIgualNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bASIGUALNode(){
+		return new AsIgualNode;
 	}
 //DIAIGUAL
 	Node* bDIAIGUALNode(Node* n1, Node* n2){
@@ -359,12 +421,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bDIAIGUALNode(){
+		return new DiaIgualNode;
+	}
 //DDIAIGUAL
 	Node* bDDIAIGUALNode(Node* n1, Node* n2){
 		INode* n = new DDiaIgualNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bDDIAIGUALNode(){
+		return new DDiaIgualNode;
 	}
 //PORIGUAL
 	Node* bPORIGUALNode(Node* n1, Node* n2){
@@ -373,12 +443,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bPORIGUALNode(){
+		return new PorIgualNode;
+	}
 //AMPIGUAL
 	Node* bAMPIGUALNode(Node* n1, Node* n2){
 		INode* n = new AmpIgualNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bAMPIGUALNode(){
+		return new AmpIgualNode;
 	}
 //PIPEIGUAL
 	Node* bPIPEIGUALNode(Node* n1, Node* n2){
@@ -387,12 +465,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bPIPEIGUALNode(Node* n1, Node* n2){
+		return new PipeIgualNode;
+	}
 //CIRCIGUAL
 	Node* bCIRCIGUALNode(Node* n1, Node* n2){
 		INode* n = new CircIgualNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bCIRCIGUALNode(){
+		return new CircIgualNode;
 	}
 //DMAYORIGUAL
 	Node* bDMAYORIGUALNode(Node* n1, Node* n2){
@@ -401,6 +487,9 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+	Node* bDMAYORIGUALNode(){
+		return new DMayorIgualNode;
+	}
 //DMENORIGUAL
 	Node* bDMENORIGUALNode(Node* n1, Node* n2){
 		INode* n = new DMenorIgualNode;
@@ -408,12 +497,20 @@ public:
 		n->setSChild(n2);
 		return n;
 	}
+
+	Node* bDMENORIGUALNode(){
+		return new DMenorIgualNode;
+	}
 //DASTIGUAL
 	Node* bDASTIGUALNode(Node* n1, Node* n2){
 		INode* n = new DAstIgualNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
+	}
+
+	Node* bDASTIGUALNode(){
+		return new DAstIgualNode;
 	}
 //MENORMAYOR
 	Node* bMENORMAYORNode(Node* n1, Node* n2){
@@ -442,7 +539,22 @@ public:
 	Node* bDENTACIONNode(){
 		return new DentacionNode;
 	}
-
+//In
+	Node* bINNode(){
+		return new InNode;
+	}
+//notin
+	Node* bNOTINNode(){
+		return new NotInNode;
+	}
+//Is
+	Node* bISNode(){
+		return new IsNode;
+	}
+//isnot
+	Node* bISNOTNode(){
+		return new IsNotNode;
+	}
 	
 	
 	//Node* bBOOLNode(bool v){

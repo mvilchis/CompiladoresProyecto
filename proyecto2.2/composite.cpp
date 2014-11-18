@@ -722,5 +722,28 @@ class AsNode: public UnaNode{
         AsNode():UnaNode(){}
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
 };
-
+//in
+class InNode: public UnaNode{
+    public: 
+        InNode():UnaNode(){}
+        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+};
+//notin
+class NotInNode: public UnaNode{
+    public: 
+        NotInNode():UnaNode(){}
+        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+};
+//is
+class InNode: public UnaNode{
+    public: 
+        IsNode():UnaNode(){}
+        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+};
+//isnot
+class NotInNode: public UnaNode{
+    public: 
+        IsNotNode():UnaNode(){}
+        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+};
 #endif /* COMPOSITE */
