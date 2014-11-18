@@ -466,7 +466,7 @@ public:
 		return n;
 	}
 
-	Node* bPIPEIGUALNode(Node* n1, Node* n2){
+	Node* bPIPEIGUALNode(){
 		return new PipeIgualNode;
 	}
 //CIRCIGUAL
