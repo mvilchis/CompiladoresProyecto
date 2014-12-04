@@ -33,7 +33,7 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
   char car;
 Node* nodeT;
 };
-%type <nodeT>GOAL file_input stmt simple_stmt ss_aux simple_stmt_aux small_stmt expr_stmt expr_stmt_aux_b expr_stmt_aux_b_a augassign print_stmt  s29  s30  s31  s32  comaS del_stmt pass_stmt flow_stmt break_stmt continue_stmt return_stmt return_stmt_aux compound_stmt if_stmt if_stmt_aux s8 while_stmt for_stmt suite suite_aux testlist_safe old_test n10 s13 s15 test or_test or_test_aux and_test and_test_aux not_test comparison comparison_aux comp_op expr expr_aux xor_expr xor_expr_aux and_expr and_expr_aux shift_expr shift_expr_aux arith_expr arith_expr_aux ae_aux term term_aux t_aux factor atom string_aux exprlist exprlist_aux testlist testlist_aux 
+%type <nodeT>GOAL file_input stmt simple_stmt ss_aux simple_stmt_aux small_stmt expr_stmt expr_stmt_aux_b expr_stmt_aux_b_a augassign print_stmt  s29  s30  s31  s32  comaS del_stmt pass_stmt flow_stmt break_stmt continue_stmt return_stmt return_stmt_aux compound_stmt if_stmt if_stmt_aux s8 while_stmt for_stmt suite suite_aux s15 test or_test or_test_aux and_test and_test_aux not_test comparison comparison_aux comp_op expr expr_aux xor_expr xor_expr_aux and_expr and_expr_aux shift_expr shift_expr_aux arith_expr arith_expr_aux ae_aux term term_aux t_aux factor atom string_aux exprlist exprlist_aux testlist testlist_aux
 %token <cad> STRING ESPTAB OPERADOR IDENTIFICADOR
 %token <cad> PRINT FALSE CLASS FINALLY IS RETURN NONE CONTINUE FOR LAMBDA TRY TRUE DEF FROM NONLOCAL WHILE AND DEL GLOBAL NOT WITH AS ELIF IF OR YIELD ASSERT ELSE IMPORT PASS BREAK EXCEPT IN RAISE EXEC
 %token <cad> NIGUAL DIGUAL MAIGUAL MEIGUAL MAYOR MENOR ENETILDE CIRCUNFLEJO PIPE AMPERSON DMAYOR DMENOR PORCEN DDIAG DIAG DASTERISCO ASTERISCO MENOS MAS
@@ -197,7 +197,7 @@ suite_aux: suite_aux stmt {$$=ast->bHERMANOSNode($1,$2); }| stmt {$$=$1;}
 s15: IF or_test ELSE test {
 LNodeList *nl = new LNodeList();
 nl->push_front($2);
-nl->push_front($3);
+nl->push_front($4);
 $$=ast->bIFNode(nl);
 
 }|{}    

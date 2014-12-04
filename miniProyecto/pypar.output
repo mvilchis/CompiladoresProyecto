@@ -1,11 +1,3 @@
-Nonterminals useless in grammar
-
-   n10
-   old_test
-   s13
-   testlist_safe
-
-
 Terminals unused in grammar
 
    ESPTAB

@@ -1959,7 +1959,7 @@ yyreduce:
     {
 LNodeList *nl = new LNodeList();
 nl->push_front((yyvsp[-2].nodeT));
-nl->push_front((yyvsp[-1].cad));
+nl->push_front((yyvsp[0].nodeT));
 (yyval.nodeT)=ast->bIFNode(nl);
 
 }
