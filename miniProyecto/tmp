@@ -1,0 +1,440 @@
+flex pylex.l
+bison --report=state -dv pypar.y -o pypar.cpp
+pypar.y:60.67: warning: empty rule for typed nonterminal, and no action [-Wother]
+ file_input: file_input NEWLINE {$$=$1;}| stmt file_input {$$=$1;}|
+                                                                   ^
+pypar.y:65.10-50: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:69.13-40: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ parameters: APAREN parameters_aux CPAREN
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:72.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:79.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:81.10-19: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ val_aux: IGUAL test
+          ^^^^^^^^^^
+pypar.y:82.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:85.21-46: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ varargslist_aux_b:  ASTERISCO IDENTIFICADOR n1 
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:86.3-26: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | DASTERISCO IDENTIFICADOR 
+   ^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:88.5-33: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ n1: COMA DASTERISCO IDENTIFICADOR
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:89.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:94.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:96.5-8: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ n3: COMA
+     ^^^^
+pypar.y:97.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:100.8-20: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ fpdef: IDENTIFICADOR
+        ^^^^^^^^^^^^^
+pypar.y:101.3-22: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | APAREN fplist CPAREN
+   ^^^^^^^^^^^^^^^^^^^^
+pypar.y:106.10-13: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ fpl_aux: COMA
+          ^^^^
+pypar.y:107.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ | 
+  ^
+pypar.y:111.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |  
+  ^
+pypar.y:120.9-13: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ ss_aux: PCOMA
+         ^^^^^
+pypar.y:121.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ | 
+  ^
+pypar.y:124.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |  
+  ^
+pypar.y:142.1-14: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ IGUAL testlist 
+ ^^^^^^^^^^^^^^
+pypar.y:143.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:146.12-19: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ augassign: MASIGUAL
+            ^^^^^^^^
+pypar.y:147.3-12: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | MENOSIGUAL
+   ^^^^^^^^^^
+pypar.y:148.3-10: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | ASTIGUAL 
+   ^^^^^^^^
+pypar.y:149.3-10: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | DIAIGUAL 
+   ^^^^^^^^
+pypar.y:150.3-10: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | PORIGUAL 
+   ^^^^^^^^
+pypar.y:151.3-10: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | AMPIGUAL 
+   ^^^^^^^^
+pypar.y:152.3-11: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | PIPEIGUAL 
+   ^^^^^^^^^
+pypar.y:153.3-11: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | CIRCIGUAL 
+   ^^^^^^^^^
+pypar.y:154.3-13: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | DMENORIGUAL 
+   ^^^^^^^^^^^
+pypar.y:155.3-13: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | DMAYORIGUAL 
+   ^^^^^^^^^^^
+pypar.y:156.3-11: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | DASTIGUAL 
+   ^^^^^^^^^
+pypar.y:157.3-11: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ | DDIAIGUAL
+   ^^^^^^^^^
+pypar.y:160.14-22: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ print_stmt : PRINT s29;
+              ^^^^^^^^^
+pypar.y:161.13-27: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s29 : s30 | DMAYOR test s31;
+             ^^^^^^^^^^^^^^^
+pypar.y:163.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:165.7-21: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s31 : COMA test comaS
+       ^^^^^^^^^^^^^^^
+pypar.y:166.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:169.22: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s32 :  s32 COMA test| ;
+                      ^
+pypar.y:170.8-11: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comaS: COMA
+        ^^^^
+pypar.y:171.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |
+  ^
+pypar.y:174.11-22: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ del_stmt: DEL exprlist
+           ^^^^^^^^^^^^
+pypar.y:177.12-15: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ pass_stmt: PASS
+            ^^^^
+pypar.y:184.3-12: warning: type clash on default action: <nodeT> != <> [-Wother]
+ | raise_stmt 
+   ^^^^^^^^^^
+pypar.y:187.13-17: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ break_stmt: BREAK
+             ^^^^^
+pypar.y:190.16-23: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ continue_stmt: CONTINUE
+                ^^^^^^^^
+pypar.y:193.14-35: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ return_stmt: RETURN return_stmt_aux
+              ^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:196.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ | 
+  ^
+pypar.y:208.5-13: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s5: COMA test 
+     ^^^^^^^^^
+pypar.y:209.2: warning: empty rule for typed nonterminal, and no action [-Wother]
+ |   
+  ^
+pypar.y:212.14-49: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ global_stmt: GLOBAL IDENTIFICADOR global_stmt_aux
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:214.55: warning: empty rule for typed nonterminal, and no action [-Wother]
+ global_stmt_aux:  global_stmt_aux COMA IDENTIFICADOR |  
+                                                       ^
+pypar.y:217.12-23: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ exec_stmt: EXEC expr s7
+            ^^^^^^^^^^^^
+pypar.y:219.5-14: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s7: IN test s5 |   
+     ^^^^^^^^^^
+pypar.y:219.17: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s7: IN test s5 |   
+                 ^
+pypar.y:230.10-44: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ if_stmt: IF test DPUNTO suite if_stmt_aux s8
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:232.51: warning: empty rule for typed nonterminal, and no action [-Wother]
+ if_stmt_aux:  if_stmt_aux ELIF test DPUNTO suite |  
+                                                   ^
+pypar.y:234.5-21: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s8: ELSE DPUNTO suite |   
+     ^^^^^^^^^^^^^^^^^
+pypar.y:234.24: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s8: ELSE DPUNTO suite |   
+                        ^
+pypar.y:237.13-38: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ while_stmt: WHILE test DPUNTO suite s8
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:240.11-50: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ for_stmt: FOR exprlist IN testlist DPUNTO suite s8
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:242.12-53: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ with_stmt: WITH with_item with_stmt_aux  DPUNTO suite
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:244.47: warning: empty rule for typed nonterminal, and no action [-Wother]
+ with_stmt_aux:  with_stmt_aux COMA with_item |  
+                                               ^
+pypar.y:248.6-12: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s10: AS expr |   
+      ^^^^^^^
+pypar.y:248.15: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s10: AS expr |   
+               ^
+pypar.y:250.22-52: warning: type clash on default action: <nodeT> != <car> [-Wother]
+ suite: simple_stmt | NEWLINE INDENT suite_aux DEDENT
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:260.26-38: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s13: s13 COMA old_test | COMA old_test
+                          ^^^^^^^^^^^^^
+pypar.y:262.6-25: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s15: IF or_test ELSE test |   
+      ^^^^^^^^^^^^^^^^^^^^
+pypar.y:262.28: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s15: IF or_test ELSE test |   
+                            ^
+pypar.y:269.39: warning: empty rule for typed nonterminal, and no action [-Wother]
+ or_test_aux:or_test_aux  OR and_test |  
+                                       ^
+pypar.y:273.43: warning: empty rule for typed nonterminal, and no action [-Wother]
+ and_test_aux:  and_test_aux AND not_test |  
+                                           ^
+pypar.y:275.11-22: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ not_test: NOT not_test | comparison
+           ^^^^^^^^^^^^
+pypar.y:279.47: warning: empty rule for typed nonterminal, and no action [-Wother]
+ comparison_aux:  comparison_aux comp_op expr |  
+                                               ^
+pypar.y:281.10-14: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+          ^^^^^
+pypar.y:281.16-20: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                ^^^^^
+pypar.y:281.22-27: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                      ^^^^^^
+pypar.y:281.29-35: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                             ^^^^^^^
+pypar.y:281.37-43: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                     ^^^^^^^
+pypar.y:281.45-54: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                             ^^^^^^^^^^
+pypar.y:281.56-61: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                                        ^^^^^^
+pypar.y:281.63-64: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                                               ^^
+pypar.y:281.66-71: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                                                  ^^^^^^
+pypar.y:281.73-74: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                                                         ^^
+pypar.y:281.76-81: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_op: MENOR|MAYOR|DIGUAL|MAIGUAL|MEIGUAL|MENORMAYOR|NIGUAL|IN|NOT IN|IS|IS NOT
+                                                                            ^^^^^^
+pypar.y:285.36: warning: empty rule for typed nonterminal, and no action [-Wother]
+ expr_aux:expr_aux   PIPE xor_expr |  
+                                    ^
+pypar.y:289.51: warning: empty rule for typed nonterminal, and no action [-Wother]
+ xor_expr_aux:  xor_expr_aux CIRCUNFLEJO and_expr |  
+                                                   ^
+pypar.y:293.58: warning: empty rule for typed nonterminal, and no action [-Wother]
+ and_expr_aux:and_expr_aux   AMPERSON shift_expr {$$=$3;}|  
+                                                          ^
+pypar.y:298.46: warning: empty rule for typed nonterminal, and no action [-Wother]
+ | shift_expr_aux  DMAYOR arith_expr {$$=$3;}|
+                                              ^
+pypar.y:302.54: warning: empty rule for typed nonterminal, and no action [-Wother]
+ arith_expr_aux: arith_expr_aux ae_aux term  {$$=$3;}|  
+                                                      ^
+pypar.y:304.9-11: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ ae_aux: MAS | MENOS
+         ^^^
+pypar.y:304.15-19: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ ae_aux: MAS | MENOS
+               ^^^^^
+pypar.y:308.46: warning: empty rule for typed nonterminal, and no action [-Wother]
+ term_aux: term_aux   t_aux factor  {$$= $3;}|  
+                                              ^
+pypar.y:310.8-16: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
+        ^^^^^^^^^
+pypar.y:310.20-23: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
+                    ^^^^
+pypar.y:310.27-32: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
+                           ^^^^^^
+pypar.y:310.36-40: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ t_aux: ASTERISCO | DIAG | PORCEN | DDIAG  
+                                    ^^^^^
+pypar.y:314.13-15: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ factor_aux: MAS | MENOS | ENETILDE
+             ^^^
+pypar.y:314.19-23: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ factor_aux: MAS | MENOS | ENETILDE
+                   ^^^^^
+pypar.y:314.27-34: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ factor_aux: MAS | MENOS | ENETILDE
+                           ^^^^^^^^
+pypar.y:318.35: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s16: DASTERISCO factor  {$$ =$2;}|  
+                                   ^
+pypar.y:320.21: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s17: testlist_comp |  
+                     ^
+pypar.y:322.17: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s18: listmaker |  
+                 ^
+pypar.y:324.22: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s19: dictorsetmaker |  
+                      ^
+pypar.y:326.15: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s20: arglist |  
+               ^
+pypar.y:328.12: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s21: test |  
+            ^
+pypar.y:330.15: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s22: sliceop |  
+               ^
+pypar.y:332.32: warning: empty rule for typed nonterminal, and no action [-Wother]
+ power_aux: power_aux  trailer |  
+                                ^
+pypar.y:334.7-23: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ atom: APAREN s17 CPAREN
+       ^^^^^^^^^^^^^^^^^
+pypar.y:335.2-24: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ |ACORCHETE s18 CCORCHETE
+  ^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:336.2-18: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ |ALLAVE s19 CLLAVE
+  ^^^^^^^^^^^^^^^^^
+pypar.y:337.2-14: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ |IDENTIFICADOR 
+  ^^^^^^^^^^^^^
+pypar.y:338.3-10: warning: type clash on default action: <nodeT> != <numf> [-Wother]
+ | FLOTANTE 
+   ^^^^^^^^
+pypar.y:341.2-5: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ |TRUE
+  ^^^^
+pypar.y:342.2-6: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ |FALSE
+  ^^^^^
+pypar.y:345.33-38: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ string_aux: string_aux STRING | STRING
+                                 ^^^^^^
+pypar.y:351.27: warning: empty rule for typed nonterminal, and no action [-Wother]
+ lm_aux: lm_aux COMA test |  
+                           ^
+pypar.y:357.27: warning: empty rule for typed nonterminal, and no action [-Wother]
+ tc_aux: tc_aux COMA test |  
+                           ^
+pypar.y:359.10-26: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ trailer: APAREN s20 CPAREN | ACORCHETE subscriptlist CCORCHETE | PUNTO IDENTIFICADOR
+          ^^^^^^^^^^^^^^^^^
+pypar.y:359.30-62: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ trailer: APAREN s20 CPAREN | ACORCHETE subscriptlist CCORCHETE | PUNTO IDENTIFICADOR
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:359.66-84: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ trailer: APAREN s20 CPAREN | ACORCHETE subscriptlist CCORCHETE | PUNTO IDENTIFICADOR
+                                                                  ^^^^^^^^^^^^^^^^^^^
+pypar.y:363.54: warning: empty rule for typed nonterminal, and no action [-Wother]
+ subscriptlist_aux:subscriptlist_aux  COMA subscript |  
+                                                      ^
+pypar.y:365.12-28: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ subscript: PUNTO PUNTO PUNTO | test | s21 DPUNTO s21 s22
+            ^^^^^^^^^^^^^^^^^
+pypar.y:367.10-19: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ sliceop: DPUNTO s21
+          ^^^^^^^^^^
+pypar.y:371.39: warning: empty rule for typed nonterminal, and no action [-Wother]
+ exprlist_aux: exprlist_aux COMA expr |  
+                                       ^
+pypar.y:375.40: warning: empty rule for typed nonterminal, and no action [-Wother]
+ testlist_aux:  testlist_aux COMA test |  
+                                        ^
+pypar.y:383.49: warning: empty rule for typed nonterminal, and no action [-Wother]
+ dsm_aux_a_a: dsm_aux_a_a COMA test DPUNTO test |  
+                                                 ^
+pypar.y:389.37: warning: empty rule for typed nonterminal, and no action [-Wother]
+ dsm_aux_b_a: dsm_aux_b_a COMA test |  
+                                     ^
+pypar.y:393.45: warning: empty rule for typed nonterminal, and no action [-Wother]
+ arglist_aux_a: arglist_aux_a argument COMA |  
+                                             ^
+pypar.y:395.33-57: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ arglist_aux_b: argument comaS | ASTERISCO test al_aux s25 | DASTERISCO test
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:395.61-75: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ arglist_aux_b: argument comaS | ASTERISCO test al_aux s25 | DASTERISCO test
+                                                             ^^^^^^^^^^^^^^^
+pypar.y:397.31: warning: empty rule for typed nonterminal, and no action [-Wother]
+ al_aux:al_aux  COMA argument |  
+                               ^
+pypar.y:399.6-25: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ s25: COMA DASTERISCO test |  
+      ^^^^^^^^^^^^^^^^^^^^
+pypar.y:399.28: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s25: COMA DASTERISCO test |  
+                            ^
+pypar.y:404.16: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s26: comp_for |  
+                ^
+pypar.y:408.11-43: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ list_for: FOR exprlist IN testlist_safe s27
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:410.10-24: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ list_if: IF old_test s27
+          ^^^^^^^^^^^^^^^
+pypar.y:412.17: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s27: list_iter |   
+                 ^
+pypar.y:416.11-37: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_for: FOR exprlist IN or_test s28
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pypar.y:418.10-24: warning: type clash on default action: <nodeT> != <cad> [-Wother]
+ comp_if: IF old_test s28
+          ^^^^^^^^^^^^^^^
+pypar.y:420.17: warning: empty rule for typed nonterminal, and no action [-Wother]
+ s28: comp_iter |   
+                 ^
+pypar.y: warning: 3 shift/reduce conflicts [-Wconflicts-sr]
+g++  -std=c++11  pypar.cpp pylex.cpp -o proyecto
+./proyecto prueba_de_fuego.py
+Entra 
+3
+****
+Éxito primero
+Valor del n: 3
+Exito

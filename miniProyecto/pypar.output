@@ -1,0 +1,3010 @@
+Nonterminals useless in grammar
+
+   n10
+   old_test
+   s13
+   testlist_safe
+
+
+Terminals unused in grammar
+
+   ESPTAB
+   OPERADOR
+   CLASS
+   FINALLY
+   NONE
+   LAMBDA
+   TRY
+   DEF
+   FROM
+   NONLOCAL
+   GLOBAL
+   WITH
+   AS
+   YIELD
+   ASSERT
+   IMPORT
+   EXCEPT
+   RAISE
+   EXEC
+   ENETILDE
+   DASTERISCO
+   APAREN
+   CPAREN
+   ACORCHETE
+   CCORCHETE
+   ALLAVE
+   CLLAVE
+   PUNTO
+   AT
+   MENOSMAYOR
+   CSIMPLE
+   IDIAG
+   GATO
+   DIDIAG
+   SALIDA
+   FIN
+
+
+State 66 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: GOAL $end
+
+    1 GOAL: file_input
+
+    2 file_input: file_input NEWLINE
+    3           | stmt file_input
+    4           | %empty
+
+    5 stmt: simple_stmt
+    6     | compound_stmt
+
+    7 simple_stmt: small_stmt simple_stmt_aux ss_aux NEWLINE
+
+    8 ss_aux: PCOMA
+    9       | %empty
+
+   10 simple_stmt_aux: simple_stmt_aux PCOMA small_stmt
+   11                | %empty
+
+   12 small_stmt: expr_stmt
+   13           | print_stmt
+   14           | del_stmt
+   15           | pass_stmt
+   16           | flow_stmt
+
+   17 expr_stmt: testlist expr_stmt_aux_b
+
+   18 expr_stmt_aux_b: augassign testlist
+   19                | expr_stmt_aux_b_a
+
+   20 expr_stmt_aux_b_a: IGUAL testlist
+   21                  | %empty
+
+   22 augassign: MASIGUAL
+   23          | MENOSIGUAL
+   24          | ASTIGUAL
+   25          | DIAIGUAL
+   26          | PORIGUAL
+   27          | AMPIGUAL
+   28          | PIPEIGUAL
+   29          | CIRCIGUAL
+   30          | DMENORIGUAL
+   31          | DMAYORIGUAL
+   32          | DASTIGUAL
+   33          | DDIAIGUAL
+
+   34 print_stmt: PRINT s29
+
+   35 s29: s30
+   36    | DMAYOR test s31
+
+   37 s30: test s32 comaS
+   38    | %empty
+
+   39 s31: COMA test comaS
+   40    | %empty
+
+   41 s32: s32 COMA test
+   42    | %empty
+
+   43 comaS: COMA
+   44      | %empty
+
+   45 del_stmt: DEL exprlist
+
+   46 pass_stmt: PASS
+
+   47 flow_stmt: break_stmt
+   48          | continue_stmt
+   49          | return_stmt
+
+   50 break_stmt: BREAK
+
+   51 continue_stmt: CONTINUE
+
+   52 return_stmt: RETURN return_stmt_aux
+
+   53 return_stmt_aux: testlist
+   54                | %empty
+
+   55 compound_stmt: if_stmt
+   56              | while_stmt
+   57              | for_stmt
+
+   58 if_stmt: IF test DPUNTO suite if_stmt_aux s8
+
+   59 if_stmt_aux: if_stmt_aux ELIF test DPUNTO suite
+   60            | %empty
+
+   61 s8: ELSE DPUNTO suite
+   62   | %empty
+
+   63 while_stmt: WHILE test DPUNTO suite s8
+
+   64 for_stmt: FOR exprlist IN testlist DPUNTO suite s8
+
+   65 suite: simple_stmt
+   66      | NEWLINE INDENT suite_aux DEDENT
+
+   67 suite_aux: suite_aux stmt
+   68          | stmt
+
+   69 s15: IF or_test ELSE test
+   70    | %empty
+
+   71 test: or_test s15
+
+   72 or_test: and_test or_test_aux
+
+   73 or_test_aux: or_test_aux OR and_test
+   74            | %empty
+
+   75 and_test: not_test and_test_aux
+
+   76 and_test_aux: and_test_aux AND not_test
+   77             | %empty
+
+   78 not_test: NOT not_test
+   79         | comparison
+
+   80 comparison: expr comparison_aux
+
+   81 comparison_aux: comparison_aux comp_op expr
+   82               | %empty
+
+   83 comp_op: MENOR
+   84        | MAYOR
+   85        | DIGUAL
+   86        | MAIGUAL
+   87        | MEIGUAL
+   88        | MENORMAYOR
+   89        | NIGUAL
+   90        | IN
+   91        | NOT IN
+   92        | IS
+   93        | IS NOT
+
+   94 expr: xor_expr expr_aux
+
+   95 expr_aux: expr_aux PIPE xor_expr
+   96         | %empty
+
+   97 xor_expr: and_expr xor_expr_aux
+
+   98 xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr
+   99             | %empty
+
+  100 and_expr: shift_expr and_expr_aux
+
+  101 and_expr_aux: and_expr_aux AMPERSON shift_expr
+  102             | %empty
+
+  103 shift_expr: arith_expr shift_expr_aux
+
+  104 shift_expr_aux: shift_expr_aux DMENOR arith_expr
+  105               | shift_expr_aux DMAYOR arith_expr
+  106               | %empty
+
+  107 arith_expr: term arith_expr_aux
+
+  108 arith_expr_aux: arith_expr_aux ae_aux term
+  109               | %empty
+
+  110 ae_aux: MAS
+  111       | MENOS
+
+  112 term: factor term_aux
+
+  113 term_aux: term_aux t_aux factor
+  114         | %empty
+
+  115 t_aux: ASTERISCO
+  116      | DIAG
+  117      | PORCEN
+  118      | DDIAG
+
+  119 factor: ae_aux factor
+  120       | atom
+
+  121 atom: IDENTIFICADOR
+  122     | FLOTANTE
+  123     | ENTERO
+  124     | string_aux
+  125     | TRUE
+  126     | FALSE
+
+  127 string_aux: string_aux STRING
+  128           | STRING
+
+  129 exprlist: expr exprlist_aux comaS
+
+  130 exprlist_aux: exprlist_aux COMA expr
+  131             | %empty
+
+  132 testlist: test testlist_aux comaS
+
+  133 testlist_aux: testlist_aux COMA test
+  134             | %empty
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+STRING (258) 127 128
+ESPTAB (259)
+OPERADOR (260)
+IDENTIFICADOR (261) 121
+PRINT (262) 34
+FALSE (263) 126
+CLASS (264)
+FINALLY (265)
+IS (266) 92 93
+RETURN (267) 52
+NONE (268)
+CONTINUE (269) 51
+FOR (270) 64
+LAMBDA (271)
+TRY (272)
+TRUE (273) 125
+DEF (274)
+FROM (275)
+NONLOCAL (276)
+WHILE (277) 63
+AND (278) 76
+DEL (279) 45
+GLOBAL (280)
+NOT (281) 78 91 93
+WITH (282)
+AS (283)
+ELIF (284) 59
+IF (285) 58 69
+OR (286) 73
+YIELD (287)
+ASSERT (288)
+ELSE (289) 61 69
+IMPORT (290)
+PASS (291) 46
+BREAK (292) 50
+EXCEPT (293)
+IN (294) 64 90 91
+RAISE (295)
+EXEC (296)
+NIGUAL (297) 89
+DIGUAL (298) 85
+MAIGUAL (299) 86
+MEIGUAL (300) 87
+MAYOR (301) 84
+MENOR (302) 83
+ENETILDE (303)
+CIRCUNFLEJO (304) 98
+PIPE (305) 95
+AMPERSON (306) 101
+DMAYOR (307) 36 105
+DMENOR (308) 104
+PORCEN (309) 117
+DDIAG (310) 118
+DIAG (311) 116
+DASTERISCO (312)
+ASTERISCO (313) 115
+MENOS (314) 111
+MAS (315) 110
+APAREN (316)
+CPAREN (317)
+ACORCHETE (318)
+CCORCHETE (319)
+ALLAVE (320)
+CLLAVE (321)
+COMA (322) 39 41 43 130 133
+DPUNTO (323) 58 59 61 63 64
+PUNTO (324)
+PCOMA (325) 8 10
+AT (326)
+IGUAL (327) 20
+MENOSMAYOR (328)
+MASIGUAL (329) 22
+MENOSIGUAL (330) 23
+ASTIGUAL (331) 24
+DIAIGUAL (332) 25
+DDIAIGUAL (333) 33
+PORIGUAL (334) 26
+AMPIGUAL (335) 27
+PIPEIGUAL (336) 28
+CIRCIGUAL (337) 29
+DMAYORIGUAL (338) 31
+DMENORIGUAL (339) 30
+DASTIGUAL (340) 32
+MENORMAYOR (341) 88
+CSIMPLE (342)
+IDIAG (343)
+GATO (344)
+DIDIAG (345)
+NEWLINE (346) 2 7 66
+ENTERO (347) 123
+FLOTANTE (348) 122
+INDENT (349) 66
+SALIDA (350)
+DEDENT (351) 66
+FIN (352)
+
+
+Nonterminals, with rules where they appear
+
+$accept (98)
+    on left: 0
+GOAL (99)
+    on left: 1, on right: 0
+file_input (100)
+    on left: 2 3 4, on right: 1 2 3
+stmt (101)
+    on left: 5 6, on right: 3 67 68
+simple_stmt (102)
+    on left: 7, on right: 5 65
+ss_aux (103)
+    on left: 8 9, on right: 7
+simple_stmt_aux (104)
+    on left: 10 11, on right: 7 10
+small_stmt (105)
+    on left: 12 13 14 15 16, on right: 7 10
+expr_stmt (106)
+    on left: 17, on right: 12
+expr_stmt_aux_b (107)
+    on left: 18 19, on right: 17
+expr_stmt_aux_b_a (108)
+    on left: 20 21, on right: 19
+augassign (109)
+    on left: 22 23 24 25 26 27 28 29 30 31 32 33, on right: 18
+print_stmt (110)
+    on left: 34, on right: 13
+s29 (111)
+    on left: 35 36, on right: 34
+s30 (112)
+    on left: 37 38, on right: 35
+s31 (113)
+    on left: 39 40, on right: 36
+s32 (114)
+    on left: 41 42, on right: 37 41
+comaS (115)
+    on left: 43 44, on right: 37 39 129 132
+del_stmt (116)
+    on left: 45, on right: 14
+pass_stmt (117)
+    on left: 46, on right: 15
+flow_stmt (118)
+    on left: 47 48 49, on right: 16
+break_stmt (119)
+    on left: 50, on right: 47
+continue_stmt (120)
+    on left: 51, on right: 48
+return_stmt (121)
+    on left: 52, on right: 49
+return_stmt_aux (122)
+    on left: 53 54, on right: 52
+compound_stmt (123)
+    on left: 55 56 57, on right: 6
+if_stmt (124)
+    on left: 58, on right: 55
+if_stmt_aux (125)
+    on left: 59 60, on right: 58 59
+s8 (126)
+    on left: 61 62, on right: 58 63 64
+while_stmt (127)
+    on left: 63, on right: 56
+for_stmt (128)
+    on left: 64, on right: 57
+suite (129)
+    on left: 65 66, on right: 58 59 61 63 64
+suite_aux (130)
+    on left: 67 68, on right: 66 67
+s15 (131)
+    on left: 69 70, on right: 71
+test (132)
+    on left: 71, on right: 36 37 39 41 58 59 63 69 132 133
+or_test (133)
+    on left: 72, on right: 69 71
+or_test_aux (134)
+    on left: 73 74, on right: 72 73
+and_test (135)
+    on left: 75, on right: 72 73
+and_test_aux (136)
+    on left: 76 77, on right: 75 76
+not_test (137)
+    on left: 78 79, on right: 75 76 78
+comparison (138)
+    on left: 80, on right: 79
+comparison_aux (139)
+    on left: 81 82, on right: 80 81
+comp_op (140)
+    on left: 83 84 85 86 87 88 89 90 91 92 93, on right: 81
+expr (141)
+    on left: 94, on right: 80 81 129 130
+expr_aux (142)
+    on left: 95 96, on right: 94 95
+xor_expr (143)
+    on left: 97, on right: 94 95
+xor_expr_aux (144)
+    on left: 98 99, on right: 97 98
+and_expr (145)
+    on left: 100, on right: 97 98
+and_expr_aux (146)
+    on left: 101 102, on right: 100 101
+shift_expr (147)
+    on left: 103, on right: 100 101
+shift_expr_aux (148)
+    on left: 104 105 106, on right: 103 104 105
+arith_expr (149)
+    on left: 107, on right: 103 104 105
+arith_expr_aux (150)
+    on left: 108 109, on right: 107 108
+ae_aux (151)
+    on left: 110 111, on right: 108 119
+term (152)
+    on left: 112, on right: 107 108
+term_aux (153)
+    on left: 113 114, on right: 112 113
+t_aux (154)
+    on left: 115 116 117 118, on right: 113
+factor (155)
+    on left: 119 120, on right: 112 113 119
+atom (156)
+    on left: 121 122 123 124 125 126, on right: 120
+string_aux (157)
+    on left: 127 128, on right: 124 127
+exprlist (158)
+    on left: 129, on right: 45 64
+exprlist_aux (159)
+    on left: 130 131, on right: 129 130
+testlist (160)
+    on left: 132, on right: 17 18 20 53 64
+testlist_aux (161)
+    on left: 133 134, on right: 132 133
+
+
+State 0
+
+    0 $accept: . GOAL $end
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    FOR            shift, and go to state 7
+    TRUE           shift, and go to state 8
+    WHILE          shift, and go to state 9
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    IF             shift, and go to state 12
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 4 (file_input)
+
+    GOAL           go to state 19
+    file_input     go to state 20
+    stmt           go to state 21
+    simple_stmt    go to state 22
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    compound_stmt  go to state 32
+    if_stmt        go to state 33
+    while_stmt     go to state 34
+    for_stmt       go to state 35
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 1
+
+  128 string_aux: STRING .
+
+    $default  reduce using rule 128 (string_aux)
+
+
+State 2
+
+  121 atom: IDENTIFICADOR .
+
+    $default  reduce using rule 121 (atom)
+
+
+State 3
+
+   34 print_stmt: PRINT . s29
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    DMAYOR         shift, and go to state 52
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 38 (s30)
+
+    s29         go to state 53
+    s30         go to state 54
+    test        go to state 55
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 4
+
+  126 atom: FALSE .
+
+    $default  reduce using rule 126 (atom)
+
+
+State 5
+
+   52 return_stmt: RETURN . return_stmt_aux
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 54 (return_stmt_aux)
+
+    return_stmt_aux  go to state 56
+    test             go to state 36
+    or_test          go to state 37
+    and_test         go to state 38
+    not_test         go to state 39
+    comparison       go to state 40
+    expr             go to state 41
+    xor_expr         go to state 42
+    and_expr         go to state 43
+    shift_expr       go to state 44
+    arith_expr       go to state 45
+    ae_aux           go to state 46
+    term             go to state 47
+    factor           go to state 48
+    atom             go to state 49
+    string_aux       go to state 50
+    testlist         go to state 57
+
+
+State 6
+
+   51 continue_stmt: CONTINUE .
+
+    $default  reduce using rule 51 (continue_stmt)
+
+
+State 7
+
+   64 for_stmt: FOR . exprlist IN testlist DPUNTO suite s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    expr        go to state 58
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+    exprlist    go to state 59
+
+
+State 8
+
+  125 atom: TRUE .
+
+    $default  reduce using rule 125 (atom)
+
+
+State 9
+
+   63 while_stmt: WHILE . test DPUNTO suite s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 60
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 10
+
+   45 del_stmt: DEL . exprlist
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    expr        go to state 58
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+    exprlist    go to state 61
+
+
+State 11
+
+   78 not_test: NOT . not_test
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    not_test    go to state 62
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 12
+
+   58 if_stmt: IF . test DPUNTO suite if_stmt_aux s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 63
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 13
+
+   46 pass_stmt: PASS .
+
+    $default  reduce using rule 46 (pass_stmt)
+
+
+State 14
+
+   50 break_stmt: BREAK .
+
+    $default  reduce using rule 50 (break_stmt)
+
+
+State 15
+
+  111 ae_aux: MENOS .
+
+    $default  reduce using rule 111 (ae_aux)
+
+
+State 16
+
+  110 ae_aux: MAS .
+
+    $default  reduce using rule 110 (ae_aux)
+
+
+State 17
+
+  123 atom: ENTERO .
+
+    $default  reduce using rule 123 (atom)
+
+
+State 18
+
+  122 atom: FLOTANTE .
+
+    $default  reduce using rule 122 (atom)
+
+
+State 19
+
+    0 $accept: GOAL . $end
+
+    $end  shift, and go to state 64
+
+
+State 20
+
+    1 GOAL: file_input .
+    2 file_input: file_input . NEWLINE
+
+    NEWLINE  shift, and go to state 65
+
+    $default  reduce using rule 1 (GOAL)
+
+
+State 21
+
+    3 file_input: stmt . file_input
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    FOR            shift, and go to state 7
+    TRUE           shift, and go to state 8
+    WHILE          shift, and go to state 9
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    IF             shift, and go to state 12
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 4 (file_input)
+
+    file_input     go to state 66
+    stmt           go to state 21
+    simple_stmt    go to state 22
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    compound_stmt  go to state 32
+    if_stmt        go to state 33
+    while_stmt     go to state 34
+    for_stmt       go to state 35
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 22
+
+    5 stmt: simple_stmt .
+
+    $default  reduce using rule 5 (stmt)
+
+
+State 23
+
+    7 simple_stmt: small_stmt . simple_stmt_aux ss_aux NEWLINE
+
+    $default  reduce using rule 11 (simple_stmt_aux)
+
+    simple_stmt_aux  go to state 67
+
+
+State 24
+
+   12 small_stmt: expr_stmt .
+
+    $default  reduce using rule 12 (small_stmt)
+
+
+State 25
+
+   13 small_stmt: print_stmt .
+
+    $default  reduce using rule 13 (small_stmt)
+
+
+State 26
+
+   14 small_stmt: del_stmt .
+
+    $default  reduce using rule 14 (small_stmt)
+
+
+State 27
+
+   15 small_stmt: pass_stmt .
+
+    $default  reduce using rule 15 (small_stmt)
+
+
+State 28
+
+   16 small_stmt: flow_stmt .
+
+    $default  reduce using rule 16 (small_stmt)
+
+
+State 29
+
+   47 flow_stmt: break_stmt .
+
+    $default  reduce using rule 47 (flow_stmt)
+
+
+State 30
+
+   48 flow_stmt: continue_stmt .
+
+    $default  reduce using rule 48 (flow_stmt)
+
+
+State 31
+
+   49 flow_stmt: return_stmt .
+
+    $default  reduce using rule 49 (flow_stmt)
+
+
+State 32
+
+    6 stmt: compound_stmt .
+
+    $default  reduce using rule 6 (stmt)
+
+
+State 33
+
+   55 compound_stmt: if_stmt .
+
+    $default  reduce using rule 55 (compound_stmt)
+
+
+State 34
+
+   56 compound_stmt: while_stmt .
+
+    $default  reduce using rule 56 (compound_stmt)
+
+
+State 35
+
+   57 compound_stmt: for_stmt .
+
+    $default  reduce using rule 57 (compound_stmt)
+
+
+State 36
+
+  132 testlist: test . testlist_aux comaS
+
+    $default  reduce using rule 134 (testlist_aux)
+
+    testlist_aux  go to state 68
+
+
+State 37
+
+   71 test: or_test . s15
+
+    IF  shift, and go to state 69
+
+    $default  reduce using rule 70 (s15)
+
+    s15  go to state 70
+
+
+State 38
+
+   72 or_test: and_test . or_test_aux
+
+    $default  reduce using rule 74 (or_test_aux)
+
+    or_test_aux  go to state 71
+
+
+State 39
+
+   75 and_test: not_test . and_test_aux
+
+    $default  reduce using rule 77 (and_test_aux)
+
+    and_test_aux  go to state 72
+
+
+State 40
+
+   79 not_test: comparison .
+
+    $default  reduce using rule 79 (not_test)
+
+
+State 41
+
+   80 comparison: expr . comparison_aux
+
+    $default  reduce using rule 82 (comparison_aux)
+
+    comparison_aux  go to state 73
+
+
+State 42
+
+   94 expr: xor_expr . expr_aux
+
+    $default  reduce using rule 96 (expr_aux)
+
+    expr_aux  go to state 74
+
+
+State 43
+
+   97 xor_expr: and_expr . xor_expr_aux
+
+    $default  reduce using rule 99 (xor_expr_aux)
+
+    xor_expr_aux  go to state 75
+
+
+State 44
+
+  100 and_expr: shift_expr . and_expr_aux
+
+    $default  reduce using rule 102 (and_expr_aux)
+
+    and_expr_aux  go to state 76
+
+
+State 45
+
+  103 shift_expr: arith_expr . shift_expr_aux
+
+    $default  reduce using rule 106 (shift_expr_aux)
+
+    shift_expr_aux  go to state 77
+
+
+State 46
+
+  119 factor: ae_aux . factor
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    ae_aux      go to state 46
+    factor      go to state 78
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 47
+
+  107 arith_expr: term . arith_expr_aux
+
+    $default  reduce using rule 109 (arith_expr_aux)
+
+    arith_expr_aux  go to state 79
+
+
+State 48
+
+  112 term: factor . term_aux
+
+    $default  reduce using rule 114 (term_aux)
+
+    term_aux  go to state 80
+
+
+State 49
+
+  120 factor: atom .
+
+    $default  reduce using rule 120 (factor)
+
+
+State 50
+
+  124 atom: string_aux .
+  127 string_aux: string_aux . STRING
+
+    STRING  shift, and go to state 81
+
+    $default  reduce using rule 124 (atom)
+
+
+State 51
+
+   17 expr_stmt: testlist . expr_stmt_aux_b
+
+    IGUAL        shift, and go to state 82
+    MASIGUAL     shift, and go to state 83
+    MENOSIGUAL   shift, and go to state 84
+    ASTIGUAL     shift, and go to state 85
+    DIAIGUAL     shift, and go to state 86
+    DDIAIGUAL    shift, and go to state 87
+    PORIGUAL     shift, and go to state 88
+    AMPIGUAL     shift, and go to state 89
+    PIPEIGUAL    shift, and go to state 90
+    CIRCIGUAL    shift, and go to state 91
+    DMAYORIGUAL  shift, and go to state 92
+    DMENORIGUAL  shift, and go to state 93
+    DASTIGUAL    shift, and go to state 94
+
+    $default  reduce using rule 21 (expr_stmt_aux_b_a)
+
+    expr_stmt_aux_b    go to state 95
+    expr_stmt_aux_b_a  go to state 96
+    augassign          go to state 97
+
+
+State 52
+
+   36 s29: DMAYOR . test s31
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 98
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 53
+
+   34 print_stmt: PRINT s29 .
+
+    $default  reduce using rule 34 (print_stmt)
+
+
+State 54
+
+   35 s29: s30 .
+
+    $default  reduce using rule 35 (s29)
+
+
+State 55
+
+   37 s30: test . s32 comaS
+
+    $default  reduce using rule 42 (s32)
+
+    s32  go to state 99
+
+
+State 56
+
+   52 return_stmt: RETURN return_stmt_aux .
+
+    $default  reduce using rule 52 (return_stmt)
+
+
+State 57
+
+   53 return_stmt_aux: testlist .
+
+    $default  reduce using rule 53 (return_stmt_aux)
+
+
+State 58
+
+  129 exprlist: expr . exprlist_aux comaS
+
+    $default  reduce using rule 131 (exprlist_aux)
+
+    exprlist_aux  go to state 100
+
+
+State 59
+
+   64 for_stmt: FOR exprlist . IN testlist DPUNTO suite s8
+
+    IN  shift, and go to state 101
+
+
+State 60
+
+   63 while_stmt: WHILE test . DPUNTO suite s8
+
+    DPUNTO  shift, and go to state 102
+
+
+State 61
+
+   45 del_stmt: DEL exprlist .
+
+    $default  reduce using rule 45 (del_stmt)
+
+
+State 62
+
+   78 not_test: NOT not_test .
+
+    $default  reduce using rule 78 (not_test)
+
+
+State 63
+
+   58 if_stmt: IF test . DPUNTO suite if_stmt_aux s8
+
+    DPUNTO  shift, and go to state 103
+
+
+State 64
+
+    0 $accept: GOAL $end .
+
+    $default  accept
+
+
+State 65
+
+    2 file_input: file_input NEWLINE .
+
+    $default  reduce using rule 2 (file_input)
+
+
+State 66
+
+    2 file_input: file_input . NEWLINE
+    3           | stmt file_input .
+
+    NEWLINE  shift, and go to state 65
+
+    NEWLINE   [reduce using rule 3 (file_input)]
+    $default  reduce using rule 3 (file_input)
+
+
+State 67
+
+    7 simple_stmt: small_stmt simple_stmt_aux . ss_aux NEWLINE
+   10 simple_stmt_aux: simple_stmt_aux . PCOMA small_stmt
+
+    PCOMA  shift, and go to state 104
+
+    $default  reduce using rule 9 (ss_aux)
+
+    ss_aux  go to state 105
+
+
+State 68
+
+  132 testlist: test testlist_aux . comaS
+  133 testlist_aux: testlist_aux . COMA test
+
+    COMA  shift, and go to state 106
+
+    $default  reduce using rule 44 (comaS)
+
+    comaS  go to state 107
+
+
+State 69
+
+   69 s15: IF . or_test ELSE test
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    or_test     go to state 108
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 70
+
+   71 test: or_test s15 .
+
+    $default  reduce using rule 71 (test)
+
+
+State 71
+
+   72 or_test: and_test or_test_aux .
+   73 or_test_aux: or_test_aux . OR and_test
+
+    OR  shift, and go to state 109
+
+    $default  reduce using rule 72 (or_test)
+
+
+State 72
+
+   75 and_test: not_test and_test_aux .
+   76 and_test_aux: and_test_aux . AND not_test
+
+    AND  shift, and go to state 110
+
+    $default  reduce using rule 75 (and_test)
+
+
+State 73
+
+   80 comparison: expr comparison_aux .
+   81 comparison_aux: comparison_aux . comp_op expr
+
+    IS          shift, and go to state 111
+    NOT         shift, and go to state 112
+    IN          shift, and go to state 113
+    NIGUAL      shift, and go to state 114
+    DIGUAL      shift, and go to state 115
+    MAIGUAL     shift, and go to state 116
+    MEIGUAL     shift, and go to state 117
+    MAYOR       shift, and go to state 118
+    MENOR       shift, and go to state 119
+    MENORMAYOR  shift, and go to state 120
+
+    $default  reduce using rule 80 (comparison)
+
+    comp_op  go to state 121
+
+
+State 74
+
+   94 expr: xor_expr expr_aux .
+   95 expr_aux: expr_aux . PIPE xor_expr
+
+    PIPE  shift, and go to state 122
+
+    $default  reduce using rule 94 (expr)
+
+
+State 75
+
+   97 xor_expr: and_expr xor_expr_aux .
+   98 xor_expr_aux: xor_expr_aux . CIRCUNFLEJO and_expr
+
+    CIRCUNFLEJO  shift, and go to state 123
+
+    $default  reduce using rule 97 (xor_expr)
+
+
+State 76
+
+  100 and_expr: shift_expr and_expr_aux .
+  101 and_expr_aux: and_expr_aux . AMPERSON shift_expr
+
+    AMPERSON  shift, and go to state 124
+
+    $default  reduce using rule 100 (and_expr)
+
+
+State 77
+
+  103 shift_expr: arith_expr shift_expr_aux .
+  104 shift_expr_aux: shift_expr_aux . DMENOR arith_expr
+  105               | shift_expr_aux . DMAYOR arith_expr
+
+    DMAYOR  shift, and go to state 125
+    DMENOR  shift, and go to state 126
+
+    $default  reduce using rule 103 (shift_expr)
+
+
+State 78
+
+  119 factor: ae_aux factor .
+
+    $default  reduce using rule 119 (factor)
+
+
+State 79
+
+  107 arith_expr: term arith_expr_aux .
+  108 arith_expr_aux: arith_expr_aux . ae_aux term
+
+    MENOS  shift, and go to state 15
+    MAS    shift, and go to state 16
+
+    $default  reduce using rule 107 (arith_expr)
+
+    ae_aux  go to state 127
+
+
+State 80
+
+  112 term: factor term_aux .
+  113 term_aux: term_aux . t_aux factor
+
+    PORCEN     shift, and go to state 128
+    DDIAG      shift, and go to state 129
+    DIAG       shift, and go to state 130
+    ASTERISCO  shift, and go to state 131
+
+    $default  reduce using rule 112 (term)
+
+    t_aux  go to state 132
+
+
+State 81
+
+  127 string_aux: string_aux STRING .
+
+    $default  reduce using rule 127 (string_aux)
+
+
+State 82
+
+   20 expr_stmt_aux_b_a: IGUAL . testlist
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 36
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+    testlist    go to state 133
+
+
+State 83
+
+   22 augassign: MASIGUAL .
+
+    $default  reduce using rule 22 (augassign)
+
+
+State 84
+
+   23 augassign: MENOSIGUAL .
+
+    $default  reduce using rule 23 (augassign)
+
+
+State 85
+
+   24 augassign: ASTIGUAL .
+
+    $default  reduce using rule 24 (augassign)
+
+
+State 86
+
+   25 augassign: DIAIGUAL .
+
+    $default  reduce using rule 25 (augassign)
+
+
+State 87
+
+   33 augassign: DDIAIGUAL .
+
+    $default  reduce using rule 33 (augassign)
+
+
+State 88
+
+   26 augassign: PORIGUAL .
+
+    $default  reduce using rule 26 (augassign)
+
+
+State 89
+
+   27 augassign: AMPIGUAL .
+
+    $default  reduce using rule 27 (augassign)
+
+
+State 90
+
+   28 augassign: PIPEIGUAL .
+
+    $default  reduce using rule 28 (augassign)
+
+
+State 91
+
+   29 augassign: CIRCIGUAL .
+
+    $default  reduce using rule 29 (augassign)
+
+
+State 92
+
+   31 augassign: DMAYORIGUAL .
+
+    $default  reduce using rule 31 (augassign)
+
+
+State 93
+
+   30 augassign: DMENORIGUAL .
+
+    $default  reduce using rule 30 (augassign)
+
+
+State 94
+
+   32 augassign: DASTIGUAL .
+
+    $default  reduce using rule 32 (augassign)
+
+
+State 95
+
+   17 expr_stmt: testlist expr_stmt_aux_b .
+
+    $default  reduce using rule 17 (expr_stmt)
+
+
+State 96
+
+   19 expr_stmt_aux_b: expr_stmt_aux_b_a .
+
+    $default  reduce using rule 19 (expr_stmt_aux_b)
+
+
+State 97
+
+   18 expr_stmt_aux_b: augassign . testlist
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 36
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+    testlist    go to state 134
+
+
+State 98
+
+   36 s29: DMAYOR test . s31
+
+    COMA  shift, and go to state 135
+
+    $default  reduce using rule 40 (s31)
+
+    s31  go to state 136
+
+
+State 99
+
+   37 s30: test s32 . comaS
+   41 s32: s32 . COMA test
+
+    COMA  shift, and go to state 137
+
+    $default  reduce using rule 44 (comaS)
+
+    comaS  go to state 138
+
+
+State 100
+
+  129 exprlist: expr exprlist_aux . comaS
+  130 exprlist_aux: exprlist_aux . COMA expr
+
+    COMA  shift, and go to state 139
+
+    $default  reduce using rule 44 (comaS)
+
+    comaS  go to state 140
+
+
+State 101
+
+   64 for_stmt: FOR exprlist IN . testlist DPUNTO suite s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 36
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+    testlist    go to state 141
+
+
+State 102
+
+   63 while_stmt: WHILE test DPUNTO . suite s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    TRUE           shift, and go to state 8
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    NEWLINE        shift, and go to state 142
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    simple_stmt    go to state 143
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    suite          go to state 144
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 103
+
+   58 if_stmt: IF test DPUNTO . suite if_stmt_aux s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    TRUE           shift, and go to state 8
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    NEWLINE        shift, and go to state 142
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    simple_stmt    go to state 143
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    suite          go to state 145
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 104
+
+    8 ss_aux: PCOMA .
+   10 simple_stmt_aux: simple_stmt_aux PCOMA . small_stmt
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    TRUE           shift, and go to state 8
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 8 (ss_aux)
+
+    small_stmt     go to state 146
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 105
+
+    7 simple_stmt: small_stmt simple_stmt_aux ss_aux . NEWLINE
+
+    NEWLINE  shift, and go to state 147
+
+
+State 106
+
+   43 comaS: COMA .
+  133 testlist_aux: testlist_aux COMA . test
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 43 (comaS)
+
+    test        go to state 148
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 107
+
+  132 testlist: test testlist_aux comaS .
+
+    $default  reduce using rule 132 (testlist)
+
+
+State 108
+
+   69 s15: IF or_test . ELSE test
+
+    ELSE  shift, and go to state 149
+
+
+State 109
+
+   73 or_test_aux: or_test_aux OR . and_test
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    and_test    go to state 150
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 110
+
+   76 and_test_aux: and_test_aux AND . not_test
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    not_test    go to state 151
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 111
+
+   92 comp_op: IS .
+   93        | IS . NOT
+
+    NOT  shift, and go to state 152
+
+    $default  reduce using rule 92 (comp_op)
+
+
+State 112
+
+   91 comp_op: NOT . IN
+
+    IN  shift, and go to state 153
+
+
+State 113
+
+   90 comp_op: IN .
+
+    $default  reduce using rule 90 (comp_op)
+
+
+State 114
+
+   89 comp_op: NIGUAL .
+
+    $default  reduce using rule 89 (comp_op)
+
+
+State 115
+
+   85 comp_op: DIGUAL .
+
+    $default  reduce using rule 85 (comp_op)
+
+
+State 116
+
+   86 comp_op: MAIGUAL .
+
+    $default  reduce using rule 86 (comp_op)
+
+
+State 117
+
+   87 comp_op: MEIGUAL .
+
+    $default  reduce using rule 87 (comp_op)
+
+
+State 118
+
+   84 comp_op: MAYOR .
+
+    $default  reduce using rule 84 (comp_op)
+
+
+State 119
+
+   83 comp_op: MENOR .
+
+    $default  reduce using rule 83 (comp_op)
+
+
+State 120
+
+   88 comp_op: MENORMAYOR .
+
+    $default  reduce using rule 88 (comp_op)
+
+
+State 121
+
+   81 comparison_aux: comparison_aux comp_op . expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    expr        go to state 154
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 122
+
+   95 expr_aux: expr_aux PIPE . xor_expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    xor_expr    go to state 155
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 123
+
+   98 xor_expr_aux: xor_expr_aux CIRCUNFLEJO . and_expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    and_expr    go to state 156
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 124
+
+  101 and_expr_aux: and_expr_aux AMPERSON . shift_expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    shift_expr  go to state 157
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 125
+
+  105 shift_expr_aux: shift_expr_aux DMAYOR . arith_expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    arith_expr  go to state 158
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 126
+
+  104 shift_expr_aux: shift_expr_aux DMENOR . arith_expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    arith_expr  go to state 159
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 127
+
+  108 arith_expr_aux: arith_expr_aux ae_aux . term
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    ae_aux      go to state 46
+    term        go to state 160
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 128
+
+  117 t_aux: PORCEN .
+
+    $default  reduce using rule 117 (t_aux)
+
+
+State 129
+
+  118 t_aux: DDIAG .
+
+    $default  reduce using rule 118 (t_aux)
+
+
+State 130
+
+  116 t_aux: DIAG .
+
+    $default  reduce using rule 116 (t_aux)
+
+
+State 131
+
+  115 t_aux: ASTERISCO .
+
+    $default  reduce using rule 115 (t_aux)
+
+
+State 132
+
+  113 term_aux: term_aux t_aux . factor
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    ae_aux      go to state 46
+    factor      go to state 161
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 133
+
+   20 expr_stmt_aux_b_a: IGUAL testlist .
+
+    $default  reduce using rule 20 (expr_stmt_aux_b_a)
+
+
+State 134
+
+   18 expr_stmt_aux_b: augassign testlist .
+
+    $default  reduce using rule 18 (expr_stmt_aux_b)
+
+
+State 135
+
+   39 s31: COMA . test comaS
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 162
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 136
+
+   36 s29: DMAYOR test s31 .
+
+    $default  reduce using rule 36 (s29)
+
+
+State 137
+
+   41 s32: s32 COMA . test
+   43 comaS: COMA .
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 43 (comaS)
+
+    test        go to state 163
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 138
+
+   37 s30: test s32 comaS .
+
+    $default  reduce using rule 37 (s30)
+
+
+State 139
+
+   43 comaS: COMA .
+  130 exprlist_aux: exprlist_aux COMA . expr
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    $default  reduce using rule 43 (comaS)
+
+    expr        go to state 164
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 140
+
+  129 exprlist: expr exprlist_aux comaS .
+
+    $default  reduce using rule 129 (exprlist)
+
+
+State 141
+
+   64 for_stmt: FOR exprlist IN testlist . DPUNTO suite s8
+
+    DPUNTO  shift, and go to state 165
+
+
+State 142
+
+   66 suite: NEWLINE . INDENT suite_aux DEDENT
+
+    INDENT  shift, and go to state 166
+
+
+State 143
+
+   65 suite: simple_stmt .
+
+    $default  reduce using rule 65 (suite)
+
+
+State 144
+
+   63 while_stmt: WHILE test DPUNTO suite . s8
+
+    ELSE  shift, and go to state 167
+
+    $default  reduce using rule 62 (s8)
+
+    s8  go to state 168
+
+
+State 145
+
+   58 if_stmt: IF test DPUNTO suite . if_stmt_aux s8
+
+    $default  reduce using rule 60 (if_stmt_aux)
+
+    if_stmt_aux  go to state 169
+
+
+State 146
+
+   10 simple_stmt_aux: simple_stmt_aux PCOMA small_stmt .
+
+    $default  reduce using rule 10 (simple_stmt_aux)
+
+
+State 147
+
+    7 simple_stmt: small_stmt simple_stmt_aux ss_aux NEWLINE .
+
+    $default  reduce using rule 7 (simple_stmt)
+
+
+State 148
+
+  133 testlist_aux: testlist_aux COMA test .
+
+    $default  reduce using rule 133 (testlist_aux)
+
+
+State 149
+
+   69 s15: IF or_test ELSE . test
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 170
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 150
+
+   73 or_test_aux: or_test_aux OR and_test .
+
+    $default  reduce using rule 73 (or_test_aux)
+
+
+State 151
+
+   76 and_test_aux: and_test_aux AND not_test .
+
+    $default  reduce using rule 76 (and_test_aux)
+
+
+State 152
+
+   93 comp_op: IS NOT .
+
+    $default  reduce using rule 93 (comp_op)
+
+
+State 153
+
+   91 comp_op: NOT IN .
+
+    $default  reduce using rule 91 (comp_op)
+
+
+State 154
+
+   81 comparison_aux: comparison_aux comp_op expr .
+
+    $default  reduce using rule 81 (comparison_aux)
+
+
+State 155
+
+   95 expr_aux: expr_aux PIPE xor_expr .
+
+    $default  reduce using rule 95 (expr_aux)
+
+
+State 156
+
+   98 xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr .
+
+    $default  reduce using rule 98 (xor_expr_aux)
+
+
+State 157
+
+  101 and_expr_aux: and_expr_aux AMPERSON shift_expr .
+
+    $default  reduce using rule 101 (and_expr_aux)
+
+
+State 158
+
+  105 shift_expr_aux: shift_expr_aux DMAYOR arith_expr .
+
+    $default  reduce using rule 105 (shift_expr_aux)
+
+
+State 159
+
+  104 shift_expr_aux: shift_expr_aux DMENOR arith_expr .
+
+    $default  reduce using rule 104 (shift_expr_aux)
+
+
+State 160
+
+  108 arith_expr_aux: arith_expr_aux ae_aux term .
+
+    $default  reduce using rule 108 (arith_expr_aux)
+
+
+State 161
+
+  113 term_aux: term_aux t_aux factor .
+
+    $default  reduce using rule 113 (term_aux)
+
+
+State 162
+
+   39 s31: COMA test . comaS
+
+    COMA  shift, and go to state 171
+
+    $default  reduce using rule 44 (comaS)
+
+    comaS  go to state 172
+
+
+State 163
+
+   41 s32: s32 COMA test .
+
+    $default  reduce using rule 41 (s32)
+
+
+State 164
+
+  130 exprlist_aux: exprlist_aux COMA expr .
+
+    $default  reduce using rule 130 (exprlist_aux)
+
+
+State 165
+
+   64 for_stmt: FOR exprlist IN testlist DPUNTO . suite s8
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    TRUE           shift, and go to state 8
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    NEWLINE        shift, and go to state 142
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    simple_stmt    go to state 143
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    suite          go to state 173
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 166
+
+   66 suite: NEWLINE INDENT . suite_aux DEDENT
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    FOR            shift, and go to state 7
+    TRUE           shift, and go to state 8
+    WHILE          shift, and go to state 9
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    IF             shift, and go to state 12
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    stmt           go to state 174
+    simple_stmt    go to state 22
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    compound_stmt  go to state 32
+    if_stmt        go to state 33
+    while_stmt     go to state 34
+    for_stmt       go to state 35
+    suite_aux      go to state 175
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 167
+
+   61 s8: ELSE . DPUNTO suite
+
+    DPUNTO  shift, and go to state 176
+
+
+State 168
+
+   63 while_stmt: WHILE test DPUNTO suite s8 .
+
+    $default  reduce using rule 63 (while_stmt)
+
+
+State 169
+
+   58 if_stmt: IF test DPUNTO suite if_stmt_aux . s8
+   59 if_stmt_aux: if_stmt_aux . ELIF test DPUNTO suite
+
+    ELIF  shift, and go to state 177
+    ELSE  shift, and go to state 167
+
+    $default  reduce using rule 62 (s8)
+
+    s8  go to state 178
+
+
+State 170
+
+   69 s15: IF or_test ELSE test .
+
+    $default  reduce using rule 69 (s15)
+
+
+State 171
+
+   43 comaS: COMA .
+
+    $default  reduce using rule 43 (comaS)
+
+
+State 172
+
+   39 s31: COMA test comaS .
+
+    $default  reduce using rule 39 (s31)
+
+
+State 173
+
+   64 for_stmt: FOR exprlist IN testlist DPUNTO suite . s8
+
+    ELSE  shift, and go to state 167
+
+    $default  reduce using rule 62 (s8)
+
+    s8  go to state 179
+
+
+State 174
+
+   68 suite_aux: stmt .
+
+    $default  reduce using rule 68 (suite_aux)
+
+
+State 175
+
+   66 suite: NEWLINE INDENT suite_aux . DEDENT
+   67 suite_aux: suite_aux . stmt
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    FOR            shift, and go to state 7
+    TRUE           shift, and go to state 8
+    WHILE          shift, and go to state 9
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    IF             shift, and go to state 12
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+    DEDENT         shift, and go to state 180
+
+    stmt           go to state 181
+    simple_stmt    go to state 22
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    compound_stmt  go to state 32
+    if_stmt        go to state 33
+    while_stmt     go to state 34
+    for_stmt       go to state 35
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 176
+
+   61 s8: ELSE DPUNTO . suite
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    TRUE           shift, and go to state 8
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    NEWLINE        shift, and go to state 142
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    simple_stmt    go to state 143
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    suite          go to state 182
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 177
+
+   59 if_stmt_aux: if_stmt_aux ELIF . test DPUNTO suite
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    FALSE          shift, and go to state 4
+    TRUE           shift, and go to state 8
+    NOT            shift, and go to state 11
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    test        go to state 183
+    or_test     go to state 37
+    and_test    go to state 38
+    not_test    go to state 39
+    comparison  go to state 40
+    expr        go to state 41
+    xor_expr    go to state 42
+    and_expr    go to state 43
+    shift_expr  go to state 44
+    arith_expr  go to state 45
+    ae_aux      go to state 46
+    term        go to state 47
+    factor      go to state 48
+    atom        go to state 49
+    string_aux  go to state 50
+
+
+State 178
+
+   58 if_stmt: IF test DPUNTO suite if_stmt_aux s8 .
+
+    $default  reduce using rule 58 (if_stmt)
+
+
+State 179
+
+   64 for_stmt: FOR exprlist IN testlist DPUNTO suite s8 .
+
+    $default  reduce using rule 64 (for_stmt)
+
+
+State 180
+
+   66 suite: NEWLINE INDENT suite_aux DEDENT .
+
+    $default  reduce using rule 66 (suite)
+
+
+State 181
+
+   67 suite_aux: suite_aux stmt .
+
+    $default  reduce using rule 67 (suite_aux)
+
+
+State 182
+
+   61 s8: ELSE DPUNTO suite .
+
+    $default  reduce using rule 61 (s8)
+
+
+State 183
+
+   59 if_stmt_aux: if_stmt_aux ELIF test . DPUNTO suite
+
+    DPUNTO  shift, and go to state 184
+
+
+State 184
+
+   59 if_stmt_aux: if_stmt_aux ELIF test DPUNTO . suite
+
+    STRING         shift, and go to state 1
+    IDENTIFICADOR  shift, and go to state 2
+    PRINT          shift, and go to state 3
+    FALSE          shift, and go to state 4
+    RETURN         shift, and go to state 5
+    CONTINUE       shift, and go to state 6
+    TRUE           shift, and go to state 8
+    DEL            shift, and go to state 10
+    NOT            shift, and go to state 11
+    PASS           shift, and go to state 13
+    BREAK          shift, and go to state 14
+    MENOS          shift, and go to state 15
+    MAS            shift, and go to state 16
+    NEWLINE        shift, and go to state 142
+    ENTERO         shift, and go to state 17
+    FLOTANTE       shift, and go to state 18
+
+    simple_stmt    go to state 143
+    small_stmt     go to state 23
+    expr_stmt      go to state 24
+    print_stmt     go to state 25
+    del_stmt       go to state 26
+    pass_stmt      go to state 27
+    flow_stmt      go to state 28
+    break_stmt     go to state 29
+    continue_stmt  go to state 30
+    return_stmt    go to state 31
+    suite          go to state 185
+    test           go to state 36
+    or_test        go to state 37
+    and_test       go to state 38
+    not_test       go to state 39
+    comparison     go to state 40
+    expr           go to state 41
+    xor_expr       go to state 42
+    and_expr       go to state 43
+    shift_expr     go to state 44
+    arith_expr     go to state 45
+    ae_aux         go to state 46
+    term           go to state 47
+    factor         go to state 48
+    atom           go to state 49
+    string_aux     go to state 50
+    testlist       go to state 51
+
+
+State 185
+
+   59 if_stmt_aux: if_stmt_aux ELIF test DPUNTO suite .
+
+    $default  reduce using rule 59 (if_stmt_aux)

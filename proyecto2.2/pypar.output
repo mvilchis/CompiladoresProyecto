@@ -37,40 +37,40 @@ Grammar
 
     2 file_input: file_input NEWLINE
     3           | stmt file_input
-    4           | /* empty */
+    4           | %empty
 
     5 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite
 
     6 parameters: APAREN parameters_aux CPAREN
 
     7 parameters_aux: varargslist
-    8               | /* empty */
+    8               | %empty
 
     9 varargslist: varargslist_aux_a varargslist_aux_b
    10            | fpdef val_aux varargslist_aux_c
 
    11 varargslist_aux_a: varargslist_aux_a fpdef val_aux COMA
-   12                  | /* empty */
+   12                  | %empty
 
    13 val_aux: IGUAL test
-   14        | /* empty */
+   14        | %empty
 
    15 varargslist_aux_b: ASTERISCO IDENTIFICADOR n1
    16                  | DASTERISCO IDENTIFICADOR
 
    17 n1: COMA DASTERISCO IDENTIFICADOR
-   18   | /* empty */
+   18   | %empty
 
    19 varargslist_aux_c: n2 n3
 
    20 n2: n2 COMA fpdef val_aux
-   21   | /* empty */
+   21   | %empty
 
    22 n3: COMA
-   23   | /* empty */
+   23   | %empty
 
    24 s5: COMA test
-   25   | /* empty */
+   25   | %empty
 
    26 fpdef: IDENTIFICADOR
    27      | APAREN fplist CPAREN
@@ -78,10 +78,10 @@ Grammar
    28 fplist: fpdef fplist_aux fpl_aux
 
    29 fpl_aux: COMA
-   30        | /* empty */
+   30        | %empty
 
    31 fplist_aux: fplist_aux COMA fpdef
-   32           | /* empty */
+   32           | %empty
 
    33 stmt: simple_stmt
    34     | compound_stmt
@@ -89,10 +89,10 @@ Grammar
    35 simple_stmt: small_stmt simple_stmt_aux ss_aux NEWLINE
 
    36 ss_aux: PCOMA
-   37       | /* empty */
+   37       | %empty
 
    38 simple_stmt_aux: simple_stmt_aux PCOMA small_stmt
-   39                | /* empty */
+   39                | %empty
 
    40 small_stmt: expr_stmt
    41           | print_stmt
@@ -108,7 +108,7 @@ Grammar
    49                | expr_stmt_aux_b_a
 
    50 expr_stmt_aux_b_a: IGUAL testlist
-   51                  | /* empty */
+   51                  | %empty
 
    52 augassign: MASIGUAL
    53          | MENOSIGUAL
@@ -129,16 +129,16 @@ Grammar
    66    | DMAYOR test s31
 
    67 s30: test s32 comaS
-   68    | /* empty */
+   68    | %empty
 
    69 s31: COMA test comaS
-   70    | /* empty */
+   70    | %empty
 
    71 s32: s32 COMA test
-   72    | /* empty */
+   72    | %empty
 
    73 comaS: COMA
-   74      | /* empty */
+   74      | %empty
 
    75 del_stmt: DEL exprlist
 
@@ -155,17 +155,17 @@ Grammar
    82 return_stmt: RETURN return_stmt_aux
 
    83 return_stmt_aux: testlist
-   84                | /* empty */
+   84                | %empty
 
    85 global_stmt: GLOBAL IDENTIFICADOR global_stmt_aux
 
    86 global_stmt_aux: global_stmt_aux COMA IDENTIFICADOR
-   87                | /* empty */
+   87                | %empty
 
    88 exec_stmt: EXEC expr s7
 
    89 s7: IN test s5
-   90   | /* empty */
+   90   | %empty
 
    91 compound_stmt: if_stmt
    92              | while_stmt
@@ -176,10 +176,10 @@ Grammar
    96 if_stmt: IF test DPUNTO suite if_stmt_aux s8
 
    97 if_stmt_aux: if_stmt_aux ELIF test DPUNTO suite
-   98            | /* empty */
+   98            | %empty
 
    99 s8: ELSE DPUNTO suite
-  100   | /* empty */
+  100   | %empty
 
   101 while_stmt: WHILE test DPUNTO suite s8
 
@@ -188,12 +188,12 @@ Grammar
   103 with_stmt: WITH with_item with_stmt_aux DPUNTO suite
 
   104 with_stmt_aux: with_stmt_aux COMA with_item
-  105              | /* empty */
+  105              | %empty
 
   106 with_item: test s10
 
   107 s10: AS expr
-  108    | /* empty */
+  108    | %empty
 
   109 suite: simple_stmt
   110      | NEWLINE INDENT suite_aux DEDENT
@@ -211,19 +211,19 @@ Grammar
   117    | COMA old_test
 
   118 s15: IF or_test ELSE test
-  119    | /* empty */
+  119    | %empty
 
   120 test: or_test s15
 
   121 or_test: and_test or_test_aux
 
   122 or_test_aux: or_test_aux OR and_test
-  123            | /* empty */
+  123            | %empty
 
   124 and_test: not_test and_test_aux
 
   125 and_test_aux: and_test_aux AND not_test
-  126             | /* empty */
+  126             | %empty
 
   127 not_test: NOT not_test
   128         | comparison
@@ -231,7 +231,7 @@ Grammar
   129 comparison: expr comparison_aux
 
   130 comparison_aux: comparison_aux comp_op expr
-  131               | /* empty */
+  131               | %empty
 
   132 comp_op: MENOR
   133        | MAYOR
@@ -248,28 +248,28 @@ Grammar
   143 expr: xor_expr expr_aux
 
   144 expr_aux: expr_aux PIPE xor_expr
-  145         | /* empty */
+  145         | %empty
 
   146 xor_expr: and_expr xor_expr_aux
 
   147 xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr
-  148             | /* empty */
+  148             | %empty
 
   149 and_expr: shift_expr and_expr_aux
 
   150 and_expr_aux: and_expr_aux AMPERSON shift_expr
-  151             | /* empty */
+  151             | %empty
 
   152 shift_expr: arith_expr shift_expr_aux
 
   153 shift_expr_aux: shift_expr_aux DMENOR arith_expr
   154               | shift_expr_aux DMAYOR arith_expr
-  155               | /* empty */
+  155               | %empty
 
   156 arith_expr: term arith_expr_aux
 
   157 arith_expr_aux: arith_expr_aux ae_aux term
-  158               | /* empty */
+  158               | %empty
 
   159 ae_aux: MAS
   160       | MENOS
@@ -277,7 +277,7 @@ Grammar
   161 term: factor term_aux
 
   162 term_aux: term_aux t_aux factor
-  163         | /* empty */
+  163         | %empty
 
   164 t_aux: ASTERISCO
   165      | DIAG
@@ -293,28 +293,28 @@ Grammar
   172 power: atom power_aux s16
 
   173 s16: DASTERISCO factor
-  174    | /* empty */
+  174    | %empty
 
   175 s17: testlist_comp
-  176    | /* empty */
+  176    | %empty
 
   177 s18: listmaker
-  178    | /* empty */
+  178    | %empty
 
   179 s19: dictorsetmaker
-  180    | /* empty */
+  180    | %empty
 
   181 s20: arglist
-  182    | /* empty */
+  182    | %empty
 
   183 s21: test
-  184    | /* empty */
+  184    | %empty
 
   185 s22: sliceop
-  186    | /* empty */
+  186    | %empty
 
   187 power_aux: power_aux trailer
-  188          | /* empty */
+  188          | %empty
 
   189 atom: APAREN s17 CPAREN
   190     | ACORCHETE s18 CCORCHETE
@@ -335,7 +335,7 @@ Grammar
   202              | lm_aux comaS
 
   203 lm_aux: lm_aux COMA test
-  204       | /* empty */
+  204       | %empty
 
   205 testlist_comp: test testlist_comp_aux
 
@@ -343,7 +343,7 @@ Grammar
   207                  | tc_aux comaS
 
   208 tc_aux: tc_aux COMA test
-  209       | /* empty */
+  209       | %empty
 
   210 trailer: APAREN s20 CPAREN
   211        | ACORCHETE subscriptlist CCORCHETE
@@ -352,7 +352,7 @@ Grammar
   213 subscriptlist: subscript subscriptlist_aux comaS
 
   214 subscriptlist_aux: subscriptlist_aux COMA subscript
-  215                  | /* empty */
+  215                  | %empty
 
   216 subscript: PUNTO PUNTO PUNTO
   217          | test
@@ -363,12 +363,12 @@ Grammar
   220 exprlist: expr exprlist_aux comaS
 
   221 exprlist_aux: exprlist_aux COMA expr
-  222             | /* empty */
+  222             | %empty
 
   223 testlist: test testlist_aux comaS
 
   224 testlist_aux: testlist_aux COMA test
-  225             | /* empty */
+  225             | %empty
 
   226 dictorsetmaker: dictorsetmaker_aux_a
   227               | dictorsetmaker_aux_b
@@ -379,7 +379,7 @@ Grammar
   230          | dsm_aux_a_a comaS
 
   231 dsm_aux_a_a: dsm_aux_a_a COMA test DPUNTO test
-  232            | /* empty */
+  232            | %empty
 
   233 dictorsetmaker_aux_b: test dsm_aux_b
 
@@ -387,28 +387,28 @@ Grammar
   235          | dsm_aux_b_a comaS
 
   236 dsm_aux_b_a: dsm_aux_b_a COMA test
-  237            | /* empty */
+  237            | %empty
 
   238 arglist: arglist_aux_a arglist_aux_b
 
   239 arglist_aux_a: arglist_aux_a argument COMA
-  240              | /* empty */
+  240              | %empty
 
   241 arglist_aux_b: argument comaS
   242              | ASTERISCO test al_aux s25
   243              | DASTERISCO test
 
   244 al_aux: al_aux COMA argument
-  245       | /* empty */
+  245       | %empty
 
   246 s25: COMA DASTERISCO test
-  247    | /* empty */
+  247    | %empty
 
   248 argument: test s26
   249         | test IGUAL test
 
   250 s26: comp_for
-  251    | /* empty */
+  251    | %empty
 
   252 list_iter: list_for
   253          | list_if
@@ -418,7 +418,7 @@ Grammar
   255 list_if: IF old_test s27
 
   256 s27: list_iter
-  257    | /* empty */
+  257    | %empty
 
   258 comp_iter: comp_for
   259          | comp_if
@@ -428,7 +428,7 @@ Grammar
   261 comp_if: IF old_test s28
 
   262 s28: comp_iter
-  263    | /* empty */
+  263    | %empty
 
 
 Terminals, with rules where they appear
@@ -811,7 +811,7 @@ s28 (232)
     on left: 262 263, on right: 260 261
 
 
-state 0
+State 0
 
     0 $accept: . GOAL $end
 
@@ -883,21 +883,21 @@ state 0
     testlist       go to state 63
 
 
-state 1
+State 1
 
   199 string_aux: STRING .
 
     $default  reduce using rule 199 (string_aux)
 
 
-state 2
+State 2
 
   192 atom: IDENTIFICADOR .
 
     $default  reduce using rule 192 (atom)
 
 
-state 3
+State 3
 
    64 print_stmt: PRINT . s29
 
@@ -937,14 +937,14 @@ state 3
     string_aux  go to state 62
 
 
-state 4
+State 4
 
   197 atom: FALSE .
 
     $default  reduce using rule 197 (atom)
 
 
-state 5
+State 5
 
    82 return_stmt: RETURN . return_stmt_aux
 
@@ -983,14 +983,14 @@ state 5
     testlist         go to state 69
 
 
-state 6
+State 6
 
    81 continue_stmt: CONTINUE .
 
     $default  reduce using rule 81 (continue_stmt)
 
 
-state 7
+State 7
 
   102 for_stmt: FOR . exprlist IN testlist DPUNTO suite s8
 
@@ -1020,21 +1020,21 @@ state 7
     exprlist    go to state 71
 
 
-state 8
+State 8
 
   196 atom: TRUE .
 
     $default  reduce using rule 196 (atom)
 
 
-state 9
+State 9
 
     5 funcdef: DEF . IDENTIFICADOR parameters DPUNTO suite
 
     IDENTIFICADOR  shift, and go to state 72
 
 
-state 10
+State 10
 
   101 while_stmt: WHILE . test DPUNTO suite s8
 
@@ -1069,7 +1069,7 @@ state 10
     string_aux  go to state 62
 
 
-state 11
+State 11
 
    75 del_stmt: DEL . exprlist
 
@@ -1099,14 +1099,14 @@ state 11
     exprlist    go to state 74
 
 
-state 12
+State 12
 
    85 global_stmt: GLOBAL . IDENTIFICADOR global_stmt_aux
 
     IDENTIFICADOR  shift, and go to state 75
 
 
-state 13
+State 13
 
   127 not_test: NOT . not_test
 
@@ -1138,7 +1138,7 @@ state 13
     string_aux  go to state 62
 
 
-state 14
+State 14
 
   103 with_stmt: WITH . with_item with_stmt_aux DPUNTO suite
 
@@ -1174,7 +1174,7 @@ state 14
     string_aux  go to state 62
 
 
-state 15
+State 15
 
    96 if_stmt: IF . test DPUNTO suite if_stmt_aux s8
 
@@ -1209,21 +1209,21 @@ state 15
     string_aux  go to state 62
 
 
-state 16
+State 16
 
    76 pass_stmt: PASS .
 
     $default  reduce using rule 76 (pass_stmt)
 
 
-state 17
+State 17
 
    80 break_stmt: BREAK .
 
     $default  reduce using rule 80 (break_stmt)
 
 
-state 18
+State 18
 
    88 exec_stmt: EXEC . expr s7
 
@@ -1252,21 +1252,21 @@ state 18
     string_aux  go to state 62
 
 
-state 19
+State 19
 
   171 factor_aux: MENOS .
 
     $default  reduce using rule 171 (factor_aux)
 
 
-state 20
+State 20
 
   170 factor_aux: MAS .
 
     $default  reduce using rule 170 (factor_aux)
 
 
-state 21
+State 21
 
   189 atom: APAREN . s17 CPAREN
 
@@ -1305,7 +1305,7 @@ state 21
     testlist_comp  go to state 83
 
 
-state 22
+State 22
 
   190 atom: ACORCHETE . s18 CCORCHETE
 
@@ -1344,7 +1344,7 @@ state 22
     listmaker   go to state 86
 
 
-state 23
+State 23
 
   191 atom: ALLAVE . s19 CLLAVE
 
@@ -1385,28 +1385,28 @@ state 23
     dictorsetmaker_aux_b  go to state 91
 
 
-state 24
+State 24
 
   194 atom: ENTERO .
 
     $default  reduce using rule 194 (atom)
 
 
-state 25
+State 25
 
   193 atom: FLOTANTE .
 
     $default  reduce using rule 193 (atom)
 
 
-state 26
+State 26
 
     0 $accept: GOAL . $end
 
     $end  shift, and go to state 92
 
 
-state 27
+State 27
 
     1 GOAL: file_input .
     2 file_input: file_input . NEWLINE
@@ -1416,14 +1416,14 @@ state 27
     $default  reduce using rule 1 (GOAL)
 
 
-state 28
+State 28
 
    95 compound_stmt: funcdef .
 
     $default  reduce using rule 95 (compound_stmt)
 
 
-state 29
+State 29
 
     3 file_input: stmt . file_input
 
@@ -1494,14 +1494,14 @@ state 29
     testlist       go to state 63
 
 
-state 30
+State 30
 
    33 stmt: simple_stmt .
 
     $default  reduce using rule 33 (stmt)
 
 
-state 31
+State 31
 
    35 simple_stmt: small_stmt . simple_stmt_aux ss_aux NEWLINE
 
@@ -1510,112 +1510,112 @@ state 31
     simple_stmt_aux  go to state 95
 
 
-state 32
+State 32
 
    40 small_stmt: expr_stmt .
 
     $default  reduce using rule 40 (small_stmt)
 
 
-state 33
+State 33
 
    41 small_stmt: print_stmt .
 
     $default  reduce using rule 41 (small_stmt)
 
 
-state 34
+State 34
 
    42 small_stmt: del_stmt .
 
     $default  reduce using rule 42 (small_stmt)
 
 
-state 35
+State 35
 
    43 small_stmt: pass_stmt .
 
     $default  reduce using rule 43 (small_stmt)
 
 
-state 36
+State 36
 
    44 small_stmt: flow_stmt .
 
     $default  reduce using rule 44 (small_stmt)
 
 
-state 37
+State 37
 
    77 flow_stmt: break_stmt .
 
     $default  reduce using rule 77 (flow_stmt)
 
 
-state 38
+State 38
 
    78 flow_stmt: continue_stmt .
 
     $default  reduce using rule 78 (flow_stmt)
 
 
-state 39
+State 39
 
    79 flow_stmt: return_stmt .
 
     $default  reduce using rule 79 (flow_stmt)
 
 
-state 40
+State 40
 
    45 small_stmt: global_stmt .
 
     $default  reduce using rule 45 (small_stmt)
 
 
-state 41
+State 41
 
    46 small_stmt: exec_stmt .
 
     $default  reduce using rule 46 (small_stmt)
 
 
-state 42
+State 42
 
    34 stmt: compound_stmt .
 
     $default  reduce using rule 34 (stmt)
 
 
-state 43
+State 43
 
    91 compound_stmt: if_stmt .
 
     $default  reduce using rule 91 (compound_stmt)
 
 
-state 44
+State 44
 
    92 compound_stmt: while_stmt .
 
     $default  reduce using rule 92 (compound_stmt)
 
 
-state 45
+State 45
 
    93 compound_stmt: for_stmt .
 
     $default  reduce using rule 93 (compound_stmt)
 
 
-state 46
+State 46
 
    94 compound_stmt: with_stmt .
 
     $default  reduce using rule 94 (compound_stmt)
 
 
-state 47
+State 47
 
   223 testlist: test . testlist_aux comaS
 
@@ -1624,7 +1624,7 @@ state 47
     testlist_aux  go to state 96
 
 
-state 48
+State 48
 
   120 test: or_test . s15
 
@@ -1635,7 +1635,7 @@ state 48
     s15  go to state 98
 
 
-state 49
+State 49
 
   121 or_test: and_test . or_test_aux
 
@@ -1644,7 +1644,7 @@ state 49
     or_test_aux  go to state 99
 
 
-state 50
+State 50
 
   124 and_test: not_test . and_test_aux
 
@@ -1653,14 +1653,14 @@ state 50
     and_test_aux  go to state 100
 
 
-state 51
+State 51
 
   128 not_test: comparison .
 
     $default  reduce using rule 128 (not_test)
 
 
-state 52
+State 52
 
   129 comparison: expr . comparison_aux
 
@@ -1669,7 +1669,7 @@ state 52
     comparison_aux  go to state 101
 
 
-state 53
+State 53
 
   143 expr: xor_expr . expr_aux
 
@@ -1678,7 +1678,7 @@ state 53
     expr_aux  go to state 102
 
 
-state 54
+State 54
 
   146 xor_expr: and_expr . xor_expr_aux
 
@@ -1687,7 +1687,7 @@ state 54
     xor_expr_aux  go to state 103
 
 
-state 55
+State 55
 
   149 and_expr: shift_expr . and_expr_aux
 
@@ -1696,7 +1696,7 @@ state 55
     and_expr_aux  go to state 104
 
 
-state 56
+State 56
 
   152 shift_expr: arith_expr . shift_expr_aux
 
@@ -1705,7 +1705,7 @@ state 56
     shift_expr_aux  go to state 105
 
 
-state 57
+State 57
 
   156 arith_expr: term . arith_expr_aux
 
@@ -1714,7 +1714,7 @@ state 57
     arith_expr_aux  go to state 106
 
 
-state 58
+State 58
 
   161 term: factor . term_aux
 
@@ -1723,7 +1723,7 @@ state 58
     term_aux  go to state 107
 
 
-state 59
+State 59
 
   168 factor: factor_aux . factor
 
@@ -1746,14 +1746,14 @@ state 59
     string_aux  go to state 62
 
 
-state 60
+State 60
 
   169 factor: power .
 
     $default  reduce using rule 169 (factor)
 
 
-state 61
+State 61
 
   172 power: atom . power_aux s16
 
@@ -1762,7 +1762,7 @@ state 61
     power_aux  go to state 109
 
 
-state 62
+State 62
 
   195 atom: string_aux .
   198 string_aux: string_aux . STRING
@@ -1772,7 +1772,7 @@ state 62
     $default  reduce using rule 195 (atom)
 
 
-state 63
+State 63
 
    47 expr_stmt: testlist . expr_stmt_aux_b
 
@@ -1797,7 +1797,7 @@ state 63
     augassign          go to state 126
 
 
-state 64
+State 64
 
    66 s29: DMAYOR . test s31
 
@@ -1832,21 +1832,21 @@ state 64
     string_aux  go to state 62
 
 
-state 65
+State 65
 
    64 print_stmt: PRINT s29 .
 
     $default  reduce using rule 64 (print_stmt)
 
 
-state 66
+State 66
 
    65 s29: s30 .
 
     $default  reduce using rule 65 (s29)
 
 
-state 67
+State 67
 
    67 s30: test . s32 comaS
 
@@ -1855,21 +1855,21 @@ state 67
     s32  go to state 128
 
 
-state 68
+State 68
 
    82 return_stmt: RETURN return_stmt_aux .
 
     $default  reduce using rule 82 (return_stmt)
 
 
-state 69
+State 69
 
    83 return_stmt_aux: testlist .
 
     $default  reduce using rule 83 (return_stmt_aux)
 
 
-state 70
+State 70
 
   220 exprlist: expr . exprlist_aux comaS
 
@@ -1878,14 +1878,14 @@ state 70
     exprlist_aux  go to state 129
 
 
-state 71
+State 71
 
   102 for_stmt: FOR exprlist . IN testlist DPUNTO suite s8
 
     IN  shift, and go to state 130
 
 
-state 72
+State 72
 
     5 funcdef: DEF IDENTIFICADOR . parameters DPUNTO suite
 
@@ -1894,21 +1894,21 @@ state 72
     parameters  go to state 132
 
 
-state 73
+State 73
 
   101 while_stmt: WHILE test . DPUNTO suite s8
 
     DPUNTO  shift, and go to state 133
 
 
-state 74
+State 74
 
    75 del_stmt: DEL exprlist .
 
     $default  reduce using rule 75 (del_stmt)
 
 
-state 75
+State 75
 
    85 global_stmt: GLOBAL IDENTIFICADOR . global_stmt_aux
 
@@ -1917,14 +1917,14 @@ state 75
     global_stmt_aux  go to state 134
 
 
-state 76
+State 76
 
   127 not_test: NOT not_test .
 
     $default  reduce using rule 127 (not_test)
 
 
-state 77
+State 77
 
   103 with_stmt: WITH with_item . with_stmt_aux DPUNTO suite
 
@@ -1933,7 +1933,7 @@ state 77
     with_stmt_aux  go to state 135
 
 
-state 78
+State 78
 
   106 with_item: test . s10
 
@@ -1944,14 +1944,14 @@ state 78
     s10  go to state 137
 
 
-state 79
+State 79
 
    96 if_stmt: IF test . DPUNTO suite if_stmt_aux s8
 
     DPUNTO  shift, and go to state 138
 
 
-state 80
+State 80
 
    88 exec_stmt: EXEC expr . s7
 
@@ -1962,7 +1962,7 @@ state 80
     s7  go to state 140
 
 
-state 81
+State 81
 
   205 testlist_comp: test . testlist_comp_aux
 
@@ -1975,21 +1975,21 @@ state 81
     comp_for           go to state 144
 
 
-state 82
+State 82
 
   189 atom: APAREN s17 . CPAREN
 
     CPAREN  shift, and go to state 145
 
 
-state 83
+State 83
 
   175 s17: testlist_comp .
 
     $default  reduce using rule 175 (s17)
 
 
-state 84
+State 84
 
   200 listmaker: test . listmaker_aux
 
@@ -2002,21 +2002,21 @@ state 84
     list_for       go to state 149
 
 
-state 85
+State 85
 
   190 atom: ACORCHETE s18 . CCORCHETE
 
     CCORCHETE  shift, and go to state 150
 
 
-state 86
+State 86
 
   177 s18: listmaker .
 
     $default  reduce using rule 177 (s18)
 
 
-state 87
+State 87
 
   228 dictorsetmaker_aux_a: test . DPUNTO test dsm_aux_a
   233 dictorsetmaker_aux_b: test . dsm_aux_b
@@ -2031,49 +2031,49 @@ state 87
     comp_for     go to state 154
 
 
-state 88
+State 88
 
   191 atom: ALLAVE s19 . CLLAVE
 
     CLLAVE  shift, and go to state 155
 
 
-state 89
+State 89
 
   179 s19: dictorsetmaker .
 
     $default  reduce using rule 179 (s19)
 
 
-state 90
+State 90
 
   226 dictorsetmaker: dictorsetmaker_aux_a .
 
     $default  reduce using rule 226 (dictorsetmaker)
 
 
-state 91
+State 91
 
   227 dictorsetmaker: dictorsetmaker_aux_b .
 
     $default  reduce using rule 227 (dictorsetmaker)
 
 
-state 92
+State 92
 
     0 $accept: GOAL $end .
 
     $default  accept
 
 
-state 93
+State 93
 
     2 file_input: file_input NEWLINE .
 
     $default  reduce using rule 2 (file_input)
 
 
-state 94
+State 94
 
     2 file_input: file_input . NEWLINE
     3           | stmt file_input .
@@ -2084,7 +2084,7 @@ state 94
     $default  reduce using rule 3 (file_input)
 
 
-state 95
+State 95
 
    35 simple_stmt: small_stmt simple_stmt_aux . ss_aux NEWLINE
    38 simple_stmt_aux: simple_stmt_aux . PCOMA small_stmt
@@ -2096,7 +2096,7 @@ state 95
     ss_aux  go to state 157
 
 
-state 96
+State 96
 
   223 testlist: test testlist_aux . comaS
   224 testlist_aux: testlist_aux . COMA test
@@ -2108,7 +2108,7 @@ state 96
     comaS  go to state 159
 
 
-state 97
+State 97
 
   118 s15: IF . or_test ELSE test
 
@@ -2142,14 +2142,14 @@ state 97
     string_aux  go to state 62
 
 
-state 98
+State 98
 
   120 test: or_test s15 .
 
     $default  reduce using rule 120 (test)
 
 
-state 99
+State 99
 
   121 or_test: and_test or_test_aux .
   122 or_test_aux: or_test_aux . OR and_test
@@ -2159,7 +2159,7 @@ state 99
     $default  reduce using rule 121 (or_test)
 
 
-state 100
+State 100
 
   124 and_test: not_test and_test_aux .
   125 and_test_aux: and_test_aux . AND not_test
@@ -2169,7 +2169,7 @@ state 100
     $default  reduce using rule 124 (and_test)
 
 
-state 101
+State 101
 
   129 comparison: expr comparison_aux .
   130 comparison_aux: comparison_aux . comp_op expr
@@ -2190,7 +2190,7 @@ state 101
     comp_op  go to state 173
 
 
-state 102
+State 102
 
   143 expr: xor_expr expr_aux .
   144 expr_aux: expr_aux . PIPE xor_expr
@@ -2200,7 +2200,7 @@ state 102
     $default  reduce using rule 143 (expr)
 
 
-state 103
+State 103
 
   146 xor_expr: and_expr xor_expr_aux .
   147 xor_expr_aux: xor_expr_aux . CIRCUNFLEJO and_expr
@@ -2210,7 +2210,7 @@ state 103
     $default  reduce using rule 146 (xor_expr)
 
 
-state 104
+State 104
 
   149 and_expr: shift_expr and_expr_aux .
   150 and_expr_aux: and_expr_aux . AMPERSON shift_expr
@@ -2220,7 +2220,7 @@ state 104
     $default  reduce using rule 149 (and_expr)
 
 
-state 105
+State 105
 
   152 shift_expr: arith_expr shift_expr_aux .
   153 shift_expr_aux: shift_expr_aux . DMENOR arith_expr
@@ -2232,7 +2232,7 @@ state 105
     $default  reduce using rule 152 (shift_expr)
 
 
-state 106
+State 106
 
   156 arith_expr: term arith_expr_aux .
   157 arith_expr_aux: arith_expr_aux . ae_aux term
@@ -2245,7 +2245,7 @@ state 106
     ae_aux  go to state 181
 
 
-state 107
+State 107
 
   161 term: factor term_aux .
   162 term_aux: term_aux . t_aux factor
@@ -2260,14 +2260,14 @@ state 107
     t_aux  go to state 186
 
 
-state 108
+State 108
 
   168 factor: factor_aux factor .
 
     $default  reduce using rule 168 (factor)
 
 
-state 109
+State 109
 
   172 power: atom power_aux . s16
   187 power_aux: power_aux . trailer
@@ -2283,14 +2283,14 @@ state 109
     trailer  go to state 192
 
 
-state 110
+State 110
 
   198 string_aux: string_aux STRING .
 
     $default  reduce using rule 198 (string_aux)
 
 
-state 111
+State 111
 
    50 expr_stmt_aux_b_a: IGUAL . testlist
 
@@ -2326,105 +2326,105 @@ state 111
     testlist    go to state 193
 
 
-state 112
+State 112
 
    52 augassign: MASIGUAL .
 
     $default  reduce using rule 52 (augassign)
 
 
-state 113
+State 113
 
    53 augassign: MENOSIGUAL .
 
     $default  reduce using rule 53 (augassign)
 
 
-state 114
+State 114
 
    54 augassign: ASTIGUAL .
 
     $default  reduce using rule 54 (augassign)
 
 
-state 115
+State 115
 
    55 augassign: DIAIGUAL .
 
     $default  reduce using rule 55 (augassign)
 
 
-state 116
+State 116
 
    63 augassign: DDIAIGUAL .
 
     $default  reduce using rule 63 (augassign)
 
 
-state 117
+State 117
 
    56 augassign: PORIGUAL .
 
     $default  reduce using rule 56 (augassign)
 
 
-state 118
+State 118
 
    57 augassign: AMPIGUAL .
 
     $default  reduce using rule 57 (augassign)
 
 
-state 119
+State 119
 
    58 augassign: PIPEIGUAL .
 
     $default  reduce using rule 58 (augassign)
 
 
-state 120
+State 120
 
    59 augassign: CIRCIGUAL .
 
     $default  reduce using rule 59 (augassign)
 
 
-state 121
+State 121
 
    61 augassign: DMAYORIGUAL .
 
     $default  reduce using rule 61 (augassign)
 
 
-state 122
+State 122
 
    60 augassign: DMENORIGUAL .
 
     $default  reduce using rule 60 (augassign)
 
 
-state 123
+State 123
 
    62 augassign: DASTIGUAL .
 
     $default  reduce using rule 62 (augassign)
 
 
-state 124
+State 124
 
    47 expr_stmt: testlist expr_stmt_aux_b .
 
     $default  reduce using rule 47 (expr_stmt)
 
 
-state 125
+State 125
 
    49 expr_stmt_aux_b: expr_stmt_aux_b_a .
 
     $default  reduce using rule 49 (expr_stmt_aux_b)
 
 
-state 126
+State 126
 
    48 expr_stmt_aux_b: augassign . testlist
 
@@ -2460,7 +2460,7 @@ state 126
     testlist    go to state 194
 
 
-state 127
+State 127
 
    66 s29: DMAYOR test . s31
 
@@ -2471,7 +2471,7 @@ state 127
     s31  go to state 196
 
 
-state 128
+State 128
 
    67 s30: test s32 . comaS
    71 s32: s32 . COMA test
@@ -2483,7 +2483,7 @@ state 128
     comaS  go to state 198
 
 
-state 129
+State 129
 
   220 exprlist: expr exprlist_aux . comaS
   221 exprlist_aux: exprlist_aux . COMA expr
@@ -2495,7 +2495,7 @@ state 129
     comaS  go to state 200
 
 
-state 130
+State 130
 
   102 for_stmt: FOR exprlist IN . testlist DPUNTO suite s8
 
@@ -2531,7 +2531,7 @@ state 130
     testlist    go to state 201
 
 
-state 131
+State 131
 
     6 parameters: APAREN . parameters_aux CPAREN
 
@@ -2549,14 +2549,14 @@ state 131
     fpdef              go to state 207
 
 
-state 132
+State 132
 
     5 funcdef: DEF IDENTIFICADOR parameters . DPUNTO suite
 
     DPUNTO  shift, and go to state 208
 
 
-state 133
+State 133
 
   101 while_stmt: WHILE test DPUNTO . suite s8
 
@@ -2614,7 +2614,7 @@ state 133
     testlist       go to state 63
 
 
-state 134
+State 134
 
    85 global_stmt: GLOBAL IDENTIFICADOR global_stmt_aux .
    86 global_stmt_aux: global_stmt_aux . COMA IDENTIFICADOR
@@ -2624,7 +2624,7 @@ state 134
     $default  reduce using rule 85 (global_stmt)
 
 
-state 135
+State 135
 
   103 with_stmt: WITH with_item with_stmt_aux . DPUNTO suite
   104 with_stmt_aux: with_stmt_aux . COMA with_item
@@ -2633,7 +2633,7 @@ state 135
     DPUNTO  shift, and go to state 214
 
 
-state 136
+State 136
 
   107 s10: AS . expr
 
@@ -2662,14 +2662,14 @@ state 136
     string_aux  go to state 62
 
 
-state 137
+State 137
 
   106 with_item: test s10 .
 
     $default  reduce using rule 106 (with_item)
 
 
-state 138
+State 138
 
    96 if_stmt: IF test DPUNTO . suite if_stmt_aux s8
 
@@ -2727,7 +2727,7 @@ state 138
     testlist       go to state 63
 
 
-state 139
+State 139
 
    89 s7: IN . test s5
 
@@ -2762,14 +2762,14 @@ state 139
     string_aux  go to state 62
 
 
-state 140
+State 140
 
    88 exec_stmt: EXEC expr s7 .
 
     $default  reduce using rule 88 (exec_stmt)
 
 
-state 141
+State 141
 
   260 comp_for: FOR . exprlist IN or_test s28
 
@@ -2799,14 +2799,14 @@ state 141
     exprlist    go to state 218
 
 
-state 142
+State 142
 
   205 testlist_comp: test testlist_comp_aux .
 
     $default  reduce using rule 205 (testlist_comp)
 
 
-state 143
+State 143
 
   207 testlist_comp_aux: tc_aux . comaS
   208 tc_aux: tc_aux . COMA test
@@ -2818,21 +2818,21 @@ state 143
     comaS  go to state 220
 
 
-state 144
+State 144
 
   206 testlist_comp_aux: comp_for .
 
     $default  reduce using rule 206 (testlist_comp_aux)
 
 
-state 145
+State 145
 
   189 atom: APAREN s17 CPAREN .
 
     $default  reduce using rule 189 (atom)
 
 
-state 146
+State 146
 
   254 list_for: FOR . exprlist IN testlist_safe s27
 
@@ -2862,14 +2862,14 @@ state 146
     exprlist    go to state 221
 
 
-state 147
+State 147
 
   200 listmaker: test listmaker_aux .
 
     $default  reduce using rule 200 (listmaker)
 
 
-state 148
+State 148
 
   202 listmaker_aux: lm_aux . comaS
   203 lm_aux: lm_aux . COMA test
@@ -2881,21 +2881,21 @@ state 148
     comaS  go to state 223
 
 
-state 149
+State 149
 
   201 listmaker_aux: list_for .
 
     $default  reduce using rule 201 (listmaker_aux)
 
 
-state 150
+State 150
 
   190 atom: ACORCHETE s18 CCORCHETE .
 
     $default  reduce using rule 190 (atom)
 
 
-state 151
+State 151
 
   228 dictorsetmaker_aux_a: test DPUNTO . test dsm_aux_a
 
@@ -2930,14 +2930,14 @@ state 151
     string_aux  go to state 62
 
 
-state 152
+State 152
 
   233 dictorsetmaker_aux_b: test dsm_aux_b .
 
     $default  reduce using rule 233 (dictorsetmaker_aux_b)
 
 
-state 153
+State 153
 
   235 dsm_aux_b: dsm_aux_b_a . comaS
   236 dsm_aux_b_a: dsm_aux_b_a . COMA test
@@ -2949,21 +2949,21 @@ state 153
     comaS  go to state 226
 
 
-state 154
+State 154
 
   234 dsm_aux_b: comp_for .
 
     $default  reduce using rule 234 (dsm_aux_b)
 
 
-state 155
+State 155
 
   191 atom: ALLAVE s19 CLLAVE .
 
     $default  reduce using rule 191 (atom)
 
 
-state 156
+State 156
 
    36 ss_aux: PCOMA .
    38 simple_stmt_aux: simple_stmt_aux PCOMA . small_stmt
@@ -3021,14 +3021,14 @@ state 156
     testlist       go to state 63
 
 
-state 157
+State 157
 
    35 simple_stmt: small_stmt simple_stmt_aux ss_aux . NEWLINE
 
     NEWLINE  shift, and go to state 228
 
 
-state 158
+State 158
 
    73 comaS: COMA .
   224 testlist_aux: testlist_aux COMA . test
@@ -3066,21 +3066,21 @@ state 158
     string_aux  go to state 62
 
 
-state 159
+State 159
 
   223 testlist: test testlist_aux comaS .
 
     $default  reduce using rule 223 (testlist)
 
 
-state 160
+State 160
 
   118 s15: IF or_test . ELSE test
 
     ELSE  shift, and go to state 230
 
 
-state 161
+State 161
 
   122 or_test_aux: or_test_aux OR . and_test
 
@@ -3113,7 +3113,7 @@ state 161
     string_aux  go to state 62
 
 
-state 162
+State 162
 
   125 and_test_aux: and_test_aux AND . not_test
 
@@ -3145,7 +3145,7 @@ state 162
     string_aux  go to state 62
 
 
-state 163
+State 163
 
   141 comp_op: IS .
   142        | IS . NOT
@@ -3155,70 +3155,70 @@ state 163
     $default  reduce using rule 141 (comp_op)
 
 
-state 164
+State 164
 
   140 comp_op: NOT . IN
 
     IN  shift, and go to state 234
 
 
-state 165
+State 165
 
   139 comp_op: IN .
 
     $default  reduce using rule 139 (comp_op)
 
 
-state 166
+State 166
 
   138 comp_op: NIGUAL .
 
     $default  reduce using rule 138 (comp_op)
 
 
-state 167
+State 167
 
   134 comp_op: DIGUAL .
 
     $default  reduce using rule 134 (comp_op)
 
 
-state 168
+State 168
 
   135 comp_op: MAIGUAL .
 
     $default  reduce using rule 135 (comp_op)
 
 
-state 169
+State 169
 
   136 comp_op: MEIGUAL .
 
     $default  reduce using rule 136 (comp_op)
 
 
-state 170
+State 170
 
   133 comp_op: MAYOR .
 
     $default  reduce using rule 133 (comp_op)
 
 
-state 171
+State 171
 
   132 comp_op: MENOR .
 
     $default  reduce using rule 132 (comp_op)
 
 
-state 172
+State 172
 
   137 comp_op: MENORMAYOR .
 
     $default  reduce using rule 137 (comp_op)
 
 
-state 173
+State 173
 
   130 comparison_aux: comparison_aux comp_op . expr
 
@@ -3247,7 +3247,7 @@ state 173
     string_aux  go to state 62
 
 
-state 174
+State 174
 
   144 expr_aux: expr_aux PIPE . xor_expr
 
@@ -3275,7 +3275,7 @@ state 174
     string_aux  go to state 62
 
 
-state 175
+State 175
 
   147 xor_expr_aux: xor_expr_aux CIRCUNFLEJO . and_expr
 
@@ -3302,7 +3302,7 @@ state 175
     string_aux  go to state 62
 
 
-state 176
+State 176
 
   150 and_expr_aux: and_expr_aux AMPERSON . shift_expr
 
@@ -3328,7 +3328,7 @@ state 176
     string_aux  go to state 62
 
 
-state 177
+State 177
 
   154 shift_expr_aux: shift_expr_aux DMAYOR . arith_expr
 
@@ -3353,7 +3353,7 @@ state 177
     string_aux  go to state 62
 
 
-state 178
+State 178
 
   153 shift_expr_aux: shift_expr_aux DMENOR . arith_expr
 
@@ -3378,21 +3378,21 @@ state 178
     string_aux  go to state 62
 
 
-state 179
+State 179
 
   160 ae_aux: MENOS .
 
     $default  reduce using rule 160 (ae_aux)
 
 
-state 180
+State 180
 
   159 ae_aux: MAS .
 
     $default  reduce using rule 159 (ae_aux)
 
 
-state 181
+State 181
 
   157 arith_expr_aux: arith_expr_aux ae_aux . term
 
@@ -3416,35 +3416,35 @@ state 181
     string_aux  go to state 62
 
 
-state 182
+State 182
 
   166 t_aux: PORCEN .
 
     $default  reduce using rule 166 (t_aux)
 
 
-state 183
+State 183
 
   167 t_aux: DDIAG .
 
     $default  reduce using rule 167 (t_aux)
 
 
-state 184
+State 184
 
   165 t_aux: DIAG .
 
     $default  reduce using rule 165 (t_aux)
 
 
-state 185
+State 185
 
   164 t_aux: ASTERISCO .
 
     $default  reduce using rule 164 (t_aux)
 
 
-state 186
+State 186
 
   162 term_aux: term_aux t_aux . factor
 
@@ -3467,7 +3467,7 @@ state 186
     string_aux  go to state 62
 
 
-state 187
+State 187
 
   173 s16: DASTERISCO . factor
 
@@ -3490,7 +3490,7 @@ state 187
     string_aux  go to state 62
 
 
-state 188
+State 188
 
   210 trailer: APAREN . s20 CPAREN
 
@@ -3502,7 +3502,7 @@ state 188
     arglist_aux_a  go to state 246
 
 
-state 189
+State 189
 
   211 trailer: ACORCHETE . subscriptlist CCORCHETE
 
@@ -3543,42 +3543,42 @@ state 189
     subscript      go to state 251
 
 
-state 190
+State 190
 
   212 trailer: PUNTO . IDENTIFICADOR
 
     IDENTIFICADOR  shift, and go to state 252
 
 
-state 191
+State 191
 
   172 power: atom power_aux s16 .
 
     $default  reduce using rule 172 (power)
 
 
-state 192
+State 192
 
   187 power_aux: power_aux trailer .
 
     $default  reduce using rule 187 (power_aux)
 
 
-state 193
+State 193
 
    50 expr_stmt_aux_b_a: IGUAL testlist .
 
     $default  reduce using rule 50 (expr_stmt_aux_b_a)
 
 
-state 194
+State 194
 
    48 expr_stmt_aux_b: augassign testlist .
 
     $default  reduce using rule 48 (expr_stmt_aux_b)
 
 
-state 195
+State 195
 
    69 s31: COMA . test comaS
 
@@ -3613,14 +3613,14 @@ state 195
     string_aux  go to state 62
 
 
-state 196
+State 196
 
    66 s29: DMAYOR test s31 .
 
     $default  reduce using rule 66 (s29)
 
 
-state 197
+State 197
 
    71 s32: s32 COMA . test
    73 comaS: COMA .
@@ -3658,14 +3658,14 @@ state 197
     string_aux  go to state 62
 
 
-state 198
+State 198
 
    67 s30: test s32 comaS .
 
     $default  reduce using rule 67 (s30)
 
 
-state 199
+State 199
 
    73 comaS: COMA .
   221 exprlist_aux: exprlist_aux COMA . expr
@@ -3697,28 +3697,28 @@ state 199
     string_aux  go to state 62
 
 
-state 200
+State 200
 
   220 exprlist: expr exprlist_aux comaS .
 
     $default  reduce using rule 220 (exprlist)
 
 
-state 201
+State 201
 
   102 for_stmt: FOR exprlist IN testlist . DPUNTO suite s8
 
     DPUNTO  shift, and go to state 256
 
 
-state 202
+State 202
 
    26 fpdef: IDENTIFICADOR .
 
     $default  reduce using rule 26 (fpdef)
 
 
-state 203
+State 203
 
    27 fpdef: APAREN . fplist CPAREN
 
@@ -3729,21 +3729,21 @@ state 203
     fplist  go to state 258
 
 
-state 204
+State 204
 
     6 parameters: APAREN parameters_aux . CPAREN
 
     CPAREN  shift, and go to state 259
 
 
-state 205
+State 205
 
     7 parameters_aux: varargslist .
 
     $default  reduce using rule 7 (parameters_aux)
 
 
-state 206
+State 206
 
     9 varargslist: varargslist_aux_a . varargslist_aux_b
    11 varargslist_aux_a: varargslist_aux_a . fpdef val_aux COMA
@@ -3757,7 +3757,7 @@ state 206
     fpdef              go to state 263
 
 
-state 207
+State 207
 
    10 varargslist: fpdef . val_aux varargslist_aux_c
 
@@ -3768,7 +3768,7 @@ state 207
     val_aux  go to state 265
 
 
-state 208
+State 208
 
     5 funcdef: DEF IDENTIFICADOR parameters DPUNTO . suite
 
@@ -3826,21 +3826,21 @@ state 208
     testlist       go to state 63
 
 
-state 209
+State 209
 
   110 suite: NEWLINE . INDENT suite_aux DEDENT
 
     INDENT  shift, and go to state 267
 
 
-state 210
+State 210
 
   109 suite: simple_stmt .
 
     $default  reduce using rule 109 (suite)
 
 
-state 211
+State 211
 
   101 while_stmt: WHILE test DPUNTO suite . s8
 
@@ -3851,14 +3851,14 @@ state 211
     s8  go to state 269
 
 
-state 212
+State 212
 
    86 global_stmt_aux: global_stmt_aux COMA . IDENTIFICADOR
 
     IDENTIFICADOR  shift, and go to state 270
 
 
-state 213
+State 213
 
   104 with_stmt_aux: with_stmt_aux COMA . with_item
 
@@ -3894,7 +3894,7 @@ state 213
     string_aux  go to state 62
 
 
-state 214
+State 214
 
   103 with_stmt: WITH with_item with_stmt_aux DPUNTO . suite
 
@@ -3952,14 +3952,14 @@ state 214
     testlist       go to state 63
 
 
-state 215
+State 215
 
   107 s10: AS expr .
 
     $default  reduce using rule 107 (s10)
 
 
-state 216
+State 216
 
    96 if_stmt: IF test DPUNTO suite . if_stmt_aux s8
 
@@ -3968,7 +3968,7 @@ state 216
     if_stmt_aux  go to state 273
 
 
-state 217
+State 217
 
    89 s7: IN test . s5
 
@@ -3979,14 +3979,14 @@ state 217
     s5  go to state 275
 
 
-state 218
+State 218
 
   260 comp_for: FOR exprlist . IN or_test s28
 
     IN  shift, and go to state 276
 
 
-state 219
+State 219
 
    73 comaS: COMA .
   208 tc_aux: tc_aux COMA . test
@@ -4024,21 +4024,21 @@ state 219
     string_aux  go to state 62
 
 
-state 220
+State 220
 
   207 testlist_comp_aux: tc_aux comaS .
 
     $default  reduce using rule 207 (testlist_comp_aux)
 
 
-state 221
+State 221
 
   254 list_for: FOR exprlist . IN testlist_safe s27
 
     IN  shift, and go to state 278
 
 
-state 222
+State 222
 
    73 comaS: COMA .
   203 lm_aux: lm_aux COMA . test
@@ -4076,14 +4076,14 @@ state 222
     string_aux  go to state 62
 
 
-state 223
+State 223
 
   202 listmaker_aux: lm_aux comaS .
 
     $default  reduce using rule 202 (listmaker_aux)
 
 
-state 224
+State 224
 
   228 dictorsetmaker_aux_a: test DPUNTO test . dsm_aux_a
 
@@ -4096,7 +4096,7 @@ state 224
     comp_for     go to state 282
 
 
-state 225
+State 225
 
    73 comaS: COMA .
   236 dsm_aux_b_a: dsm_aux_b_a COMA . test
@@ -4134,35 +4134,35 @@ state 225
     string_aux  go to state 62
 
 
-state 226
+State 226
 
   235 dsm_aux_b: dsm_aux_b_a comaS .
 
     $default  reduce using rule 235 (dsm_aux_b)
 
 
-state 227
+State 227
 
    38 simple_stmt_aux: simple_stmt_aux PCOMA small_stmt .
 
     $default  reduce using rule 38 (simple_stmt_aux)
 
 
-state 228
+State 228
 
    35 simple_stmt: small_stmt simple_stmt_aux ss_aux NEWLINE .
 
     $default  reduce using rule 35 (simple_stmt)
 
 
-state 229
+State 229
 
   224 testlist_aux: testlist_aux COMA test .
 
     $default  reduce using rule 224 (testlist_aux)
 
 
-state 230
+State 230
 
   118 s15: IF or_test ELSE . test
 
@@ -4197,112 +4197,112 @@ state 230
     string_aux  go to state 62
 
 
-state 231
+State 231
 
   122 or_test_aux: or_test_aux OR and_test .
 
     $default  reduce using rule 122 (or_test_aux)
 
 
-state 232
+State 232
 
   125 and_test_aux: and_test_aux AND not_test .
 
     $default  reduce using rule 125 (and_test_aux)
 
 
-state 233
+State 233
 
   142 comp_op: IS NOT .
 
     $default  reduce using rule 142 (comp_op)
 
 
-state 234
+State 234
 
   140 comp_op: NOT IN .
 
     $default  reduce using rule 140 (comp_op)
 
 
-state 235
+State 235
 
   130 comparison_aux: comparison_aux comp_op expr .
 
     $default  reduce using rule 130 (comparison_aux)
 
 
-state 236
+State 236
 
   144 expr_aux: expr_aux PIPE xor_expr .
 
     $default  reduce using rule 144 (expr_aux)
 
 
-state 237
+State 237
 
   147 xor_expr_aux: xor_expr_aux CIRCUNFLEJO and_expr .
 
     $default  reduce using rule 147 (xor_expr_aux)
 
 
-state 238
+State 238
 
   150 and_expr_aux: and_expr_aux AMPERSON shift_expr .
 
     $default  reduce using rule 150 (and_expr_aux)
 
 
-state 239
+State 239
 
   154 shift_expr_aux: shift_expr_aux DMAYOR arith_expr .
 
     $default  reduce using rule 154 (shift_expr_aux)
 
 
-state 240
+State 240
 
   153 shift_expr_aux: shift_expr_aux DMENOR arith_expr .
 
     $default  reduce using rule 153 (shift_expr_aux)
 
 
-state 241
+State 241
 
   157 arith_expr_aux: arith_expr_aux ae_aux term .
 
     $default  reduce using rule 157 (arith_expr_aux)
 
 
-state 242
+State 242
 
   162 term_aux: term_aux t_aux factor .
 
     $default  reduce using rule 162 (term_aux)
 
 
-state 243
+State 243
 
   173 s16: DASTERISCO factor .
 
     $default  reduce using rule 173 (s16)
 
 
-state 244
+State 244
 
   210 trailer: APAREN s20 . CPAREN
 
     CPAREN  shift, and go to state 285
 
 
-state 245
+State 245
 
   181 s20: arglist .
 
     $default  reduce using rule 181 (s20)
 
 
-state 246
+State 246
 
   238 arglist: arglist_aux_a . arglist_aux_b
   239 arglist_aux_a: arglist_aux_a . argument COMA
@@ -4342,14 +4342,14 @@ state 246
     argument       go to state 290
 
 
-state 247
+State 247
 
   216 subscript: PUNTO . PUNTO PUNTO
 
     PUNTO  shift, and go to state 291
 
 
-state 248
+State 248
 
   183 s21: test .
   217 subscript: test .
@@ -4358,21 +4358,21 @@ state 248
     $default  reduce using rule 217 (subscript)
 
 
-state 249
+State 249
 
   218 subscript: s21 . DPUNTO s21 s22
 
     DPUNTO  shift, and go to state 292
 
 
-state 250
+State 250
 
   211 trailer: ACORCHETE subscriptlist . CCORCHETE
 
     CCORCHETE  shift, and go to state 293
 
 
-state 251
+State 251
 
   213 subscriptlist: subscript . subscriptlist_aux comaS
 
@@ -4381,14 +4381,14 @@ state 251
     subscriptlist_aux  go to state 294
 
 
-state 252
+State 252
 
   212 trailer: PUNTO IDENTIFICADOR .
 
     $default  reduce using rule 212 (trailer)
 
 
-state 253
+State 253
 
    69 s31: COMA test . comaS
 
@@ -4399,21 +4399,21 @@ state 253
     comaS  go to state 296
 
 
-state 254
+State 254
 
    71 s32: s32 COMA test .
 
     $default  reduce using rule 71 (s32)
 
 
-state 255
+State 255
 
   221 exprlist_aux: exprlist_aux COMA expr .
 
     $default  reduce using rule 221 (exprlist_aux)
 
 
-state 256
+State 256
 
   102 for_stmt: FOR exprlist IN testlist DPUNTO . suite s8
 
@@ -4471,7 +4471,7 @@ state 256
     testlist       go to state 63
 
 
-state 257
+State 257
 
    28 fplist: fpdef . fplist_aux fpl_aux
 
@@ -4480,42 +4480,42 @@ state 257
     fplist_aux  go to state 298
 
 
-state 258
+State 258
 
    27 fpdef: APAREN fplist . CPAREN
 
     CPAREN  shift, and go to state 299
 
 
-state 259
+State 259
 
     6 parameters: APAREN parameters_aux CPAREN .
 
     $default  reduce using rule 6 (parameters)
 
 
-state 260
+State 260
 
    16 varargslist_aux_b: DASTERISCO . IDENTIFICADOR
 
     IDENTIFICADOR  shift, and go to state 300
 
 
-state 261
+State 261
 
    15 varargslist_aux_b: ASTERISCO . IDENTIFICADOR n1
 
     IDENTIFICADOR  shift, and go to state 301
 
 
-state 262
+State 262
 
     9 varargslist: varargslist_aux_a varargslist_aux_b .
 
     $default  reduce using rule 9 (varargslist)
 
 
-state 263
+State 263
 
    11 varargslist_aux_a: varargslist_aux_a fpdef . val_aux COMA
 
@@ -4526,7 +4526,7 @@ state 263
     val_aux  go to state 302
 
 
-state 264
+State 264
 
    13 val_aux: IGUAL . test
 
@@ -4561,7 +4561,7 @@ state 264
     string_aux  go to state 62
 
 
-state 265
+State 265
 
    10 varargslist: fpdef val_aux . varargslist_aux_c
 
@@ -4571,14 +4571,14 @@ state 265
     n2                 go to state 305
 
 
-state 266
+State 266
 
     5 funcdef: DEF IDENTIFICADOR parameters DPUNTO suite .
 
     $default  reduce using rule 5 (funcdef)
 
 
-state 267
+State 267
 
   110 suite: NEWLINE INDENT . suite_aux DEDENT
 
@@ -4647,42 +4647,42 @@ state 267
     testlist       go to state 63
 
 
-state 268
+State 268
 
    99 s8: ELSE . DPUNTO suite
 
     DPUNTO  shift, and go to state 308
 
 
-state 269
+State 269
 
   101 while_stmt: WHILE test DPUNTO suite s8 .
 
     $default  reduce using rule 101 (while_stmt)
 
 
-state 270
+State 270
 
    86 global_stmt_aux: global_stmt_aux COMA IDENTIFICADOR .
 
     $default  reduce using rule 86 (global_stmt_aux)
 
 
-state 271
+State 271
 
   104 with_stmt_aux: with_stmt_aux COMA with_item .
 
     $default  reduce using rule 104 (with_stmt_aux)
 
 
-state 272
+State 272
 
   103 with_stmt: WITH with_item with_stmt_aux DPUNTO suite .
 
     $default  reduce using rule 103 (with_stmt)
 
 
-state 273
+State 273
 
    96 if_stmt: IF test DPUNTO suite if_stmt_aux . s8
    97 if_stmt_aux: if_stmt_aux . ELIF test DPUNTO suite
@@ -4695,7 +4695,7 @@ state 273
     s8  go to state 310
 
 
-state 274
+State 274
 
    24 s5: COMA . test
 
@@ -4730,14 +4730,14 @@ state 274
     string_aux  go to state 62
 
 
-state 275
+State 275
 
    89 s7: IN test s5 .
 
     $default  reduce using rule 89 (s7)
 
 
-state 276
+State 276
 
   260 comp_for: FOR exprlist IN . or_test s28
 
@@ -4771,14 +4771,14 @@ state 276
     string_aux  go to state 62
 
 
-state 277
+State 277
 
   208 tc_aux: tc_aux COMA test .
 
     $default  reduce using rule 208 (tc_aux)
 
 
-state 278
+State 278
 
   254 list_for: FOR exprlist IN . testlist_safe s27
 
@@ -4814,21 +4814,21 @@ state 278
     string_aux     go to state 62
 
 
-state 279
+State 279
 
   203 lm_aux: lm_aux COMA test .
 
     $default  reduce using rule 203 (lm_aux)
 
 
-state 280
+State 280
 
   228 dictorsetmaker_aux_a: test DPUNTO test dsm_aux_a .
 
     $default  reduce using rule 228 (dictorsetmaker_aux_a)
 
 
-state 281
+State 281
 
   230 dsm_aux_a: dsm_aux_a_a . comaS
   231 dsm_aux_a_a: dsm_aux_a_a . COMA test DPUNTO test
@@ -4840,35 +4840,35 @@ state 281
     comaS  go to state 317
 
 
-state 282
+State 282
 
   229 dsm_aux_a: comp_for .
 
     $default  reduce using rule 229 (dsm_aux_a)
 
 
-state 283
+State 283
 
   236 dsm_aux_b_a: dsm_aux_b_a COMA test .
 
     $default  reduce using rule 236 (dsm_aux_b_a)
 
 
-state 284
+State 284
 
   118 s15: IF or_test ELSE test .
 
     $default  reduce using rule 118 (s15)
 
 
-state 285
+State 285
 
   210 trailer: APAREN s20 CPAREN .
 
     $default  reduce using rule 210 (trailer)
 
 
-state 286
+State 286
 
   243 arglist_aux_b: DASTERISCO . test
 
@@ -4903,7 +4903,7 @@ state 286
     string_aux  go to state 62
 
 
-state 287
+State 287
 
   242 arglist_aux_b: ASTERISCO . test al_aux s25
 
@@ -4938,7 +4938,7 @@ state 287
     string_aux  go to state 62
 
 
-state 288
+State 288
 
   248 argument: test . s26
   249         | test . IGUAL test
@@ -4952,14 +4952,14 @@ state 288
     comp_for  go to state 322
 
 
-state 289
+State 289
 
   238 arglist: arglist_aux_a arglist_aux_b .
 
     $default  reduce using rule 238 (arglist)
 
 
-state 290
+State 290
 
   239 arglist_aux_a: arglist_aux_a argument . COMA
   241 arglist_aux_b: argument . comaS
@@ -4971,14 +4971,14 @@ state 290
     comaS  go to state 324
 
 
-state 291
+State 291
 
   216 subscript: PUNTO PUNTO . PUNTO
 
     PUNTO  shift, and go to state 325
 
 
-state 292
+State 292
 
   218 subscript: s21 DPUNTO . s21 s22
 
@@ -5016,14 +5016,14 @@ state 292
     string_aux  go to state 62
 
 
-state 293
+State 293
 
   211 trailer: ACORCHETE subscriptlist CCORCHETE .
 
     $default  reduce using rule 211 (trailer)
 
 
-state 294
+State 294
 
   213 subscriptlist: subscript subscriptlist_aux . comaS
   214 subscriptlist_aux: subscriptlist_aux . COMA subscript
@@ -5035,21 +5035,21 @@ state 294
     comaS  go to state 329
 
 
-state 295
+State 295
 
    73 comaS: COMA .
 
     $default  reduce using rule 73 (comaS)
 
 
-state 296
+State 296
 
    69 s31: COMA test comaS .
 
     $default  reduce using rule 69 (s31)
 
 
-state 297
+State 297
 
   102 for_stmt: FOR exprlist IN testlist DPUNTO suite . s8
 
@@ -5060,7 +5060,7 @@ state 297
     s8  go to state 330
 
 
-state 298
+State 298
 
    28 fplist: fpdef fplist_aux . fpl_aux
    31 fplist_aux: fplist_aux . COMA fpdef
@@ -5072,21 +5072,21 @@ state 298
     fpl_aux  go to state 332
 
 
-state 299
+State 299
 
    27 fpdef: APAREN fplist CPAREN .
 
     $default  reduce using rule 27 (fpdef)
 
 
-state 300
+State 300
 
    16 varargslist_aux_b: DASTERISCO IDENTIFICADOR .
 
     $default  reduce using rule 16 (varargslist_aux_b)
 
 
-state 301
+State 301
 
    15 varargslist_aux_b: ASTERISCO IDENTIFICADOR . n1
 
@@ -5097,28 +5097,28 @@ state 301
     n1  go to state 334
 
 
-state 302
+State 302
 
    11 varargslist_aux_a: varargslist_aux_a fpdef val_aux . COMA
 
     COMA  shift, and go to state 335
 
 
-state 303
+State 303
 
    13 val_aux: IGUAL test .
 
     $default  reduce using rule 13 (val_aux)
 
 
-state 304
+State 304
 
    10 varargslist: fpdef val_aux varargslist_aux_c .
 
     $default  reduce using rule 10 (varargslist)
 
 
-state 305
+State 305
 
    19 varargslist_aux_c: n2 . n3
    20 n2: n2 . COMA fpdef val_aux
@@ -5130,14 +5130,14 @@ state 305
     n3  go to state 337
 
 
-state 306
+State 306
 
   112 suite_aux: stmt .
 
     $default  reduce using rule 112 (suite_aux)
 
 
-state 307
+State 307
 
   110 suite: NEWLINE INDENT suite_aux . DEDENT
   111 suite_aux: suite_aux . stmt
@@ -5207,7 +5207,7 @@ state 307
     testlist       go to state 63
 
 
-state 308
+State 308
 
    99 s8: ELSE DPUNTO . suite
 
@@ -5265,7 +5265,7 @@ state 308
     testlist       go to state 63
 
 
-state 309
+State 309
 
    97 if_stmt_aux: if_stmt_aux ELIF . test DPUNTO suite
 
@@ -5300,21 +5300,21 @@ state 309
     string_aux  go to state 62
 
 
-state 310
+State 310
 
    96 if_stmt: IF test DPUNTO suite if_stmt_aux s8 .
 
     $default  reduce using rule 96 (if_stmt)
 
 
-state 311
+State 311
 
    24 s5: COMA test .
 
     $default  reduce using rule 24 (s5)
 
 
-state 312
+State 312
 
   260 comp_for: FOR exprlist IN or_test . s28
 
@@ -5329,7 +5329,7 @@ state 312
     s28        go to state 346
 
 
-state 313
+State 313
 
   254 list_for: FOR exprlist IN testlist_safe . s27
 
@@ -5344,7 +5344,7 @@ state 313
     s27        go to state 351
 
 
-state 314
+State 314
 
   113 testlist_safe: old_test . n10
 
@@ -5354,14 +5354,14 @@ state 314
     s13  go to state 354
 
 
-state 315
+State 315
 
   114 old_test: or_test .
 
     $default  reduce using rule 114 (old_test)
 
 
-state 316
+State 316
 
    73 comaS: COMA .
   231 dsm_aux_a_a: dsm_aux_a_a COMA . test DPUNTO test
@@ -5399,21 +5399,21 @@ state 316
     string_aux  go to state 62
 
 
-state 317
+State 317
 
   230 dsm_aux_a: dsm_aux_a_a comaS .
 
     $default  reduce using rule 230 (dsm_aux_a)
 
 
-state 318
+State 318
 
   243 arglist_aux_b: DASTERISCO test .
 
     $default  reduce using rule 243 (arglist_aux_b)
 
 
-state 319
+State 319
 
   242 arglist_aux_b: ASTERISCO test . al_aux s25
 
@@ -5422,7 +5422,7 @@ state 319
     al_aux  go to state 356
 
 
-state 320
+State 320
 
   249 argument: test IGUAL . test
 
@@ -5457,21 +5457,21 @@ state 320
     string_aux  go to state 62
 
 
-state 321
+State 321
 
   248 argument: test s26 .
 
     $default  reduce using rule 248 (argument)
 
 
-state 322
+State 322
 
   250 s26: comp_for .
 
     $default  reduce using rule 250 (s26)
 
 
-state 323
+State 323
 
    73 comaS: COMA .
   239 arglist_aux_a: arglist_aux_a argument COMA .
@@ -5480,28 +5480,28 @@ state 323
     $default  reduce using rule 239 (arglist_aux_a)
 
 
-state 324
+State 324
 
   241 arglist_aux_b: argument comaS .
 
     $default  reduce using rule 241 (arglist_aux_b)
 
 
-state 325
+State 325
 
   216 subscript: PUNTO PUNTO PUNTO .
 
     $default  reduce using rule 216 (subscript)
 
 
-state 326
+State 326
 
   183 s21: test .
 
     $default  reduce using rule 183 (s21)
 
 
-state 327
+State 327
 
   218 subscript: s21 DPUNTO s21 . s22
 
@@ -5513,7 +5513,7 @@ state 327
     sliceop  go to state 360
 
 
-state 328
+State 328
 
    73 comaS: COMA .
   214 subscriptlist_aux: subscriptlist_aux COMA . subscript
@@ -5555,21 +5555,21 @@ state 328
     subscript   go to state 361
 
 
-state 329
+State 329
 
   213 subscriptlist: subscript subscriptlist_aux comaS .
 
     $default  reduce using rule 213 (subscriptlist)
 
 
-state 330
+State 330
 
   102 for_stmt: FOR exprlist IN testlist DPUNTO suite s8 .
 
     $default  reduce using rule 102 (for_stmt)
 
 
-state 331
+State 331
 
    29 fpl_aux: COMA .
    31 fplist_aux: fplist_aux COMA . fpdef
@@ -5582,35 +5582,35 @@ state 331
     fpdef  go to state 362
 
 
-state 332
+State 332
 
    28 fplist: fpdef fplist_aux fpl_aux .
 
     $default  reduce using rule 28 (fplist)
 
 
-state 333
+State 333
 
    17 n1: COMA . DASTERISCO IDENTIFICADOR
 
     DASTERISCO  shift, and go to state 363
 
 
-state 334
+State 334
 
    15 varargslist_aux_b: ASTERISCO IDENTIFICADOR n1 .
 
     $default  reduce using rule 15 (varargslist_aux_b)
 
 
-state 335
+State 335
 
    11 varargslist_aux_a: varargslist_aux_a fpdef val_aux COMA .
 
     $default  reduce using rule 11 (varargslist_aux_a)
 
 
-state 336
+State 336
 
    20 n2: n2 COMA . fpdef val_aux
    22 n3: COMA .
@@ -5623,42 +5623,42 @@ state 336
     fpdef  go to state 364
 
 
-state 337
+State 337
 
    19 varargslist_aux_c: n2 n3 .
 
     $default  reduce using rule 19 (varargslist_aux_c)
 
 
-state 338
+State 338
 
   110 suite: NEWLINE INDENT suite_aux DEDENT .
 
     $default  reduce using rule 110 (suite)
 
 
-state 339
+State 339
 
   111 suite_aux: suite_aux stmt .
 
     $default  reduce using rule 111 (suite_aux)
 
 
-state 340
+State 340
 
    99 s8: ELSE DPUNTO suite .
 
     $default  reduce using rule 99 (s8)
 
 
-state 341
+State 341
 
    97 if_stmt_aux: if_stmt_aux ELIF test . DPUNTO suite
 
     DPUNTO  shift, and go to state 365
 
 
-state 342
+State 342
 
   261 comp_if: IF . old_test s28
 
@@ -5693,35 +5693,35 @@ state 342
     string_aux  go to state 62
 
 
-state 343
+State 343
 
   262 s28: comp_iter .
 
     $default  reduce using rule 262 (s28)
 
 
-state 344
+State 344
 
   258 comp_iter: comp_for .
 
     $default  reduce using rule 258 (comp_iter)
 
 
-state 345
+State 345
 
   259 comp_iter: comp_if .
 
     $default  reduce using rule 259 (comp_iter)
 
 
-state 346
+State 346
 
   260 comp_for: FOR exprlist IN or_test s28 .
 
     $default  reduce using rule 260 (comp_for)
 
 
-state 347
+State 347
 
   255 list_if: IF . old_test s27
 
@@ -5756,35 +5756,35 @@ state 347
     string_aux  go to state 62
 
 
-state 348
+State 348
 
   256 s27: list_iter .
 
     $default  reduce using rule 256 (s27)
 
 
-state 349
+State 349
 
   252 list_iter: list_for .
 
     $default  reduce using rule 252 (list_iter)
 
 
-state 350
+State 350
 
   253 list_iter: list_if .
 
     $default  reduce using rule 253 (list_iter)
 
 
-state 351
+State 351
 
   254 list_for: FOR exprlist IN testlist_safe s27 .
 
     $default  reduce using rule 254 (list_for)
 
 
-state 352
+State 352
 
   117 s13: COMA . old_test
 
@@ -5819,14 +5819,14 @@ state 352
     string_aux  go to state 62
 
 
-state 353
+State 353
 
   113 testlist_safe: old_test n10 .
 
     $default  reduce using rule 113 (testlist_safe)
 
 
-state 354
+State 354
 
   115 n10: s13 . comaS
   116 s13: s13 . COMA old_test
@@ -5838,14 +5838,14 @@ state 354
     comaS  go to state 370
 
 
-state 355
+State 355
 
   231 dsm_aux_a_a: dsm_aux_a_a COMA test . DPUNTO test
 
     DPUNTO  shift, and go to state 371
 
 
-state 356
+State 356
 
   242 arglist_aux_b: ASTERISCO test al_aux . s25
   244 al_aux: al_aux . COMA argument
@@ -5857,14 +5857,14 @@ state 356
     s25  go to state 373
 
 
-state 357
+State 357
 
   249 argument: test IGUAL test .
 
     $default  reduce using rule 249 (argument)
 
 
-state 358
+State 358
 
   219 sliceop: DPUNTO . s21
 
@@ -5902,42 +5902,42 @@ state 358
     string_aux  go to state 62
 
 
-state 359
+State 359
 
   218 subscript: s21 DPUNTO s21 s22 .
 
     $default  reduce using rule 218 (subscript)
 
 
-state 360
+State 360
 
   185 s22: sliceop .
 
     $default  reduce using rule 185 (s22)
 
 
-state 361
+State 361
 
   214 subscriptlist_aux: subscriptlist_aux COMA subscript .
 
     $default  reduce using rule 214 (subscriptlist_aux)
 
 
-state 362
+State 362
 
    31 fplist_aux: fplist_aux COMA fpdef .
 
     $default  reduce using rule 31 (fplist_aux)
 
 
-state 363
+State 363
 
    17 n1: COMA DASTERISCO . IDENTIFICADOR
 
     IDENTIFICADOR  shift, and go to state 375
 
 
-state 364
+State 364
 
    20 n2: n2 COMA fpdef . val_aux
 
@@ -5948,7 +5948,7 @@ state 364
     val_aux  go to state 376
 
 
-state 365
+State 365
 
    97 if_stmt_aux: if_stmt_aux ELIF test DPUNTO . suite
 
@@ -6006,7 +6006,7 @@ state 365
     testlist       go to state 63
 
 
-state 366
+State 366
 
   261 comp_if: IF old_test . s28
 
@@ -6021,7 +6021,7 @@ state 366
     s28        go to state 378
 
 
-state 367
+State 367
 
   255 list_if: IF old_test . s27
 
@@ -6036,14 +6036,14 @@ state 367
     s27        go to state 379
 
 
-state 368
+State 368
 
   117 s13: COMA old_test .
 
     $default  reduce using rule 117 (s13)
 
 
-state 369
+State 369
 
    73 comaS: COMA .
   116 s13: s13 COMA . old_test
@@ -6081,14 +6081,14 @@ state 369
     string_aux  go to state 62
 
 
-state 370
+State 370
 
   115 n10: s13 comaS .
 
     $default  reduce using rule 115 (n10)
 
 
-state 371
+State 371
 
   231 dsm_aux_a_a: dsm_aux_a_a COMA test DPUNTO . test
 
@@ -6123,7 +6123,7 @@ state 371
     string_aux  go to state 62
 
 
-state 372
+State 372
 
   244 al_aux: al_aux COMA . argument
   246 s25: COMA . DASTERISCO test
@@ -6161,70 +6161,70 @@ state 372
     argument    go to state 383
 
 
-state 373
+State 373
 
   242 arglist_aux_b: ASTERISCO test al_aux s25 .
 
     $default  reduce using rule 242 (arglist_aux_b)
 
 
-state 374
+State 374
 
   219 sliceop: DPUNTO s21 .
 
     $default  reduce using rule 219 (sliceop)
 
 
-state 375
+State 375
 
    17 n1: COMA DASTERISCO IDENTIFICADOR .
 
     $default  reduce using rule 17 (n1)
 
 
-state 376
+State 376
 
    20 n2: n2 COMA fpdef val_aux .
 
     $default  reduce using rule 20 (n2)
 
 
-state 377
+State 377
 
    97 if_stmt_aux: if_stmt_aux ELIF test DPUNTO suite .
 
     $default  reduce using rule 97 (if_stmt_aux)
 
 
-state 378
+State 378
 
   261 comp_if: IF old_test s28 .
 
     $default  reduce using rule 261 (comp_if)
 
 
-state 379
+State 379
 
   255 list_if: IF old_test s27 .
 
     $default  reduce using rule 255 (list_if)
 
 
-state 380
+State 380
 
   116 s13: s13 COMA old_test .
 
     $default  reduce using rule 116 (s13)
 
 
-state 381
+State 381
 
   231 dsm_aux_a_a: dsm_aux_a_a COMA test DPUNTO test .
 
     $default  reduce using rule 231 (dsm_aux_a_a)
 
 
-state 382
+State 382
 
   246 s25: COMA DASTERISCO . test
 
@@ -6259,14 +6259,14 @@ state 382
     string_aux  go to state 62
 
 
-state 383
+State 383
 
   244 al_aux: al_aux COMA argument .
 
     $default  reduce using rule 244 (al_aux)
 
 
-state 384
+State 384
 
   246 s25: COMA DASTERISCO test .
 

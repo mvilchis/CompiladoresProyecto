@@ -40,7 +40,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 21 "pypar.y" /* yacc.c:1909  */
+#line 26 "pypar.y" /* yacc.c:1909  */
 
 #include "composite.cpp"
 
@@ -154,13 +154,13 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 24 "pypar.y" /* yacc.c:1909  */
+#line 29 "pypar.y" /* yacc.c:1909  */
 
-int numi;
-float numf;
-const char* cad;
-char car;
- Node* nodeT;
+  int numi;
+  float numf;
+  const char* cad;
+  char car;
+Node* nodeT;
 
 #line 166 "pypar.hpp" /* yacc.c:1909  */
 };
