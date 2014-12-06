@@ -49,7 +49,7 @@ class LeafNode: public Node{
         throw "[Error: Método no implementado en esta clase]";
     }
     Niterador* getChild(){
-        throw "[Error: Método no implementado en esta clase]";
+        return chen->getIterador();
     }
 	
 };
