@@ -2,7 +2,7 @@
 #include "builder.cpp"
 #include <iostream>
 #include <string>
-
+#include "tabla_de_simbolos.cpp"
 /*  Fernández Martínez José Ismael
     Trinidad Hernández Norma Verónica
     Vilchis Domínguez Miguel Alonso
@@ -14,6 +14,7 @@ using namespace std;
 
 class PrintVisitor:public NodeVisitor{
 public:
+	TablaDeSimbolos t;
 	void printBloque(string s, INode* n) {
 		cout << "[" << s << " ";
 		Niterador *it = n->getChild();

@@ -19,9 +19,38 @@ class Node{
 public:
     virtual void accept(NodeVisitor*)=0;
 
+    virtual void addFChild(Node* n) = 0;
+    virtual void addSChild(Node* n) = 0;
+    virtual void setFChild(Node* n) = 0;
+    virtual void setSChild(Node* n) = 0;
+    virtual Node* getFChild() = 0;
+    virtual Node* getSChild() = 0;
+    virtual Niterador* getChild() = 0; //posicion de hijo en una lista
+
 };
 
 class LeafNode: public Node{
+    void addFChild(Node* n){
+        throw "[Error: Método no implementado en esta clase]";
+    }
+    void addSChild(Node* n){
+        throw "[Error: Método no implementado en esta clase]";
+    }
+    void setFChild(Node* n){
+        throw "[Error: Método no implementado en esta clase]";
+    }
+    void setSChild(Node* n){
+        throw "[Error: Método no implementado en esta clase]";
+    }
+    Node* getFChild(){
+        throw "[Error: Método no implementado en esta clase]";
+    }
+    Node* getSChild(){
+        throw "[Error: Método no implementado en esta clase]";
+    }
+    Niterador* getChild(){
+        return chen->getIterador();
+    }
 	
 };
 
@@ -142,14 +171,6 @@ protected:
 public:
 	INode(int nls):Node(){chen = new VNodeList(nls);}
 	INode():Node(){chen=new LNodeList();}
-	
-    virtual void addFChild(Node* n) = 0;
-	virtual void addSChild(Node* n) = 0;
-    virtual	void setFChild(Node* n) = 0;
-    virtual	void setSChild(Node* n) = 0;
-    virtual Node* getFChild() = 0;
-    virtual Node* getSChild() = 0;
-    virtual Niterador* getChild() = 0; //posicion de hijo en una lista
 	
 };
 
