@@ -276,9 +276,9 @@ class IntNode : public LeafNode {
         IntNode(int valor):LeafNode(){this->valor=valor;
 	//cout<<"Entra \n" << valor<< "\n****\n";	
 	}
-        virtual void accept(NodeVisitor *nv) {
+        virtual void accept(NodeVisitor &nv) {
 	//cout<<"YA Entra \n";	
-	nv->visit(this);
+	nv.visit(this);
 }
 };
 //String
@@ -286,28 +286,28 @@ class StringNode : public LeafNode {
     public:
         string valor;
         StringNode(string valor):LeafNode(){this->valor=valor;}
-        virtual void accept(NodeVisitor *nv) { nv->visit(this);}
+        virtual void accept(NodeVisitor &nv) { nv.visit(this);}
 };
 
 class IdentificadorNode : public LeafNode {
     public:
         string nombre;
         IdentificadorNode(string nombre):LeafNode(){this->nombre=nombre;}
-        virtual void accept(NodeVisitor *nv) { nv->visit(this);}
+        virtual void accept(NodeVisitor &nv) { nv.visit(this);}
 };
 
 class FalseNode : public LeafNode {
 	public:
 		bool valor;
 		FalseNode():LeafNode(){this->valor=false;}
-	        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+	        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class TrueNode : public LeafNode {
 	public:
 		bool valor;
 		TrueNode():LeafNode(){this->valor=true;}
-	        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+	        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 
 };
 //False y True
@@ -315,7 +315,7 @@ class TrueNode : public LeafNode {
 //    public:
 //        bool valor;
 //        BoolNode(bool valor):LeafNode(){this->valor=valor;}
-//        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+//        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 //};
 
 
@@ -323,104 +323,104 @@ class TrueNode : public LeafNode {
 class ContinueNode : public LeafNode {
     public:
         ContinueNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //pass
 class PassNode : public LeafNode {
     public:
         PassNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //break
 class BreakNode : public LeafNode {
     public:
         BreakNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //flotante
 class FloatNode : public LeafNode {
     public:
         float valor;
         FloatNode(float valor):LeafNode(){this->valor=valor;}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //identacion
 class IdentacionNode : public LeafNode {
     public:
         IdentacionNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DentacionNode : public LeafNode {
     public:
         DentacionNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class NewLineNode : public LeafNode {
     public:
         NewLineNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class AParenNode : public LeafNode {
     public:
         AParenNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class CParenNode : public LeafNode {
     public:
         CParenNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class ACorcheteNode : public LeafNode {
     public:
         ACorcheteNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class CCorcheteNode : public LeafNode {
     public:
         CCorcheteNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class ALlaveNode : public LeafNode {
     public:
         ALlaveNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class CLlaveNode : public LeafNode {
     public:
         CLlaveNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class ComaNode : public LeafNode {
     public:
         ComaNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DPuntoNode : public LeafNode {
     public:
         DPuntoNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class PuntoNode : public LeafNode {
     public:
         PuntoNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class PComaNode : public LeafNode {
     public:
         PComaNode():LeafNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 /**********************************
  *
@@ -436,49 +436,49 @@ class PComaNode : public LeafNode {
 class IfNode: public BlockNode{
     public:
         IfNode():BlockNode() {}  
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}  
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}  
 };
 
 class ElIfNode: public BlockNode{
     public:
         ElIfNode():BlockNode() {}  
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}  
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}  
 };
 
 class ForNode: public BlockNode{
     public:
         ForNode():BlockNode() {}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //Return
 class ReturnNode: public BlockNode{
     public:
         ReturnNode():BlockNode() {}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //Print
 class PrintNode: public UnaNode{
     public:
         PrintNode():UnaNode() {}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}     
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}     
 };
 //global
 class GlobalNode: public BlockNode{
     public:
         GlobalNode():BlockNode() {} 
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}      
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}      
 };
 //fun
 class FuncionNode: public BlockNode{
     public:
         FuncionNode():BlockNode() {}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //exec
 class ExecNode: public BlockNode{
     public:
         ExecNode():BlockNode() {}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 
@@ -490,234 +490,234 @@ class ExecNode: public BlockNode{
 class WhileElseNode: public BinNode{
 public:
     WhileElseNode() : BinNode(){}
-    virtual void accept(NodeVisitor *nv){
-     nv->visit(this);
+    virtual void accept(NodeVisitor &nv){
+     nv.visit(this);
     }
 };
 class IfElseNode: public BinNode{
 public:
     IfElseNode() : BinNode(){}
-    virtual void accept(NodeVisitor *nv){
-     nv->visit(this);
+    virtual void accept(NodeVisitor &nv){
+     nv.visit(this);
     }
 };
 class ForElseNode: public BinNode{
 public:
     ForElseNode() : BinNode(){}
-    virtual void accept(NodeVisitor *nv){
-     nv->visit(this);
+    virtual void accept(NodeVisitor &nv){
+     nv.visit(this);
     }
 };
 class WhileNode: public BinNode{
     public: 
         WhileNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
  //is
 /*class IsNode: public BinNode{
     public: 
         IsNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };*/
 //and
 class AndNode: public BinNode{
     public: 
         AndNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class AmpersonNode: public BinNode{
     public: 
         AmpersonNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 //or
 class OrNode: public BinNode{
     public: 
         OrNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class PipeNode: public BinNode{
     public: 
         PipeNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 //por
 class PorNode: public BinNode{
     public: 
         PorNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //mas
 class MenosNode: public BinNode{
     public: 
         MenosNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //menos
 class MasNode: public BinNode{
     public: 
         MasNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //div
 class DivNode: public BinNode{
     public: 
         DivNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 //igual
 class IgualNode: public BinNode{
     public: 
         IgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class MasIgualNode: public BinNode{
     public: 
         MasIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class MenosIgualNode: public BinNode{
     public: 
         MenosIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class AsIgualNode: public BinNode{
     public: 
         AsIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DiaIgualNode: public BinNode{
     public: 
         DiaIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DDiaIgualNode: public BinNode{
     public: 
         DDiaIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class PorIgualNode: public BinNode{
     public: 
         PorIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class AmpIgualNode: public BinNode{
     public: 
         AmpIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class PipeIgualNode: public BinNode{
     public: 
         PipeIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class CircIgualNode: public BinNode{
     public: 
         CircIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DMayorIgualNode: public BinNode{
     public: 
         DMayorIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DMenorIgualNode: public BinNode{
     public: 
         DMenorIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DAstIgualNode: public BinNode{
     public: 
         DAstIgualNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class MenorMayorNode: public BinNode{
     public: 
         MenorMayorNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //dif
 class DifNode: public BinNode{
     public: 
         DifNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //menor
 class MenorNode: public BinNode{
     public: 
         MenorNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //mayor
 class MayorNode: public BinNode{
     public: 
         MayorNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //menorigual
 class MenIgNode: public BinNode{
     public: 
         MenIgNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //mayorigual
 class MayIgNode: public BinNode{
     public: 
         MayIgNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 class NIgNode: public BinNode{
     public: 
         NIgNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DIgNode: public BinNode{
     public: 
         DIgNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DMayorNode: public BinNode{
     public: 
         DMayorNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DMenorNode: public BinNode{
     public: 
         DMenorNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DDiagNode: public BinNode{
     public: 
         DDiagNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class DAsteriscosNode: public BinNode{
     public: 
         DAsteriscosNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 
@@ -725,7 +725,7 @@ class DAsteriscosNode: public BinNode{
 class ModNode: public BinNode{
     public: 
         ModNode():BinNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 /*********************************
  *
@@ -737,75 +737,75 @@ class ModNode: public BinNode{
 class DelNode: public UnaNode{
     public: 
         DelNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //not
 class NotNode: public UnaNode{
     public: 
         NotNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class EnetildeNode: public UnaNode{
     public: 
         EnetildeNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class CircunflejoNode: public UnaNode{
     public: 
         CircunflejoNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 //with
 class WithNode: public UnaNode{
     public: 
         WithNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //as
 class AsNode: public UnaNode{
     public: 
         AsNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //in
 class InNode: public UnaNode{
     public: 
         InNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //notin
 class NotInNode: public UnaNode{
     public: 
         NotInNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //is
 class IsNode: public UnaNode{
     public: 
         IsNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 //isnot
 class IsNotNode: public UnaNode{
     public: 
         IsNotNode():UnaNode(){}
-        virtual void accept(NodeVisitor *nv){nv->visit(this);}
+        virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class HermanosNode: public BlockNode{
 	public:
 		HermanosNode():BlockNode(){}
-		virtual void accept(NodeVisitor *nv){nv->visit(this);}
+		virtual void accept(NodeVisitor &nv){nv.visit(this);}
 };
 
 class ArgNode: public BlockNode{
 public:
     ArgNode() : BlockNode(){}
-    virtual void accept(NodeVisitor *nv){
-        nv->visit(this);
+    virtual void accept(NodeVisitor &nv){
+        nv.visit(this);
     }
 };
 #endif /* COMPOSITE */

@@ -98,9 +98,8 @@ class ArgNode;
 class IfElseNode;
 class WhileElseNode;
 class ForElseNode;
-class PrintVisitor;
 class NodeVisitor{
-protected:
+public:
 	NodeVisitor(){}
 public:
 	virtual void visit(IfElseNode*) = 0;
@@ -266,5 +265,3 @@ public:
 	virtual Node * bWHILEELSENode () = 0;
 	virtual Node * bFORELSENode () = 0;
 };
-
-class MASTBuilder;

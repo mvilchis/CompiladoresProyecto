@@ -16,7 +16,7 @@ class PrintVisitor:public NodeVisitor{
 public:
 	void printBloque(string s, Node* n) {
 		cout << "[" << s << " ";
-		Niterador *it = n->getIterador();
+		Niterador *it = n->getChild();
 		bool e = it->hasNext();
 		while (it->hasNext()) {
 			Node* actual = it->next();

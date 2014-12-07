@@ -13,8 +13,8 @@
 using namespace std;
 #include "visitor.cpp"
 #define YYDEBUG 1
-MASTBuilder ast;
-NodeVisitor visitor;
+MASTBuilder *ast;
+NodeVisitor *visitor = new PrintVisitor();
 
 extern FILE *yyin;
 extern char *yytext;
@@ -55,16 +55,16 @@ GOAL : file_input {$$=$1;
 
 
 file_input : NEWLINE file_input {$$=$2;}
-            | stmt file_input{$$=ast.bHERMANOSNode($1,$2);}
-            |{$$=ast.bHERMANOSNode();}
+            | stmt file_input{$$=ast->bHERMANOSNode($1,$2);}
+            |{$$=ast->bHERMANOSNode();}
             ;
 
 
 suite : simple_stmt {$$=$1;}
-        | INDENT stmt s44 DEDENT {$$=ast.bHERMANOSNode($2,$3);}
+        | INDENT stmt s44 DEDENT {$$=ast->bHERMANOSNode($2,$3);}
         ;
-s44 : stmt s44 {$$=ast.bHERMANOSNode($1,$2);}
-    | {$$=ast.bHERMANOSNode();}
+s44 : stmt s44 {$$=ast->bHERMANOSNode($1,$2);}
+    | {$$=ast->bHERMANOSNode();}
     ;
 
 
@@ -72,92 +72,92 @@ stmt : simple_stmt {$$=$1;}
     | compound_stmt {$$=$1;} 
     ;
 
-simple_stmt : small_stmt s42 NEWLINE {$$=ast.bHERMANOSNode($1,$2);};
-s42 : PCOMA small_stmt s42 {$$=ast.bHERMANOSNode($2,$3);}
+simple_stmt : small_stmt s42 NEWLINE {$$=ast->bHERMANOSNode($1,$2);};
+s42 : PCOMA small_stmt s42 {$$=ast->bHERMANOSNode($2,$3);}
     | s43 {$$=$1;}
     ;
-s43 : PCOMA {$$=ast.bHERMANOSNode();}
-    | {$$=ast.bHERMANOSNode();}
+s43 : PCOMA {$$=ast->bHERMANOSNode();}
+    | {$$=ast->bHERMANOSNode();}
     ;
 
 
-small_stmt : print_stmt {$$=ast.bHERMANOSNode($1);}
-            | flow_stmt {$$=ast.bHERMANOSNode($1);}
-            | expr_stmt {$$=ast.bHERMANOSNode($1);}
-            | pass_stmt {$$=ast.bHERMANOSNode($1);}
-            | del_stmt {$$=ast.bHERMANOSNode($1);}
+small_stmt : print_stmt {$$=ast->bHERMANOSNode($1);}
+            | flow_stmt {$$=ast->bHERMANOSNode($1);}
+            | expr_stmt {$$=ast->bHERMANOSNode($1);}
+            | pass_stmt {$$=ast->bHERMANOSNode($1);}
+            | del_stmt {$$=ast->bHERMANOSNode($1);}
             ;
 
-pass_stmt : PASS {$$=ast.bPASSNode();}
+pass_stmt : PASS {$$=ast->bPASSNode();}
             ;
 
-del_stmt : DEL IDENTIFICADOR {$$=ast.bDELNode($1);};
+del_stmt : DEL IDENTIFICADOR {$$=ast->bDELNode($1);};
 
 flow_stmt : break_stmt  {$$=$1;}
             | continue_stmt {$$=$1;}
             | return_stmt {$$=$1;}
             ;
 
-expr_stmt : IDENTIFICADOR s41  {$2->setFChild(ast.bIDENTIFICADORNode($1)); $$=$2;}
+expr_stmt : IDENTIFICADOR s41  {$2->setFChild(ast->bIDENTIFICADORNode($1)); $$=$2;}
         | test {$$=$1;};
 s41 : s56 test {$1->setSChild($2);};
-s56 : MASIGUAL {$$=ast.bMASIGUALNode();}
- | MENOSIGUAL {$$=ast.bMENOSIGUALNode();}
- | ASTIGUAL {$$=ast.bASIGUALNode();}
- | DIAIGUAL {$$=ast.bDIAIGUALNode();}
- | PORIGUAL {$$=ast.bPORIGUALNode();}
- | AMPIGUAL {$$= ast.bAMPIGUALNode();}
- | PIPEIGUAL {$$=ast.bPIPEIGUALNode();}
- | CIRCIGUAL {$$=ast.bCIRCIGUALNode();}
- | DMENORIGUAL {$$=ast.bDMENORIGUALNode();}
- | DMAYORIGUAL {$$=ast.bDMAYORIGUALNode();}
- | DASTIGUAL {$$=ast.bDASTIGUALNode();}
- | DDIAIGUAL {$$=ast.bDDIAIGUALNode();}
+s56 : MASIGUAL {$$=ast->bMASIGUALNode();}
+ | MENOSIGUAL {$$=ast->bMENOSIGUALNode();}
+ | ASTIGUAL {$$=ast->bASIGUALNode();}
+ | DIAIGUAL {$$=ast->bDIAIGUALNode();}
+ | PORIGUAL {$$=ast->bPORIGUALNode();}
+ | AMPIGUAL {$$= ast->bAMPIGUALNode();}
+ | PIPEIGUAL {$$=ast->bPIPEIGUALNode();}
+ | CIRCIGUAL {$$=ast->bCIRCIGUALNode();}
+ | DMENORIGUAL {$$=ast->bDMENORIGUALNode();}
+ | DMAYORIGUAL {$$=ast->bDMAYORIGUALNode();}
+ | DASTIGUAL {$$=ast->bDASTIGUALNode();}
+ | DDIAIGUAL {$$=ast->bDDIAIGUALNode();}
 ;
 
 
-break_stmt : BREAK {$$=ast.bBREAKNode();} ;
+break_stmt : BREAK {$$=ast->bBREAKNode();} ;
 
-continue_stmt : CONTINUE {$$=ast.bCONTINUENode();};
+continue_stmt : CONTINUE {$$=ast->bCONTINUENode();};
 
-return_stmt : RETURN s40{$$=ast.bRETURNNode($2);};
+return_stmt : RETURN s40{$$=ast->bRETURNNode($2);};
 s40 : test{$$=$1;} 
     | {$$=NULL;};
 
-compound_stmt : if_stmt {$$=ast.bHERMANOSNode($1);}
-            | if_else_stmt {$$=ast.bHERMANOSNode($1);}
-            | while_stmt {$$=ast.bHERMANOSNode($1);}
-            | while_else_stmt {$$=ast.bHERMANOSNode($1);}
-            | for_stmt {$$=ast.bHERMANOSNode($1);}
-            | for_else_stmt {$$=ast.bHERMANOSNode($1);}
+compound_stmt : if_stmt {$$=ast->bHERMANOSNode($1);}
+            | if_else_stmt {$$=ast->bHERMANOSNode($1);}
+            | while_stmt {$$=ast->bHERMANOSNode($1);}
+            | while_else_stmt {$$=ast->bHERMANOSNode($1);}
+            | for_stmt {$$=ast->bHERMANOSNode($1);}
+            | for_else_stmt {$$=ast->bHERMANOSNode($1);}
             ;
 
-print_stmt : PRINT test {$$=ast.bPRINTNode($2);} 
+print_stmt : PRINT test {$$=ast->bPRINTNode($2);} 
             ;
 
-while_else_stmt : while_stmt else_stmt {$$=ast.bWHILEELSENode($1,$2);}
+while_else_stmt : while_stmt else_stmt {$$=ast->bWHILEELSENode($1,$2);}
             ;
-while_stmt : WHILE test DPUNTO NEWLINE suite {$$=ast.bWHILENode($2,$5);}
-            ;
-
-if_stmt : IF test DPUNTO NEWLINE suite elif {$$=ast.bIFNode($2,$5,$6);}
+while_stmt : WHILE test DPUNTO NEWLINE suite {$$=ast->bWHILENode($2,$5);}
             ;
 
-elif : ELIF test DPUNTO NEWLINE suite elif {$$=ast.bIFNode($2,$5,$6);}
+if_stmt : IF test DPUNTO NEWLINE suite elif {$$=ast->bIFNode($2,$5,$6);}
+            ;
+
+elif : ELIF test DPUNTO NEWLINE suite elif {$$=ast->bIFNode($2,$5,$6);}
     | {$$=NULL;}
     ;
 
-if_else_stmt : if_stmt else_stmt {$$=ast.bIFELSENode($1,$2);}
+if_else_stmt : if_stmt else_stmt {$$=ast->bIFELSENode($1,$2);}
         ;
 
 else_stmt : ELSE DPUNTO NEWLINE suite  {$$=$4;}
             ;
 
-for_else_stmt : for_stmt else_stmt  {$$=ast.bFORELSENode($1,$2);}
+for_else_stmt : for_stmt else_stmt  {$$=ast->bFORELSENode($1,$2);}
 ;
 
-for_stmt : FOR IDENTIFICADOR IN trailer DPUNTO NEWLINE  suite {$$=ast.bFORNode(ast.bIDENTIFICADORNode($2),$4,$7);}
-| FOR IDENTIFICADOR IN IDENTIFICADOR DPUNTO NEWLINE  suite {$$=ast.bFORNode(ast.bIDENTIFICADORNode($2),ast.bIDENTIFICADORNode($4),$7);}
+for_stmt : FOR IDENTIFICADOR IN trailer DPUNTO NEWLINE  suite {$$=ast->bFORNode(ast->bIDENTIFICADORNode($2),$4,$7);}
+| FOR IDENTIFICADOR IN IDENTIFICADOR DPUNTO NEWLINE  suite {$$=ast->bFORNode(ast->bIDENTIFICADORNode($2),ast->bIDENTIFICADORNode($4),$7);}
 ;
 
 
@@ -165,19 +165,19 @@ test : or_test {$$=$1;};
 
     
 
-or_test : and_test s2{$$=ast.bORNode($1,$2);};
-s2 : OR and_test s2 {$$=ast.bORNode($2,$3);}
+or_test : and_test s2{$$=ast->bORNode($1,$2);};
+s2 : OR and_test s2 {$$=ast->bORNode($2,$3);}
     | {$$=NULL;}
     ;
 
 
-and_test: not_test s3 {$$=ast.bANDNode($1,$2);};
-s3 : AND not_test s3 {$$=ast.bANDNode($2,$3);}
+and_test: not_test s3 {$$=ast->bANDNode($1,$2);};
+s3 : AND not_test s3 {$$=ast->bANDNode($2,$3);}
     | {$$=NULL;}
     ;
 
 
-not_test: NOT not_test {$$=ast.bNOTNode($2);}
+not_test: NOT not_test {$$=ast->bNOTNode($2);}
         | comparison {$$=$1;};
 
 
@@ -206,32 +206,32 @@ s4 : comp_op expr s4 {
     ;
 
 
-comp_op:MENOR {$$=ast.bMENORNode();}
- |MAYOR {$$=ast.bMAYORNode();}
- |DIGUAL {$$=ast.bDIGNode();}
- |MAIGUAL {$$=ast.bMAYIGNode();}
- |MEIGUAL {$$=ast.bMENIGNode();}
- |MENORMAYOR {$$=ast.bMENORMAYORNode();}
- |NIGUAL {$$=ast.bNIGNode();}
- |IN {$$=ast.bINNode();}
- |NOT IN {$$=ast.bNOTINNode();}
- |IS {$$=ast.bISNode();}
- |IS NOT {$$=ast.bISNOTNode();}
+comp_op:MENOR {$$=ast->bMENORNode();}
+ |MAYOR {$$=ast->bMAYORNode();}
+ |DIGUAL {$$=ast->bDIGNode();}
+ |MAIGUAL {$$=ast->bMAYIGNode();}
+ |MEIGUAL {$$=ast->bMENIGNode();}
+ |MENORMAYOR {$$=ast->bMENORMAYORNode();}
+ |NIGUAL {$$=ast->bNIGNode();}
+ |IN {$$=ast->bINNode();}
+ |NOT IN {$$=ast->bNOTINNode();}
+ |IS {$$=ast->bISNode();}
+ |IS NOT {$$=ast->bISNOTNode();}
 ;
-expr : xor_expr s5 {$$=ast.bPIPENode($1,$2);};
-s5 : PIPE xor_expr s5 {$$=ast.bPIPENode($2,$3);}
+expr : xor_expr s5 {$$=ast->bPIPENode($1,$2);};
+s5 : PIPE xor_expr s5 {$$=ast->bPIPENode($2,$3);}
     | {$$=NULL;}
     ;
 
 
-xor_expr : and_expr s6{$$=ast.bCIRCUNFLEJONode($1,$2);}; 
-s6 : CIRCUNFLEJO and_expr s6 {$$=ast.bCIRCUNFLEJONode($2,$3);}
+xor_expr : and_expr s6{$$=ast->bCIRCUNFLEJONode($1,$2);}; 
+s6 : CIRCUNFLEJO and_expr s6 {$$=ast->bCIRCUNFLEJONode($2,$3);}
     | {$$=NULL;}
     ;
 
 
-and_expr: shift_expr s7 {$$=ast.bAMPERSONNode($1,$2);};
-s7 : AMPERSON shift_expr s7 {$$=ast.bAMPERSONNode($2,$3);}
+and_expr: shift_expr s7 {$$=ast->bAMPERSONNode($1,$2);};
+s7 : AMPERSON shift_expr s7 {$$=ast->bAMPERSONNode($2,$3);}
     | {$$=NULL;}
     ;
 
@@ -243,8 +243,8 @@ shift_expr : arith_expr s8 {if($2==NULL){
                         $$=$2;
                         }
                     };
-s8 : DMAYOR arith_expr s8 { $$=ast.bDMAYORNode($2,$3);}
-    | DMENOR arith_expr s8 { $$=ast.bDMENORNode($2,$3);}
+s8 : DMAYOR arith_expr s8 { $$=ast->bDMAYORNode($2,$3);}
+    | DMENOR arith_expr s8 { $$=ast->bDMENORNode($2,$3);}
     | {$$=NULL;}
     ;
 
@@ -267,8 +267,8 @@ s9 : s10 term s9 {if($3==NULL){
                 }
     | {$$=NULL;}
     ;
-s10 : MAS {$$=ast.bMENOSNode();} 
-    | MENOS {$$=ast.bMASNode();} ;
+s10 : MAS {$$=ast->bMENOSNode();} 
+    | MENOS {$$=ast->bMASNode();} ;
 
 term : factor s11   {if($2==NULL){
                         $$=$1;
@@ -289,13 +289,13 @@ s11 : s12 factor s11 {if($3==NULL){
                 }
     | {$$=NULL;}
     ;
-s12 : ASTERISCO  {$$=ast.bPORNode();}
-    | DIAG  {$$=ast.bDIVNode();}
-    | PORCEN {$$=ast.bMODNode();}
-    | DDIAG {$$=ast.bDDIAGNode();};
+s12 : ASTERISCO  {$$=ast->bPORNode();}
+    | DIAG  {$$=ast->bDIVNode();}
+    | PORCEN {$$=ast->bMODNode();}
+    | DDIAG {$$=ast->bDDIAGNode();};
 
 
-factor : s10 factor {$1->setFChild(ast.bINTNode(0));
+factor : s10 factor {$1->setFChild(ast->bINTNode(0));
                         $1->setSChild($2);
                         $$=$1;} 
     | atom {$$=$1;}
@@ -303,21 +303,21 @@ factor : s10 factor {$1->setFChild(ast.bINTNode(0));
 
 
 
-atom : IDENTIFICADOR {$$=ast.bIDENTIFICADORNode($1);}
-    | ENTERO {$$=ast.bINTNode($1);}
-    | FLOTANTE {$$=ast.bFLOATNode($1);}
-    | STRING {$$=ast.bSTRINGNode($1);}
-    | TRUE {$$=ast.bFALSENode();}
-    | FALSE {$$=ast.bTRUENode();}
+atom : IDENTIFICADOR {$$=ast->bIDENTIFICADORNode($1);}
+    | ENTERO {$$=ast->bINTNode($1);}
+    | FLOTANTE {$$=ast->bFLOATNode($1);}
+    | STRING {$$=ast->bSTRINGNode($1);}
+    | TRUE {$$=ast->bFALSENode();}
+    | FALSE {$$=ast->bTRUENode();}
     ;
 
 trailer : APAREN arglist CPAREN {$$=$2;};
 
-arglist : test s29 {$$=ast.bARGNode(ast.bARGNode($1),$2);}
-        | {$$=ast.bARGNode();}
+arglist : test s29 {$$=ast->bARGNode(ast->bARGNode($1),$2);}
+        | {$$=ast->bARGNode();}
         ;
-s29 : COMA test s29 {$$=ast.bARGNode(ast.bARGNode($1),$2);}
-    | {$$=ast.bARGNode();}
+s29 : COMA test s29 {$$=ast->bARGNode(ast->bARGNode($1),$2);}
+    | {$$=ast->bARGNode();}
     ;
 
 

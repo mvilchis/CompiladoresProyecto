@@ -71,8 +71,8 @@
 using namespace std;
 #include "visitor.cpp"
 #define YYDEBUG 1
-MASTBuilder ast;
-NodeVisitor visitor;
+MASTBuilder *ast;
+NodeVisitor *visitor = new PrintVisitor();
 
 extern FILE *yyin;
 extern char *yytext;
@@ -1508,13 +1508,13 @@ yyreduce:
 
   case 4:
 #line 58 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1513 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
 #line 59 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode();}
+    {(yyval.nodeT)=ast->bHERMANOSNode();}
 #line 1519 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1526,19 +1526,19 @@ yyreduce:
 
   case 7:
 #line 64 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[-2].nodeT),(yyvsp[-1].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-2].nodeT),(yyvsp[-1].nodeT));}
 #line 1531 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 66 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1537 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 67 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode();}
+    {(yyval.nodeT)=ast->bHERMANOSNode();}
 #line 1543 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1556,13 +1556,13 @@ yyreduce:
 
   case 12:
 #line 75 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[-2].nodeT),(yyvsp[-1].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-2].nodeT),(yyvsp[-1].nodeT));}
 #line 1561 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 76 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1567 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1574,55 +1574,55 @@ yyreduce:
 
   case 15:
 #line 79 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode();}
+    {(yyval.nodeT)=ast->bHERMANOSNode();}
 #line 1579 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 80 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode();}
+    {(yyval.nodeT)=ast->bHERMANOSNode();}
 #line 1585 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 84 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1591 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 85 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1597 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 86 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1603 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 87 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1609 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 88 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1615 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 91 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPASSNode();}
+    {(yyval.nodeT)=ast->bPASSNode();}
 #line 1621 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 94 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDELNode((yyvsp[-1].nodeT));}
+    {(yyval.nodeT)=ast->bDELNode((yyvsp[-1].nodeT));}
 #line 1627 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1646,7 +1646,7 @@ yyreduce:
 
   case 27:
 #line 101 "pypar.y" /* yacc.c:1646  */
-    {(yyvsp[0].nodeT)->setFChild(ast.bIDENTIFICADORNode((yyvsp[-1].cad))); (yyval.nodeT)=(yyvsp[0].nodeT);}
+    {(yyvsp[0].nodeT)->setFChild(ast->bIDENTIFICADORNode((yyvsp[-1].cad))); (yyval.nodeT)=(yyvsp[0].nodeT);}
 #line 1651 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1664,91 +1664,91 @@ yyreduce:
 
   case 30:
 #line 104 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMASIGUALNode();}
+    {(yyval.nodeT)=ast->bMASIGUALNode();}
 #line 1669 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
 #line 105 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMENOSIGUALNode();}
+    {(yyval.nodeT)=ast->bMENOSIGUALNode();}
 #line 1675 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
 #line 106 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bASIGUALNode();}
+    {(yyval.nodeT)=ast->bASIGUALNode();}
 #line 1681 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
 #line 107 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDIAIGUALNode();}
+    {(yyval.nodeT)=ast->bDIAIGUALNode();}
 #line 1687 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
 #line 108 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPORIGUALNode();}
+    {(yyval.nodeT)=ast->bPORIGUALNode();}
 #line 1693 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 109 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)= ast.bAMPIGUALNode();}
+    {(yyval.nodeT)= ast->bAMPIGUALNode();}
 #line 1699 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 110 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPIPEIGUALNode();}
+    {(yyval.nodeT)=ast->bPIPEIGUALNode();}
 #line 1705 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 111 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bCIRCIGUALNode();}
+    {(yyval.nodeT)=ast->bCIRCIGUALNode();}
 #line 1711 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 112 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDMENORIGUALNode();}
+    {(yyval.nodeT)=ast->bDMENORIGUALNode();}
 #line 1717 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
 #line 113 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDMAYORIGUALNode();}
+    {(yyval.nodeT)=ast->bDMAYORIGUALNode();}
 #line 1723 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
 #line 114 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDASTIGUALNode();}
+    {(yyval.nodeT)=ast->bDASTIGUALNode();}
 #line 1729 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
 #line 115 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDDIAIGUALNode();}
+    {(yyval.nodeT)=ast->bDDIAIGUALNode();}
 #line 1735 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
 #line 119 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bBREAKNode();}
+    {(yyval.nodeT)=ast->bBREAKNode();}
 #line 1741 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 121 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bCONTINUENode();}
+    {(yyval.nodeT)=ast->bCONTINUENode();}
 #line 1747 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
 #line 123 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bRETURNNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bRETURNNode((yyvsp[0].nodeT));}
 #line 1753 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1766,67 +1766,67 @@ yyreduce:
 
   case 47:
 #line 127 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1771 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 48:
 #line 128 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1777 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 49:
 #line 129 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1783 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 50:
 #line 130 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1789 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 51:
 #line 131 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1795 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 52:
 #line 132 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bHERMANOSNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[0].nodeT));}
 #line 1801 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 53:
 #line 135 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPRINTNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bPRINTNode((yyvsp[0].nodeT));}
 #line 1807 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 54:
 #line 138 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bWHILEELSENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bWHILEELSENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1813 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 55:
 #line 140 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bWHILENode((yyvsp[-3].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bWHILENode((yyvsp[-3].nodeT),(yyvsp[0].nodeT));}
 #line 1819 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 56:
 #line 143 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bIFNode((yyvsp[-4].nodeT),(yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bIFNode((yyvsp[-4].nodeT),(yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1825 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 57:
 #line 146 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bIFNode((yyvsp[-4].nodeT),(yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bIFNode((yyvsp[-4].nodeT),(yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1831 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1838,7 +1838,7 @@ yyreduce:
 
   case 59:
 #line 150 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bIFELSENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bIFELSENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1843 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1850,19 +1850,19 @@ yyreduce:
 
   case 61:
 #line 156 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bFORELSENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bFORELSENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1855 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
 #line 159 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bFORNode(ast.bIDENTIFICADORNode((yyvsp[-5].cad)),(yyvsp[-3].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bFORNode(ast->bIDENTIFICADORNode((yyvsp[-5].cad)),(yyvsp[-3].nodeT),(yyvsp[0].nodeT));}
 #line 1861 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
 #line 160 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bFORNode(ast.bIDENTIFICADORNode((yyvsp[-5].cad)),ast.bIDENTIFICADORNode((yyvsp[-3].cad)),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bFORNode(ast->bIDENTIFICADORNode((yyvsp[-5].cad)),ast->bIDENTIFICADORNode((yyvsp[-3].cad)),(yyvsp[0].nodeT));}
 #line 1867 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1874,13 +1874,13 @@ yyreduce:
 
   case 65:
 #line 168 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1879 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 66:
 #line 169 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1885 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1892,13 +1892,13 @@ yyreduce:
 
   case 68:
 #line 174 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bANDNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bANDNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1897 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
 #line 175 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bANDNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bANDNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 1903 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1910,7 +1910,7 @@ yyreduce:
 
   case 71:
 #line 180 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bNOTNode((yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bNOTNode((yyvsp[0].nodeT));}
 #line 1915 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -1959,79 +1959,79 @@ yyreduce:
 
   case 76:
 #line 209 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMENORNode();}
+    {(yyval.nodeT)=ast->bMENORNode();}
 #line 1964 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 77:
 #line 210 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMAYORNode();}
+    {(yyval.nodeT)=ast->bMAYORNode();}
 #line 1970 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 78:
 #line 211 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDIGNode();}
+    {(yyval.nodeT)=ast->bDIGNode();}
 #line 1976 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 79:
 #line 212 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMAYIGNode();}
+    {(yyval.nodeT)=ast->bMAYIGNode();}
 #line 1982 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 80:
 #line 213 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMENIGNode();}
+    {(yyval.nodeT)=ast->bMENIGNode();}
 #line 1988 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 81:
 #line 214 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMENORMAYORNode();}
+    {(yyval.nodeT)=ast->bMENORMAYORNode();}
 #line 1994 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 82:
 #line 215 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bNIGNode();}
+    {(yyval.nodeT)=ast->bNIGNode();}
 #line 2000 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 83:
 #line 216 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bINNode();}
+    {(yyval.nodeT)=ast->bINNode();}
 #line 2006 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 84:
 #line 217 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bNOTINNode();}
+    {(yyval.nodeT)=ast->bNOTINNode();}
 #line 2012 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 85:
 #line 218 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bISNode();}
+    {(yyval.nodeT)=ast->bISNode();}
 #line 2018 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 86:
 #line 219 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bISNOTNode();}
+    {(yyval.nodeT)=ast->bISNOTNode();}
 #line 2024 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 87:
 #line 221 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPIPENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bPIPENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2030 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 88:
 #line 222 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPIPENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bPIPENode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2036 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -2043,13 +2043,13 @@ yyreduce:
 
   case 90:
 #line 227 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bCIRCUNFLEJONode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bCIRCUNFLEJONode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2048 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 91:
 #line 228 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bCIRCUNFLEJONode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bCIRCUNFLEJONode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2054 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -2061,13 +2061,13 @@ yyreduce:
 
   case 93:
 #line 233 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bAMPERSONNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bAMPERSONNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2066 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 94:
 #line 234 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bAMPERSONNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bAMPERSONNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2072 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -2092,13 +2092,13 @@ yyreduce:
 
   case 97:
 #line 246 "pypar.y" /* yacc.c:1646  */
-    { (yyval.nodeT)=ast.bDMAYORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    { (yyval.nodeT)=ast->bDMAYORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2097 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 98:
 #line 247 "pypar.y" /* yacc.c:1646  */
-    { (yyval.nodeT)=ast.bDMENORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
+    { (yyval.nodeT)=ast->bDMENORNode((yyvsp[-1].nodeT),(yyvsp[0].nodeT));}
 #line 2103 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -2143,13 +2143,13 @@ yyreduce:
 
   case 103:
 #line 270 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMENOSNode();}
+    {(yyval.nodeT)=ast->bMENOSNode();}
 #line 2148 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 104:
 #line 271 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMASNode();}
+    {(yyval.nodeT)=ast->bMASNode();}
 #line 2154 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -2188,31 +2188,31 @@ yyreduce:
 
   case 108:
 #line 292 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bPORNode();}
+    {(yyval.nodeT)=ast->bPORNode();}
 #line 2193 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 109:
 #line 293 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDIVNode();}
+    {(yyval.nodeT)=ast->bDIVNode();}
 #line 2199 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 110:
 #line 294 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bMODNode();}
+    {(yyval.nodeT)=ast->bMODNode();}
 #line 2205 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
 #line 295 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bDDIAGNode();}
+    {(yyval.nodeT)=ast->bDDIAGNode();}
 #line 2211 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 112:
 #line 298 "pypar.y" /* yacc.c:1646  */
-    {(yyvsp[-1].nodeT)->setFChild(ast.bINTNode(0));
+    {(yyvsp[-1].nodeT)->setFChild(ast->bINTNode(0));
                         (yyvsp[-1].nodeT)->setSChild((yyvsp[0].nodeT));
                         (yyval.nodeT)=(yyvsp[-1].nodeT);}
 #line 2219 "pypar.cpp" /* yacc.c:1646  */
@@ -2226,37 +2226,37 @@ yyreduce:
 
   case 114:
 #line 306 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bIDENTIFICADORNode((yyvsp[0].cad));}
+    {(yyval.nodeT)=ast->bIDENTIFICADORNode((yyvsp[0].cad));}
 #line 2231 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
 #line 307 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bINTNode((yyvsp[0].numi));}
+    {(yyval.nodeT)=ast->bINTNode((yyvsp[0].numi));}
 #line 2237 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
 #line 308 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bFLOATNode((yyvsp[0].numf));}
+    {(yyval.nodeT)=ast->bFLOATNode((yyvsp[0].numf));}
 #line 2243 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 117:
 #line 309 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bSTRINGNode((yyvsp[0].cad));}
+    {(yyval.nodeT)=ast->bSTRINGNode((yyvsp[0].cad));}
 #line 2249 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 118:
 #line 310 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bFALSENode();}
+    {(yyval.nodeT)=ast->bFALSENode();}
 #line 2255 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 119:
 #line 311 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bTRUENode();}
+    {(yyval.nodeT)=ast->bTRUENode();}
 #line 2261 "pypar.cpp" /* yacc.c:1646  */
     break;
 
@@ -2268,25 +2268,25 @@ yyreduce:
 
   case 121:
 #line 316 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bARGNode(ast.bARGNode((yyvsp[-1].nodeT)),(yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bARGNode(ast->bARGNode((yyvsp[-1].nodeT)),(yyvsp[0].nodeT));}
 #line 2273 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 122:
 #line 317 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bARGNode();}
+    {(yyval.nodeT)=ast->bARGNode();}
 #line 2279 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 123:
 #line 319 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bARGNode(ast.bARGNode((yyvsp[-2].nodeT)),(yyvsp[-1].nodeT));}
+    {(yyval.nodeT)=ast->bARGNode(ast->bARGNode((yyvsp[-2].nodeT)),(yyvsp[-1].nodeT));}
 #line 2285 "pypar.cpp" /* yacc.c:1646  */
     break;
 
   case 124:
 #line 320 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast.bARGNode();}
+    {(yyval.nodeT)=ast->bARGNode();}
 #line 2291 "pypar.cpp" /* yacc.c:1646  */
     break;
 
