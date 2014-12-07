@@ -50,7 +50,7 @@ Node* nodeT;
 GOAL: file_input {printf("Éxito primero\n");
 	$$=$1;
 	NodeVisitor *visitor = new PrintVisitor();
-	$$->accept(visitor);
+//	$$->accept(visitor);
 	printf("Exito\n");
 }
 ;
@@ -70,7 +70,7 @@ simple_stmt: small_stmt r1 NEWLINE {cout << "ep\n"; $$=ast->bHERMANOSNode($1,$2)
 
 r1: simple_stmt_aux ss_aux {$$=ast->bHERMANOSNode($1,$2);/*checar aqui*/}
 ;
-ss_aux: PCOMA{$$=NULL;}
+ss_aux: PCOMA{$$=ast->bHERMANOSNode();}
 | {$$=NULL;} 
 ;
 simple_stmt_aux: simple_stmt_aux PCOMA small_stmt {$$=ast->bHERMANOSNode($1,$3);}
@@ -119,14 +119,14 @@ print_stmt : PRINT s29 {
 
 s29 : s30 {$$=$1; }| DMAYOR test s31 {$$=$3;};
 s30 : test s32 comaS {$$=ast->bHERMANOSNode($1,$2);}
-|{$$=NULL;} 
+|{$$=ast->bHERMANOSNode();} 
 ;
 s31 : COMA test comaS {$$=$2;}
-|{$$=NULL;} 
+|{$$=ast->bHERMANOSNode();} 
 ;
 
 s32 :  s32 COMA test {$$=ast->bHERMANOSNode($1,$3);}| {$$=ast->bHERMANOSNode();} ;
-comaS: COMA{$$=NULL;}
+comaS: COMA{$$=ast->bHERMANOSNode();}
 |{$$=NULL;} 
 ;
 /*DEL*/
@@ -151,7 +151,7 @@ continue_stmt: CONTINUE {$$=ast->bCONTINUENode();}
 return_stmt: RETURN return_stmt_aux {$$=ast->bRETURNNode($2);}
 ;
 return_stmt_aux: testlist{$$=$1;}
-|{$$=NULL;}  
+|{$$=ast->bHERMANOSNode();}  
 ;
 compound_stmt: 
 if_stmt {$$=$1;} 
@@ -174,10 +174,10 @@ if_stmt_aux:  if_stmt_aux ELIF test DPUNTO suite {
         nl->push_front($3);
         $$=ast->bIFNode(nl);
         }
-|{$$=NULL;}   
+|{$$=ast->bHERMANOSNode();}   
 ;
 s8: ELSE DPUNTO suite { $$=$3; }
-|   {$$=NULL;} 
+|   {$$=ast->bHERMANOSNode();} 
 ;
 /*WHILE*/
 while_stmt: WHILE test DPUNTO suite s8 { $$=ast->bWHILENode($2,$4);}
@@ -357,7 +357,8 @@ if($1==NULL){
                     }
 
 
-}|{$$=NULL;}   
+}|
+{$$=NULL;}   
 ;
 t_aux:ASTERISCO  {$$=ast->bPORNode();}
  | DIAG  {$$=ast->bDIVNode();}
@@ -392,7 +393,7 @@ string_aux: string_aux STRING { $$=ast->bHERMANOSNode(ast->bSTRINGNode($2), $1);
 
 exprlist: expr exprlist_aux comaS {$$=$1;}
 ;
-exprlist_aux: exprlist_aux COMA expr {$$=$3;} |{$$=NULL;}   
+exprlist_aux: exprlist_aux COMA expr {$$=$3;} |{$$=ast->bHERMANOSNode();}   
 ;
 testlist: test testlist_aux comaS {$$=$1;}
 ;

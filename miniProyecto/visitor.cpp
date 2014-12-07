@@ -15,6 +15,7 @@ using namespace std;
 class PrintVisitor:public NodeVisitor{
 public:
 	void printBloque(string s, INode* n) {
+		cout <<"ENTRE A IMPRIMIR BLOQUE\n" ;
 		cout << "[" << s << " ";
 		Niterador *it = n->getChild();
 		while (it->hasNext()) {
