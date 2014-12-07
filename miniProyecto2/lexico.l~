@@ -1,0 +1,384 @@
+%{
+/**
+    lexico.l
+    Analizador léxico de lenguaje Python
+
+    @author Susana Hahn Martín-Lunas
+    @author José de Jesús Vargas Muñoz
+    @author Luis Alfredo Lizárraga Santos
+    @version 1.3 29/10/2014
+*/
+#include <iostream>
+#include <string> 
+#include <fstream>
+#include "Stack.cpp"
+#include "pypar.hpp"
+
+
+using namespace std;
+Stack *st = new Stack();
+int ident = 0;
+int dedent=0;   
+int currentLine = 1;
+int currentIdent = 0;
+static ofstream file;
+int updateIdentVal=0;
+bool start = true;
+
+int updateIdent(bool endof);
+
+%}
+
+%option noyywrap
+%option Stack
+%option outfile="pylex.cpp"
+%x comments
+%x dedents
+%x principio
+%x idents
+
+DIGIT [0-9]
+NUMBER {DIGIT}+
+REAL {NUMBER}?"."{DIGIT}+
+IDENTIFIER [A-Za-z'_']+[A-Za-z'_'0-9]* 
+CAR_RETURN [\r]
+NEWLINE {CAR_RETURN}?[\n]
+SPACE_TAB (" "|\t)
+
+%%
+<dedents>"*"                        return T_DEDENT;
+
+<dedents>"_"                        yy_pop_state();
+
+<dedents>"E"                        return 0;
+
+<idents>"*"                        return T_IDENT;
+
+<idents>"_"                        yy_pop_state();
+
+<comments>(.)*                      yy_pop_state();
+
+
+<principio>{SPACE_TAB}*"#"             yy_push_state(comments);
+
+<principio>{NEWLINE}{SPACE_TAB}*"#" {
+                                        currentLine++;
+                                        yy_push_state(comments);
+                                    }
+
+<principio>{NEWLINE}{SPACE_TAB}+    {
+                                        currentLine++;
+                                        cout << "Error de identación línea " << currentLine << endl;
+                                        return T_ERROR;
+                                    }
+
+<principio>{NEWLINE}            {
+                                    currentLine++;
+                                }  
+
+<principio>{SPACE_TAB}+         {
+                                    cout << "Error de identación línea " << currentLine << endl;
+                                    return T_ERROR;
+                                }
+
+<principio>[^" "|\t]            {
+                                    unput(yytext[0]); 
+                                    yy_pop_state();
+                                }
+
+
+
+"+="                            {
+
+                                    return T_A_PLUS;
+                                }
+
+"-="                            return T_A_MINUS;
+
+"*="                            return T_A_TIMES;
+
+"/="                            return T_A_ON;
+
+"%="                            return T_A_MODULO;
+
+"|="                            return T_A_OR;
+
+"&="                            return T_A_AND;
+
+"^="                            return T_A_CARET;
+
+"<<="                           return T_A_LEFT_SHIFT;
+
+">>="                           return T_A_RIGHT_SHIFT;
+
+"**="                           return T_A_POWER;
+
+"//="                           return T_A_ONON;
+
+
+
+"while"                         return T_WHILE;
+                            
+"if"                            return T_IF;
+                            
+"print"                         return T_PRINT;
+                            
+"False"                         {
+                                    yylval.int_val = 0;
+                                    return T_FALSE;
+                                }
+                            
+"None"                          return T_NONE;
+                            
+"True"                          {
+                                    yylval.int_val = 0;
+                                    return T_TRUE;
+                                }
+                            
+"and"                           return T_AND;
+                            
+"as"                            return T_AS;
+                            
+"assert"                        return T_ASSERT;
+                            
+"break"                         return T_BREAK;
+                            
+"class"                         return T_CLASS;
+                            
+"continue"                      return T_CONTINUE;
+                            
+"def"                           return T_DEF;
+                            
+"del"                           return T_DEL;
+                            
+"elif"                          return T_ELIF;
+                            
+"else"                          return T_ELSE;
+                            
+"except"                        return T_EXCEPT;
+                            
+"finally"                       return T_FINALLY;
+                            
+"for"                           return T_FOR;
+                            
+"from"                          return T_FROM;
+                            
+"global"                        return T_GLOBAL;
+                            
+"import"                        return T_IMPORT;
+                            
+"in"                            return T_IN;
+                            
+"is"                            return T_IS;
+                        
+"lambda"                        return T_LAMBDA;
+                            
+"nonlocal"                      return T_NONLOCAL;
+                            
+"not"                           return T_NOT;
+                            
+"or"                            return T_OR;
+                            
+"pass"                          return T_PASS;
+                            
+"raise"                         return T_RAISE;
+                            
+"return"                        return T_RETURN;
+                            
+"try"                           return T_TRY;
+                            
+"with"                          return T_WITH;
+                            
+"yield"                         return T_YIELD;
+
+"range"                         return T_RANGE;
+
+"xrange"                         return T_XRANGE;
+
+                            
+
+"\""[^"\""]*"\""                {
+                                    yylval.string_val = strdup(yytext);
+                                    return T_STRING;
+                                }
+
+
+
+"("                         return T_OPAR;
+
+")"                         return T_CPAR;
+
+"["                         return T_OBRA;
+
+"]"                         return T_CBRA;
+
+"{"                         return T_OKEY;
+
+"}"                         return T_CKEY;
+
+","                         return T_COMA;
+
+"="                         return T_EQ;
+
+"=="                        return T_DOUBLE_EQ;
+
+"+"                         return T_MAS;
+
+"-"                         return T_MENOS;
+
+"**"                        return T_DPOR;
+
+"*"                         return T_POR;
+
+"/"                         return T_ENTRE;
+
+":"                         return T_DOTS;
+
+"\."                        return T_DOT;
+
+";"                         return T_DOT_COMMA;
+
+"^"                         return T_CARET;
+
+"~"                         return T_TILDE;
+
+"|"                         return T_PIPE;
+
+"&"                         return T_AMP;
+
+"%"                         return T_MOD;
+
+"//"                        return T_DENTRE;
+
+">>"                        return T_DIR_RIGHT;
+
+"<<"                        return T_DIR_LEFT;
+
+
+
+"<"                         return T_LESS_THAN;
+
+">"                         return T_GREATER_THAN;
+
+"<="                        return T_L_EQUAL;
+
+">="                        return T_G_EQUAL;
+
+"<>"                        return T_DIFFERENT;
+
+"!="                        return T_NOT_EQUAL;
+
+
+
+{IDENTIFIER}                    {
+                                    yylval.string_val = strdup(yytext);
+                                    return T_ID;
+                                }
+
+{NUMBER}                        {
+                                    yylval.int_val = atoi(yytext);
+                                    return T_NUMBER;
+                                }
+
+{REAL}                          {
+                                    yylval.float_val = atof(yytext);
+                                    return T_REAL;
+                                }
+
+{NEWLINE}{SPACE_TAB}*"#"        {
+                                    if(yy_top_state()!=comments)
+                                        yy_push_state(comments);
+                                    currentLine++;
+                                }
+
+{NEWLINE}{SPACE_TAB}*           {                         
+                                    currentLine++;
+                                    updateIdentVal=updateIdent(false);
+                                    if (updateIdentVal==3) {
+                                        cout << "Error de identación línea " << currentLine << endl;
+                                        return T_ERROR;
+                                    }
+                                    return T_NEWLINE;
+                                    
+                                }
+
+{NEWLINE}{SPACE_TAB}*{NEWLINE} {
+                                    currentLine++;
+                                    unput('\n');
+                                }                        
+" "+          
+
+(\t)+                   
+
+<<EOF>>                         {
+                                    currentLine++;
+                                    if (updateIdent(true)!=3) {
+                                        //return T_END;
+                                    } else{
+                                        cout << "Error de identación con el fin de archivo "  << endl;
+                                        return T_ERROR;
+                                    }
+                                    return T_NEWLINE;
+
+                                }
+
+"#"                                  yy_push_state(comments);                        
+
+.                               {
+                                    cout << "\nError al hacer el analisis en la línea " << currentLine << endl;
+                                    return T_ERROR;
+                                }
+%%
+
+void startCondition() {
+    st->push(0);
+    yy_push_state(principio);
+}
+
+/*
+ * Actualiza el nivel de indentación de la línea
+ * @param endof Booleano que indica que se llegó al fin del archivo
+ * @return 1: INDENT 2: DEDENT 3: Error
+ */
+int updateIdent(bool endof)
+{
+    ident=0;
+    dedent=0;
+
+    //Verificamos cual fue la identacion
+    if (!endof) {
+        for (int i = 1; i < yyleng; i++) {
+            if (yytext[i] == ' ')
+                ident = ident + 1;
+            if (yytext[i] == '\t')
+                ident = ident + 4;
+        }
+    }
+    currentIdent = st->top();
+    if (ident > currentIdent) {
+        st->push(ident);
+        unput('_');
+        unput('*');
+        yy_push_state(idents);
+        return 1;
+    }
+    while (ident <= currentIdent) {
+        if (currentIdent == ident) {
+            if(endof)
+                unput('E');
+            else
+                unput('_');
+            for(int i = 0; i < dedent; i++)
+                unput('*');
+            yy_push_state(dedents);
+            return 2;
+        } else {
+            st->pop();
+            if (ident > st->top())
+                return 3;
+            dedent++;
+            currentIdent = st->top();
+        }   
+    }
+    return 3;
+}

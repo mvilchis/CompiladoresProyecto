@@ -75,6 +75,21 @@ public:
 			n->addSChild(it->next());
 		return n;
 	}
+
+	Node* bFORNode(Node* c1, Node* c2, Node* c3) {
+		Node* n = new ForNode;
+		n->addSChild(c1);
+		n->addSChild(c2);
+		n->addSChild(c3);
+		return n;
+	}
+
+	Node* bFORELSENode(Node* n1, Node* n2){
+		Node* n= new ForElseNode;
+		n->setFChild(n1);
+		n->setSChild(n2);
+		return n;
+	}
 //TRUE
 	Node* bTRUENode(){
 		return new TrueNode;
@@ -83,6 +98,13 @@ public:
 //WHILE
 	Node* bWHILENode(Node* n1, Node* n2){
 		Node* n = new WhileNode;
+		n->setFChild(n1);
+		n->setSChild(n2);
+		return n;
+	}
+
+	Node* bWHILEELSENode(Node* n1, Node* n2){
+		Node* n= new WhileElseNode;
 		n->setFChild(n1);
 		n->setSChild(n2);
 		return n;
@@ -140,6 +162,21 @@ public:
 		Niterador *it = l->getIterador();
 		while(it->hasNext())
 			n->addSChild(it->next());
+		return n;
+	}
+
+	Node* bIFNode(Node* c1, Node* c2, Node* c3) {
+		Node* n = new IfNode;
+		n->addSChild(c1);
+		n->addSChild(c2);
+		if(c3!=NULL) n->addSChild(c3);
+		return n;
+	}
+
+	Node* bIFELSENode(Node* n1, Node* n2){
+		Node* n= new IfElseNode;
+		n->setFChild(n1);
+		n->setSChild(n2);
 		return n;
 	}
 //OR 
@@ -613,6 +650,28 @@ public:
 			n->addSChild(it->next());
 		return n;
 	
+	}
+
+	Node* bARGNode() {
+		Node* n = new ArgNode;
+		return n;
+	}
+
+	Node* bARGNode(Node* a, Node* b) {
+		Node* n = new ArgNode;
+		Niterador *it=a->getChild();
+		while (it->hasNext())
+			n->addSChild(it->next());
+		it= b->getChild();
+		while (it->hasNext())
+			n->addSChild(it->next());
+		return n;
+	}
+
+	Node* bARGNode(Node* c) {
+		Node* n = new ArgNode;
+		n->addSChild(c);
+		return n;
 	}
 
 

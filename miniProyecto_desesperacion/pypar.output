@@ -1,0 +1,2907 @@
+Terminales no usados en gramática
+
+   CLASS
+   FINALLY
+   NONE
+   LAMBDA
+   TRY
+   DEF
+   FROM
+   NONLOCAL
+   GLOBAL
+   WITH
+   AS
+   YIELD
+   ASSERT
+   IMPORT
+   EXCEPT
+   RAISE
+   EXEC
+   ENETILDE
+   DASTERISCO
+   ACORCHETE
+   CCORCHETE
+   ALLAVE
+   CLLAVE
+   PUNTO
+   AT
+   IGUAL
+   MENOSMAYOR
+   CSIMPLE
+   IDIAG
+   GATO
+   DIDIAG
+   SALIDA
+   FIN
+
+
+Gramática
+
+    0 $accept: GOAL $end
+
+    1 GOAL: file_input
+
+    2 file_input: NEWLINE file_input
+    3           | stmt file_input
+    4           | %empty
+
+    5 suite: simple_stmt
+    6      | INDENT stmt s44 DEDENT
+
+    7 s44: stmt s44
+    8    | %empty
+
+    9 stmt: simple_stmt
+   10     | compound_stmt
+
+   11 simple_stmt: small_stmt s42 NEWLINE
+
+   12 s42: PCOMA small_stmt s42
+   13    | s43
+
+   14 s43: PCOMA
+   15    | %empty
+
+   16 small_stmt: print_stmt
+   17           | flow_stmt
+   18           | expr_stmt
+   19           | pass_stmt
+   20           | del_stmt
+
+   21 pass_stmt: PASS
+
+   22 del_stmt: DEL IDENTIFICADOR
+
+   23 flow_stmt: break_stmt
+   24          | continue_stmt
+   25          | return_stmt
+
+   26 expr_stmt: IDENTIFICADOR s41
+   27          | test
+
+   28 s41: s56 test
+
+   29 s56: MASIGUAL
+   30    | MENOSIGUAL
+   31    | ASTIGUAL
+   32    | DIAIGUAL
+   33    | PORIGUAL
+   34    | AMPIGUAL
+   35    | PIPEIGUAL
+   36    | CIRCIGUAL
+   37    | DMENORIGUAL
+   38    | DMAYORIGUAL
+   39    | DASTIGUAL
+   40    | DDIAIGUAL
+
+   41 break_stmt: BREAK
+
+   42 continue_stmt: CONTINUE
+
+   43 return_stmt: RETURN s40
+
+   44 s40: test
+   45    | %empty
+
+   46 compound_stmt: if_stmt
+   47              | if_else_stmt
+   48              | while_stmt
+   49              | while_else_stmt
+   50              | for_stmt
+   51              | for_else_stmt
+
+   52 print_stmt: PRINT test
+
+   53 while_else_stmt: while_stmt else_stmt
+
+   54 while_stmt: WHILE test DPUNTO NEWLINE suite
+
+   55 if_stmt: IF test DPUNTO NEWLINE suite elif
+
+   56 elif: ELIF test DPUNTO NEWLINE suite elif
+   57     | %empty
+
+   58 if_else_stmt: if_stmt else_stmt
+
+   59 else_stmt: ELSE DPUNTO NEWLINE suite
+
+   60 for_else_stmt: for_stmt else_stmt
+
+   61 for_stmt: FOR IDENTIFICADOR IN trailer DPUNTO NEWLINE suite
+   62         | FOR IDENTIFICADOR IN IDENTIFICADOR DPUNTO NEWLINE suite
+
+   63 test: or_test
+
+   64 or_test: and_test s2
+
+   65 s2: OR and_test s2
+   66   | %empty
+
+   67 and_test: not_test s3
+
+   68 s3: AND not_test s3
+   69   | %empty
+
+   70 not_test: NOT not_test
+   71         | comparison
+
+   72 comparison: expr s4
+
+   73 s4: comp_op expr s4
+   74   | %empty
+
+   75 comp_op: MENOR
+   76        | MAYOR
+   77        | DIGUAL
+   78        | MAIGUAL
+   79        | MEIGUAL
+   80        | MENORMAYOR
+   81        | NIGUAL
+   82        | IN
+   83        | NOT IN
+   84        | IS
+   85        | IS NOT
+
+   86 expr: xor_expr s5
+
+   87 s5: PIPE xor_expr s5
+   88   | %empty
+
+   89 xor_expr: and_expr s6
+
+   90 s6: CIRCUNFLEJO and_expr s6
+   91   | %empty
+
+   92 and_expr: shift_expr s7
+
+   93 s7: AMPERSON shift_expr s7
+   94   | %empty
+
+   95 shift_expr: arith_expr s8
+
+   96 s8: DMAYOR arith_expr s8
+   97   | DMENOR arith_expr s8
+   98   | %empty
+
+   99 arith_expr: term s9
+
+  100 s9: s10 term s9
+  101   | %empty
+
+  102 s10: MAS
+  103    | MENOS
+
+  104 term: factor s11
+
+  105 s11: s12 factor s11
+  106    | %empty
+
+  107 s12: ASTERISCO
+  108    | DIAG
+  109    | PORCEN
+  110    | DDIAG
+
+  111 factor: s10 factor
+  112       | atom
+
+  113 atom: IDENTIFICADOR
+  114     | ENTERO
+  115     | FLOTANTE
+  116     | STRING
+  117     | TRUE
+  118     | FALSE
+
+  119 trailer: APAREN arglist CPAREN
+
+  120 arglist: test s29
+  121        | %empty
+
+  122 s29: COMA test s29
+  123    | %empty
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+STRING (258) 116
+IDENTIFICADOR (259) 22 26 61 62 113
+PRINT (260) 52
+FALSE (261) 118
+CLASS (262)
+FINALLY (263)
+IS (264) 84 85
+RETURN (265) 43
+NONE (266)
+CONTINUE (267) 42
+FOR (268) 61 62
+LAMBDA (269)
+TRY (270)
+TRUE (271) 117
+DEF (272)
+FROM (273)
+NONLOCAL (274)
+WHILE (275) 54
+AND (276) 68
+DEL (277) 22
+GLOBAL (278)
+NOT (279) 70 83 85
+WITH (280)
+AS (281)
+ELIF (282) 56
+IF (283) 55
+OR (284) 65
+YIELD (285)
+ASSERT (286)
+ELSE (287) 59
+IMPORT (288)
+PASS (289) 21
+BREAK (290) 41
+EXCEPT (291)
+IN (292) 61 62 82 83
+RAISE (293)
+EXEC (294)
+NIGUAL (295) 81
+DIGUAL (296) 77
+MAIGUAL (297) 78
+MEIGUAL (298) 79
+MAYOR (299) 76
+MENOR (300) 75
+ENETILDE (301)
+CIRCUNFLEJO (302) 90
+PIPE (303) 87
+AMPERSON (304) 93
+DMAYOR (305) 96
+DMENOR (306) 97
+PORCEN (307) 109
+DDIAG (308) 110
+DIAG (309) 108
+DASTERISCO (310)
+ASTERISCO (311) 107
+MENOS (312) 103
+MAS (313) 102
+APAREN (314) 119
+CPAREN (315) 119
+ACORCHETE (316)
+CCORCHETE (317)
+ALLAVE (318)
+CLLAVE (319)
+COMA (320) 122
+DPUNTO (321) 54 55 56 59 61 62
+PUNTO (322)
+PCOMA (323) 12 14
+AT (324)
+IGUAL (325)
+MENOSMAYOR (326)
+MASIGUAL (327) 29
+MENOSIGUAL (328) 30
+ASTIGUAL (329) 31
+DIAIGUAL (330) 32
+DDIAIGUAL (331) 40
+PORIGUAL (332) 33
+AMPIGUAL (333) 34
+PIPEIGUAL (334) 35
+CIRCIGUAL (335) 36
+DMAYORIGUAL (336) 38
+DMENORIGUAL (337) 37
+DASTIGUAL (338) 39
+MENORMAYOR (339) 80
+CSIMPLE (340)
+IDIAG (341)
+GATO (342)
+DIDIAG (343)
+NEWLINE (344) 2 11 54 55 56 59 61 62
+ENTERO (345) 114
+FLOTANTE (346) 115
+INDENT (347) 6
+SALIDA (348)
+DEDENT (349) 6
+FIN (350)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (96)
+    en la izquierda: 0
+GOAL (97)
+    en la izquierda: 1, en la derecha: 0
+file_input (98)
+    en la izquierda: 2 3 4, en la derecha: 1 2 3
+suite (99)
+    en la izquierda: 5 6, en la derecha: 54 55 56 59 61 62
+s44 (100)
+    en la izquierda: 7 8, en la derecha: 6 7
+stmt (101)
+    en la izquierda: 9 10, en la derecha: 3 6 7
+simple_stmt (102)
+    en la izquierda: 11, en la derecha: 5 9
+s42 (103)
+    en la izquierda: 12 13, en la derecha: 11 12
+s43 (104)
+    en la izquierda: 14 15, en la derecha: 13
+small_stmt (105)
+    en la izquierda: 16 17 18 19 20, en la derecha: 11 12
+pass_stmt (106)
+    en la izquierda: 21, en la derecha: 19
+del_stmt (107)
+    en la izquierda: 22, en la derecha: 20
+flow_stmt (108)
+    en la izquierda: 23 24 25, en la derecha: 17
+expr_stmt (109)
+    en la izquierda: 26 27, en la derecha: 18
+s41 (110)
+    en la izquierda: 28, en la derecha: 26
+s56 (111)
+    en la izquierda: 29 30 31 32 33 34 35 36 37 38 39 40, en la derecha:
+    28
+break_stmt (112)
+    en la izquierda: 41, en la derecha: 23
+continue_stmt (113)
+    en la izquierda: 42, en la derecha: 24
+return_stmt (114)
+    en la izquierda: 43, en la derecha: 25
+s40 (115)
+    en la izquierda: 44 45, en la derecha: 43
+compound_stmt (116)
+    en la izquierda: 46 47 48 49 50 51, en la derecha: 10
+print_stmt (117)
+    en la izquierda: 52, en la derecha: 16
+while_else_stmt (118)
+    en la izquierda: 53, en la derecha: 49
+while_stmt (119)
+    en la izquierda: 54, en la derecha: 48 53
+if_stmt (120)
+    en la izquierda: 55, en la derecha: 46 58
+elif (121)
+    en la izquierda: 56 57, en la derecha: 55 56
+if_else_stmt (122)
+    en la izquierda: 58, en la derecha: 47
+else_stmt (123)
+    en la izquierda: 59, en la derecha: 53 58 60
+for_else_stmt (124)
+    en la izquierda: 60, en la derecha: 51
+for_stmt (125)
+    en la izquierda: 61 62, en la derecha: 50 60
+test (126)
+    en la izquierda: 63, en la derecha: 27 28 44 52 54 55 56 120 122
+or_test (127)
+    en la izquierda: 64, en la derecha: 63
+s2 (128)
+    en la izquierda: 65 66, en la derecha: 64 65
+and_test (129)
+    en la izquierda: 67, en la derecha: 64 65
+s3 (130)
+    en la izquierda: 68 69, en la derecha: 67 68
+not_test (131)
+    en la izquierda: 70 71, en la derecha: 67 68 70
+comparison (132)
+    en la izquierda: 72, en la derecha: 71
+s4 (133)
+    en la izquierda: 73 74, en la derecha: 72 73
+comp_op (134)
+    en la izquierda: 75 76 77 78 79 80 81 82 83 84 85, en la derecha:
+    73
+expr (135)
+    en la izquierda: 86, en la derecha: 72 73
+s5 (136)
+    en la izquierda: 87 88, en la derecha: 86 87
+xor_expr (137)
+    en la izquierda: 89, en la derecha: 86 87
+s6 (138)
+    en la izquierda: 90 91, en la derecha: 89 90
+and_expr (139)
+    en la izquierda: 92, en la derecha: 89 90
+s7 (140)
+    en la izquierda: 93 94, en la derecha: 92 93
+shift_expr (141)
+    en la izquierda: 95, en la derecha: 92 93
+s8 (142)
+    en la izquierda: 96 97 98, en la derecha: 95 96 97
+arith_expr (143)
+    en la izquierda: 99, en la derecha: 95 96 97
+s9 (144)
+    en la izquierda: 100 101, en la derecha: 99 100
+s10 (145)
+    en la izquierda: 102 103, en la derecha: 100 111
+term (146)
+    en la izquierda: 104, en la derecha: 99 100
+s11 (147)
+    en la izquierda: 105 106, en la derecha: 104 105
+s12 (148)
+    en la izquierda: 107 108 109 110, en la derecha: 105
+factor (149)
+    en la izquierda: 111 112, en la derecha: 104 105 111
+atom (150)
+    en la izquierda: 113 114 115 116 117 118, en la derecha: 112
+trailer (151)
+    en la izquierda: 119, en la derecha: 61
+arglist (152)
+    en la izquierda: 120 121, en la derecha: 119
+s29 (153)
+    en la izquierda: 122 123, en la derecha: 120 122
+
+
+State 0
+
+    0 $accept: . GOAL $end
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    FOR            desplazar e ir al estado 7
+    TRUE           desplazar e ir al estado 8
+    WHILE          desplazar e ir al estado 9
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    IF             desplazar e ir al estado 12
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    NEWLINE        desplazar e ir al estado 17
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 4 (file_input)
+
+    GOAL             ir al estado 20
+    file_input       ir al estado 21
+    stmt             ir al estado 22
+    simple_stmt      ir al estado 23
+    small_stmt       ir al estado 24
+    pass_stmt        ir al estado 25
+    del_stmt         ir al estado 26
+    flow_stmt        ir al estado 27
+    expr_stmt        ir al estado 28
+    break_stmt       ir al estado 29
+    continue_stmt    ir al estado 30
+    return_stmt      ir al estado 31
+    compound_stmt    ir al estado 32
+    print_stmt       ir al estado 33
+    while_else_stmt  ir al estado 34
+    while_stmt       ir al estado 35
+    if_stmt          ir al estado 36
+    if_else_stmt     ir al estado 37
+    for_else_stmt    ir al estado 38
+    for_stmt         ir al estado 39
+    test             ir al estado 40
+    or_test          ir al estado 41
+    and_test         ir al estado 42
+    not_test         ir al estado 43
+    comparison       ir al estado 44
+    expr             ir al estado 45
+    xor_expr         ir al estado 46
+    and_expr         ir al estado 47
+    shift_expr       ir al estado 48
+    arith_expr       ir al estado 49
+    s10              ir al estado 50
+    term             ir al estado 51
+    factor           ir al estado 52
+    atom             ir al estado 53
+
+
+State 1
+
+  116 atom: STRING .
+
+    $default  reduce usando la regla 116 (atom)
+
+
+State 2
+
+   26 expr_stmt: IDENTIFICADOR . s41
+  113 atom: IDENTIFICADOR .
+
+    MASIGUAL     desplazar e ir al estado 54
+    MENOSIGUAL   desplazar e ir al estado 55
+    ASTIGUAL     desplazar e ir al estado 56
+    DIAIGUAL     desplazar e ir al estado 57
+    DDIAIGUAL    desplazar e ir al estado 58
+    PORIGUAL     desplazar e ir al estado 59
+    AMPIGUAL     desplazar e ir al estado 60
+    PIPEIGUAL    desplazar e ir al estado 61
+    CIRCIGUAL    desplazar e ir al estado 62
+    DMAYORIGUAL  desplazar e ir al estado 63
+    DMENORIGUAL  desplazar e ir al estado 64
+    DASTIGUAL    desplazar e ir al estado 65
+
+    $default  reduce usando la regla 113 (atom)
+
+    s41  ir al estado 66
+    s56  ir al estado 67
+
+
+State 3
+
+   52 print_stmt: PRINT . test
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    test        ir al estado 69
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 4
+
+  118 atom: FALSE .
+
+    $default  reduce usando la regla 118 (atom)
+
+
+State 5
+
+   43 return_stmt: RETURN . s40
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 45 (s40)
+
+    s40         ir al estado 70
+    test        ir al estado 71
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 6
+
+   42 continue_stmt: CONTINUE .
+
+    $default  reduce usando la regla 42 (continue_stmt)
+
+
+State 7
+
+   61 for_stmt: FOR . IDENTIFICADOR IN trailer DPUNTO NEWLINE suite
+   62         | FOR . IDENTIFICADOR IN IDENTIFICADOR DPUNTO NEWLINE suite
+
+    IDENTIFICADOR  desplazar e ir al estado 72
+
+
+State 8
+
+  117 atom: TRUE .
+
+    $default  reduce usando la regla 117 (atom)
+
+
+State 9
+
+   54 while_stmt: WHILE . test DPUNTO NEWLINE suite
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    test        ir al estado 73
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 10
+
+   22 del_stmt: DEL . IDENTIFICADOR
+
+    IDENTIFICADOR  desplazar e ir al estado 74
+
+
+State 11
+
+   70 not_test: NOT . not_test
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    not_test    ir al estado 75
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 12
+
+   55 if_stmt: IF . test DPUNTO NEWLINE suite elif
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    test        ir al estado 76
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 13
+
+   21 pass_stmt: PASS .
+
+    $default  reduce usando la regla 21 (pass_stmt)
+
+
+State 14
+
+   41 break_stmt: BREAK .
+
+    $default  reduce usando la regla 41 (break_stmt)
+
+
+State 15
+
+  103 s10: MENOS .
+
+    $default  reduce usando la regla 103 (s10)
+
+
+State 16
+
+  102 s10: MAS .
+
+    $default  reduce usando la regla 102 (s10)
+
+
+State 17
+
+    2 file_input: NEWLINE . file_input
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    FOR            desplazar e ir al estado 7
+    TRUE           desplazar e ir al estado 8
+    WHILE          desplazar e ir al estado 9
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    IF             desplazar e ir al estado 12
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    NEWLINE        desplazar e ir al estado 17
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 4 (file_input)
+
+    file_input       ir al estado 77
+    stmt             ir al estado 22
+    simple_stmt      ir al estado 23
+    small_stmt       ir al estado 24
+    pass_stmt        ir al estado 25
+    del_stmt         ir al estado 26
+    flow_stmt        ir al estado 27
+    expr_stmt        ir al estado 28
+    break_stmt       ir al estado 29
+    continue_stmt    ir al estado 30
+    return_stmt      ir al estado 31
+    compound_stmt    ir al estado 32
+    print_stmt       ir al estado 33
+    while_else_stmt  ir al estado 34
+    while_stmt       ir al estado 35
+    if_stmt          ir al estado 36
+    if_else_stmt     ir al estado 37
+    for_else_stmt    ir al estado 38
+    for_stmt         ir al estado 39
+    test             ir al estado 40
+    or_test          ir al estado 41
+    and_test         ir al estado 42
+    not_test         ir al estado 43
+    comparison       ir al estado 44
+    expr             ir al estado 45
+    xor_expr         ir al estado 46
+    and_expr         ir al estado 47
+    shift_expr       ir al estado 48
+    arith_expr       ir al estado 49
+    s10              ir al estado 50
+    term             ir al estado 51
+    factor           ir al estado 52
+    atom             ir al estado 53
+
+
+State 18
+
+  114 atom: ENTERO .
+
+    $default  reduce usando la regla 114 (atom)
+
+
+State 19
+
+  115 atom: FLOTANTE .
+
+    $default  reduce usando la regla 115 (atom)
+
+
+State 20
+
+    0 $accept: GOAL . $end
+
+    $end  desplazar e ir al estado 78
+
+
+State 21
+
+    1 GOAL: file_input .
+
+    $default  reduce usando la regla 1 (GOAL)
+
+
+State 22
+
+    3 file_input: stmt . file_input
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    FOR            desplazar e ir al estado 7
+    TRUE           desplazar e ir al estado 8
+    WHILE          desplazar e ir al estado 9
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    IF             desplazar e ir al estado 12
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    NEWLINE        desplazar e ir al estado 17
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 4 (file_input)
+
+    file_input       ir al estado 79
+    stmt             ir al estado 22
+    simple_stmt      ir al estado 23
+    small_stmt       ir al estado 24
+    pass_stmt        ir al estado 25
+    del_stmt         ir al estado 26
+    flow_stmt        ir al estado 27
+    expr_stmt        ir al estado 28
+    break_stmt       ir al estado 29
+    continue_stmt    ir al estado 30
+    return_stmt      ir al estado 31
+    compound_stmt    ir al estado 32
+    print_stmt       ir al estado 33
+    while_else_stmt  ir al estado 34
+    while_stmt       ir al estado 35
+    if_stmt          ir al estado 36
+    if_else_stmt     ir al estado 37
+    for_else_stmt    ir al estado 38
+    for_stmt         ir al estado 39
+    test             ir al estado 40
+    or_test          ir al estado 41
+    and_test         ir al estado 42
+    not_test         ir al estado 43
+    comparison       ir al estado 44
+    expr             ir al estado 45
+    xor_expr         ir al estado 46
+    and_expr         ir al estado 47
+    shift_expr       ir al estado 48
+    arith_expr       ir al estado 49
+    s10              ir al estado 50
+    term             ir al estado 51
+    factor           ir al estado 52
+    atom             ir al estado 53
+
+
+State 23
+
+    9 stmt: simple_stmt .
+
+    $default  reduce usando la regla 9 (stmt)
+
+
+State 24
+
+   11 simple_stmt: small_stmt . s42 NEWLINE
+
+    PCOMA  desplazar e ir al estado 80
+
+    $default  reduce usando la regla 15 (s43)
+
+    s42  ir al estado 81
+    s43  ir al estado 82
+
+
+State 25
+
+   19 small_stmt: pass_stmt .
+
+    $default  reduce usando la regla 19 (small_stmt)
+
+
+State 26
+
+   20 small_stmt: del_stmt .
+
+    $default  reduce usando la regla 20 (small_stmt)
+
+
+State 27
+
+   17 small_stmt: flow_stmt .
+
+    $default  reduce usando la regla 17 (small_stmt)
+
+
+State 28
+
+   18 small_stmt: expr_stmt .
+
+    $default  reduce usando la regla 18 (small_stmt)
+
+
+State 29
+
+   23 flow_stmt: break_stmt .
+
+    $default  reduce usando la regla 23 (flow_stmt)
+
+
+State 30
+
+   24 flow_stmt: continue_stmt .
+
+    $default  reduce usando la regla 24 (flow_stmt)
+
+
+State 31
+
+   25 flow_stmt: return_stmt .
+
+    $default  reduce usando la regla 25 (flow_stmt)
+
+
+State 32
+
+   10 stmt: compound_stmt .
+
+    $default  reduce usando la regla 10 (stmt)
+
+
+State 33
+
+   16 small_stmt: print_stmt .
+
+    $default  reduce usando la regla 16 (small_stmt)
+
+
+State 34
+
+   49 compound_stmt: while_else_stmt .
+
+    $default  reduce usando la regla 49 (compound_stmt)
+
+
+State 35
+
+   48 compound_stmt: while_stmt .
+   53 while_else_stmt: while_stmt . else_stmt
+
+    ELSE  desplazar e ir al estado 83
+
+    $default  reduce usando la regla 48 (compound_stmt)
+
+    else_stmt  ir al estado 84
+
+
+State 36
+
+   46 compound_stmt: if_stmt .
+   58 if_else_stmt: if_stmt . else_stmt
+
+    ELSE  desplazar e ir al estado 83
+
+    $default  reduce usando la regla 46 (compound_stmt)
+
+    else_stmt  ir al estado 85
+
+
+State 37
+
+   47 compound_stmt: if_else_stmt .
+
+    $default  reduce usando la regla 47 (compound_stmt)
+
+
+State 38
+
+   51 compound_stmt: for_else_stmt .
+
+    $default  reduce usando la regla 51 (compound_stmt)
+
+
+State 39
+
+   50 compound_stmt: for_stmt .
+   60 for_else_stmt: for_stmt . else_stmt
+
+    ELSE  desplazar e ir al estado 83
+
+    $default  reduce usando la regla 50 (compound_stmt)
+
+    else_stmt  ir al estado 86
+
+
+State 40
+
+   27 expr_stmt: test .
+
+    $default  reduce usando la regla 27 (expr_stmt)
+
+
+State 41
+
+   63 test: or_test .
+
+    $default  reduce usando la regla 63 (test)
+
+
+State 42
+
+   64 or_test: and_test . s2
+
+    OR  desplazar e ir al estado 87
+
+    $default  reduce usando la regla 66 (s2)
+
+    s2  ir al estado 88
+
+
+State 43
+
+   67 and_test: not_test . s3
+
+    AND  desplazar e ir al estado 89
+
+    $default  reduce usando la regla 69 (s3)
+
+    s3  ir al estado 90
+
+
+State 44
+
+   71 not_test: comparison .
+
+    $default  reduce usando la regla 71 (not_test)
+
+
+State 45
+
+   72 comparison: expr . s4
+
+    IS          desplazar e ir al estado 91
+    NOT         desplazar e ir al estado 92
+    IN          desplazar e ir al estado 93
+    NIGUAL      desplazar e ir al estado 94
+    DIGUAL      desplazar e ir al estado 95
+    MAIGUAL     desplazar e ir al estado 96
+    MEIGUAL     desplazar e ir al estado 97
+    MAYOR       desplazar e ir al estado 98
+    MENOR       desplazar e ir al estado 99
+    MENORMAYOR  desplazar e ir al estado 100
+
+    $default  reduce usando la regla 74 (s4)
+
+    s4       ir al estado 101
+    comp_op  ir al estado 102
+
+
+State 46
+
+   86 expr: xor_expr . s5
+
+    PIPE  desplazar e ir al estado 103
+
+    $default  reduce usando la regla 88 (s5)
+
+    s5  ir al estado 104
+
+
+State 47
+
+   89 xor_expr: and_expr . s6
+
+    CIRCUNFLEJO  desplazar e ir al estado 105
+
+    $default  reduce usando la regla 91 (s6)
+
+    s6  ir al estado 106
+
+
+State 48
+
+   92 and_expr: shift_expr . s7
+
+    AMPERSON  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 94 (s7)
+
+    s7  ir al estado 108
+
+
+State 49
+
+   95 shift_expr: arith_expr . s8
+
+    DMAYOR  desplazar e ir al estado 109
+    DMENOR  desplazar e ir al estado 110
+
+    $default  reduce usando la regla 98 (s8)
+
+    s8  ir al estado 111
+
+
+State 50
+
+  111 factor: s10 . factor
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    s10     ir al estado 50
+    factor  ir al estado 112
+    atom    ir al estado 53
+
+
+State 51
+
+   99 arith_expr: term . s9
+
+    MENOS  desplazar e ir al estado 15
+    MAS    desplazar e ir al estado 16
+
+    $default  reduce usando la regla 101 (s9)
+
+    s9   ir al estado 113
+    s10  ir al estado 114
+
+
+State 52
+
+  104 term: factor . s11
+
+    PORCEN     desplazar e ir al estado 115
+    DDIAG      desplazar e ir al estado 116
+    DIAG       desplazar e ir al estado 117
+    ASTERISCO  desplazar e ir al estado 118
+
+    $default  reduce usando la regla 106 (s11)
+
+    s11  ir al estado 119
+    s12  ir al estado 120
+
+
+State 53
+
+  112 factor: atom .
+
+    $default  reduce usando la regla 112 (factor)
+
+
+State 54
+
+   29 s56: MASIGUAL .
+
+    $default  reduce usando la regla 29 (s56)
+
+
+State 55
+
+   30 s56: MENOSIGUAL .
+
+    $default  reduce usando la regla 30 (s56)
+
+
+State 56
+
+   31 s56: ASTIGUAL .
+
+    $default  reduce usando la regla 31 (s56)
+
+
+State 57
+
+   32 s56: DIAIGUAL .
+
+    $default  reduce usando la regla 32 (s56)
+
+
+State 58
+
+   40 s56: DDIAIGUAL .
+
+    $default  reduce usando la regla 40 (s56)
+
+
+State 59
+
+   33 s56: PORIGUAL .
+
+    $default  reduce usando la regla 33 (s56)
+
+
+State 60
+
+   34 s56: AMPIGUAL .
+
+    $default  reduce usando la regla 34 (s56)
+
+
+State 61
+
+   35 s56: PIPEIGUAL .
+
+    $default  reduce usando la regla 35 (s56)
+
+
+State 62
+
+   36 s56: CIRCIGUAL .
+
+    $default  reduce usando la regla 36 (s56)
+
+
+State 63
+
+   38 s56: DMAYORIGUAL .
+
+    $default  reduce usando la regla 38 (s56)
+
+
+State 64
+
+   37 s56: DMENORIGUAL .
+
+    $default  reduce usando la regla 37 (s56)
+
+
+State 65
+
+   39 s56: DASTIGUAL .
+
+    $default  reduce usando la regla 39 (s56)
+
+
+State 66
+
+   26 expr_stmt: IDENTIFICADOR s41 .
+
+    $default  reduce usando la regla 26 (expr_stmt)
+
+
+State 67
+
+   28 s41: s56 . test
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    test        ir al estado 121
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 68
+
+  113 atom: IDENTIFICADOR .
+
+    $default  reduce usando la regla 113 (atom)
+
+
+State 69
+
+   52 print_stmt: PRINT test .
+
+    $default  reduce usando la regla 52 (print_stmt)
+
+
+State 70
+
+   43 return_stmt: RETURN s40 .
+
+    $default  reduce usando la regla 43 (return_stmt)
+
+
+State 71
+
+   44 s40: test .
+
+    $default  reduce usando la regla 44 (s40)
+
+
+State 72
+
+   61 for_stmt: FOR IDENTIFICADOR . IN trailer DPUNTO NEWLINE suite
+   62         | FOR IDENTIFICADOR . IN IDENTIFICADOR DPUNTO NEWLINE suite
+
+    IN  desplazar e ir al estado 122
+
+
+State 73
+
+   54 while_stmt: WHILE test . DPUNTO NEWLINE suite
+
+    DPUNTO  desplazar e ir al estado 123
+
+
+State 74
+
+   22 del_stmt: DEL IDENTIFICADOR .
+
+    $default  reduce usando la regla 22 (del_stmt)
+
+
+State 75
+
+   70 not_test: NOT not_test .
+
+    $default  reduce usando la regla 70 (not_test)
+
+
+State 76
+
+   55 if_stmt: IF test . DPUNTO NEWLINE suite elif
+
+    DPUNTO  desplazar e ir al estado 124
+
+
+State 77
+
+    2 file_input: NEWLINE file_input .
+
+    $default  reduce usando la regla 2 (file_input)
+
+
+State 78
+
+    0 $accept: GOAL $end .
+
+    $default  aceptar
+
+
+State 79
+
+    3 file_input: stmt file_input .
+
+    $default  reduce usando la regla 3 (file_input)
+
+
+State 80
+
+   12 s42: PCOMA . small_stmt s42
+   14 s43: PCOMA .
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 14 (s43)
+
+    small_stmt     ir al estado 125
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 81
+
+   11 simple_stmt: small_stmt s42 . NEWLINE
+
+    NEWLINE  desplazar e ir al estado 126
+
+
+State 82
+
+   13 s42: s43 .
+
+    $default  reduce usando la regla 13 (s42)
+
+
+State 83
+
+   59 else_stmt: ELSE . DPUNTO NEWLINE suite
+
+    DPUNTO  desplazar e ir al estado 127
+
+
+State 84
+
+   53 while_else_stmt: while_stmt else_stmt .
+
+    $default  reduce usando la regla 53 (while_else_stmt)
+
+
+State 85
+
+   58 if_else_stmt: if_stmt else_stmt .
+
+    $default  reduce usando la regla 58 (if_else_stmt)
+
+
+State 86
+
+   60 for_else_stmt: for_stmt else_stmt .
+
+    $default  reduce usando la regla 60 (for_else_stmt)
+
+
+State 87
+
+   65 s2: OR . and_test s2
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    and_test    ir al estado 128
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 88
+
+   64 or_test: and_test s2 .
+
+    $default  reduce usando la regla 64 (or_test)
+
+
+State 89
+
+   68 s3: AND . not_test s3
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    not_test    ir al estado 129
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 90
+
+   67 and_test: not_test s3 .
+
+    $default  reduce usando la regla 67 (and_test)
+
+
+State 91
+
+   84 comp_op: IS .
+   85        | IS . NOT
+
+    NOT  desplazar e ir al estado 130
+
+    $default  reduce usando la regla 84 (comp_op)
+
+
+State 92
+
+   83 comp_op: NOT . IN
+
+    IN  desplazar e ir al estado 131
+
+
+State 93
+
+   82 comp_op: IN .
+
+    $default  reduce usando la regla 82 (comp_op)
+
+
+State 94
+
+   81 comp_op: NIGUAL .
+
+    $default  reduce usando la regla 81 (comp_op)
+
+
+State 95
+
+   77 comp_op: DIGUAL .
+
+    $default  reduce usando la regla 77 (comp_op)
+
+
+State 96
+
+   78 comp_op: MAIGUAL .
+
+    $default  reduce usando la regla 78 (comp_op)
+
+
+State 97
+
+   79 comp_op: MEIGUAL .
+
+    $default  reduce usando la regla 79 (comp_op)
+
+
+State 98
+
+   76 comp_op: MAYOR .
+
+    $default  reduce usando la regla 76 (comp_op)
+
+
+State 99
+
+   75 comp_op: MENOR .
+
+    $default  reduce usando la regla 75 (comp_op)
+
+
+State 100
+
+   80 comp_op: MENORMAYOR .
+
+    $default  reduce usando la regla 80 (comp_op)
+
+
+State 101
+
+   72 comparison: expr s4 .
+
+    $default  reduce usando la regla 72 (comparison)
+
+
+State 102
+
+   73 s4: comp_op . expr s4
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    expr        ir al estado 132
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 103
+
+   87 s5: PIPE . xor_expr s5
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    xor_expr    ir al estado 133
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 104
+
+   86 expr: xor_expr s5 .
+
+    $default  reduce usando la regla 86 (expr)
+
+
+State 105
+
+   90 s6: CIRCUNFLEJO . and_expr s6
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    and_expr    ir al estado 134
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 106
+
+   89 xor_expr: and_expr s6 .
+
+    $default  reduce usando la regla 89 (xor_expr)
+
+
+State 107
+
+   93 s7: AMPERSON . shift_expr s7
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    shift_expr  ir al estado 135
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 108
+
+   92 and_expr: shift_expr s7 .
+
+    $default  reduce usando la regla 92 (and_expr)
+
+
+State 109
+
+   96 s8: DMAYOR . arith_expr s8
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    arith_expr  ir al estado 136
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 110
+
+   97 s8: DMENOR . arith_expr s8
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    arith_expr  ir al estado 137
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 111
+
+   95 shift_expr: arith_expr s8 .
+
+    $default  reduce usando la regla 95 (shift_expr)
+
+
+State 112
+
+  111 factor: s10 factor .
+
+    $default  reduce usando la regla 111 (factor)
+
+
+State 113
+
+   99 arith_expr: term s9 .
+
+    $default  reduce usando la regla 99 (arith_expr)
+
+
+State 114
+
+  100 s9: s10 . term s9
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    s10     ir al estado 50
+    term    ir al estado 138
+    factor  ir al estado 52
+    atom    ir al estado 53
+
+
+State 115
+
+  109 s12: PORCEN .
+
+    $default  reduce usando la regla 109 (s12)
+
+
+State 116
+
+  110 s12: DDIAG .
+
+    $default  reduce usando la regla 110 (s12)
+
+
+State 117
+
+  108 s12: DIAG .
+
+    $default  reduce usando la regla 108 (s12)
+
+
+State 118
+
+  107 s12: ASTERISCO .
+
+    $default  reduce usando la regla 107 (s12)
+
+
+State 119
+
+  104 term: factor s11 .
+
+    $default  reduce usando la regla 104 (term)
+
+
+State 120
+
+  105 s11: s12 . factor s11
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    s10     ir al estado 50
+    factor  ir al estado 139
+    atom    ir al estado 53
+
+
+State 121
+
+   28 s41: s56 test .
+
+    $default  reduce usando la regla 28 (s41)
+
+
+State 122
+
+   61 for_stmt: FOR IDENTIFICADOR IN . trailer DPUNTO NEWLINE suite
+   62         | FOR IDENTIFICADOR IN . IDENTIFICADOR DPUNTO NEWLINE suite
+
+    IDENTIFICADOR  desplazar e ir al estado 140
+    APAREN         desplazar e ir al estado 141
+
+    trailer  ir al estado 142
+
+
+State 123
+
+   54 while_stmt: WHILE test DPUNTO . NEWLINE suite
+
+    NEWLINE  desplazar e ir al estado 143
+
+
+State 124
+
+   55 if_stmt: IF test DPUNTO . NEWLINE suite elif
+
+    NEWLINE  desplazar e ir al estado 144
+
+
+State 125
+
+   12 s42: PCOMA small_stmt . s42
+
+    PCOMA  desplazar e ir al estado 80
+
+    $default  reduce usando la regla 15 (s43)
+
+    s42  ir al estado 145
+    s43  ir al estado 82
+
+
+State 126
+
+   11 simple_stmt: small_stmt s42 NEWLINE .
+
+    $default  reduce usando la regla 11 (simple_stmt)
+
+
+State 127
+
+   59 else_stmt: ELSE DPUNTO . NEWLINE suite
+
+    NEWLINE  desplazar e ir al estado 146
+
+
+State 128
+
+   65 s2: OR and_test . s2
+
+    OR  desplazar e ir al estado 87
+
+    $default  reduce usando la regla 66 (s2)
+
+    s2  ir al estado 147
+
+
+State 129
+
+   68 s3: AND not_test . s3
+
+    AND  desplazar e ir al estado 89
+
+    $default  reduce usando la regla 69 (s3)
+
+    s3  ir al estado 148
+
+
+State 130
+
+   85 comp_op: IS NOT .
+
+    $default  reduce usando la regla 85 (comp_op)
+
+
+State 131
+
+   83 comp_op: NOT IN .
+
+    $default  reduce usando la regla 83 (comp_op)
+
+
+State 132
+
+   73 s4: comp_op expr . s4
+
+    IS          desplazar e ir al estado 91
+    NOT         desplazar e ir al estado 92
+    IN          desplazar e ir al estado 93
+    NIGUAL      desplazar e ir al estado 94
+    DIGUAL      desplazar e ir al estado 95
+    MAIGUAL     desplazar e ir al estado 96
+    MEIGUAL     desplazar e ir al estado 97
+    MAYOR       desplazar e ir al estado 98
+    MENOR       desplazar e ir al estado 99
+    MENORMAYOR  desplazar e ir al estado 100
+
+    $default  reduce usando la regla 74 (s4)
+
+    s4       ir al estado 149
+    comp_op  ir al estado 102
+
+
+State 133
+
+   87 s5: PIPE xor_expr . s5
+
+    PIPE  desplazar e ir al estado 103
+
+    $default  reduce usando la regla 88 (s5)
+
+    s5  ir al estado 150
+
+
+State 134
+
+   90 s6: CIRCUNFLEJO and_expr . s6
+
+    CIRCUNFLEJO  desplazar e ir al estado 105
+
+    $default  reduce usando la regla 91 (s6)
+
+    s6  ir al estado 151
+
+
+State 135
+
+   93 s7: AMPERSON shift_expr . s7
+
+    AMPERSON  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 94 (s7)
+
+    s7  ir al estado 152
+
+
+State 136
+
+   96 s8: DMAYOR arith_expr . s8
+
+    DMAYOR  desplazar e ir al estado 109
+    DMENOR  desplazar e ir al estado 110
+
+    $default  reduce usando la regla 98 (s8)
+
+    s8  ir al estado 153
+
+
+State 137
+
+   97 s8: DMENOR arith_expr . s8
+
+    DMAYOR  desplazar e ir al estado 109
+    DMENOR  desplazar e ir al estado 110
+
+    $default  reduce usando la regla 98 (s8)
+
+    s8  ir al estado 154
+
+
+State 138
+
+  100 s9: s10 term . s9
+
+    MENOS  desplazar e ir al estado 15
+    MAS    desplazar e ir al estado 16
+
+    $default  reduce usando la regla 101 (s9)
+
+    s9   ir al estado 155
+    s10  ir al estado 114
+
+
+State 139
+
+  105 s11: s12 factor . s11
+
+    PORCEN     desplazar e ir al estado 115
+    DDIAG      desplazar e ir al estado 116
+    DIAG       desplazar e ir al estado 117
+    ASTERISCO  desplazar e ir al estado 118
+
+    $default  reduce usando la regla 106 (s11)
+
+    s11  ir al estado 156
+    s12  ir al estado 120
+
+
+State 140
+
+   62 for_stmt: FOR IDENTIFICADOR IN IDENTIFICADOR . DPUNTO NEWLINE suite
+
+    DPUNTO  desplazar e ir al estado 157
+
+
+State 141
+
+  119 trailer: APAREN . arglist CPAREN
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 121 (arglist)
+
+    test        ir al estado 158
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+    arglist     ir al estado 159
+
+
+State 142
+
+   61 for_stmt: FOR IDENTIFICADOR IN trailer . DPUNTO NEWLINE suite
+
+    DPUNTO  desplazar e ir al estado 160
+
+
+State 143
+
+   54 while_stmt: WHILE test DPUNTO NEWLINE . suite
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+    INDENT         desplazar e ir al estado 161
+
+    suite          ir al estado 162
+    simple_stmt    ir al estado 163
+    small_stmt     ir al estado 24
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 144
+
+   55 if_stmt: IF test DPUNTO NEWLINE . suite elif
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+    INDENT         desplazar e ir al estado 161
+
+    suite          ir al estado 164
+    simple_stmt    ir al estado 163
+    small_stmt     ir al estado 24
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 145
+
+   12 s42: PCOMA small_stmt s42 .
+
+    $default  reduce usando la regla 12 (s42)
+
+
+State 146
+
+   59 else_stmt: ELSE DPUNTO NEWLINE . suite
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+    INDENT         desplazar e ir al estado 161
+
+    suite          ir al estado 165
+    simple_stmt    ir al estado 163
+    small_stmt     ir al estado 24
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 147
+
+   65 s2: OR and_test s2 .
+
+    $default  reduce usando la regla 65 (s2)
+
+
+State 148
+
+   68 s3: AND not_test s3 .
+
+    $default  reduce usando la regla 68 (s3)
+
+
+State 149
+
+   73 s4: comp_op expr s4 .
+
+    $default  reduce usando la regla 73 (s4)
+
+
+State 150
+
+   87 s5: PIPE xor_expr s5 .
+
+    $default  reduce usando la regla 87 (s5)
+
+
+State 151
+
+   90 s6: CIRCUNFLEJO and_expr s6 .
+
+    $default  reduce usando la regla 90 (s6)
+
+
+State 152
+
+   93 s7: AMPERSON shift_expr s7 .
+
+    $default  reduce usando la regla 93 (s7)
+
+
+State 153
+
+   96 s8: DMAYOR arith_expr s8 .
+
+    $default  reduce usando la regla 96 (s8)
+
+
+State 154
+
+   97 s8: DMENOR arith_expr s8 .
+
+    $default  reduce usando la regla 97 (s8)
+
+
+State 155
+
+  100 s9: s10 term s9 .
+
+    $default  reduce usando la regla 100 (s9)
+
+
+State 156
+
+  105 s11: s12 factor s11 .
+
+    $default  reduce usando la regla 105 (s11)
+
+
+State 157
+
+   62 for_stmt: FOR IDENTIFICADOR IN IDENTIFICADOR DPUNTO . NEWLINE suite
+
+    NEWLINE  desplazar e ir al estado 166
+
+
+State 158
+
+  120 arglist: test . s29
+
+    COMA  desplazar e ir al estado 167
+
+    $default  reduce usando la regla 123 (s29)
+
+    s29  ir al estado 168
+
+
+State 159
+
+  119 trailer: APAREN arglist . CPAREN
+
+    CPAREN  desplazar e ir al estado 169
+
+
+State 160
+
+   61 for_stmt: FOR IDENTIFICADOR IN trailer DPUNTO . NEWLINE suite
+
+    NEWLINE  desplazar e ir al estado 170
+
+
+State 161
+
+    6 suite: INDENT . stmt s44 DEDENT
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    FOR            desplazar e ir al estado 7
+    TRUE           desplazar e ir al estado 8
+    WHILE          desplazar e ir al estado 9
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    IF             desplazar e ir al estado 12
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    stmt             ir al estado 171
+    simple_stmt      ir al estado 23
+    small_stmt       ir al estado 24
+    pass_stmt        ir al estado 25
+    del_stmt         ir al estado 26
+    flow_stmt        ir al estado 27
+    expr_stmt        ir al estado 28
+    break_stmt       ir al estado 29
+    continue_stmt    ir al estado 30
+    return_stmt      ir al estado 31
+    compound_stmt    ir al estado 32
+    print_stmt       ir al estado 33
+    while_else_stmt  ir al estado 34
+    while_stmt       ir al estado 35
+    if_stmt          ir al estado 36
+    if_else_stmt     ir al estado 37
+    for_else_stmt    ir al estado 38
+    for_stmt         ir al estado 39
+    test             ir al estado 40
+    or_test          ir al estado 41
+    and_test         ir al estado 42
+    not_test         ir al estado 43
+    comparison       ir al estado 44
+    expr             ir al estado 45
+    xor_expr         ir al estado 46
+    and_expr         ir al estado 47
+    shift_expr       ir al estado 48
+    arith_expr       ir al estado 49
+    s10              ir al estado 50
+    term             ir al estado 51
+    factor           ir al estado 52
+    atom             ir al estado 53
+
+
+State 162
+
+   54 while_stmt: WHILE test DPUNTO NEWLINE suite .
+
+    $default  reduce usando la regla 54 (while_stmt)
+
+
+State 163
+
+    5 suite: simple_stmt .
+
+    $default  reduce usando la regla 5 (suite)
+
+
+State 164
+
+   55 if_stmt: IF test DPUNTO NEWLINE suite . elif
+
+    ELIF  desplazar e ir al estado 172
+
+    $default  reduce usando la regla 57 (elif)
+
+    elif  ir al estado 173
+
+
+State 165
+
+   59 else_stmt: ELSE DPUNTO NEWLINE suite .
+
+    $default  reduce usando la regla 59 (else_stmt)
+
+
+State 166
+
+   62 for_stmt: FOR IDENTIFICADOR IN IDENTIFICADOR DPUNTO NEWLINE . suite
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+    INDENT         desplazar e ir al estado 161
+
+    suite          ir al estado 174
+    simple_stmt    ir al estado 163
+    small_stmt     ir al estado 24
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 167
+
+  122 s29: COMA . test s29
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    test        ir al estado 175
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 168
+
+  120 arglist: test s29 .
+
+    $default  reduce usando la regla 120 (arglist)
+
+
+State 169
+
+  119 trailer: APAREN arglist CPAREN .
+
+    $default  reduce usando la regla 119 (trailer)
+
+
+State 170
+
+   61 for_stmt: FOR IDENTIFICADOR IN trailer DPUNTO NEWLINE . suite
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+    INDENT         desplazar e ir al estado 161
+
+    suite          ir al estado 176
+    simple_stmt    ir al estado 163
+    small_stmt     ir al estado 24
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 171
+
+    6 suite: INDENT stmt . s44 DEDENT
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    FOR            desplazar e ir al estado 7
+    TRUE           desplazar e ir al estado 8
+    WHILE          desplazar e ir al estado 9
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    IF             desplazar e ir al estado 12
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 8 (s44)
+
+    s44              ir al estado 177
+    stmt             ir al estado 178
+    simple_stmt      ir al estado 23
+    small_stmt       ir al estado 24
+    pass_stmt        ir al estado 25
+    del_stmt         ir al estado 26
+    flow_stmt        ir al estado 27
+    expr_stmt        ir al estado 28
+    break_stmt       ir al estado 29
+    continue_stmt    ir al estado 30
+    return_stmt      ir al estado 31
+    compound_stmt    ir al estado 32
+    print_stmt       ir al estado 33
+    while_else_stmt  ir al estado 34
+    while_stmt       ir al estado 35
+    if_stmt          ir al estado 36
+    if_else_stmt     ir al estado 37
+    for_else_stmt    ir al estado 38
+    for_stmt         ir al estado 39
+    test             ir al estado 40
+    or_test          ir al estado 41
+    and_test         ir al estado 42
+    not_test         ir al estado 43
+    comparison       ir al estado 44
+    expr             ir al estado 45
+    xor_expr         ir al estado 46
+    and_expr         ir al estado 47
+    shift_expr       ir al estado 48
+    arith_expr       ir al estado 49
+    s10              ir al estado 50
+    term             ir al estado 51
+    factor           ir al estado 52
+    atom             ir al estado 53
+
+
+State 172
+
+   56 elif: ELIF . test DPUNTO NEWLINE suite elif
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 68
+    FALSE          desplazar e ir al estado 4
+    TRUE           desplazar e ir al estado 8
+    NOT            desplazar e ir al estado 11
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    test        ir al estado 179
+    or_test     ir al estado 41
+    and_test    ir al estado 42
+    not_test    ir al estado 43
+    comparison  ir al estado 44
+    expr        ir al estado 45
+    xor_expr    ir al estado 46
+    and_expr    ir al estado 47
+    shift_expr  ir al estado 48
+    arith_expr  ir al estado 49
+    s10         ir al estado 50
+    term        ir al estado 51
+    factor      ir al estado 52
+    atom        ir al estado 53
+
+
+State 173
+
+   55 if_stmt: IF test DPUNTO NEWLINE suite elif .
+
+    $default  reduce usando la regla 55 (if_stmt)
+
+
+State 174
+
+   62 for_stmt: FOR IDENTIFICADOR IN IDENTIFICADOR DPUNTO NEWLINE suite .
+
+    $default  reduce usando la regla 62 (for_stmt)
+
+
+State 175
+
+  122 s29: COMA test . s29
+
+    COMA  desplazar e ir al estado 167
+
+    $default  reduce usando la regla 123 (s29)
+
+    s29  ir al estado 180
+
+
+State 176
+
+   61 for_stmt: FOR IDENTIFICADOR IN trailer DPUNTO NEWLINE suite .
+
+    $default  reduce usando la regla 61 (for_stmt)
+
+
+State 177
+
+    6 suite: INDENT stmt s44 . DEDENT
+
+    DEDENT  desplazar e ir al estado 181
+
+
+State 178
+
+    7 s44: stmt . s44
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    FOR            desplazar e ir al estado 7
+    TRUE           desplazar e ir al estado 8
+    WHILE          desplazar e ir al estado 9
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    IF             desplazar e ir al estado 12
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+
+    $default  reduce usando la regla 8 (s44)
+
+    s44              ir al estado 182
+    stmt             ir al estado 178
+    simple_stmt      ir al estado 23
+    small_stmt       ir al estado 24
+    pass_stmt        ir al estado 25
+    del_stmt         ir al estado 26
+    flow_stmt        ir al estado 27
+    expr_stmt        ir al estado 28
+    break_stmt       ir al estado 29
+    continue_stmt    ir al estado 30
+    return_stmt      ir al estado 31
+    compound_stmt    ir al estado 32
+    print_stmt       ir al estado 33
+    while_else_stmt  ir al estado 34
+    while_stmt       ir al estado 35
+    if_stmt          ir al estado 36
+    if_else_stmt     ir al estado 37
+    for_else_stmt    ir al estado 38
+    for_stmt         ir al estado 39
+    test             ir al estado 40
+    or_test          ir al estado 41
+    and_test         ir al estado 42
+    not_test         ir al estado 43
+    comparison       ir al estado 44
+    expr             ir al estado 45
+    xor_expr         ir al estado 46
+    and_expr         ir al estado 47
+    shift_expr       ir al estado 48
+    arith_expr       ir al estado 49
+    s10              ir al estado 50
+    term             ir al estado 51
+    factor           ir al estado 52
+    atom             ir al estado 53
+
+
+State 179
+
+   56 elif: ELIF test . DPUNTO NEWLINE suite elif
+
+    DPUNTO  desplazar e ir al estado 183
+
+
+State 180
+
+  122 s29: COMA test s29 .
+
+    $default  reduce usando la regla 122 (s29)
+
+
+State 181
+
+    6 suite: INDENT stmt s44 DEDENT .
+
+    $default  reduce usando la regla 6 (suite)
+
+
+State 182
+
+    7 s44: stmt s44 .
+
+    $default  reduce usando la regla 7 (s44)
+
+
+State 183
+
+   56 elif: ELIF test DPUNTO . NEWLINE suite elif
+
+    NEWLINE  desplazar e ir al estado 184
+
+
+State 184
+
+   56 elif: ELIF test DPUNTO NEWLINE . suite elif
+
+    STRING         desplazar e ir al estado 1
+    IDENTIFICADOR  desplazar e ir al estado 2
+    PRINT          desplazar e ir al estado 3
+    FALSE          desplazar e ir al estado 4
+    RETURN         desplazar e ir al estado 5
+    CONTINUE       desplazar e ir al estado 6
+    TRUE           desplazar e ir al estado 8
+    DEL            desplazar e ir al estado 10
+    NOT            desplazar e ir al estado 11
+    PASS           desplazar e ir al estado 13
+    BREAK          desplazar e ir al estado 14
+    MENOS          desplazar e ir al estado 15
+    MAS            desplazar e ir al estado 16
+    ENTERO         desplazar e ir al estado 18
+    FLOTANTE       desplazar e ir al estado 19
+    INDENT         desplazar e ir al estado 161
+
+    suite          ir al estado 185
+    simple_stmt    ir al estado 163
+    small_stmt     ir al estado 24
+    pass_stmt      ir al estado 25
+    del_stmt       ir al estado 26
+    flow_stmt      ir al estado 27
+    expr_stmt      ir al estado 28
+    break_stmt     ir al estado 29
+    continue_stmt  ir al estado 30
+    return_stmt    ir al estado 31
+    print_stmt     ir al estado 33
+    test           ir al estado 40
+    or_test        ir al estado 41
+    and_test       ir al estado 42
+    not_test       ir al estado 43
+    comparison     ir al estado 44
+    expr           ir al estado 45
+    xor_expr       ir al estado 46
+    and_expr       ir al estado 47
+    shift_expr     ir al estado 48
+    arith_expr     ir al estado 49
+    s10            ir al estado 50
+    term           ir al estado 51
+    factor         ir al estado 52
+    atom           ir al estado 53
+
+
+State 185
+
+   56 elif: ELIF test DPUNTO NEWLINE suite . elif
+
+    ELIF  desplazar e ir al estado 172
+
+    $default  reduce usando la regla 57 (elif)
+
+    elif  ir al estado 186
+
+
+State 186
+
+   56 elif: ELIF test DPUNTO NEWLINE suite elif .
+
+    $default  reduce usando la regla 56 (elif)

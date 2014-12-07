@@ -1,7 +1,7 @@
 all: interprete run
 
 interprete:
-	flex lexico.l
+	flex pylex.l
 	bison --report=state -dv pypar.y -o pypar.cpp
 	g++  -std=c++11  pypar.cpp pylex.cpp -o proyecto
 clean:

@@ -14,6 +14,7 @@ using namespace std;
 #include "visitor.cpp"
 #define YYDEBUG 1
 MASTBuilder *ast;
+NodeVisitor *visitor = new PrintVisitor();
 
 extern FILE *yyin;
 extern char *yytext;
@@ -49,14 +50,15 @@ Node* nodeT;
 /*Símbolo inicial*/
 GOAL: file_input {printf("Éxito primero\n");
 	$$=$1;
-	NodeVisitor *visitor = new PrintVisitor();
+	
 	$$->accept(visitor);
 	printf("Exito\n");
 }
 ;
 
-file_input:NEWLINE file_input{$$=$2;}| stmt file_input {cout << "a\n";$$=ast->bHERMANOSNode($1, $2);
- }| {cout << "b\n"; $$=ast->bHERMANOSNode();
+file_input:NEWLINE file_input{$$=$2;}| stmt file_input {cout << "a\n";//$$=ast->bHERMANOSNode($1, $2);
+}
+|{cout << "b\n"; $$=ast->bHERMANOSNode();
 } 
 
 
@@ -66,14 +68,15 @@ stmt: simple_stmt {$$=$1;}
 }
 ;
 
-simple_stmt: small_stmt simple_stmt_aux NEWLINE {cout << "ep\n"; $$=ast->bHERMANOSNode($1,$2);
+simple_stmt: small_stmt simple_stmt_aux NEWLINE {cout << "ep\n";// $$=ast->bHERMANOSNode($1,$2);
 }
 ;
 simple_stmt_aux: PCOMA small_stmt simple_stmt_aux {$$=ast->bHERMANOSNode($2,$3);}
 |ss_aux{$$=$1;}  
 ;
 ss_aux: PCOMA{$$=ast->bHERMANOSNode();}
-| {$$=ast->bHERMANOSNode();} 
+| {//$$=ast->bHERMANOSNode();
+} 
 ;
 
 small_stmt:expr_stmt {$$=ast->bHERMANOSNode($1);}
@@ -167,7 +170,6 @@ if_stmt_aux:ELIF test DPUNTO NEWLINE suite if_stmt_aux{
 |{$$=NULL;}   
 ;
 s8: ELSE DPUNTO NEWLINE suite { $$=$4; }
-|   {$$=NULL;} 
 ;
 /*WHILE*/
 while_stmt:WHILE test DPUNTO NEWLINE suite{ $$=ast->bWHILENode($2,$5);}
