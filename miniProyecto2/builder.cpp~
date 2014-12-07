@@ -603,7 +603,7 @@ public:
 		return n;
 	}
 	Node* bHERMANOSNode(){
-		Node* n = new HermanosNode;
+		INode* n = new HermanosNode;
 		return n;
 	}
 	Node* bHERMANOSNode(NodeList* l){

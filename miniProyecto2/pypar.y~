@@ -133,22 +133,15 @@ return_stmt: RETURN return_stmt_aux {$$=ast->bRETURNNode($2);}
 return_stmt_aux: test{$$=$1;}
 |{$$=NULL;}  
 ;
-compound_stmt: 
-if_stmt {ast->bHERMANOSNode($1);
-}
-if_else_stmt {ast->bHERMANOSNode($1);
-} 
-| while_stmt {ast->bHERMANOSNode($1);
-} 
-| while_else_stmt {ast->bHERMANOSNode($1);
-} 
-| for_stmt {ast->bHERMANOSNode($1);
-}
-| for_else_stmt {ast->bHERMANOSNode($1);
-} 
+compound_stmt:if_stmt {ast->bHERMANOSNode($1);}
+if_else_stmt {ast->bHERMANOSNode($1);} 
+| while_stmt {ast->bHERMANOSNode($1);} 
+| while_else_stmt {ast->bHERMANOSNode($1);} 
+| for_stmt {ast->bHERMANOSNode($1);}
+| for_else_stmt {ast->bHERMANOSNode($1);} 
 ;
 /*IF*/
-if_stmt: IF test DPUNTO NEWLINE suite if_stmt_aux{
+if_stmt:IF test DPUNTO NEWLINE suite if_stmt_aux{
         LNodeList *nl = new LNodeList();
         nl->push_front($6);
         nl->push_front($5);
@@ -177,9 +170,9 @@ s8: ELSE DPUNTO NEWLINE suite { $$=$4; }
 |   {$$=NULL;} 
 ;
 /*WHILE*/
-while_stmt: WHILE test DPUNTO NEWLINE suite{ $$=ast->bWHILENode($2,$5);}
+while_stmt:WHILE test DPUNTO NEWLINE suite{ $$=ast->bWHILENode($2,$5);}
 ;
-while_else_stmt: while_stmt s8{$$=ast->bWHILENode($1,$2);}
+while_else_stmt:while_stmt s8{$$=ast->bWHILENode($1,$2);}
 ;
 /*FOR*/
 for_stmt: FOR IDENTIFICADOR IN testlist DPUNTO NEWLINE suite{
@@ -202,7 +195,7 @@ suite: simple_stmt {$$=$1; }| INDENT stmt suite_aux DEDENT {
 	$$=ast->bHERMANOSNode($2,$3);
 }
 ;
-suite_aux: stmt suite_aux {$$=ast->bHERMANOSNode($1,$2); }|{$$=bHERMANOSNode();}
+suite_aux: stmt suite_aux {$$=ast->bHERMANOSNode($1,$2); }|{$$=ast->bHERMANOSNode();}
 ;
 
 test: or_test{$$=$1;}
