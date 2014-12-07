@@ -778,5 +778,5 @@ class HermanosNode: public BlockNode{
 	public:
 		HermanosNode():BlockNode(){}
 		virtual void accept(NodeVisitor *nv){nv->visit(this);}
-}
+};
 #endif /* COMPOSITE */

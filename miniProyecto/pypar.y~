@@ -33,7 +33,7 @@ int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
   char car;
 Node* nodeT;
 };
-%type <nodeT>GOAL file_input stmt simple_stmt ss_aux simple_stmt_aux small_stmt expr_stmt expr_stmt_aux_b expr_stmt_aux_b_a augassign print_stmt  s29  s30  s31  s32  comaS del_stmt pass_stmt flow_stmt break_stmt continue_stmt return_stmt return_stmt_aux compound_stmt if_stmt if_stmt_aux s8 while_stmt for_stmt suite suite_aux s15 test or_test or_test_aux and_test and_test_aux not_test comparison comparison_aux comp_op expr expr_aux xor_expr xor_expr_aux and_expr and_expr_aux shift_expr shift_expr_aux arith_expr arith_expr_aux ae_aux term term_aux t_aux factor atom string_aux exprlist exprlist_aux testlist testlist_aux
+%type <nodeT>GOAL file_input stmt simple_stmt ss_aux simple_stmt_aux small_stmt expr_stmt expr_stmt_aux_b expr_stmt_aux_b_a augassign print_stmt  s29  s30  s31  s32  comaS del_stmt pass_stmt flow_stmt break_stmt continue_stmt return_stmt return_stmt_aux compound_stmt if_stmt if_stmt_aux s8 while_stmt for_stmt suite suite_aux s15 test or_test or_test_aux and_test and_test_aux not_test comparison comparison_aux comp_op expr expr_aux xor_expr xor_expr_aux and_expr and_expr_aux shift_expr shift_expr_aux arith_expr arith_expr_aux ae_aux term term_aux t_aux factor atom string_aux exprlist exprlist_aux testlist testlist_aux r1
 %token <cad> STRING ESPTAB OPERADOR IDENTIFICADOR
 %token <cad> PRINT FALSE CLASS FINALLY IS RETURN NONE CONTINUE FOR LAMBDA TRY TRUE DEF FROM NONLOCAL WHILE AND DEL GLOBAL NOT WITH AS ELIF IF OR YIELD ASSERT ELSE IMPORT PASS BREAK EXCEPT IN RAISE EXEC
 %token <cad> NIGUAL DIGUAL MAIGUAL MEIGUAL MAYOR MENOR ENETILDE CIRCUNFLEJO PIPE AMPERSON DMAYOR DMENOR PORCEN DDIAG DIAG DASTERISCO ASTERISCO MENOS MAS
@@ -55,7 +55,9 @@ GOAL: file_input {printf("Éxito primero\n");
 }
 ;
 
-file_input: file_input NEWLINE {$$=$1;}| stmt file_input {$$=ast->bHERMANOSNode($1, $2); coutt << "a";}| {} 
+file_input: file_input NEWLINE {$$=$1;}| stmt file_input {cout << "a\n";$$=ast->bHERMANOSNode($1, $2);
+ }| {cout << "b\n";$$=NULL;
+} 
 ;
 
 /*definición statments*/
@@ -63,13 +65,16 @@ stmt: simple_stmt {$$=$1;}
 | compound_stmt{$$=$1;}
 ;
 
-simple_stmt: small_stmt simple_stmt_aux ss_aux NEWLINE {$$=ast->bHERMANOSNode($1,$2);}
+simple_stmt: small_stmt r1 NEWLINE {cout << "ep\n"; $$=ast->bHERMANOSNode($1,$2);}
 ;
-ss_aux: PCOMA{}
-| {} 
+
+r1: simple_stmt_aux ss_aux {$$=ast->bHERMANOSNode($1,$2);/*checar aqui*/}
+;
+ss_aux: PCOMA{$$=NULL;}
+| {$$=NULL;} 
 ;
 simple_stmt_aux: simple_stmt_aux PCOMA small_stmt {$$=ast->bHERMANOSNode($1,$3);}
-|{}   
+|{$$=NULL;}   
 ;
 small_stmt:
 expr_stmt {$$=$1;}
@@ -78,7 +83,7 @@ expr_stmt {$$=$1;}
 | pass_stmt{$$=$1;}
 | flow_stmt{$$=$1;}
 ;
-expr_stmt: testlist expr_stmt_aux_b { $2->setFChild($1);$$=$2; 
+expr_stmt: testlist expr_stmt_aux_b {// $2->setFChild($1);$$=$2; 
  }
 ;
 
@@ -87,7 +92,7 @@ expr_stmt_aux_b:  augassign testlist {$1->setSChild($2); $$=$1;}
 ;
 expr_stmt_aux_b_a: 
 IGUAL testlist {$$=$2;}
-|{} 
+|{$$=NULL;} 
 ;
 
 augassign:MASIGUAL {$$=ast->bMASIGUALNode();}
@@ -114,15 +119,15 @@ print_stmt : PRINT s29 {
 
 s29 : s30 {$$=$1; }| DMAYOR test s31 {$$=$3;};
 s30 : test s32 comaS {$$=ast->bHERMANOSNode($1,$2);}
-|{} 
+|{$$=NULL;} 
 ;
 s31 : COMA test comaS {$$=$2;}
-|{} 
+|{$$=NULL;} 
 ;
 
 s32 :  s32 COMA test {$$=ast->bHERMANOSNode($1,$3);}| {$$=ast->bHERMANOSNode();} ;
 comaS: COMA{}
-|{} 
+|{$$=NULL;} 
 ;
 /*DEL*/
 del_stmt: DEL exprlist {$$=ast->bDELNode($2);}
@@ -146,7 +151,7 @@ continue_stmt: CONTINUE {$$=ast->bCONTINUENode();}
 return_stmt: RETURN return_stmt_aux {$$=ast->bRETURNNode($2);}
 ;
 return_stmt_aux: testlist{$$=$1;}
-|{}  
+|{$$=NULL;}  
 ;
 compound_stmt: 
 if_stmt {$$=$1;} 
@@ -169,10 +174,10 @@ if_stmt_aux:  if_stmt_aux ELIF test DPUNTO suite {
         nl->push_front($3);
         $$=ast->bIFNode(nl);
         }
-|{}   
+|{$$=NULL;}   
 ;
 s8: ELSE DPUNTO suite { $$=$3; }
-|   {} 
+|   {$$=NULL;} 
 ;
 /*WHILE*/
 while_stmt: WHILE test DPUNTO suite s8 { $$=ast->bWHILENode($2,$4);}
@@ -200,15 +205,15 @@ nl->push_front($2);
 nl->push_front($4);
 $$=ast->bIFNode(nl);
 
-}|{}    
+}|{$$ = NULL;}    
 ;
-test: or_test s15 {$$=ast->bHERMANOSNode($1,$2);}
+test: or_test s15 {/*$$=ast->bHERMANOSNode($1,$2);*/ $$=$1;}
 ;
 /*COMPARADORES*/
 or_test: and_test or_test_aux  {$$=ast->bORNode($1,$2);}
 
 ;
-or_test_aux:or_test_aux  OR and_test {$$=ast->bORNode($1,$3);} |{}   
+or_test_aux:or_test_aux  OR and_test {$$=ast->bORNode($1,$3);} |{$$=NULL;}   
 ;
 and_test: not_test and_test_aux { $$=ast->bANDNode($1,$2);
 }
@@ -216,14 +221,36 @@ and_test: not_test and_test_aux { $$=ast->bANDNode($1,$2);
 and_test_aux:  and_test_aux AND not_test {
         $$=ast->bANDNode($1,$3);
 }
-|{}   
+|{$$=NULL;}   
 ;
 not_test: NOT not_test {$$=ast->bNOTNode($2);}
 | comparison {$$=$1;}
 ;
-comparison: expr comparison_aux {$$=ast->bHERMANOSNode($1,$2);}
+comparison: expr comparison_aux {/*$$=ast->bHERMANOSNode($1,$2);*/
+	if($2==NULL){
+          $$=$1;
+
+            }
+                    else{
+
+                        $2->setFChild($1); 
+                        $$=$2;
+                        }
+}
 ;
-comparison_aux:  comparison_aux comp_op expr {$$=ast->bHERMANOSNode($1,$2);} |{$$=ast->bHERMANOSNode();}  
+comparison_aux:  comparison_aux comp_op expr {/*$$=ast->bHERMANOSNode($1,$2);*/
+if($1==NULL){
+                        $2->setSChild($3);
+                        $$=$2;
+                    }else{
+                        $1->setFChild($3);
+                        $2->setSChild($1);
+                        $$=$2;
+                        }
+                   
+} |{$$=NULL;
+/*$$=ast->bHERMANOSNode();*/
+}  
 ;
 comp_op:MENOR {$$=ast->bMENORNode();}
  |MAYOR {$$=ast->bMAYORNode();}
@@ -249,7 +276,7 @@ $$=ast->bORNode($1,$2);
 xor_expr_aux:  xor_expr_aux CIRCUNFLEJO and_expr {
 $$=ast->bORNode($1,$3);
 
-}|{}   
+}|{$$=NULL;}   
 ;
 and_expr: shift_expr and_expr_aux { //$$=$1;
 $$=ast->bANDNode($1,$2);
@@ -258,7 +285,7 @@ $$=ast->bANDNode($1,$2);
 and_expr_aux:and_expr_aux   AMPERSON shift_expr {//$$=$3;
  $$=ast->bANDNode($1,$3);
 
-}|{}   
+}|{$$=NULL;}   
 ;
 shift_expr: arith_expr shift_expr_aux { //$$=$1;
 	//$$=ast->bHERMANOSNode($1,$2);
@@ -277,14 +304,14 @@ $$=ast->bDMENORNode($1,$3);
 } 
 | shift_expr_aux  DMAYOR arith_expr {//$$=$3;
 $$=ast->bDMAYORNode($1,$3);
-}|{} 
+}|{$$=NULL;} 
 ;
 arith_expr: term arith_expr_aux {//$$=$1;
 if($2==NULL){
                         $$=$1;
                         }
                     else{
-                        $2->setFChild($1);
+                       	$2->setFChild($1);
                         $$=$2;
                         }
 
@@ -300,7 +327,7 @@ if($1==NULL){
                     $2->setSChild($1);
                     $$=$2;
                     }
-}|{}   
+}|{$$=NULL;}   
 ;
 ae_aux:MAS  {$$=ast->bMASNode();}
  | MENOS {$$=ast->bMENOSNode();}
@@ -308,6 +335,7 @@ ae_aux:MAS  {$$=ast->bMASNode();}
  
 
 term: factor term_aux {//$$ =$1;
+
 if($2==NULL){
                         $$=$1;
                         }
@@ -329,7 +357,7 @@ if($1==NULL){
                     }
 
 
-}|{}   
+}|{$$=NULL;}   
 ;
 t_aux:ASTERISCO  {$$=ast->bPORNode();}
  | DIAG  {$$=ast->bDIVNode();}
@@ -348,9 +376,9 @@ factor:  ae_aux factor {//$$=$2;
 ;
 
 atom:IDENTIFICADOR {$$=ast->bIDENTIFICADORNode($1);}
- | FLOTANTE {$$=ast->bFLOATNode($1);}
- | ENTERO {$$=ast->bINTNode($1);}
- | string_aux {$$=$1;}
+ |FLOTANTE {$$=ast->bFLOATNode($1);}
+ |ENTERO {$$=ast->bINTNode($1);}
+ |string_aux {$$=$1;}
  |TRUE {$$=ast->bTRUENode();}
  |FALSE {$$=ast->bFALSENode();}
 ;
@@ -364,11 +392,11 @@ string_aux: string_aux STRING { $$=ast->bHERMANOSNode(ast->bSTRINGNode($2), $1);
 
 exprlist: expr exprlist_aux comaS {$$=$1;}
 ;
-exprlist_aux: exprlist_aux COMA expr {$$=$3;} |{}   
+exprlist_aux: exprlist_aux COMA expr {$$=$3;} |{$$=NULL;}   
 ;
 testlist: test testlist_aux comaS {$$=$1;}
 ;
-testlist_aux:  testlist_aux COMA test {$$=$3;}|{}   
+testlist_aux:  testlist_aux COMA test {$$=$3;}|{$$=NULL;}   
 ;
 
 %%
@@ -383,7 +411,7 @@ int main(int argc, char const *argv[]) {
     else
         yyin = stdin;
     do {
-        yydebug = 0;
+        yydebug = 1;
 	inicializar();
         yyparse();
     } while (!feof(yyin));

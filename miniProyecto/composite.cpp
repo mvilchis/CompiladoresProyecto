@@ -274,10 +274,10 @@ class IntNode : public LeafNode {
     public:
         int valor;
         IntNode(int valor):LeafNode(){this->valor=valor;
-	cout<<"Entra \n" << valor<< "\n****\n";	
+	//cout<<"Entra \n" << valor<< "\n****\n";	
 	}
         virtual void accept(NodeVisitor *nv) {
-	cout<<"YA Entra \n";	
+	//cout<<"YA Entra \n";	
 	nv->visit(this);
 }
 };

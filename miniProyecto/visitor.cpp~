@@ -37,7 +37,7 @@ public:
 		cout << "]" ;
 	}
 	void visit(IntNode* n){
-		cout << "Valor del n: " << n->valor << "\n";
+		cout << "Valor del n: " << n->valor;
 	}
 	void visit(StringNode* n){
 		cout << n->valor;
@@ -261,5 +261,7 @@ public:
 	void visit(DifNode* n){
 		cout << "- ";
 	}
-
+	void visit(HermanosNode* n){
+		printBloque("HERMANOS",n);
+	}
 };
