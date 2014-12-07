@@ -277,7 +277,7 @@ class IntNode : public LeafNode {
 	cout<<"Entra \n" << valor<< "\n****\n";	
 	}
         virtual void accept(NodeVisitor *nv) {
-	//cout<<"YA Entra \n";	
+	cout<<"YA Entra \n";	
 	nv->visit(this);
 }
 };
@@ -772,5 +772,11 @@ class IsNotNode: public UnaNode{
     public: 
         IsNotNode():UnaNode(){}
         virtual void accept(NodeVisitor *nv){nv->visit(this);}
+};
+
+class HermanosNode: public BlockNode{
+	public:
+		HermanosNode():BlockNode(){}
+		virtual void accept(NodeVisitor *nv){nv->visit(this);}
 };
 #endif /* COMPOSITE */

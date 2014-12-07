@@ -55,7 +55,7 @@ GOAL: file_input {printf("Éxito primero\n");
 }
 ;
 
-file_input: file_input NEWLINE {$$=$1;}| stmt file_input {$$=ast->bHERMANOSNode($1, $2); cout << "a";}| {} 
+file_input: file_input NEWLINE {$$=$1;}| stmt file_input {$$=ast->bHERMANOSNode($1, $2); coutt << "a";}| {} 
 ;
 
 /*definición statments*/

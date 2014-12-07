@@ -261,7 +261,5 @@ public:
 	void visit(DifNode* n){
 		cout << "- ";
 	}
-	void visit(HermanosNode* n){
-		printBloque("HERMANOS",n);
-	}
+
 };

@@ -251,5 +251,5 @@ public:
 	virtual Node * bISNOTNode () = 0;
 	virtual Node * bINNode () = 0;
 	virtual Node * bNOTINNode () = 0;
-	virtual Node * bHERMANOSNode () = 0;
+	virtual Node * bHERMANOSNode (NodeList *nl) = 0;
 };

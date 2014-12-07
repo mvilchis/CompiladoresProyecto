@@ -1536,7 +1536,7 @@ yyreduce:
 
   case 4:
 #line 58 "pypar.y" /* yacc.c:1646  */
-    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-1].nodeT), (yyvsp[0].nodeT));}
+    {(yyval.nodeT)=ast->bHERMANOSNode((yyvsp[-1].nodeT), (yyvsp[0].nodeT)); cout << "a";}
 #line 1541 "pypar.cpp" /* yacc.c:1646  */
     break;
 
