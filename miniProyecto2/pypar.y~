@@ -1,0 +1,413 @@
+/*  Fernández Martínez José Ismael
+    Trinidad Hernández Norma Verónica
+    Vilchis Domínguez Miguel Alonso
+    Proyecto 02
+    Sept 2014
+*/
+
+%{
+
+#include <stdio.h>
+#include <string>
+#define YYDEBUG 1
+using namespace std;
+#include "visitor.cpp"
+#define YYDEBUG 1
+MASTBuilder *ast;
+
+extern FILE *yyin;
+extern char *yytext;
+extern void inicializar();
+
+int yylex(); 
+int yyerror(const char *s) { printf ("Error: %s\n", s); return 1;}
+
+%}
+%code requires{
+#include "composite.cpp"
+}
+%union {
+  int numi;
+  float numf;
+  const char* cad;
+  char car;
+Node* nodeT;
+};
+%type <nodeT>GOAL file_input stmt simple_stmt ss_aux simple_stmt_aux small_stmt expr_stmt expr_stmt_aux_b expr_stmt_aux_b_a augassign print_stmt  s29  s30  s31  s32  comaS del_stmt pass_stmt flow_stmt break_stmt continue_stmt return_stmt return_stmt_aux compound_stmt if_stmt if_stmt_aux s8 while_stmt for_stmt suite suite_aux s15 test or_test or_test_aux and_test and_test_aux not_test comparison comparison_aux comp_op expr expr_aux xor_expr xor_expr_aux and_expr and_expr_aux shift_expr shift_expr_aux arith_expr arith_expr_aux ae_aux term term_aux t_aux factor atom string_aux exprlist exprlist_aux testlist testlist_aux if_else_stmt while_else_stmt for_else_stmt r2
+%token <cad> STRING ESPTAB OPERADOR IDENTIFICADOR
+%token <cad> PRINT FALSE CLASS FINALLY IS RETURN NONE CONTINUE FOR LAMBDA TRY TRUE DEF FROM NONLOCAL WHILE AND DEL GLOBAL NOT WITH AS ELIF IF OR YIELD ASSERT ELSE IMPORT PASS BREAK EXCEPT IN RAISE EXEC
+%token <cad> NIGUAL DIGUAL MAIGUAL MEIGUAL MAYOR MENOR ENETILDE CIRCUNFLEJO PIPE AMPERSON DMAYOR DMENOR PORCEN DDIAG DIAG DASTERISCO ASTERISCO MENOS MAS
+%token <cad> APAREN CPAREN ACORCHETE CCORCHETE ALLAVE CLLAVE COMA DPUNTO PUNTO PCOMA AT IGUAL MENOSMAYOR MASIGUAL MENOSIGUAL ASTIGUAL DIAIGUAL DDIAIGUAL PORIGUAL AMPIGUAL PIPEIGUAL CIRCIGUAL DMAYORIGUAL DMENORIGUAL DASTIGUAL MENORMAYOR
+%token <cad> CSIMPLE IDIAG GATO DIDIAG 
+%token <car> NEWLINE
+%token <numi> ENTERO
+%token <numf> FLOTANTE
+%token <cad> INDENT SALIDA DEDENT
+%token FIN 
+
+%%
+/*Símbolo inicial*/
+GOAL: file_input {printf("Éxito primero\n");
+	$$=$1;
+	NodeVisitor *visitor = new PrintVisitor();
+	$$->accept(visitor);
+	printf("Exito\n");
+}
+;
+
+file_input:NEWLINE file_input{$$=$2;}| stmt file_input {cout << "a\n";$$=ast->bHERMANOSNode($1, $2);
+ }| {cout << "b\n"; $$=ast->bHERMANOSNode();
+} 
+
+
+/*definición statments*/
+stmt: simple_stmt {$$=$1;} 
+| compound_stmt{$$=$1;
+}
+;
+
+simple_stmt: small_stmt simple_stmt_aux NEWLINE {cout << "ep\n"; $$=ast->bHERMANOSNode($1,$2);
+}
+;
+simple_stmt_aux: PCOMA small_stmt simple_stmt_aux {$$=ast->bHERMANOSNode($2,$3);}
+|ss_aux{$$=$1;}  
+;
+ss_aux: PCOMA{$$=ast->bHERMANOSNode();}
+| {$$=ast->bHERMANOSNode();} 
+;
+
+small_stmt:expr_stmt {$$=ast->bHERMANOSNode($1);}
+| print_stmt{$$=ast->bHERMANOSNode($1);}
+| del_stmt{$$=ast->bHERMANOSNode($1);}
+| pass_stmt{$$=ast->bHERMANOSNode($1);}
+| flow_stmt{$$=ast->bHERMANOSNode($1);}
+;
+expr_stmt: IDENTIFICADOR expr_stmt_aux_b {$2->setFChild(ast->bIDENTIFICADORNode($1));$$=$2; }
+|test{$$=$1;}
+;
+
+expr_stmt_aux_b:  augassign test{$1->setSChild($2);}
+;
+
+augassign:MASIGUAL {$$=ast->bMASIGUALNode();}
+ | MENOSIGUAL {$$=ast->bMENOSIGUALNode();}
+ | ASTIGUAL {$$=ast->bASIGUALNode();}
+ | DIAIGUAL {$$=ast->bDIAIGUALNode();}
+ | PORIGUAL {$$=ast->bPORIGUALNode();}
+ | AMPIGUAL {$$= ast->bAMPIGUALNode();}
+ | PIPEIGUAL {$$=ast->bPIPEIGUALNode();}
+ | CIRCIGUAL {$$=ast->bCIRCIGUALNode();}
+ | DMENORIGUAL {$$=ast->bDMENORIGUALNode();}
+ | DMAYORIGUAL {$$=ast->bDMAYORIGUALNode();}
+ | DASTIGUAL {$$=ast->bDASTIGUALNode();}
+ | DDIAIGUAL {$$=ast->bDDIAIGUALNode();}
+;
+
+/*PRINT*/
+print_stmt : PRINT test {
+        $$=ast->bPRINTNode($2);
+}
+;
+
+/*DEL*/
+del_stmt: DEL IDENTIFICADOR {$$=ast->bDELNode(ast->bIDENTIFICADORNode($2));}
+;
+/*PASS*/
+pass_stmt: PASS {$$=ast->bPASSNode();}
+;
+/*Statments de flujo*/
+flow_stmt:
+break_stmt {$$=$1;}
+| continue_stmt {$$=$1;}
+| return_stmt {$$=$1;}
+;
+/*BREAK*/
+break_stmt: BREAK {$$=ast->bBREAKNode();}
+;
+/*CONTINUE*/
+continue_stmt: CONTINUE {$$=ast->bCONTINUENode();}
+;
+/*RETURN*/
+return_stmt: RETURN return_stmt_aux {$$=ast->bRETURNNode($2);}
+;
+return_stmt_aux: test{$$=$1;}
+|{$$=NULL;}  
+;
+compound_stmt: 
+if_stmt {ast->bHERMANOSNode($1);
+}
+if_else_stmt {ast->bHERMANOSNode($1);
+} 
+| while_stmt {ast->bHERMANOSNode($1);
+} 
+| while_else_stmt {ast->bHERMANOSNode($1);
+} 
+| for_stmt {ast->bHERMANOSNode($1);
+}
+| for_else_stmt {ast->bHERMANOSNode($1);
+} 
+;
+/*IF*/
+if_stmt: IF test DPUNTO NEWLINE suite if_stmt_aux{
+        LNodeList *nl = new LNodeList();
+        nl->push_front($6);
+        nl->push_front($5);
+        nl->push_front($2);
+        $$=ast->bIFNode(nl);}
+;
+
+if_else_stmt: if_stmt s8{
+	LNodeList *nl = new LNodeList();
+        nl->push_front($2);
+        nl->push_front($1);
+        $$=ast->bIFNode(nl);
+}
+;
+
+if_stmt_aux:ELIF test DPUNTO NEWLINE suite if_stmt_aux{
+        LNodeList *nl = new LNodeList();
+        nl->push_front($6);
+        nl->push_front($5);
+        nl->push_front($2);
+        $$=ast->bIFNode(nl);
+        }
+|{$$=NULL;}   
+;
+s8: ELSE DPUNTO NEWLINE suite { $$=$4; }
+|   {$$=NULL;} 
+;
+/*WHILE*/
+while_stmt: WHILE test DPUNTO NEWLINE suite{ $$=ast->bWHILENode($2,$5);}
+;
+while_else_stmt: while_stmt s8{$$=ast->bWHILENode($1,$2);}
+;
+/*FOR*/
+for_stmt: FOR IDENTIFICADOR IN testlist DPUNTO NEWLINE suite{
+        LNodeList *nl = new LNodeList();
+        nl->push_front($7);
+        nl->push_front($4);
+        nl->push_front(ast->bIDENTIFICADORNode($2));
+        $$=ast->bFORNode(nl);
+        }
+;
+for_else_stmt: for_stmt s8{
+        LNodeList *nl = new LNodeList();
+        nl->push_front($2);
+        nl->push_front($1);
+        $$=ast->bFORNode(nl);
+        }
+;
+
+suite: simple_stmt {$$=$1; }| INDENT stmt suite_aux DEDENT {
+	$$=ast->bHERMANOSNode($2,$3);
+}
+;
+suite_aux: stmt suite_aux {$$=ast->bHERMANOSNode($1,$2); }|{$$=bHERMANOSNode();}
+;
+
+test: or_test{$$=$1;}
+;
+/*COMPARADORES*/
+or_test: and_test or_test_aux  {
+$$=ast->bORNode($1,$2);
+}
+
+;
+or_test_aux:  OR and_test or_test_aux{$$=ast->bORNode($2,$3);} |{$$=NULL;}   
+;
+and_test: not_test and_test_aux {$$=ast->bANDNode($1,$2);
+}
+;
+and_test_aux: AND not_test and_test_aux{
+        $$=ast->bANDNode($2,$3);
+}
+|{$$=NULL;}   
+;
+not_test: NOT not_test {$$=ast->bNOTNode($2);}
+| comparison {$$=$1;}
+;
+comparison: expr comparison_aux {/*$$=ast->bHERMANOSNode($1,$2);*/
+	if($2==NULL){
+          $$=$1;
+
+            }
+                    else{
+
+                        $2->setFChild($1); 
+                        $$=$2;
+                        }
+}
+;
+comparison_aux: comp_op expr comparison_aux{
+if($1==NULL){
+                        $1->setSChild($2);
+                        $$=$1;
+                    }else{
+                        $3->setFChild($2);
+                        $1->setSChild($3);
+                        $$=$1;
+                        }
+                   
+} |{$$=NULL;}  
+;
+comp_op:MENOR {$$=ast->bMENORNode();}
+ |MAYOR {$$=ast->bMAYORNode();}
+ |DIGUAL {$$=ast->bDIGNode();}
+ |MAIGUAL {$$=ast->bMAYIGNode();}
+ |MEIGUAL {$$=ast->bMENIGNode();}
+ |MENORMAYOR {$$=ast->bMENORMAYORNode();}
+ |NIGUAL {$$=ast->bNIGNode();}
+ |IN {$$=ast->bINNode();}
+ |NOT IN {$$=ast->bNOTINNode();}
+ |IS {$$=ast->bISNode();}
+ |IS NOT {$$=ast->bISNOTNode();}
+;
+
+expr: xor_expr expr_aux {$$=ast->bPIPENode($1,$2);
+}
+;
+expr_aux:PIPE xor_expr expr_aux {$$=ast->bPIPENode($2,$3);
+}|{$$=NULL;
+}   
+;
+xor_expr: and_expr xor_expr_aux {$$=ast->bCIRCUNFLEJONode($1,$2);
+}
+;
+xor_expr_aux:CIRCUNFLEJO and_expr xor_expr_aux{
+$$=ast->bPIPENode($2,$3);
+}|{$$=NULL;}   
+;
+and_expr: shift_expr and_expr_aux {
+$$=ast->bANDNode($1,$2);
+} 
+;
+and_expr_aux:AMPERSON shift_expr and_expr_aux{
+$$=ast->bANDNode($2,$3);
+}|{$$=NULL;}   
+;
+shift_expr: arith_expr shift_expr_aux { ;
+	if($2==NULL){
+                        $$=$1;
+                        }
+                    else{
+                        $2->setFChild($1);
+                        $$=$2;
+                      }
+
+}
+;
+shift_expr_aux:DMENOR arith_expr shift_expr_aux{
+$$=ast->bDMENORNode($2,$3);
+} 
+|DMAYOR arith_expr shift_expr_aux {
+$$=ast->bDMAYORNode($2,$3);
+}|{$$=NULL;} 
+;
+arith_expr: term arith_expr_aux {
+if($2==NULL){
+                        $$=$1;
+                        }
+                    else{
+                       	$2->setFChild($1);
+                        $$=$2;
+                        }
+
+
+}
+;
+arith_expr_aux: ae_aux term  arith_expr_aux {
+if($3==NULL){
+                    $1->setSChild($2);
+                    $$=$1;
+                }else{
+                    $3->setFChild($2);
+                    $1->setSChild($3);
+                    $$=$1;
+                    }
+}|{$$=NULL;}   
+;
+ae_aux:MAS  {$$=ast->bMASNode();}
+ | MENOS {$$=ast->bMENOSNode();}
+;
+ 
+
+term: factor term_aux {
+
+if($2==NULL){
+                        $$=$1;
+                        }
+                    else{
+                        $2->setFChild($1);
+                        $$=$2;
+                        }
+
+}
+;
+term_aux: t_aux factor term_aux{
+if($3==NULL){
+                    $1->setSChild($2);
+                    $$=$1;
+                }else{
+                    $3->setFChild($2);
+                    $1->setSChild($3);
+                    $$=$1;
+                    }
+
+
+}|{$$=NULL;}   
+;
+t_aux:ASTERISCO  {$$=ast->bPORNode();}
+ | DIAG  {$$=ast->bDIVNode();}
+ | PORCEN {$$=ast->bMODNode();}
+ | DDIAG {$$=ast->bDDIAGNode();}
+
+
+ 
+;
+factor:  ae_aux factor {
+	$1->setFChild(ast->bINTNode(0));
+	$1->setSChild($2);
+	$$=$1;
+} | atom{$$=$1;}
+
+;
+
+atom:IDENTIFICADOR {$$=ast->bIDENTIFICADORNode($1);}
+ |FLOTANTE {$$=ast->bFLOATNode($1);}
+ |ENTERO {$$=ast->bINTNode($1);}
+ |STRING {$$=ast->bSTRINGNode($1);}
+ |TRUE {$$=ast->bTRUENode();}
+ |FALSE {$$=ast->bFALSENode();}
+;
+
+
+
+
+testlist: APAREN testlist_aux CPAREN {$$=$2;}
+;
+testlist_aux:test r2 {$$=ast->bHERMANOSNode($1,$2);}
+|{$$=ast->bHERMANOSNode();}
+;
+
+r2:COMA test r2{$$=ast->bHERMANOSNode(ast->bHERMANOSNode($2),$3);}
+|{$$=ast->bHERMANOSNode();}
+;
+
+%%
+
+int main(int argc, char const *argv[]) {
+    ++argv;
+    --argc;
+
+    if (argc > 0) {
+        yyin = fopen(argv[0], "r");
+    }
+    else
+        yyin = stdin;
+    do {
+        yydebug = 1;
+	inicializar();
+        yyparse();
+    } while (!feof(yyin));
+}
+
